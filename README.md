@@ -1,4 +1,4 @@
-![tp2](https://github.com/MaxiOtero6/algo3_tp2_towerDefense/actions/workflows/build.yml/badge.svg) [![codecov](https://codecov.io/gh/MaxiOtero6/algo3_tp2_towerDefense/branch/master/graph/badge.svg)](https://codecov.io/gh/MaxiOtero6/algo3_tp2_towerDefense)
+![tp2](https://github.com/MaxiOtero6/algo3_tp2_towerDefense/actions/workflows/build.yml/badge.svg) [![codecov](https://codecov.io/gh/MaxiOtero6/algo3_tp2_towerDefense/branch/main/graph/badge.svg)](https://codecov.io/gh/MaxiOtero6/algo3_tp2_towerDefense)
 
 # TP2 Algoritmos 3: {nombre} 
 
