@@ -7,7 +7,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 ## Grupo {N}
 
 * **Integrante 1** - [Maximiliano Otero](https://github.com/MaxiOtero6)
-* **Integrante 2** - [Tomas Pla](https://github.com/TomasPlaHozikian)
+* **Integrante 2** - [Tomas Alberto Pla](https://github.com/TomasPlaHozikian)
 * **Integrante 3** - [Lucas Fernandez](https://github.com/Lucasfz25)
 * **Integrante 4** - [Ignacio Oviedo](https://github.com/ColoOviedo)
 * **Integrante 5** - [Joaquin Velurtas](https://github.com/joaquinvelurtas)
