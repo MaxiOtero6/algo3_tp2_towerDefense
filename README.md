@@ -1,10 +1,10 @@
 ![tp2](https://github.com/MaxiOtero6/algo3_tp2_towerDefense/actions/workflows/build.yml/badge.svg) [![codecov](https://codecov.io/gh/MaxiOtero6/algo3_tp2_towerDefense/branch/main/graph/badge.svg)](https://codecov.io/gh/MaxiOtero6/algo3_tp2_towerDefense)
 
-# TP2 Algoritmos 3: {nombre} 
+# TP2 Algoritmos 3: AlgoDefense 
 
 Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUBA
 
-## Grupo {N}
+## Grupo 12
 
 * **Integrante 1** - [Maximiliano Otero](https://github.com/MaxiOtero6)
 * **Integrante 2** - [Tomas Alberto Pla](https://github.com/TomasPlaHozikian)
@@ -12,7 +12,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **Integrante 4** - [Ignacio Oviedo](https://github.com/ColoOviedo)
 * **Integrante 5** - [Joaquin Velurtas](https://github.com/joaquinvelurtas)
 
-Corrector: **{Corrector}**
+Corrector: **Diego Sánchez**
 
 ## Aplicación
 
