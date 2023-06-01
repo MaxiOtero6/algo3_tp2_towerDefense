@@ -1,13 +1,13 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.Defensas.DefensaBlanca;
-import edu.fiuba.algo3.modelo.Defensas.DefensaPlateada;
+import edu.fiuba.algo3.modelo.Defensas.*;
+import edu.fiuba.algo3.modelo.Enemigos.*;
+import edu.fiuba.algo3.modelo.Parcelas.*;
+import edu.fiuba.algo3.modelo.Parcelas.Pasarela.*;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class Tests {
@@ -35,5 +35,89 @@ public class Tests {
         DefensaBlanca defensaBlanca = new DefensaBlanca();
         defensaBlanca.avanzarTurno();
         assertTrue(defensaBlanca.chequearProgreso());
+    }
+
+    @Test
+    public void test03ElJugadorCuentaConLosCreditosParaConstruirLaTorre()
+    {
+
+    }
+
+    @Test
+    public void test04SePuedeConstruirSobreTierra()
+    {
+
+    }
+    
+    @Test
+    public void test04NoSePuedeConstruirSobreTierraConUnaDefensa()
+    {
+
+    }
+
+    @Test
+    public void test04NoSePuedeConstruirSobreParcela()
+    {
+        
+    }
+    
+    @Test
+    public void test04NoSePuedeConstruirSobreRocoso()
+    {
+        
+    }
+
+    @Test
+    public void test05LasDefensasAtacanEnElRangoEsperado()
+    {
+
+    }
+
+    @Test
+    public void test05LasDefensasNoAtacanFueraDelRango()
+    {
+
+    }
+
+    @Test
+    public void test06LasUnidadesEnemigasSonDaniadasAcordeAlAtaqueRecibido()
+    {
+
+    }
+
+    @Test
+    public void test07LasUnidadesEnemigasSoloSeMuevenSobreLaParcelaAutorizada()
+    {
+
+    }
+
+    @Test
+    public void test08ElJugadorCobraAlDestruirUnEnemigo()
+    {
+        
+    }
+
+    @Test
+    public void test09AlPasarUnTurnoLasUnidadesEnemigasSeMuevenSegunSusCapacidades()
+    {
+
+    }
+
+    @Test
+    public void test10AlEliminarATodosLosEnemigosElJugadorGanaLaPartida()
+    {
+
+    }
+
+    @Test
+    public void testo11AlNoQuedarUnidadesEnemigasSinHaberlasEliminadoTodasElJugadorConVidaPositivaEsteGanaLaPartida()
+    {
+
+    }
+
+    @Test
+    public void test12SiElJugadorPierdeTodaLaVidaPierdeElJuego()
+    {
+
     }
 }
