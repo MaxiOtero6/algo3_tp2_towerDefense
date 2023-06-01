@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Defensas;
 
 // Verificar que cada defensa tarde en construirse lo que dice que tarda y que recién están
 // “operativas” cuando ya se terminaron de construir.

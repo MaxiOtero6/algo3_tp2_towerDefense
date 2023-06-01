@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Defensas;
 
 public class EstadoActivado implements Estado {
     private final Defensa defensa;

@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Enemigos;
 import java.util.Random;
 
 public class Arania extends Enemigo {

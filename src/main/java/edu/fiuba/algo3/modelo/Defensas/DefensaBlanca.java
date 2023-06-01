@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Defensas;
 
 public class DefensaBlanca extends Defensa{
     public DefensaBlanca(){

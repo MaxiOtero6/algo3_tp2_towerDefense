@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Defensas;
 //state design pattern 
 public interface Estado {
     void avanzarTurno();
