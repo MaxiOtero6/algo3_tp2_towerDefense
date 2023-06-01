@@ -22,6 +22,11 @@ public class Jugador {
         return this.vida;
     }
 
+    public void agregarCreditos(int creditos)
+    {
+        this.creditos.agregarCreditos(creditos);
+    }
+
     public static Jugador obtenerJugador()
     {
         if (jugador == null)

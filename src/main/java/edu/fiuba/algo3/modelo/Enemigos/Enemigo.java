@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo.Enemigos;
 
+import edu.fiuba.algo3.modelo.Jugador;
+
 public class Enemigo {
     private int energia;
     private int danio;
@@ -14,20 +16,20 @@ public class Enemigo {
         this.velocidad = velocidad;
     }
 
-    // public int otorgarCreditos()
-    // {
-        
-    // }
+    public void otorgarCreditos()
+    {
+        Jugador.obtenerJugador().agregarCreditos(this.creditos);
+    }
 
     // public void atacar()
     // {
         
     // }
 
-    // public void recibirDanio(int danioRecibido)
-    // {
-
-    // }
+    public void recibirDanio(int danioRecibido)
+    {
+        this.energia -= danioRecibido;
+    }
 
     // public void avanzar()
     // {

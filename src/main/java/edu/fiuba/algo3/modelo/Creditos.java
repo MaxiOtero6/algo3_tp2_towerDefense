@@ -22,4 +22,9 @@ public class Creditos {
         }
     }
 
+    public void agregarCreditos(int creditos)
+    {
+        this.creditos += creditos;
+    }
+
 }
