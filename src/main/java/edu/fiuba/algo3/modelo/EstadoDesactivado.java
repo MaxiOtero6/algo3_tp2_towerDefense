@@ -10,7 +10,7 @@ public class EstadoDesactivado implements Estado {
     }
     private void construir(){
        if(defensa.progresarConstruccion()){
-            defensa.cambiarEstado(new EstadoActivado(defensa));
+            defensa.cambiarEstado();
        };
     }
     

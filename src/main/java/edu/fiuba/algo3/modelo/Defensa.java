@@ -16,15 +16,20 @@ public abstract class Defensa {
         this.progresoConstruccion = progresoConstruccion;
         this.estado = new EstadoDesactivado(this);
     }
+    public void avanzarTurno(){
+        this.estado.avanzarTurno();
+    }
 
     public boolean progresarConstruccion(){
         this.progresoConstruccion -= 1;
         return this.progresoConstruccion == 0;
     }
 
-    public void cambiarEstado(Estado estado){
-        this.estado = estado;
+    public void cambiarEstado(){
+        this.estado = new EstadoActivado(this);
     }
-
+    public boolean chequearProgreso(){
+        return this.progresoConstruccion == 0;
+    }
 
 }
