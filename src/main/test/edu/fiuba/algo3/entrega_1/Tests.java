@@ -6,13 +6,17 @@ import edu.fiuba.algo3.modelo.Enemigos.*;
 import edu.fiuba.algo3.modelo.Parcelas.*;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.*;
 
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.TestMethodOrder.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingDeque;
 
-
+@TestMethodOrder(MethodOrderer.Alphanumeric.class)
 public class Tests {
     @Test
     public void test01JugadorSeCreaCon100CreditosY20Vida() {
@@ -41,8 +45,16 @@ public class Tests {
     }
 
     @Test
-    public void test03ElJugadorCuentaConLosCreditosParaConstruirLaTorre()
-    {
+    public void test03ElJugadorCuentaConLosCreditosParaConstruirLaTorre() {
+        Partida partida = new Partida();
+        String respuesta1 = partida.construir("Plateada");
+        assertEquals(respuesta1, "Defensa construida exitosamnte");
+        partida.construir("Plateada");
+        partida.construir("Plateada");
+        partida.construir("Plateada");
+        partida.construir("Plateada");
+        String respuesta2 = partida.construir("Plateada");
+        assertEquals(respuesta2,"No se pudo construir la defensa");
 
     }
 
@@ -142,7 +154,7 @@ public class Tests {
     }
 
     @Test
-    public void testo11AlNoQuedarUnidadesEnemigasSinHaberlasEliminadoTodasElJugadorConVidaPositivaEsteGanaLaPartida()
+    public void test11AlNoQuedarUnidadesEnemigasSinHaberlasEliminadoTodasElJugadorConVidaPositivaEsteGanaLaPartida()
     {
 
     }
