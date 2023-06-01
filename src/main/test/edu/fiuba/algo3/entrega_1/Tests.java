@@ -9,6 +9,9 @@ import edu.fiuba.algo3.modelo.Parcelas.Pasarela.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.LinkedList;
+import java.util.concurrent.LinkedBlockingDeque;
+
 
 public class Tests {
     @Test
@@ -22,7 +25,7 @@ public class Tests {
 //“operativas” cuando ya se terminaron de construir.
     @Test
     public void test02TorrePlateadaTardeEnCrearseLoEsperado() {
-        DefensaPlateada defensaPlateada = new DefensaPlateada();
+        DefensaPlateada defensaPlateada = new DefensaPlateada(null);
         defensaPlateada.avanzarTurno();
         assertFalse(defensaPlateada.chequearProgreso());
         defensaPlateada.avanzarTurno();
@@ -32,7 +35,7 @@ public class Tests {
     }
     @Test
     public void test02TorreBlancaTardeEnCrearseLoEsperado() {
-        DefensaBlanca defensaBlanca = new DefensaBlanca();
+        DefensaBlanca defensaBlanca = new DefensaBlanca(null);
         defensaBlanca.avanzarTurno();
         assertTrue(defensaBlanca.chequearProgreso());
     }
@@ -70,23 +73,41 @@ public class Tests {
     @Test
     public void test05LasDefensasAtacanEnElRangoEsperado()
     {
+        LinkedList<Enemigo> enemigos = new LinkedList<Enemigo>();
+        enemigos.add(new Hormiga(new Posicion(0,0)));
+        Enemigo enemigoEsperado = new Hormiga(new Posicion(1, 1));
+        enemigos.add(enemigoEsperado);
 
+        Defensa defensa = new DefensaBlanca(new Posicion(2,2));
+
+        Enemigo enemigoObtenido = defensa.hallarEnemigoMasCercano(enemigos);
+
+        assertEquals(enemigoEsperado, enemigoObtenido);
     }
 
     @Test
     public void test05LasDefensasNoAtacanFueraDelRango()
     {
+        LinkedList<Enemigo> enemigos = new LinkedList<Enemigo>();
+        enemigos.add(new Hormiga(new Posicion(10,10)));
+        enemigos.add(new Hormiga(new Posicion(11, 11)));
 
+        Defensa defensa = new DefensaBlanca(new Posicion(2,2));
+        Enemigo enemigoEsperado = null;
+
+        Enemigo enemigoObtenido = defensa.hallarEnemigoMasCercano(enemigos);
+
+        assertEquals(enemigoEsperado, enemigoObtenido);
     }
 
     @Test
     public void test06LasUnidadesEnemigasSonDaniadasAcordeAlAtaqueRecibido()
     {
-        Arania arania = new Arania();
+        Arania arania = new Arania(null);
         int danioDelAtaque = 1;
         int energiaEsperadaArania = 1;
 
-        Hormiga hormiga = new Hormiga();
+        Hormiga hormiga = new Hormiga(null);
         int energiaEsperadaHormiga = 0;
 
         arania.recibirDanio(danioDelAtaque);

@@ -1,12 +1,14 @@
 package edu.fiuba.algo3.modelo.Enemigos;
 import java.util.Random;
 
+import edu.fiuba.algo3.modelo.Posicion;
+
 public class Arania extends Enemigo {
     
     private static int araniasMuertas = 0;
-    public Arania()
+    public Arania(Posicion posicion)
     {
-        super(2,2,0,2);
+        super(2,2,0,2, posicion);
         this.creditos = this.randCreditos();
     }
 
