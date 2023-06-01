@@ -4,11 +4,13 @@ package edu.fiuba.algo3.modelo;
 // “operativas” cuando ya se terminaron de construir.
 
 public abstract class Defensa {
-       private int coste;
-       private int rango;
-       private int danio;
-       private int progresoConstruccion;
-       Estado estado;
+    
+    private int coste;
+    private int rango;
+    private int danio;
+    private int progresoConstruccion;
+    Estado estado;
+
     public Defensa(int coste, int rango, int danio, int progresoConstruccion){
         this.coste = coste;
         this.rango = rango;
@@ -16,6 +18,7 @@ public abstract class Defensa {
         this.progresoConstruccion = progresoConstruccion;
         this.estado = new EstadoDesactivado(this);
     }
+
     public void avanzarTurno(){
         this.estado.avanzarTurno();
     }
