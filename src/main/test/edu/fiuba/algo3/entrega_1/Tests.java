@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class Tests {
     @Test
     public void test01JugadorSeCreaCon100CreditosY20Vida() {
-        Jugador jugador = new Jugador();
+        Jugador jugador = Jugador.obtenerJugador();
         assertEquals(100, jugador.obtenerCreditos());
         assertEquals(20, jugador.obtenerVida());
     }
