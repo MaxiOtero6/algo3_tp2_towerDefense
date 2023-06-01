@@ -82,7 +82,18 @@ public class Tests {
     @Test
     public void test06LasUnidadesEnemigasSonDaniadasAcordeAlAtaqueRecibido()
     {
+        Arania arania = new Arania();
+        int danioDelAtaque = 1;
+        int energiaEsperadaArania = 1;
 
+        Hormiga hormiga = new Hormiga();
+        int energiaEsperadaHormiga = 0;
+
+        arania.recibirDanio(danioDelAtaque);
+        hormiga.recibirDanio(danioDelAtaque);
+
+        assertEquals(arania.obtenerEnergia(), energiaEsperadaArania);
+        assertEquals(hormiga.obtenerEnergia(), energiaEsperadaHormiga);
     }
 
     @Test

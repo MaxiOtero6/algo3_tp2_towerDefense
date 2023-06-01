@@ -3,11 +3,11 @@ import java.util.Random;
 
 public class Arania extends Enemigo {
     
-    private static int hormigasMuertas = 0;
+    private static int araniasMuertas = 0;
     public Arania()
     {
-        super(1,1,1,1);
-        if (hormigasMuertas >= 10) {this.creditos = this.randCreditos();}
+        super(2,2,0,2);
+        this.creditos = this.randCreditos();
     }
 
     private int randCreditos()

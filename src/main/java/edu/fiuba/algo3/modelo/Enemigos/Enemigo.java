@@ -31,6 +31,11 @@ public class Enemigo {
         this.energia -= danioRecibido;
     }
 
+    public int obtenerEnergia()
+    {
+        return this.energia;
+    }
+
     // public void avanzar()
     // {
 
