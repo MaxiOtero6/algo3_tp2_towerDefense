@@ -40,4 +40,7 @@ public class Jugador {
         }
         return jugador;
     }
+    public boolean comprobarCreditos(int creditosAGastar){
+        return creditos.comprobarCreditos(creditosAGastar);
+    }
 }
