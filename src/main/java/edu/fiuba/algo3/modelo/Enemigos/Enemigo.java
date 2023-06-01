@@ -21,10 +21,10 @@ public class Enemigo {
         Jugador.obtenerJugador().agregarCreditos(this.creditos);
     }
 
-    // public void atacar()
-    // {
-        
-    // }
+    public void atacar()
+    {
+        Jugador.obtenerJugador().recibirDanio(this.danio);
+    }
 
     public void recibirDanio(int danioRecibido)
     {
