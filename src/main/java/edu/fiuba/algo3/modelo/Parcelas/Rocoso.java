@@ -1,10 +1,17 @@
 package edu.fiuba.algo3.modelo.Parcelas;
 
-public class Rocoso extends Parcela {
+public class Rocoso implements Parcela {
     
+    @Override
     public void avanzarTurno()
     {
-        ; //Hola tengo anemia
+
+    }
+
+    @Override
+    public void construir()
+    {
+        System.out.println("No se puede construir en esta parcela!");
     }
 
 }

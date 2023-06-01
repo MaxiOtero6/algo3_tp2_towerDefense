@@ -52,19 +52,19 @@ public class Tests {
     @Test
     public void test04NoSePuedeConstruirSobreTierraConUnaDefensa()
     {
-
+        //assertThrows()
     }
 
     @Test
     public void test04NoSePuedeConstruirSobreParcela()
     {
-        
+        //assertThrows()
     }
     
     @Test
     public void test04NoSePuedeConstruirSobreRocoso()
     {
-        
+        //assertThrows()
     }
 
     @Test
