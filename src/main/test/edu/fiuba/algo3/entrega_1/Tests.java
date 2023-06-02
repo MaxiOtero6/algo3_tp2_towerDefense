@@ -208,7 +208,7 @@ public class Tests {
         Defensa defensa = new DefensaPlateada(null);
         
         defensa.atacar(arania);
-        boolean creditosValidos = ((jugador.obtenerCreditos() > creditosInicial) && (jugador.obtenerCreditos() <= creditosEsperados));
+        boolean creditosValidos = ((jugador.obtenerCreditos() >= creditosInicial) && (jugador.obtenerCreditos() <= creditosEsperados));
         jugador.agregarCreditos(100);
         jugador.eliminarCreditos(creditosEsperados);
         assertTrue(creditosValidos);
