@@ -26,7 +26,7 @@ public class Tests {
         assertEquals(20, jugador.obtenerVida());
     }
 
-    //Verificar que cada defensa tarde en construirse lo que dice que tarda y que recién están
+//Verificar que cada defensa tarde en construirse lo que dice que tarda y que recién están
 //“operativas” cuando ya se terminaron de construir.
     @Test
     public void test02TorrePlateadaTardeEnCrearseLoEsperado() {
