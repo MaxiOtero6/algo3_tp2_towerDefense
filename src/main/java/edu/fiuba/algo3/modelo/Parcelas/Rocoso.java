@@ -1,10 +1,19 @@
 package edu.fiuba.algo3.modelo.Parcelas;
 
+import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Defensas.*;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 
 public class Rocoso implements Parcela {
     
+    private Posicion posicion;
+
+    public Rocoso(Posicion posicion)
+    {
+        this.posicion = posicion;
+    }
+
+
     @Override
     public void avanzarTurno()
     {
