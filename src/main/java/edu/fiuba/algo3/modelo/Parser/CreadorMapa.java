@@ -20,7 +20,7 @@ public class CreadorMapa {
         }
 
         JsonNode root = ParserJSON.leerJSON(
-            "src\\main\\java\\edu\\fiuba\\algo3\\modelo\\Parser\\mapa.json"
+            "src\\main\\resources\\json\\mapa.json"
             );
 
         String indice;

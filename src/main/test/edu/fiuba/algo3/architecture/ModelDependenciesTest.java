@@ -11,7 +11,7 @@ public class ModelDependenciesTest {
     private final String MODEL = "..modelo..";
     private final String JAVA_LANG = "java..";
     private final String JUNIT = "org.junit..";
-    private final String JACKSON = "com.fasterxml.jackson..";
+    private final String JACKSON = "com.fasterxml.jackson.databind..";
 
     @Test
     public void elModeloSoloPuedeReferenciarClasesDelModeloAdemasJavaAdemasJunit() {
