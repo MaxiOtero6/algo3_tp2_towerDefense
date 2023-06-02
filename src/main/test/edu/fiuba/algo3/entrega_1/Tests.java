@@ -35,7 +35,7 @@ public class Tests {
         assertFalse(defensaPlateada.chequearProgreso());
         defensaPlateada.avanzarTurno();
         assertTrue(defensaPlateada.chequearProgreso());
-
+        
 
     }
     @Test
@@ -43,6 +43,7 @@ public class Tests {
         DefensaBlanca defensaBlanca = new DefensaBlanca(null);
         defensaBlanca.avanzarTurno();
         assertTrue(defensaBlanca.chequearProgreso());
+        
     }
 
     @Test
@@ -56,7 +57,8 @@ public class Tests {
         partida.construir("Plateada");
         String respuesta2 = partida.construir("Plateada");
         assertEquals(respuesta2,"No se pudo construir la defensa");
-
+        Jugador.obtenerJugador().agregarCreditos(100);
+        
     }
 
     @Test
@@ -163,6 +165,7 @@ public class Tests {
 
         arania.recibirDanio(danioDelAtaque);
         hormiga.recibirDanio(danioDelAtaque);
+        Jugador.obtenerJugador().eliminarCreditos(1);
 
         assertEquals(arania.obtenerEnergia(), energiaEsperadaArania);
         assertEquals(hormiga.obtenerEnergia(), energiaEsperadaHormiga);
@@ -182,15 +185,41 @@ public class Tests {
     }
 
     @Test
-    public void test08ElJugadorCobraAlDestruirUnEnemigo()
+    public void test08ElJugadorCobraAlDestruirUnEnemigo0Hormiga()
     {
-        
+        Jugador jugador = Jugador.obtenerJugador();
+        int creditosEsperados = 101;
+        Enemigo hormiga = new Hormiga();
+        Defensa defensa = new DefensaBlanca(null);
+        defensa.atacar(hormiga);
+        assertEquals(creditosEsperados, jugador.obtenerCreditos());
+        Jugador.obtenerJugador().eliminarCreditos(1);
+
     }
+
+    @Test
+    public void test08ElJugadorCobraAlDestruirUnEnemigoArania()
+    {
+        Jugador jugador = Jugador.obtenerJugador();
+        int creditosInicial = jugador.obtenerCreditos();
+        int creditosEsperados = jugador.obtenerCreditos() + 10;
+        
+        Enemigo arania = new Arania();
+        Defensa defensa = new DefensaPlateada(null);
+        
+        defensa.atacar(arania);
+        boolean creditosValidos = ((jugador.obtenerCreditos() > creditosInicial) && (jugador.obtenerCreditos() <= creditosEsperados));
+        jugador.agregarCreditos(100);
+        jugador.eliminarCreditos(creditosEsperados);
+        assertTrue(creditosValidos);
+
+    }
+
 
     @Test
     public void test09AlPasarUnTurnoLasUnidadesEnemigasSeMuevenSegunSusCapacidades()
     {
-
+        
     }
 
     @Test

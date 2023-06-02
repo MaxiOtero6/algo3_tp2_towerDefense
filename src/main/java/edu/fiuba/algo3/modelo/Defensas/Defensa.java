@@ -45,4 +45,8 @@ public abstract class Defensa {
 
     public abstract Enemigo hallarEnemigoMasCercano(LinkedList<Enemigo> enemigos);
 
+    public void atacar(Enemigo enemigo){
+        enemigo.recibirDanio(this.danio);
+    }
+
 }

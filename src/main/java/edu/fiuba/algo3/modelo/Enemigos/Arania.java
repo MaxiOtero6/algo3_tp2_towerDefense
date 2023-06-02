@@ -17,4 +17,15 @@ public class Arania extends Enemigo {
         Random rand = new Random();
         return rand.nextInt(11); //Genera int random en el intervalo [0,10]
     }
+
+    @Override
+    public void recibirDanio(int danioRecibido)
+    {
+        this.energia -= danioRecibido;
+        if (this.energia <= 0)
+        {
+            araniasMuertas++;
+            this.otorgarCreditos();
+        }
+    }
 }

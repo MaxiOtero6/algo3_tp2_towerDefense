@@ -12,6 +12,7 @@ public class Creditos {
     {
         return this.creditos;
     }
+
     public boolean comprobarCreditos(int creditosAGastar){
         if (this.creditos < creditosAGastar){
             return false;
@@ -25,6 +26,11 @@ public class Creditos {
     public void agregarCreditos(int creditos)
     {
         this.creditos += creditos;
+    }
+
+    public void eliminarCreditos(int creditos)
+    {
+        this.creditos -= creditos;
     }
 
 }

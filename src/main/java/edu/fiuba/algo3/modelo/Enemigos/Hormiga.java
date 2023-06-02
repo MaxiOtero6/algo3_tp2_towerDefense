@@ -10,4 +10,15 @@ public class Hormiga extends Enemigo {
         super(1,1,1,1);
         if (hormigasMuertas >= 10) {this.creditos = 2;}
     }
+
+    @Override
+    public void recibirDanio(int danioRecibido)
+    {
+        this.energia -= danioRecibido;
+        if (this.energia <= 0)
+        {
+            hormigasMuertas++;
+            this.otorgarCreditos();
+        }
+    }
 }

@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
+
 public class Jugador {
     private Creditos creditos;
     private int vida;
@@ -27,6 +29,11 @@ public class Jugador {
         this.creditos.agregarCreditos(creditos);
     }
 
+    public void eliminarCreditos(int creditos)
+    {
+        this.creditos.eliminarCreditos(creditos);
+    }
+
     public void recibirDanio(int danio)
     {
         this.vida -= danio;
@@ -43,4 +50,5 @@ public class Jugador {
     public boolean comprobarCreditos(int creditosAGastar){
         return creditos.comprobarCreditos(creditosAGastar);
     }
+
 }

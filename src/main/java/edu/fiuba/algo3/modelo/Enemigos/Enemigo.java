@@ -4,8 +4,8 @@ import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
 
-public class Enemigo {
-    private int energia;
+public abstract class Enemigo {
+    protected int energia;
     private int danio;
     protected int creditos;
     private int velocidad;
@@ -31,10 +31,7 @@ public class Enemigo {
         Jugador.obtenerJugador().recibirDanio(this.danio);
     }
 
-    public void recibirDanio(int danioRecibido)
-    {
-        this.energia -= danioRecibido;
-    }
+    public abstract void recibirDanio(int danioRecibido);
 
     public int obtenerEnergia()
     {
