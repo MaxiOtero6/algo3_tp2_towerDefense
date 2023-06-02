@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Parcelas.Pasarela;
 
 import java.util.LinkedList;
 
+import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Defensas.*;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
@@ -10,21 +11,42 @@ import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 public class Pasarela implements Parcela {
     
     private LinkedList<Enemigo> enemigos;
+    private Posicion posicion;
 
-    
+    public Pasarela(Posicion posicion)
+    {
+        this.enemigos = new LinkedList<Enemigo>();
+        this.posicion = posicion;
+    }
+
     public LinkedList<Enemigo> obtenerEnemigos()
     {
         return this.enemigos;
     }
 
-    public void setEnemigos(LinkedList<Enemigo> enemigos)
+    public void agregarEnemigo(Enemigo enemigo) throws Exception
     {
-        this.enemigos = enemigos;
+        this.enemigos.add(enemigo);
+        enemigo.setearPosicion(posicion);
+    }
+
+    private void eliminarEnemigos()
+    {
+        while (enemigos.size() != 0) {
+            Enemigo enemigo = enemigos.getFirst();
+            enemigo.mover();
+            enemigos.removeFirst();
+        }
+    }
+
+    public boolean compararPosicion(Posicion posicion)
+    {
+        return this.posicion.igual(posicion);
     }
     
     public void avanzarTurno()
     {
-        
+        eliminarEnemigos();
     }
     
     @Override
