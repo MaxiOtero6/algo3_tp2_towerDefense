@@ -2,11 +2,12 @@ package edu.fiuba.algo3.modelo.Parcelas.Pasarela;
 
 import java.util.LinkedList;
 
+import edu.fiuba.algo3.modelo.Defensas.*;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 
 
-public abstract class Pasarela implements Parcela {
+public class Pasarela implements Parcela {
     
     private LinkedList<Enemigo> enemigos;
 
@@ -21,12 +22,15 @@ public abstract class Pasarela implements Parcela {
         this.enemigos = enemigos;
     }
     
-    public abstract void avanzarTurno();
+    public void avanzarTurno()
+    {
+        
+    }
     
     @Override
-    public void construir()
+    public void construir(Defensa defensa) throws Exception
     {
-        System.out.println("No se puede construir en esta parcela!");
+        throw new Exception("No se puede construir en esta parcela!");
     }
 
 }

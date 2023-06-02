@@ -5,10 +5,9 @@ import edu.fiuba.algo3.modelo.Defensas.*;
 public class EsConstruible implements Construible{
     
     @Override
-    public void construir(Defensa defensa, Tierra tierra)
+    public Defensa construir(Defensa defensa) throws Exception
     {
-        tierra.colocarDefensa(defensa);
-        tierra.setConstruible(new NoEsConstruible());
+        return defensa;
     }
 
 }

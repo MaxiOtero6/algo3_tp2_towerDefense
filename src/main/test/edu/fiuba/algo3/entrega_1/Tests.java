@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.Defensas.*;
 import edu.fiuba.algo3.modelo.Enemigos.*;
 import edu.fiuba.algo3.modelo.Parcelas.*;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.*;
+import edu.fiuba.algo3.modelo.Parcelas.Tierra.*;
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -61,25 +62,56 @@ public class Tests {
     @Test
     public void test04SePuedeConstruirSobreTierra()
     {
+        Tierra tierra = new Tierra(null);
+        Defensa defensa = new DefensaBlanca(null);
 
+        assertDoesNotThrow(() -> tierra.construir(defensa));
     }
     
     @Test
     public void test04NoSePuedeConstruirSobreTierraConUnaDefensa()
     {
-        //assertThrows()
+        Tierra tierra = new Tierra(null);
+        Defensa defensa = new DefensaBlanca(null);
+        tierra.colocarDefensa(defensa);
+
+        assertThrows(Exception.class,() -> tierra.construir(defensa));
     }
 
     @Test
-    public void test04NoSePuedeConstruirSobreParcela()
+    public void test04NoSePuedeConstruirSobreAlgunaPasarela()
     {
-        //assertThrows()
+        Pasarela pasarela = new Pasarela();
+        Defensa defensa = new DefensaBlanca(null);
+
+        assertThrows(Exception.class, () -> pasarela.construir(defensa));
+    }
+
+    @Test
+    public void test04NoSePuedeConstruirSobreLaMeta()
+    {
+        Pasarela pasarela = new Meta();
+        Defensa defensa = new DefensaBlanca(null);
+
+        assertThrows(Exception.class, () -> pasarela.construir(defensa));
+    }
+
+    @Test
+    public void test04NoSePuedeConstruirSobreLaLargada()
+    {
+        Pasarela pasarela = new Largada();
+        Defensa defensa = new DefensaBlanca(null);
+
+        assertThrows(Exception.class, () -> pasarela.construir(defensa));
     }
     
     @Test
     public void test04NoSePuedeConstruirSobreRocoso()
     {
-        //assertThrows()
+        Rocoso rocoso = new Rocoso();
+        Defensa defensa = new DefensaBlanca(null);
+
+        assertThrows(Exception.class, () -> rocoso.construir(defensa));
     }
 
     @Test
