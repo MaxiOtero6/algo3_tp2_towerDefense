@@ -6,9 +6,9 @@ import edu.fiuba.algo3.modelo.Posicion;
 public class Arania extends Enemigo {
     
     private static int araniasMuertas = 0;
-    public Arania(Posicion posicion)
+    public Arania()
     {
-        super(2,2,0,2, posicion);
+        super(2,2,0,2);
         this.creditos = this.randCreditos();
     }
 

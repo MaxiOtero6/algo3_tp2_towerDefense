@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Enemigos;
 
+import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
 
@@ -11,12 +12,13 @@ public class Enemigo {
     protected static int enemigosMuertos = 0;
     private Posicion posicion;
 
-    public Enemigo(int energia, int danio, int creditos, int velocidad, Posicion posicion){
+    public Enemigo(int energia, int danio, int creditos, int velocidad){
         this.energia = energia;
         this.danio = danio;
         this.creditos = creditos;
         this.velocidad = velocidad;
-        this.posicion = posicion;
+        this.posicion = new Posicion(0, 0);
+
     }
 
     public void otorgarCreditos()
@@ -42,6 +44,17 @@ public class Enemigo {
     public Posicion obtenerPosicion()
     {
         return this.posicion;
+    }
+
+    public void setearPosicion(Posicion posicion)
+    {
+        this.posicion = posicion;
+    }
+
+    public void mover()
+    {
+        Camino camino = Camino.obtenerCamino();
+        camino.moverEnemigo(velocidad, posicion, this);
     }
 
     // public void avanzar()

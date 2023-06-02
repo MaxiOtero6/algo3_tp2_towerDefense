@@ -26,7 +26,7 @@ public class Tests {
         assertEquals(20, jugador.obtenerVida());
     }
 
-    //Verificar que cada defensa tarde en construirse lo que dice que tarda y que recién están
+//Verificar que cada defensa tarde en construirse lo que dice que tarda y que recién están
 //“operativas” cuando ya se terminaron de construir.
     @Test
     public void test02TorrePlateadaTardeEnCrearseLoEsperado() {
@@ -49,7 +49,7 @@ public class Tests {
     public void test03ElJugadorCuentaConLosCreditosParaConstruirLaTorre() {
         Partida partida = new Partida();
         String respuesta1 = partida.construir("Plateada");
-        assertEquals(respuesta1, "Defensa construida exitosamnte");
+        assertEquals(respuesta1, "Defensa construida exitosamente");
         partida.construir("Plateada");
         partida.construir("Plateada");
         partida.construir("Plateada");
@@ -73,15 +73,15 @@ public class Tests {
     {
         Tierra tierra = new Tierra(null);
         Defensa defensa = new DefensaBlanca(null);
-        tierra.colocarDefensa(defensa);
 
+        assertDoesNotThrow(() -> tierra.construir(defensa));
         assertThrows(Exception.class,() -> tierra.construir(defensa));
     }
 
     @Test
     public void test04NoSePuedeConstruirSobreAlgunaPasarela()
     {
-        Pasarela pasarela = new Pasarela();
+        Pasarela pasarela = new Pasarela(null);
         Defensa defensa = new DefensaBlanca(null);
 
         assertThrows(Exception.class, () -> pasarela.construir(defensa));
@@ -90,7 +90,7 @@ public class Tests {
     @Test
     public void test04NoSePuedeConstruirSobreLaMeta()
     {
-        Pasarela pasarela = new Meta();
+        Pasarela pasarela = new Meta(null);
         Defensa defensa = new DefensaBlanca(null);
 
         assertThrows(Exception.class, () -> pasarela.construir(defensa));
@@ -99,7 +99,7 @@ public class Tests {
     @Test
     public void test04NoSePuedeConstruirSobreLaLargada()
     {
-        Pasarela pasarela = new Largada();
+        Pasarela pasarela = new Largada(null);
         Defensa defensa = new DefensaBlanca(null);
 
         assertThrows(Exception.class, () -> pasarela.construir(defensa));
@@ -118,8 +118,11 @@ public class Tests {
     public void test05LasDefensasAtacanEnElRangoEsperado()
     {
         LinkedList<Enemigo> enemigos = new LinkedList<Enemigo>();
-        enemigos.add(new Hormiga(new Posicion(0,0)));
-        Enemigo enemigoEsperado = new Hormiga(new Posicion(1, 1));
+        Enemigo enemigo1 = new Hormiga();
+        enemigo1.setearPosicion(new Posicion(0,0));
+        enemigos.add(enemigo1);
+        Enemigo enemigoEsperado = new Hormiga();
+        enemigoEsperado.setearPosicion(new Posicion(1, 1));
         enemigos.add(enemigoEsperado);
 
         Defensa defensa = new DefensaBlanca(new Posicion(2,2));
@@ -133,8 +136,12 @@ public class Tests {
     public void test05LasDefensasNoAtacanFueraDelRango()
     {
         LinkedList<Enemigo> enemigos = new LinkedList<Enemigo>();
-        enemigos.add(new Hormiga(new Posicion(10,10)));
-        enemigos.add(new Hormiga(new Posicion(11, 11)));
+        Enemigo enemigo1 = new Hormiga();
+        enemigo1.setearPosicion(new Posicion(10,10));
+        enemigos.add(enemigo1);
+        Enemigo enemigo2 = new Hormiga();
+        enemigo2.setearPosicion(new Posicion(11, 11));
+        enemigos.add(enemigo2);
 
         Defensa defensa = new DefensaBlanca(new Posicion(2,2));
         Enemigo enemigoEsperado = null;
@@ -147,11 +154,11 @@ public class Tests {
     @Test
     public void test06LasUnidadesEnemigasSonDaniadasAcordeAlAtaqueRecibido()
     {
-        Arania arania = new Arania(null);
+        Arania arania = new Arania();
         int danioDelAtaque = 1;
         int energiaEsperadaArania = 1;
 
-        Hormiga hormiga = new Hormiga(null);
+        Hormiga hormiga = new Hormiga();
         int energiaEsperadaHormiga = 0;
 
         arania.recibirDanio(danioDelAtaque);
@@ -164,7 +171,14 @@ public class Tests {
     @Test
     public void test07LasUnidadesEnemigasSoloSeMuevenSobreLaParcelaAutorizada()
     {
+        Pasarela pasarela = new Pasarela(new Posicion(0, 0));
+        Enemigo hormiga = new Hormiga();
+        Rocoso rocoso = new Rocoso();
+        Tierra tierra = new Tierra(null);
 
+        assertDoesNotThrow(() -> pasarela.agregarEnemigo(hormiga));
+        assertThrows(Exception.class, () -> rocoso.agregarEnemigo(hormiga));
+        assertThrows(Exception.class, () -> tierra.agregarEnemigo(hormiga));
     }
 
     @Test

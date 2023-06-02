@@ -21,7 +21,7 @@ public class Partida {
         if (defensa == null) {
             return "No se pudo construir la defensa";
         } else {
-            return "Defensa construida exitosamnte";
+            return "Defensa construida exitosamente";
         }
     }
 }

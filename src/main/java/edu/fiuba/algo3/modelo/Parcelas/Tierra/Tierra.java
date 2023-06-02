@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Parcelas.Tierra;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Defensas.*;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
+import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 
 public class Tierra implements Parcela 
 {
@@ -39,4 +40,8 @@ public class Tierra implements Parcela
         this.construible = construible;
     }
 
+    public void agregarEnemigo(Enemigo enemigo) throws Exception
+    {
+        throw new Exception("No se puede agregar un enemigo en esta parcela!");
+    }
 }
