@@ -49,7 +49,7 @@ public class Tests {
     public void test03ElJugadorCuentaConLosCreditosParaConstruirLaTorre() {
         Partida partida = new Partida();
         String respuesta1 = partida.construir("Plateada");
-        assertEquals(respuesta1, "Defensa construida exitosamnte");
+        assertEquals(respuesta1, "Defensa construida exitosamente");
         partida.construir("Plateada");
         partida.construir("Plateada");
         partida.construir("Plateada");
