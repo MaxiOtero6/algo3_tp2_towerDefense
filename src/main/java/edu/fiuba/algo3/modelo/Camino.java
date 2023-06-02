@@ -9,7 +9,13 @@ public class Camino {
     private LinkedList<Pasarela> pasarelas;
     private static Camino camino;
 
-    public void agregarPasarela(Pasarela pasarela){
+    private Camino()
+    {
+        this.pasarelas = new LinkedList<Pasarela>();
+    }
+
+    public void agregarPasarela(Pasarela pasarela)
+    {
         pasarelas.add(pasarela);
     }
 
@@ -32,6 +38,10 @@ public class Camino {
 
     public static Camino obtenerCamino()
     {
+        if (camino == null)
+        {
+            camino = new Camino();
+        }
         return camino;
     }
 }

@@ -55,4 +55,8 @@ public class Pasarela implements Parcela {
         throw new Exception("No se puede construir en esta parcela!");
     }
 
+    public boolean verificarSiEstaElEnemigo(Enemigo enemigo)
+    {
+        return enemigos.contains(enemigo);
+    }
 }

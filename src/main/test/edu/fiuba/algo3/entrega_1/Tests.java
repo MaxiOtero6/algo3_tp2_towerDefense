@@ -219,7 +219,28 @@ public class Tests {
     @Test
     public void test09AlPasarUnTurnoLasUnidadesEnemigasSeMuevenSegunSusCapacidades()
     {
+        Pasarela pasarelaInicial = new Pasarela(new Posicion(0, 0));
+        Pasarela pasarelaIntermedia = new Pasarela(new Posicion(1, 1));
+        Pasarela pasarelaFinal = new Pasarela(new Posicion(2, 2));
+
+        Camino camino = Camino.obtenerCamino();
+        camino.agregarPasarela(pasarelaInicial);
+        camino.agregarPasarela(pasarelaIntermedia);
+        camino.agregarPasarela(pasarelaFinal);
+
+        Enemigo hormiga = new Hormiga();
+        Enemigo arania = new Arania();
+
+
+        try{pasarelaInicial.agregarEnemigo(hormiga);}
+        catch (Exception e){}
+        try{pasarelaInicial.agregarEnemigo(arania);}
+        catch (Exception e){}
         
+        pasarelaInicial.avanzarTurno();
+
+        assertTrue(pasarelaIntermedia.verificarSiEstaElEnemigo(hormiga));
+        assertTrue(pasarelaFinal.verificarSiEstaElEnemigo(arania));
     }
 
     @Test
