@@ -14,16 +14,16 @@ import edu.fiuba.algo3.modelo.Posicion;
 
 public class CreadorMapa {
     
+    private final static JsonNode ROOT = ParserJSON.leerJSON(
+                                "src\\main\\resources\\json\\mapa.json"
+                                        );
+
     public static Mapa crearMapa(List<Pasarela> camino)
     {
         List<List<Parcela>> parcelas = new ArrayList<>();
         for (int i = 1; i - 1 < 15; i++) {
             parcelas.add(new ArrayList<Parcela>());
         }
-
-        JsonNode root = ParserJSON.leerJSON(
-            "src\\main\\resources\\json\\mapa.json"
-            );
 
         String indice;
         String parcela;
@@ -35,7 +35,7 @@ public class CreadorMapa {
                 indice = String.format("%d",i);
                 j = 0;
                 
-                for (JsonNode parcelaJson : root.get("Mapa").get(String.format(indice))) 
+                for (JsonNode parcelaJson : ROOT.get("Mapa").get(String.format(indice))) 
                 {
                     parcela = parcelaJson.toString();
                     parcela = parcela.substring(1, parcela.length() - 1);
