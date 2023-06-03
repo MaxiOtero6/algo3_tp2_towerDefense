@@ -55,4 +55,9 @@ public class Pasarela implements Parcela {
         throw new Exception("No se puede construir en esta parcela!");
     }
 
+    public Posicion getPosicion()
+    {
+        return this.posicion;
+    }
+
 }
