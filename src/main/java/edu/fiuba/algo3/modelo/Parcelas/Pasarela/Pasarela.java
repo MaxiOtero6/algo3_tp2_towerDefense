@@ -10,7 +10,7 @@ import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 
 public class Pasarela implements Parcela {
     
-    private LinkedList<Enemigo> enemigos;
+    protected LinkedList<Enemigo> enemigos;
     private Posicion posicion;
 
     public Pasarela(Posicion posicion)
@@ -24,7 +24,7 @@ public class Pasarela implements Parcela {
         return this.enemigos;
     }
 
-    public void agregarEnemigo(Enemigo enemigo) throws Exception
+    public void agregarEnemigo(Enemigo enemigo)
     {
         this.enemigos.add(enemigo);
         enemigo.setearPosicion(posicion);

@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
+import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
 
 public class Jugador {
     private Creditos creditos;
@@ -37,6 +38,9 @@ public class Jugador {
     public void recibirDanio(int danio)
     {
         this.vida -= danio;
+        if (vida <= 0){
+            throw new PerderPartidaError();
+        }
     }
 
     public static Jugador obtenerJugador()

@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Defensas.*;
 import edu.fiuba.algo3.modelo.Enemigos.*;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
+import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
 import edu.fiuba.algo3.modelo.Parcelas.*;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.*;
 import edu.fiuba.algo3.modelo.Parcelas.Tierra.*;
@@ -256,8 +257,12 @@ public class Tests {
     }
 
     @Test
-    public void test12SiElJugadorPierdeTodaLaVidaPierdeElJuego()
-    {
-
+    public void test12SiElJugadorPierdeTodaLaVidaPierdeElJuego(){
+        Meta meta = new Meta(new Posicion(0,0));
+        for (int i = 0; i < 9; i++){
+            meta.agregarEnemigo(new Arania());
+        }
+        assertAll(meta::avanzarTurno);
+        assertThrows(PerderPartidaError.class, meta::avanzarTurno);
     }
 }
