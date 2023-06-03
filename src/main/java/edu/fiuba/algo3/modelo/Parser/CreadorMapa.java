@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo.Parser;
 
 import edu.fiuba.algo3.modelo.Mapa;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -20,9 +20,9 @@ public class CreadorMapa {
 
     public static Mapa crearMapa(List<Pasarela> camino)
     {
-        List<List<Parcela>> parcelas = new ArrayList<>();
+        List<List<Parcela>> parcelas = new LinkedList<>();
         for (int i = 1; i - 1 < 15; i++) {
-            parcelas.add(new ArrayList<Parcela>());
+            parcelas.add(new LinkedList<Parcela>());
         }
 
         String indice;
@@ -51,15 +51,18 @@ public class CreadorMapa {
                     else if ("Pasarela".equals(parcela))
                     {
                         parcelas.get(i - 1).add(new Pasarela(new Posicion(j, i - 1)));
-                        camino.add(new Pasarela(new Posicion(j, i - 1)));
+                        if (camino != null) {camino.add(new Pasarela(new Posicion(j, i - 1)));}
                     }
                     
                     j++;
                 }
             }
-            camino.set(0, new Largada(camino.get(0).getPosicion()));
-            camino.set(camino.size() - 1, new Meta(camino.get(camino.size() - 1).getPosicion()));
-            return (new Mapa(parcelas));
+            if (camino != null)
+            {   
+                camino.set(0, new Largada(camino.get(0).getPosicion()));
+                camino.set(camino.size() - 1, new Meta(camino.get(camino.size() - 1).getPosicion()));
+            }
+                return (new Mapa(parcelas));
         }
         catch (NullPointerException e)
         {
