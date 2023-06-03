@@ -3,6 +3,7 @@ package edu.fiuba.algo3.entrega_1;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Defensas.*;
 import edu.fiuba.algo3.modelo.Enemigos.*;
+import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
 import edu.fiuba.algo3.modelo.Parcelas.*;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.*;
 import edu.fiuba.algo3.modelo.Parcelas.Tierra.*;
@@ -35,7 +36,7 @@ public class Tests {
         assertFalse(defensaPlateada.chequearProgreso());
         defensaPlateada.avanzarTurno();
         assertTrue(defensaPlateada.chequearProgreso());
-        
+
 
     }
     @Test
@@ -43,7 +44,7 @@ public class Tests {
         DefensaBlanca defensaBlanca = new DefensaBlanca(null);
         defensaBlanca.avanzarTurno();
         assertTrue(defensaBlanca.chequearProgreso());
-        
+
     }
 
     @Test
@@ -58,7 +59,7 @@ public class Tests {
         String respuesta2 = partida.construir("Plateada");
         assertEquals(respuesta2,"No se pudo construir la defensa");
         Jugador.obtenerJugador().agregarCreditos(100);
-        
+
     }
 
     @Test
@@ -69,7 +70,7 @@ public class Tests {
 
         assertDoesNotThrow(() -> tierra.construir(defensa));
     }
-    
+
     @Test
     public void test04NoSePuedeConstruirSobreTierraConUnaDefensa()
     {
@@ -106,7 +107,7 @@ public class Tests {
 
         assertThrows(Exception.class, () -> pasarela.construir(defensa));
     }
-    
+
     @Test
     public void test04NoSePuedeConstruirSobreRocoso()
     {
@@ -203,10 +204,10 @@ public class Tests {
         Jugador jugador = Jugador.obtenerJugador();
         int creditosInicial = jugador.obtenerCreditos();
         int creditosEsperados = jugador.obtenerCreditos() + 10;
-        
+
         Enemigo arania = new Arania();
         Defensa defensa = new DefensaPlateada(null);
-        
+
         defensa.atacar(arania);
         boolean creditosValidos = ((jugador.obtenerCreditos() >= creditosInicial) && (jugador.obtenerCreditos() <= creditosEsperados));
         jugador.agregarCreditos(100);
@@ -236,7 +237,6 @@ public class Tests {
         catch (Exception e){}
         try{pasarelaInicial.agregarEnemigo(arania);}
         catch (Exception e){}
-        
         pasarelaInicial.avanzarTurno();
 
         assertTrue(pasarelaIntermedia.verificarSiEstaElEnemigo(hormiga));
@@ -244,9 +244,9 @@ public class Tests {
     }
 
     @Test
-    public void test10AlEliminarATodosLosEnemigosElJugadorGanaLaPartida()
-    {
-
+    public void test10AlEliminarATodosLosEnemigosElJugadorGanaLaPartida() {
+        Turno turno = new Turno();
+        assertThrows(GanarPartidaError.class, turno::avanzarTurno);
     }
 
     @Test
