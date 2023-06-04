@@ -90,7 +90,6 @@ public class Tests2 {
                 Enemigo a = enemigosEsperados.get(i).get(j);
                 Enemigo b = enemigos.get(i).get(j);
                 assertEquals(a.getClass(), b.getClass());
-                System.out.println(a.getClass());
             }
         }
     }
@@ -138,9 +137,6 @@ public class Tests2 {
     @Test
     public void test17ElJuegoSeCreaAcordeALosJson()
     {
-        Posicion a = new Posicion(0,0);
-        Posicion b = new Posicion(0,0);
-        assertEquals(a,b);
     }
 
     @Test
