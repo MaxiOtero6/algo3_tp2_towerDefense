@@ -15,7 +15,7 @@ import edu.fiuba.algo3.modelo.Posicion;
 public class CreadorMapa {
     
     private final static JsonNode ROOT = ParserJSON.leerJSON(
-                                "src\\main\\resources\\json\\mapa.json"
+                                "src/main/resources/json/mapa.json"
                                         );
 
     public static Mapa crearMapa(List<Pasarela> camino)

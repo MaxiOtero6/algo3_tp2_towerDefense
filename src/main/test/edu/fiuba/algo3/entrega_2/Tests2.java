@@ -8,8 +8,7 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.*;
 
 import edu.fiuba.algo3.modelo.Parser.CreadorEnemigos;
 import edu.fiuba.algo3.modelo.Parser.CreadorMapa;
@@ -41,7 +40,7 @@ public class Tests2 {
         }
         catch (IOException e) {}
 
-        lecturaJson = ParserJSON.leerJSON("src\\main\\resources\\json\\enemigos.json");
+        lecturaJson = ParserJSON.leerJSON("src/main/resources/json/enemigos.json");
 
         assertNotEquals(null, lecturaEsperada);
         assertNotEquals(null, lecturaJson);
@@ -62,7 +61,7 @@ public class Tests2 {
         }
         catch (IOException e) {}
 
-        lecturaJson = ParserJSON.leerJSON("src\\main\\resources\\json\\mapa.json");
+        lecturaJson = ParserJSON.leerJSON("src/main/resources/json/mapa.json");
 
         assertNotEquals(null, lecturaEsperada);
         assertNotEquals(null, lecturaJson);

@@ -13,7 +13,7 @@ import edu.fiuba.algo3.modelo.Enemigos.Hormiga;
 public class CreadorEnemigos {
 
     private final static JsonNode ROOT = ParserJSON.leerJSON(
-                                "src\\main\\resources\\json\\enemigos.json"
+                                "src/main/resources/json/enemigos.json"
                                         );
     
     public static List<Enemigo> crearEnemigos(int numeroTurno)
