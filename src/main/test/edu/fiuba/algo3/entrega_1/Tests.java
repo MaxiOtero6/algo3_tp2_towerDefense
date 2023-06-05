@@ -246,6 +246,8 @@ public class Tests {
 
     @Test
     public void test10AlEliminarATodosLosEnemigosElJugadorGanaLaPartida() {
+        Camino.obtenerCamino().borrarPasarelas();
+        Jugador.obtenerJugador().restaurarVida();
         Turno turno = new Turno();
         assertThrows(GanarPartidaError.class, turno::avanzarTurno);
     }
@@ -253,11 +255,19 @@ public class Tests {
     @Test
     public void test11AlNoQuedarUnidadesEnemigasSinHaberlasEliminadoTodasElJugadorConVidaPositivaEsteGanaLaPartida()
     {
-
+        Camino.obtenerCamino().borrarPasarelas();
+        Jugador.obtenerJugador().restaurarVida();
+        Turno turno = new Turno();
+        Meta meta = new Meta(new Posicion(0,0));
+        meta.agregarEnemigo(new Arania());
+        assertAll(meta::avanzarTurno);
+        assertThrows(GanarPartidaError.class, turno::avanzarTurno);
     }
 
     @Test
     public void test12SiElJugadorPierdeTodaLaVidaPierdeElJuego(){
+        Camino.obtenerCamino().borrarPasarelas();
+        Jugador.obtenerJugador().restaurarVida();
         Meta meta = new Meta(new Posicion(0,0));
         for (int i = 0; i < 9; i++){
             meta.agregarEnemigo(new Arania());

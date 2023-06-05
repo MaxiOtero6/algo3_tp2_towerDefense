@@ -56,4 +56,8 @@ public class Jugador {
         return creditos.comprobarCreditos(creditosAGastar);
     }
 
+    public void restaurarVida(){
+        this.vida = 20;
+    }
+
 }

@@ -44,4 +44,19 @@ public class Camino {
         }
         return camino;
     }
+
+    public boolean tieneEnemigos(){
+        boolean tieneEnemigos = false;
+        for (Pasarela pasarela : pasarelas){
+            if (pasarela.tieneEnemigos()){
+                tieneEnemigos = true;
+            }
+        }
+        return tieneEnemigos;
+    }
+
+    public void borrarPasarelas(){
+        this.pasarelas = new LinkedList<Pasarela>();
+    }
+
 }

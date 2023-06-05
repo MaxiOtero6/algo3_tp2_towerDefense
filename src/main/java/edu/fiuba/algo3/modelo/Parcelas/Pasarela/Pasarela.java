@@ -59,4 +59,9 @@ public class Pasarela implements Parcela {
     {
         return enemigos.contains(enemigo);
     }
+
+    public boolean tieneEnemigos(){
+        return !enemigos.isEmpty();
+    }
+
 }
