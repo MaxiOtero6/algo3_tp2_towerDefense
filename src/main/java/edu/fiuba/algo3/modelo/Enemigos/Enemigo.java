@@ -58,4 +58,15 @@ public abstract class Enemigo {
     // {
 
     // }
+    @Override
+    public boolean equals(Object enemigo)
+    {
+        if (enemigo == this) {return true;}
+        if (enemigo.getClass() == this.getClass())
+        {
+            Enemigo enem = (Enemigo)enemigo;
+            return (this.posicion.equals(enem.obtenerPosicion()));
+        }
+        return false;
+    }
 }

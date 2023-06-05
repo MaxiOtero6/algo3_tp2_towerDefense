@@ -71,26 +71,19 @@ public class Tests2 {
     @Test
     public void test15LaConversionDelJsonEnemigosEsLaIndicada()
     {
-        // LinkedList<LinkedList<Enemigo>> enemigos = new LinkedList<>();
-        // LinkedList<LinkedList<Enemigo>> enemigosEsperados = new LinkedList<>();
-        // Enemigo[][] enemigosPorTurno = {{new Hormiga()}, {new Hormiga(), new Arania()}, {new Hormiga(), new Hormiga(), new Arania()}, {new Arania()}, {new Hormiga(), new Arania()}, {new Hormiga(), new Arania(), new Arania()}, {new Arania()}, {new Hormiga()}, {new Hormiga()}, {new Hormiga(), new Hormiga()}, {new Arania()}, {new Hormiga(), new Arania(), new Arania()}};
+        LinkedList<LinkedList<Enemigo>> enemigos = new LinkedList<>();
+        LinkedList<LinkedList<Enemigo>> enemigosEsperados = new LinkedList<>();
+        Enemigo[][] enemigosPorTurno = {{new Hormiga()}, {new Hormiga(), new Arania()}, {new Hormiga(), new Hormiga(), new Arania()}, {new Arania()}, {new Hormiga(), new Arania()}, {new Hormiga(), new Arania(), new Arania()}, {new Arania()}, {new Hormiga()}, {new Hormiga()}, {new Hormiga(), new Hormiga()}, {new Arania()}, {new Hormiga(), new Arania(), new Arania()}};
         
-        // for (Enemigo[] turno : enemigosPorTurno) {    
-        //     enemigosEsperados.add(new LinkedList<>(Arrays.asList(turno)));
-        // }
+        for (Enemigo[] turno : enemigosPorTurno) {    
+            enemigosEsperados.add(new LinkedList<>(Arrays.asList(turno)));
+        }
 
-        // for (int i = 0; i < enemigosPorTurno.length; i++) {
-        //     enemigos.add(new LinkedList<>(CreadorEnemigos.crearEnemigos(i)));
-        // }
+        for (int i = 0; i < enemigosPorTurno.length; i++) {
+            enemigos.add(new LinkedList<>(CreadorEnemigos.crearEnemigos(i)));
+        }
 
-        // //assertEquals comparaba punteros no instancias
-        // for (int i = 0; i < enemigosPorTurno.length; i++) {
-        //     for (int j = 0; j < enemigosEsperados.get(i).size(); j++) {
-        //         Enemigo a = enemigosEsperados.get(i).get(j);
-        //         Enemigo b = enemigos.get(i).get(j);
-        //         assertEquals(a.getClass(), b.getClass());
-        //     }
-        // }
+        assertEquals(enemigosEsperados, enemigos);
     }
 
     @Test
@@ -123,7 +116,7 @@ public class Tests2 {
         // mapaEsperado = new Mapa(mapaSimulado);
 
         // mapa = CreadorMapa.crearMapa(null);
-        //assertEquals comparaba punteros no instancias
+
         // for (int i = 0; i < filasMapa.length; i++) {
         //     for (int j = 0; j < filasMapa.length; j++) {
         //         Enemigo a = mapaEsperado.get(i).get(j);
