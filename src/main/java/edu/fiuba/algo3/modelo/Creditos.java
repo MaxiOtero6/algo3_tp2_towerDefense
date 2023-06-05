@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Errores.CreditosInsuficientesError;
+
 public class Creditos {
 
     private int creditos;
@@ -13,9 +15,9 @@ public class Creditos {
         return this.creditos;
     }
 
-    public boolean comprobarCreditos(int creditosAGastar){
+    public boolean gastarCreditos(int creditosAGastar){
         if (this.creditos < creditosAGastar){
-            return false;
+            throw new CreditosInsuficientesError();
         }
         else {
             creditos -= creditosAGastar;

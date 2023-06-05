@@ -15,13 +15,4 @@ public class Partida {
         this.jugador = Jugador.obtenerJugador();
         this.constructorDeDefensas = new ConstructorDeDefensas();
     }
-
-    public String construir(String torre) {
-        Defensa defensa = constructorDeDefensas.construir(torre);
-        if (defensa == null) {
-            return "No se pudo construir la defensa";
-        } else {
-            return "Defensa construida exitosamente";
-        }
-    }
 }

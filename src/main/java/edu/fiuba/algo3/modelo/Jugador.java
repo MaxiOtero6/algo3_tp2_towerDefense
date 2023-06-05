@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
+import edu.fiuba.algo3.modelo.Errores.CreditosInsuficientesError;
 import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
 
 public class Jugador {
@@ -52,8 +53,8 @@ public class Jugador {
         return jugador;
     }
     
-    public boolean comprobarCreditos(int creditosAGastar){
-        return creditos.comprobarCreditos(creditosAGastar);
+    public void gastarCreditos(int creditosAGastar){
+        creditos.gastarCreditos(creditosAGastar);
     }
 
     public void restaurarVida(){

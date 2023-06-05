@@ -3,6 +3,7 @@ package edu.fiuba.algo3.entrega_1;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Defensas.*;
 import edu.fiuba.algo3.modelo.Enemigos.*;
+import edu.fiuba.algo3.modelo.Errores.CreditosInsuficientesError;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
 import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
 import edu.fiuba.algo3.modelo.Parcelas.*;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.TestMethodOrder.*;
+import org.junit.jupiter.api.function.Executable;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -50,17 +52,15 @@ public class Tests {
 
     @Test
     public void test03ElJugadorCuentaConLosCreditosParaConstruirLaTorre() {
-        Partida partida = new Partida();
-        String respuesta1 = partida.construir("Plateada");
-        assertEquals(respuesta1, "Defensa construida exitosamente");
-        partida.construir("Plateada");
-        partida.construir("Plateada");
-        partida.construir("Plateada");
-        partida.construir("Plateada");
-        String respuesta2 = partida.construir("Plateada");
-        assertEquals(respuesta2,"No se pudo construir la defensa");
-        Jugador.obtenerJugador().agregarCreditos(100);
-
+        Jugador jugador = Jugador.obtenerJugador();
+       Defensa defensa = new DefensaPlateada(new Posicion(0,0));
+        defensa.gastarCreditos();
+        defensa.gastarCreditos();
+        defensa.gastarCreditos();
+        defensa.gastarCreditos();
+        defensa.gastarCreditos();
+       assertThrows(CreditosInsuficientesError.class, defensa::gastarCreditos);
+       jugador.agregarCreditos(100);
     }
 
     @Test

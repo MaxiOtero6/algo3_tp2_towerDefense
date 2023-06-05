@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Defensas;
 
 import java.util.LinkedList;
 
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Enemigos.*;
 // Verificar que cada defensa tarde en construirse lo que dice que tarda y que recién están
@@ -49,4 +50,8 @@ public abstract class Defensa {
         enemigo.recibirDanio(this.danio);
     }
 
+    public void gastarCreditos(){
+        Jugador jugador = Jugador.obtenerJugador();
+        jugador.gastarCreditos(this.coste);
+    }
 }
