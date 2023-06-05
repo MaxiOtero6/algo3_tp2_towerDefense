@@ -44,4 +44,21 @@ public class Tierra implements Parcela
     {
         throw new Exception("No se puede agregar un enemigo en esta parcela!");
     }
+
+    public Posicion obtenerPosicion()
+    {
+        return this.posicion;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o == this) {return true;}
+        if (o.getClass() == this.getClass())
+        {
+            Tierra tierra = (Tierra)o;
+            return (this.posicion.equals(tierra.obtenerPosicion()));
+        }
+        return false;
+    }
 }

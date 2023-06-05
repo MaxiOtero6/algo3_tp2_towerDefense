@@ -18,7 +18,7 @@ public class CreadorMapa {
                                 "src/main/resources/json/mapa.json"
                                         );
 
-    public static Mapa crearMapa(List<Pasarela> camino)
+    public static List<List<Parcela>> crearMapa(List<Pasarela> camino)
     {
         List<List<Parcela>> parcelas = new LinkedList<>();
         for (int i = 1; i - 1 < 15; i++) {
@@ -62,7 +62,7 @@ public class CreadorMapa {
                 camino.set(0, new Largada(camino.get(0).getPosicion()));
                 camino.set(camino.size() - 1, new Meta(camino.get(camino.size() - 1).getPosicion()));
             }
-                return (new Mapa(parcelas));
+                return (parcelas);
         }
         catch (NullPointerException e)
         {
