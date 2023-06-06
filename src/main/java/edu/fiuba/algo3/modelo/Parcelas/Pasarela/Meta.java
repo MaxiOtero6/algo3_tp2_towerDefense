@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.Parcelas.Pasarela;
 
 import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 
 public class Meta extends Pasarela{
     
@@ -9,13 +10,13 @@ public class Meta extends Pasarela{
     }
 
     @Override
-    public void avanzarTurno()
-    {
-
+    public void avanzarTurno(){
+        for (Enemigo enemigo : enemigos){
+            this.daniarJugador(enemigo);
+        }
     }
 
-    public void daniarJugador()
-    {
-        
+    public void daniarJugador(Enemigo enemigo){
+        enemigo.atacar();
     }
 }

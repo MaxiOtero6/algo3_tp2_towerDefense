@@ -9,7 +9,7 @@ import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 
 public class Pasarela implements Parcela {
     
-    private LinkedList<Enemigo> enemigos;
+    protected LinkedList<Enemigo> enemigos;
     private Posicion posicion;
 
     public Pasarela(Posicion posicion)
@@ -23,7 +23,7 @@ public class Pasarela implements Parcela {
         return this.enemigos;
     }
 
-    public void agregarEnemigo(Enemigo enemigo) throws Exception
+    public void agregarEnemigo(Enemigo enemigo)
     {
         this.enemigos.add(enemigo);
         enemigo.setearPosicion(posicion);
@@ -54,6 +54,7 @@ public class Pasarela implements Parcela {
         throw new Exception("No se puede construir en esta parcela!");
     }
 
+
     public Posicion getPosicion()
     {
         return this.posicion;
@@ -74,6 +75,14 @@ public class Pasarela implements Parcela {
             return (this.posicion.equals(pasarela.obtenerPosicion()));
         }
         return false;
+
+    public boolean verificarSiEstaElEnemigo(Enemigo enemigo)
+    {
+        return enemigos.contains(enemigo);
+    }
+
+    public boolean tieneEnemigos(){
+        return !enemigos.isEmpty();
     }
 
 }

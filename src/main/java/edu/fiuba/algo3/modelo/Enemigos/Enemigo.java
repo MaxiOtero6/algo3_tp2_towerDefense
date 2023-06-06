@@ -54,10 +54,6 @@ public abstract class Enemigo {
         camino.moverEnemigo(velocidad, posicion, this);
     }
 
-    // public void avanzar()
-    // {
-
-    // }
     @Override
     public boolean equals(Object enemigo)
     {

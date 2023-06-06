@@ -3,12 +3,19 @@ package edu.fiuba.algo3.entrega_1;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Defensas.*;
 import edu.fiuba.algo3.modelo.Enemigos.*;
+import edu.fiuba.algo3.modelo.Errores.CreditosInsuficientesError;
+import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
+import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
 import edu.fiuba.algo3.modelo.Parcelas.*;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.*;
 import edu.fiuba.algo3.modelo.Parcelas.Tierra.*;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+
+import org.junit.jupiter.api.TestMethodOrder.*;
+import org.junit.jupiter.api.function.Executable;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.LinkedList;
@@ -31,7 +38,7 @@ public class Tests {
         assertFalse(defensaPlateada.chequearProgreso());
         defensaPlateada.avanzarTurno();
         assertTrue(defensaPlateada.chequearProgreso());
-        
+
 
     }
     @Test
@@ -39,22 +46,20 @@ public class Tests {
         DefensaBlanca defensaBlanca = new DefensaBlanca(null);
         defensaBlanca.avanzarTurno();
         assertTrue(defensaBlanca.chequearProgreso());
-        
+
     }
 
     @Test
     public void test03ElJugadorCuentaConLosCreditosParaConstruirLaTorre() {
-        Partida partida = new Partida();
-        String respuesta1 = partida.construir("Plateada");
-        assertEquals(respuesta1, "Defensa construida exitosamente");
-        partida.construir("Plateada");
-        partida.construir("Plateada");
-        partida.construir("Plateada");
-        partida.construir("Plateada");
-        String respuesta2 = partida.construir("Plateada");
-        assertEquals(respuesta2,"No se pudo construir la defensa");
-        Jugador.obtenerJugador().agregarCreditos(100);
-        
+        Jugador jugador = Jugador.obtenerJugador();
+       Defensa defensa = new DefensaPlateada(new Posicion(0,0));
+        defensa.gastarCreditos();
+        defensa.gastarCreditos();
+        defensa.gastarCreditos();
+        defensa.gastarCreditos();
+        defensa.gastarCreditos();
+       assertThrows(CreditosInsuficientesError.class, defensa::gastarCreditos);
+       jugador.agregarCreditos(100);
     }
 
     @Test
@@ -65,7 +70,7 @@ public class Tests {
 
         assertDoesNotThrow(() -> tierra.construir(defensa));
     }
-    
+
     @Test
     public void test04NoSePuedeConstruirSobreTierraConUnaDefensa()
     {
@@ -102,7 +107,7 @@ public class Tests {
 
         assertThrows(Exception.class, () -> pasarela.construir(defensa));
     }
-    
+
     @Test
     public void test04NoSePuedeConstruirSobreRocoso()
     {
@@ -199,10 +204,10 @@ public class Tests {
         Jugador jugador = Jugador.obtenerJugador();
         int creditosInicial = jugador.obtenerCreditos();
         int creditosEsperados = jugador.obtenerCreditos() + 10;
-        
+
         Enemigo arania = new Arania();
         Defensa defensa = new DefensaPlateada(null);
-        
+
         defensa.atacar(arania);
         boolean creditosValidos = ((jugador.obtenerCreditos() >= creditosInicial) && (jugador.obtenerCreditos() <= creditosEsperados));
         jugador.agregarCreditos(100);
@@ -215,24 +220,58 @@ public class Tests {
     @Test
     public void test09AlPasarUnTurnoLasUnidadesEnemigasSeMuevenSegunSusCapacidades()
     {
-        
+        Pasarela pasarelaInicial = new Pasarela(new Posicion(0, 0));
+        Pasarela pasarelaIntermedia = new Pasarela(new Posicion(1, 1));
+        Pasarela pasarelaFinal = new Pasarela(new Posicion(2, 2));
+
+        Camino camino = Camino.obtenerCamino();
+        camino.agregarPasarela(pasarelaInicial);
+        camino.agregarPasarela(pasarelaIntermedia);
+        camino.agregarPasarela(pasarelaFinal);
+
+        Enemigo hormiga = new Hormiga();
+        Enemigo arania = new Arania();
+
+
+        try{pasarelaInicial.agregarEnemigo(hormiga);}
+        catch (Exception e){}
+        try{pasarelaInicial.agregarEnemigo(arania);}
+        catch (Exception e){}
+        pasarelaInicial.avanzarTurno();
+
+        assertTrue(pasarelaIntermedia.verificarSiEstaElEnemigo(hormiga));
+        assertTrue(pasarelaFinal.verificarSiEstaElEnemigo(arania));
     }
 
     @Test
-    public void test10AlEliminarATodosLosEnemigosElJugadorGanaLaPartida()
-    {
-
+    public void test10AlEliminarATodosLosEnemigosElJugadorGanaLaPartida() {
+        Camino.obtenerCamino().borrarPasarelas();
+        Jugador.obtenerJugador().restaurarVida();
+        Turno turno = new Turno();
+        assertThrows(GanarPartidaError.class, turno::avanzarTurno);
     }
 
     @Test
     public void test11AlNoQuedarUnidadesEnemigasSinHaberlasEliminadoTodasElJugadorConVidaPositivaEsteGanaLaPartida()
     {
-
+        Camino.obtenerCamino().borrarPasarelas();
+        Jugador.obtenerJugador().restaurarVida();
+        Turno turno = new Turno();
+        Meta meta = new Meta(new Posicion(0,0));
+        meta.agregarEnemigo(new Arania());
+        assertAll(meta::avanzarTurno);
+        assertThrows(GanarPartidaError.class, turno::avanzarTurno);
     }
 
     @Test
-    public void test12SiElJugadorPierdeTodaLaVidaPierdeElJuego()
-    {
-
+    public void test12SiElJugadorPierdeTodaLaVidaPierdeElJuego(){
+        Camino.obtenerCamino().borrarPasarelas();
+        Jugador.obtenerJugador().restaurarVida();
+        Meta meta = new Meta(new Posicion(0,0));
+        for (int i = 0; i < 9; i++){
+            meta.agregarEnemigo(new Arania());
+        }
+        assertAll(meta::avanzarTurno);
+        assertThrows(PerderPartidaError.class, meta::avanzarTurno);
     }
 }
