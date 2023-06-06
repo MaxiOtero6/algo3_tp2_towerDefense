@@ -12,7 +12,7 @@ public class ModelDependenciesTest {
     private final String JAVA_LANG = "java..";
     private final String JUNIT = "org.junit..";
     private final String JACKSON = "com.fasterxml.jackson.databind..";
-    private final String LOG4J = "org.apache.logging.log4j.Logger";
+    private final String LOG4J = "org.apache.logging.log4j..";
 
     @Test
     public void elModeloSoloPuedeReferenciarClasesDelModeloAdemasJavaAdemasJunit() {
