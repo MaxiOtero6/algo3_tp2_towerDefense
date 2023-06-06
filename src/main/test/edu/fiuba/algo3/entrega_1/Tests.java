@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Enemigos.*;
 import edu.fiuba.algo3.modelo.Errores.CreditosInsuficientesError;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
 import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
+import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
 import edu.fiuba.algo3.modelo.Parcelas.*;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.*;
 import edu.fiuba.algo3.modelo.Parcelas.Tierra.*;
@@ -78,7 +79,7 @@ public class Tests {
         Defensa defensa = new DefensaBlanca(null);
 
         assertDoesNotThrow(() -> tierra.construir(defensa));
-        assertThrows(Exception.class,() -> tierra.construir(defensa));
+        assertThrows(TerrenoDeConstruccionInvalidoError.class,() -> tierra.construir(defensa));
     }
 
     @Test
@@ -87,7 +88,7 @@ public class Tests {
         Pasarela pasarela = new Pasarela(null);
         Defensa defensa = new DefensaBlanca(null);
 
-        assertThrows(Exception.class, () -> pasarela.construir(defensa));
+        assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> pasarela.construir(defensa));
     }
 
     @Test
@@ -96,7 +97,7 @@ public class Tests {
         Pasarela pasarela = new Meta(null);
         Defensa defensa = new DefensaBlanca(null);
 
-        assertThrows(Exception.class, () -> pasarela.construir(defensa));
+        assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> pasarela.construir(defensa));
     }
 
     @Test
@@ -105,7 +106,7 @@ public class Tests {
         Pasarela pasarela = new Largada(null);
         Defensa defensa = new DefensaBlanca(null);
 
-        assertThrows(Exception.class, () -> pasarela.construir(defensa));
+        assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> pasarela.construir(defensa));
     }
 
     @Test
@@ -114,7 +115,7 @@ public class Tests {
         Rocoso rocoso = new Rocoso(null);
         Defensa defensa = new DefensaBlanca(null);
 
-        assertThrows(Exception.class, () -> rocoso.construir(defensa));
+        assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> rocoso.construir(defensa));
     }
 
     @Test
