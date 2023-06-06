@@ -31,11 +31,6 @@ public class Jugador {
         this.creditos.agregarCreditos(creditos);
     }
 
-    public void eliminarCreditos(int creditos)
-    {
-        this.creditos.eliminarCreditos(creditos);
-    }
-
     public void recibirDanio(int danio)
     {
         this.vida -= danio;

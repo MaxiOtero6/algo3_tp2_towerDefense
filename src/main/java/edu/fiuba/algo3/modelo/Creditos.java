@@ -15,7 +15,8 @@ public class Creditos {
         return this.creditos;
     }
 
-    public void gastarCreditos(int creditosAGastar){
+    public void gastarCreditos(int creditosAGastar)
+    {
         if (this.creditos < creditosAGastar){
             throw new CreditosInsuficientesError();
         }
@@ -27,11 +28,6 @@ public class Creditos {
     public void agregarCreditos(int creditos)
     {
         this.creditos += creditos;
-    }
-
-    public void eliminarCreditos(int creditos)
-    {
-        this.creditos -= creditos;
     }
 
 }

@@ -167,7 +167,7 @@ public class Tests {
 
         arania.recibirDanio(danioDelAtaque);
         hormiga.recibirDanio(danioDelAtaque);
-        Jugador.obtenerJugador().eliminarCreditos(1);
+        Jugador.obtenerJugador().gastarCreditos(1);
 
         assertEquals(arania.obtenerEnergia(), energiaEsperadaArania);
         assertEquals(hormiga.obtenerEnergia(), energiaEsperadaHormiga);
@@ -195,7 +195,7 @@ public class Tests {
         Defensa defensa = new DefensaBlanca(null);
         defensa.atacar(hormiga);
         assertEquals(creditosEsperados, jugador.obtenerCreditos());
-        Jugador.obtenerJugador().eliminarCreditos(1);
+        Jugador.obtenerJugador().gastarCreditos(1);
 
     }
 
@@ -212,7 +212,7 @@ public class Tests {
         defensa.atacar(arania);
         boolean creditosValidos = ((jugador.obtenerCreditos() >= creditosInicial) && (jugador.obtenerCreditos() <= creditosEsperados));
         jugador.agregarCreditos(100);
-        jugador.eliminarCreditos(creditosEsperados);
+        jugador.gastarCreditos(creditosEsperados);
         assertTrue(creditosValidos);
 
     }
