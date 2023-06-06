@@ -54,7 +54,7 @@ public class Tierra implements Parcela
     public boolean equals(Object o)
     {
         if (o == this) {return true;}
-        if (o.getClass() == this.getClass())
+        if (o instanceof Tierra)
         {
             Tierra tierra = (Tierra)o;
             return (this.posicion.equals(tierra.obtenerPosicion()));

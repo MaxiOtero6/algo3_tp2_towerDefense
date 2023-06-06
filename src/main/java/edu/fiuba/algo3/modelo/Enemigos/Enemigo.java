@@ -58,7 +58,7 @@ public abstract class Enemigo {
     public boolean equals(Object enemigo)
     {
         if (enemigo == this) {return true;}
-        if (enemigo.getClass() == this.getClass())
+        if (enemigo instanceof Enemigo)
         {
             Enemigo enem = (Enemigo)enemigo;
             return (this.posicion.equals(enem.obtenerPosicion()));

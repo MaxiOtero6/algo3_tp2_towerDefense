@@ -69,7 +69,7 @@ public class Pasarela implements Parcela {
     public boolean equals(Object o)
     {
         if (o == this) {return true;}
-        if (o.getClass() == this.getClass())
+        if (o instanceof Pasarela)
         {
             Pasarela pasarela = (Pasarela)o;
             return (this.posicion.equals(pasarela.obtenerPosicion()));

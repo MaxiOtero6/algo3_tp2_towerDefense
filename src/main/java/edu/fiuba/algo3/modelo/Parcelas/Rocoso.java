@@ -39,7 +39,7 @@ public class Rocoso implements Parcela {
     public boolean equals(Object o)
     {
         if (o == this) {return true;}
-        if (o.getClass() == this.getClass())
+        if (o instanceof Rocoso)
         {
             Rocoso rocoso = (Rocoso)o;
             return (this.posicion.equals(rocoso.obtenerPosicion()));
