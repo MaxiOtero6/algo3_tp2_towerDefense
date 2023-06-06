@@ -7,7 +7,6 @@ import edu.fiuba.algo3.modelo.Defensas.*;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 
-
 public class Pasarela implements Parcela {
     
     protected LinkedList<Enemigo> enemigos;
@@ -54,6 +53,28 @@ public class Pasarela implements Parcela {
     {
         throw new Exception("No se puede construir en esta parcela!");
     }
+
+
+    public Posicion getPosicion()
+    {
+        return this.posicion;
+    }
+
+    public Posicion obtenerPosicion()
+    {
+        return this.posicion;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o == this) {return true;}
+        if (o.getClass() == this.getClass())
+        {
+            Pasarela pasarela = (Pasarela)o;
+            return (this.posicion.equals(pasarela.obtenerPosicion()));
+        }
+        return false;
 
     public boolean verificarSiEstaElEnemigo(Enemigo enemigo)
     {

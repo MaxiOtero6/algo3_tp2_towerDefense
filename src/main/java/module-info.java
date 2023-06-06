@@ -1,6 +1,8 @@
 module edu.fiuba.algo3 {
     requires transitive javafx.graphics;
     requires javafx.controls;
-    requires transitive com.google.gson;
+    requires com.fasterxml.jackson.databind;
+    requires org.apache.logging.log4j;
     exports edu.fiuba.algo3;
+
 }

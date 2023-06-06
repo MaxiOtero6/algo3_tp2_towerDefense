@@ -38,4 +38,15 @@ public class Posicion {
     {
         return (coordenadasX == coordenadaX & coordenadasY == coordenadaY);
     }
+
+    public boolean equals(Object o)
+    {
+        if (o == this) {return true;}
+        if (o.getClass() == this.getClass())
+        {
+            Posicion posicion = (Posicion)o;
+            return (this.coordenadaX == posicion.obtenerX() && this.coordenadaY == posicion.obtenerY());
+        }
+        return false;
+    }
 }

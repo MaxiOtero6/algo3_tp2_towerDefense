@@ -54,8 +54,15 @@ public abstract class Enemigo {
         camino.moverEnemigo(velocidad, posicion, this);
     }
 
-    public boolean equals(Enemigo enemigo)
+    @Override
+    public boolean equals(Object enemigo)
     {
-        return this == enemigo;
+        if (enemigo == this) {return true;}
+        if (enemigo.getClass() == this.getClass())
+        {
+            Enemigo enem = (Enemigo)enemigo;
+            return (this.posicion.equals(enem.obtenerPosicion()));
+        }
+        return false;
     }
 }

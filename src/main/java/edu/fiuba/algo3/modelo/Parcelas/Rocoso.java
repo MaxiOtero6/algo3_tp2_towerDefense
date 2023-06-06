@@ -1,10 +1,23 @@
 package edu.fiuba.algo3.modelo.Parcelas;
 
+import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Defensas.*;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 
 public class Rocoso implements Parcela {
     
+    private Posicion posicion;
+
+    public Rocoso(Posicion posicion)
+    {
+        this.posicion = posicion;
+    }
+
+    public Posicion obtenerPosicion()
+    {
+        return this.posicion;
+    }
+
     @Override
     public void avanzarTurno()
     {
@@ -20,5 +33,17 @@ public class Rocoso implements Parcela {
     public void agregarEnemigo(Enemigo enemigo) throws Exception
     {
         throw new Exception("No se puede agregar un enemigo en esta parcela!");
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o == this) {return true;}
+        if (o.getClass() == this.getClass())
+        {
+            Rocoso rocoso = (Rocoso)o;
+            return (this.posicion.equals(rocoso.obtenerPosicion()));
+        }
+        return false;
     }
 }

@@ -9,17 +9,16 @@ import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
 import edu.fiuba.algo3.modelo.Parcelas.*;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.*;
 import edu.fiuba.algo3.modelo.Parcelas.Tierra.*;
-
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+
 import org.junit.jupiter.api.TestMethodOrder.*;
 import org.junit.jupiter.api.function.Executable;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.LinkedList;
-import java.util.concurrent.LinkedBlockingDeque;
 
 @TestMethodOrder(MethodOrderer.Alphanumeric.class)
 public class Tests {
@@ -112,7 +111,7 @@ public class Tests {
     @Test
     public void test04NoSePuedeConstruirSobreRocoso()
     {
-        Rocoso rocoso = new Rocoso();
+        Rocoso rocoso = new Rocoso(null);
         Defensa defensa = new DefensaBlanca(null);
 
         assertThrows(Exception.class, () -> rocoso.construir(defensa));
@@ -178,7 +177,7 @@ public class Tests {
     {
         Pasarela pasarela = new Pasarela(new Posicion(0, 0));
         Enemigo hormiga = new Hormiga();
-        Rocoso rocoso = new Rocoso();
+        Rocoso rocoso = new Rocoso(null);
         Tierra tierra = new Tierra(null);
 
         assertDoesNotThrow(() -> pasarela.agregarEnemigo(hormiga));
