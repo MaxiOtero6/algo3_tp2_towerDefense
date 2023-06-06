@@ -75,6 +75,7 @@ public class Pasarela implements Parcela {
             return (this.posicion.equals(pasarela.obtenerPosicion()));
         }
         return false;
+    }
 
     public boolean verificarSiEstaElEnemigo(Enemigo enemigo)
     {
