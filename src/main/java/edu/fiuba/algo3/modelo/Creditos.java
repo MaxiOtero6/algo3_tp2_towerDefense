@@ -15,13 +15,12 @@ public class Creditos {
         return this.creditos;
     }
 
-    public boolean gastarCreditos(int creditosAGastar){
+    public void gastarCreditos(int creditosAGastar){
         if (this.creditos < creditosAGastar){
             throw new CreditosInsuficientesError();
         }
         else {
             creditos -= creditosAGastar;
-            return true;
         }
     }
 
