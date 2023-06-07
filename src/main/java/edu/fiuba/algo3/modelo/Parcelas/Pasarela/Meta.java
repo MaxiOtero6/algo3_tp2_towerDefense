@@ -14,6 +14,7 @@ public class Meta extends Pasarela{
         for (Enemigo enemigo : enemigos){
             this.daniarJugador(enemigo);
         }
+        eliminarEnemigos();
     }
 
     public void daniarJugador(Enemigo enemigo){
