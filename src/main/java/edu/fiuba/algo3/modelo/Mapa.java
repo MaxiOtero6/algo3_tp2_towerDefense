@@ -12,19 +12,4 @@ public class Mapa {
     {
         this.mapa = parcelas;
     }
-
-    public void avanzarTurno()
-    {
-
-    }
-
-    public void setMapa(List<List<Parcela>> parcelas)
-    {
-        this.mapa = parcelas;
-    }
-
-    // public void construir(Posicion posicion)
-    // {
-
-    // }
 }
