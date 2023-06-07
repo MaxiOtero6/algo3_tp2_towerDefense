@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
@@ -16,11 +15,6 @@ public class Mapa {
     public void avanzarTurno()
     {
 
-    }
-
-    public void setMapa(List<List<Parcela>> parcelas)
-    {
-        this.mapa = parcelas;
     }
 
     // public void construir(Posicion posicion)
