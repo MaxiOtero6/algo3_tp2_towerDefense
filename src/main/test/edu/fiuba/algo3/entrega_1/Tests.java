@@ -191,8 +191,7 @@ public class Tests {
     public void test08ElJugadorCobraAlDestruirUnEnemigoHormiga()
     {
         Jugador jugador = Jugador.obtenerJugador();
-        jugador.agregarCreditos(10);
-        int creditosEsperados = 101;
+        int creditosEsperados = jugador.obtenerCreditos() + 1;
         Enemigo hormiga = new Hormiga();
         hormiga.recibirDanio(1);
         assertEquals(creditosEsperados, jugador.obtenerCreditos());
