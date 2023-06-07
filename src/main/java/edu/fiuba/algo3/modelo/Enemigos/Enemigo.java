@@ -65,4 +65,9 @@ public abstract class Enemigo {
         }
         return false;
     }
+
+    public double calcDistancia(Posicion posicion)
+    {
+        return Posicion.calcDistancia(posicion, this.posicion);
+    }
 }

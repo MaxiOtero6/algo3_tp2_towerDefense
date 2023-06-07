@@ -14,10 +14,9 @@ public class DefensaBlanca extends Defensa{
     @Override
     public Enemigo hallarEnemigoMasCercano(List<Enemigo> enemigos)
     {
-        //Cambiar getter a metodo enemigo que llame a calcdistancia
         Enemigo enemigoMasCercano = enemigos.stream()
-            .filter(enemigo -> Posicion.calcDistancia(this.posicion, enemigo.obtenerPosicion()) < this.rango)
-            .min(Comparator.comparingDouble(enemigo -> Posicion.calcDistancia(this.posicion, enemigo.obtenerPosicion())))
+            .filter(enemigo -> enemigo.calcDistancia(this.posicion) < this.rango)
+            .min(Comparator.comparingDouble(enemigo -> enemigo.calcDistancia(this.posicion)))
             .orElse(null);
 
         return enemigoMasCercano;

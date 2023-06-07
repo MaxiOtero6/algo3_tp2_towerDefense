@@ -15,8 +15,8 @@ public class DefensaPlateada extends Defensa {
     public Enemigo hallarEnemigoMasCercano(List<Enemigo> enemigos)
     {
         Enemigo enemigoMasCercano = enemigos.stream()
-            .filter(enemigo -> Posicion.calcDistancia(this.posicion, enemigo.obtenerPosicion()) < this.rango)
-            .min(Comparator.comparingDouble(enemigo -> Posicion.calcDistancia(this.posicion, enemigo.obtenerPosicion())))
+            .filter(enemigo -> enemigo.calcDistancia(this.posicion) < this.rango)
+            .min(Comparator.comparingDouble(enemigo -> enemigo.calcDistancia(this.posicion)))
             .orElse(null);
 
         return enemigoMasCercano;
