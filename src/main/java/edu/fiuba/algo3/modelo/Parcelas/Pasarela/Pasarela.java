@@ -1,7 +1,9 @@
 package edu.fiuba.algo3.modelo.Parcelas.Pasarela;
 
 import java.util.LinkedList;
+import java.util.List;
 
+import edu.fiuba.algo3.modelo.Errores.SpawnNoEnLargadaError;
 import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Defensas.*;
@@ -74,4 +76,8 @@ public class Pasarela implements Parcela {
         return enemigos.contains(enemigo);
     }
 
+    public void aparecerEnemigos(List<Enemigo> enemigos) throws SpawnNoEnLargadaError
+    {
+        throw new SpawnNoEnLargadaError();
+    }
 }

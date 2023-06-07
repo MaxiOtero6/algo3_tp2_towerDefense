@@ -12,6 +12,7 @@ public class Largada extends Pasarela {
         super(posicion);
     }
     
+    @Override
     public void aparecerEnemigos(List<Enemigo> enemigos)
     {
         this.enemigos = new LinkedList<>(enemigos);
