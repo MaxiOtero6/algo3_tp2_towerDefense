@@ -21,19 +21,18 @@ public class Camino {
 
     public void moverEnemigo(int velocidad, Posicion posicion, Enemigo enemigo)
     {
-        boolean corte = true;
         int iterador = 0;
-        while (corte)
+        while (!pasarelas.get(iterador).compararPosicion(posicion))
         {
-            Pasarela pasarelaInicial = pasarelas.get(iterador);
-            if (pasarelaInicial.compararPosicion(posicion)){
-                Pasarela pasarelaFinal = pasarelas.get(iterador + velocidad);
-                try {pasarelaFinal.agregarEnemigo(enemigo);}
-                catch (Exception e){}
-                corte = false;
-            }
             iterador++;
         }
+
+        int indiceDestino = iterador + velocidad;
+        if (indiceDestino > pasarelas.size() - 1) { indiceDestino = pasarelas.size() - 1; }
+
+        Pasarela pasarelaFinal = pasarelas.get(iterador + velocidad);
+
+        pasarelaFinal.agregarEnemigo(enemigo);
     }
 
     public static Camino obtenerCamino()
