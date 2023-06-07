@@ -31,12 +31,20 @@ public class Jugador {
         this.creditos.agregarCreditos(creditos);
     }
 
+    public void gastarCreditos(int creditosAGastar){
+        creditos.gastarCreditos(creditosAGastar);
+    }
+
     public void recibirDanio(int danio)
     {
         this.vida -= danio;
         if (vida <= 0){
             throw new PerderPartidaError();
         }
+    }
+
+    public void restaurarVida(){
+        this.vida = 20;
     }
 
     public static Jugador obtenerJugador()
@@ -46,14 +54,6 @@ public class Jugador {
             jugador = new Jugador();
         }
         return jugador;
-    }
-    
-    public void gastarCreditos(int creditosAGastar){
-        creditos.gastarCreditos(creditosAGastar);
-    }
-
-    public void restaurarVida(){
-        this.vida = 20;
     }
 
 }

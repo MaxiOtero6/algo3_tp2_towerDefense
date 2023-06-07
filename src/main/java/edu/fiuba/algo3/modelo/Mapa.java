@@ -11,14 +11,4 @@ public class Mapa {
     {
         this.mapa = parcelas;
     }
-
-    public void avanzarTurno()
-    {
-
-    }
-
-    // public void construir(Posicion posicion)
-    // {
-
-    // }
 }
