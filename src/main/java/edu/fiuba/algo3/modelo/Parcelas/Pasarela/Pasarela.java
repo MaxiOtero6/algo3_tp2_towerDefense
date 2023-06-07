@@ -19,6 +19,7 @@ public class Pasarela implements Parcela {
         this.posicion = posicion;
     }
 
+    @Override
     public void agregarEnemigo(Enemigo enemigo)
     {
         enemigo.setearPosicion(posicion);
@@ -45,7 +46,7 @@ public class Pasarela implements Parcela {
     }
     
     @Override
-    public void construir(Defensa defensa) throws Exception
+    public void construir(Defensa defensa) throws TerrenoDeConstruccionInvalidoError
     {
         throw new TerrenoDeConstruccionInvalidoError();
     }

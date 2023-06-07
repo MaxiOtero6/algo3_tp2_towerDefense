@@ -17,15 +17,19 @@ public abstract class Defensa {
     protected List<Enemigo> enemigos;
 
 
-    public Defensa(int coste, int rango, int danio, int progresoConstruccion, Posicion posicion, List<Enemigo> enemigos)
+    public Defensa(int coste, int rango, int danio, int progresoConstruccion, List<Enemigo> enemigos)
     {
         this.coste = coste;
         this.rango = rango;
         this.danio = danio;
         this.progresoConstruccion = progresoConstruccion;
         this.estado = new EstadoDesactivado();
-        this.posicion = posicion;
         this.enemigos = enemigos;
+    }
+
+    public void setearPosicion(Posicion posicion)
+    {
+        this.posicion = posicion;
     }
 
     public void avanzarTurno(){

@@ -4,6 +4,8 @@ import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Defensas.*;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
+import edu.fiuba.algo3.modelo.Errores.AgregarEnemigoError;
+import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
 
 public class Tierra implements Parcela 
 {
@@ -18,20 +20,9 @@ public class Tierra implements Parcela
     }
 
     @Override
-    public void avanzarTurno()
+    public void construir(Defensa defensa) throws TerrenoDeConstruccionInvalidoError
     {
-        ; 
-    }    
-
-    @Override
-    public void construir(Defensa defensa) throws Exception
-    {
-        this.colocarDefensa(construible.construir(defensa));
-    }
-
-    public void colocarDefensa(Defensa defensa)
-    {
-        this.defensa = defensa;
+        this.defensa = construible.construir(defensa, this.posicion);
         this.setConstruible(new NoEsConstruible());
     }
 
@@ -40,9 +31,10 @@ public class Tierra implements Parcela
         this.construible = construible;
     }
 
-    public void agregarEnemigo(Enemigo enemigo) throws Exception
+    @Override
+    public void agregarEnemigo(Enemigo enemigo) throws AgregarEnemigoError
     {
-        throw new Exception("No se puede agregar un enemigo en esta parcela!");
+        throw new AgregarEnemigoError();
     }
 
     public Posicion obtenerPosicion()

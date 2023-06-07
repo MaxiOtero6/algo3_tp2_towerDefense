@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Parcelas;
 
+import edu.fiuba.algo3.modelo.Errores.AgregarEnemigoError;
 import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Defensas.*;
@@ -20,20 +21,15 @@ public class Rocoso implements Parcela {
     }
 
     @Override
-    public void avanzarTurno()
-    {
-
-    }
-
-    @Override
-    public void construir(Defensa defensa) throws Exception
+    public void construir(Defensa defensa) throws TerrenoDeConstruccionInvalidoError
     {
         throw new TerrenoDeConstruccionInvalidoError();
     }
 
-    public void agregarEnemigo(Enemigo enemigo) throws Exception
+    @Override
+    public void agregarEnemigo(Enemigo enemigo) throws AgregarEnemigoError
     {
-        throw new Exception("No se puede agregar un enemigo en esta parcela!");
+        throw new AgregarEnemigoError();
     }
 
     @Override
