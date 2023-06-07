@@ -5,6 +5,7 @@ import java.util.List;
 
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.*;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
+import edu.fiuba.algo3.modelo.Errores.SpawnNoEnLargadaError;
 
 public class Camino {
     private LinkedList<Pasarela> pasarelas;
@@ -73,7 +74,14 @@ public class Camino {
 
     public void aparecerEnemigos(List<Enemigo> enemigos)
     {
-        ((Largada)pasarelas.get(0)).aparecerEnemigos(enemigos);
+        try
+        {
+            (pasarelas.get(0)).aparecerEnemigos(enemigos);
+        }
+        catch (SpawnNoEnLargadaError e)
+        {
+            //Log
+        }
     }
 
 }

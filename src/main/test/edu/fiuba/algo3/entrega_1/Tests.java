@@ -25,6 +25,9 @@ import java.util.List;
 
 @TestMethodOrder(MethodOrderer.Alphanumeric.class)
 public class Tests {
+
+    private final int PRUEBA_SIN_ENEMIGOS = -1;
+
     @Test
     public void test01JugadorSeCreaCon100CreditosY20Vida() {
         Jugador jugador = Jugador.obtenerJugador();
@@ -249,7 +252,7 @@ public class Tests {
         Camino.obtenerCamino().borrarPasarelas();
         Jugador.obtenerJugador().restaurarVida();
         Turno turno = new Turno(new LinkedList<>(Arrays.asList(new Pasarela(new Posicion(0,0)))));
-        assertThrows(GanarPartidaError.class, () -> turno.avanzarTurno(0));
+        assertThrows(GanarPartidaError.class, () -> turno.avanzarTurno(PRUEBA_SIN_ENEMIGOS));
     }
 
     @Test
@@ -261,7 +264,7 @@ public class Tests {
         Meta meta = new Meta(new Posicion(0,0));
         meta.agregarEnemigo(new Arania());
         assertAll(meta::avanzarTurno);
-        assertThrows(GanarPartidaError.class, () -> turno.avanzarTurno(0));
+        assertThrows(GanarPartidaError.class, () -> turno.avanzarTurno(PRUEBA_SIN_ENEMIGOS));
     }
 
     @Test

@@ -24,12 +24,15 @@ public class Turno {
 
     public void avanzarTurno(int numeroTurno) {
         avanzarEnemigos();
-        List<Enemigo> enemigos = CreadorEnemigos.crearEnemigos(numeroTurno);
-        for (Enemigo enemigo : enemigos) 
+        if (numeroTurno >= 0)
         {
-            enemigos.add(enemigo);
+            List<Enemigo> enemigosTurno = CreadorEnemigos.crearEnemigos(numeroTurno);
+            for (Enemigo enemigo : enemigosTurno) 
+            {
+                this.enemigos.add(enemigo);
+            }
+            Camino.obtenerCamino().aparecerEnemigos(enemigosTurno);
         }
-        Camino.obtenerCamino().aparecerEnemigos(enemigos);
 
         for (Defensa defensa : defensas) {
             defensa.avanzarTurno();
