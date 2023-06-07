@@ -19,9 +19,9 @@ public class Camino {
     {
         this.pasarelas = new LinkedList<>(pasarelas);
     }
+
     
-    /** Itera desde la meta hacia la largada para evitar perder informacion
-     * Busca la pasarela que requiere, al indice de la misma se suma la velocidad del
+    /* Busca la pasarela que requiere, al indice de la misma se suma la velocidad del
      * enemigo y mueve al enemigo a tal pasarela.
      * @param velocidad
      * @param posicion
@@ -29,10 +29,10 @@ public class Camino {
      */
     public void moverEnemigo(int velocidad, Posicion posicion, Enemigo enemigo)
     {
-        int iterador = pasarelas.size() - 1;
-        while (!pasarelas.get(iterador).compararPosicion(posicion) && iterador >= 0)
+        int iterador = 0;
+        while (!pasarelas.get(iterador).compararPosicion(posicion) && iterador < pasarelas.size() - 1)
         {
-            iterador--;
+            iterador++;
         }
         
         int indiceDestino = iterador + velocidad;
@@ -43,6 +43,21 @@ public class Camino {
         pasarelaFinal.agregarEnemigo(enemigo);
     }
 
+    /** Itera desde la meta hacia la largada para evitar perder informacion
+     * @param velocidad
+     * @param posicion
+     * @param enemigo
+     */
+    public void moverEnemigos()
+    {
+        int iterador = pasarelas.size() - 1;
+        while (iterador >= 0)
+        {
+            pasarelas.get(iterador).avanzarTurno();
+            iterador--;
+        }
+    }
+
     public static Camino obtenerCamino()
     {
         if (camino == null)
@@ -50,16 +65,6 @@ public class Camino {
             camino = new Camino();
         }
         return camino;
-    }
-
-    public boolean tieneEnemigos(){
-        boolean tieneEnemigos = false;
-        for (Pasarela pasarela : pasarelas){
-            if (pasarela.tieneEnemigos()){
-                tieneEnemigos = true;
-            }
-        }
-        return tieneEnemigos;
     }
 
     public void borrarPasarelas(){

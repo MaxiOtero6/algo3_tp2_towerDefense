@@ -34,6 +34,8 @@ public class Turno {
         for (Defensa defensa : defensas) {
             defensa.avanzarTurno();
         }
+
+        comprobarCantidadEnemigos();
     }
 
     public void aniadirDefensa(Defensa defensa)
@@ -42,10 +44,14 @@ public class Turno {
         defensas.add(defensa);
     }
 
-    private void avanzarEnemigos(){
-        if (!(Camino.obtenerCamino().tieneEnemigos())){
+    private void avanzarEnemigos()
+    {
+        Camino.obtenerCamino().moverEnemigos();
+    }
+
+    private void comprobarCantidadEnemigos(){
+        if (enemigos.size() == 0){
             throw new GanarPartidaError();
         }
     }
-
 }
