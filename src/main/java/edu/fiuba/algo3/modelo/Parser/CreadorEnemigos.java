@@ -15,6 +15,7 @@ public class CreadorEnemigos {
                                 "src/main/resources/json/enemigos.json"
                                         );
     
+    /** 11 >= numeroTurno >= 0 */
     public static List<Enemigo> crearEnemigos(int numeroTurno)
     {
         List<Enemigo> enemigosTurno = new LinkedList<>();

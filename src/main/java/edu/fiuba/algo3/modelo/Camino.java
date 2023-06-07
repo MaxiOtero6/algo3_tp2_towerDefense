@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.*;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
@@ -14,23 +15,30 @@ public class Camino {
         this.pasarelas = new LinkedList<Pasarela>();
     }
 
-    public void agregarPasarela(Pasarela pasarela)
+    public void agregarPasarelas(List<Pasarela> pasarelas)
     {
-        pasarelas.add(pasarela);
+        this.pasarelas = new LinkedList<>(pasarelas);
     }
-
+    
+    /** Itera desde la meta hacia la largada para evitar perder informacion
+     * Busca la pasarela que requiere, al indice de la misma se suma la velocidad del
+     * enemigo y mueve al enemigo a tal pasarela.
+     * @param velocidad
+     * @param posicion
+     * @param enemigo
+     */
     public void moverEnemigo(int velocidad, Posicion posicion, Enemigo enemigo)
     {
-        int iterador = 0;
-        while (!pasarelas.get(iterador).compararPosicion(posicion) && iterador < pasarelas.size())
+        int iterador = pasarelas.size() - 1;
+        while (!pasarelas.get(iterador).compararPosicion(posicion) && iterador >= 0)
         {
-            iterador++;
+            iterador--;
         }
-
+        
         int indiceDestino = iterador + velocidad;
-        if (indiceDestino > pasarelas.size() - 1) { indiceDestino = pasarelas.size() - 1; }
+        if (indiceDestino < 0) { indiceDestino = 0; }
 
-        Pasarela pasarelaFinal = pasarelas.get(iterador + velocidad);
+        Pasarela pasarelaFinal = pasarelas.get(indiceDestino);
 
         pasarelaFinal.agregarEnemigo(enemigo);
     }
@@ -56,6 +64,11 @@ public class Camino {
 
     public void borrarPasarelas(){
         this.pasarelas = new LinkedList<Pasarela>();
+    }
+
+    public void aparecerEnemigos(List<Enemigo> enemigos)
+    {
+        ((Largada)pasarelas.get(0)).aparecerEnemigos(enemigos);
     }
 
 }

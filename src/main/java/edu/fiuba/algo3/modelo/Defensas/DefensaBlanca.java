@@ -7,8 +7,8 @@ import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Enemigos.*;
 
 public class DefensaBlanca extends Defensa{
-    public DefensaBlanca(List<Enemigo> enemigos){
-        super(10, 3, 1, 1, enemigos);
+    public DefensaBlanca(){
+        super(10, 3, 1, 1);
     }
 
     @Override
