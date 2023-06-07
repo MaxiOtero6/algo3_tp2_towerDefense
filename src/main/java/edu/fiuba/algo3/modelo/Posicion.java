@@ -28,16 +28,6 @@ public class Posicion {
             + Math.pow(Math.abs(pos2.obtenerY() - pos1.obtenerY()), 2)
         );
     }
-
-    public boolean igual(Posicion posicion)
-    {
-        return posicion.igualCoordenadas(coordenadaX, coordenadaY);
-    }
-
-    private boolean igualCoordenadas(int coordenadasX, int coordenadasY)
-    {
-        return (coordenadasX == coordenadaX & coordenadasY == coordenadaY);
-    }
     
     @Override
     public boolean equals(Object o)
