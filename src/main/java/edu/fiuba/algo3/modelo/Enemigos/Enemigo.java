@@ -41,7 +41,7 @@ public abstract class Enemigo {
 
     public boolean vivo()
     {
-        return this.energia <= 0;
+        return this.energia > 0;
     }
 
     public abstract void morir(); 

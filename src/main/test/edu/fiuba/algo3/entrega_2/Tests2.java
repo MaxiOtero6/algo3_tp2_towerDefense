@@ -171,11 +171,11 @@ public class Tests2 {
         Jugador.obtenerJugador().restaurarVida();
         List<Pasarela> camino = new LinkedList<>();
         Partida partida = new Partida(CreadorMapa.crearMapa(camino), camino);
-        partida.construir(new DefensaPlateada(), new Posicion(0,0));
         partida.construir(new DefensaPlateada(), new Posicion(0,1));
         partida.construir(new DefensaPlateada(), new Posicion(0,2));
         partida.construir(new DefensaPlateada(), new Posicion(0,3));
         partida.construir(new DefensaPlateada(), new Posicion(0,4));
+        partida.construir(new DefensaPlateada(), new Posicion(0,5));
         partida.construir(new DefensaBlanca(), new Posicion(2,0));
         partida.construir(new DefensaBlanca(), new Posicion(2,1));
         partida.construir(new DefensaBlanca(), new Posicion(2,2));

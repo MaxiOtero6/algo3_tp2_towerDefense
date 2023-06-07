@@ -52,6 +52,7 @@ public class Partida {
     public void construir(Defensa defensa, Posicion posicion)
     {
         this.mapa.construir(defensa, posicion);
+        this.turno.aniadirDefensa(defensa);
     }
 
 

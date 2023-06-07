@@ -23,7 +23,7 @@ public class Mapa {
     {
         try
         {
-            mapa.get(posicion.obtenerY()).get(posicion.obtenerY()).construir(defensa);
+            mapa.get(posicion.obtenerY()).get(posicion.obtenerX()).construir(defensa);
         }
         catch (TerrenoDeConstruccionInvalidoError e)
         {

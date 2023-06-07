@@ -56,7 +56,15 @@ public abstract class Defensa {
     public abstract Enemigo hallarEnemigoMasCercano(List<Enemigo> enemigos);
 
     public void atacar(){
-        this.hallarEnemigoMasCercano(this.enemigos).recibirDanio(this.danio);
+        Enemigo enemigoMasCercano = this.hallarEnemigoMasCercano(this.enemigos);
+        try
+        {
+            enemigoMasCercano.recibirDanio(this.danio);
+        }
+        catch (NullPointerException e)
+        {
+            //Log
+        }
     }
 
     public void gastarCreditos(){
