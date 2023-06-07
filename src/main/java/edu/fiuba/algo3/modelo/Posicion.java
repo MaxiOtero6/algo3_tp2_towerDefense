@@ -33,7 +33,7 @@ public class Posicion {
     public boolean equals(Object o)
     {
         if (o == this) {return true;}
-        if (o.getClass() == this.getClass())
+        if (o instanceof Posicion)
         {
             Posicion posicion = (Posicion)o;
             return (this.coordenadaX == posicion.obtenerX() && this.coordenadaY == posicion.obtenerY());

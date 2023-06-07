@@ -13,13 +13,11 @@ import edu.fiuba.algo3.modelo.Parser.CreadorMapa;
 public class Partida {
 
     private Turno turno;
-    private Jugador jugador;
     private Mapa mapa;
 
 
 
     public Partida(List<List<Parcela>> parcelas, List<Pasarela> camino) {
-        this.jugador = Jugador.obtenerJugador();
         this.mapa = new Mapa(parcelas);
         this.turno = new Turno(camino);
     }
@@ -45,4 +43,27 @@ public class Partida {
 
         }
     }
+
+    public Mapa obtenerMapa()
+    {
+        return this.mapa;
+    }
+
+    public Turno obtenerTurno()
+    {
+        return this.turno;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o == this) {return true;}
+        if (o instanceof Partida)
+        {
+            Partida partida = (Partida)o;
+            return (this.mapa.equals(partida.obtenerMapa()) && this.turno.equals(partida.obtenerTurno()));
+        }
+        return false;
+    }
+
 }

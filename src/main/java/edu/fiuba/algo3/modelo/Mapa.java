@@ -11,4 +11,21 @@ public class Mapa {
     {
         this.mapa = parcelas;
     }
+
+    public List<List<Parcela>> obtenerMapa()
+    {
+        return this.mapa;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o == this) {return true;}
+        if (o instanceof Mapa)
+        {
+            Mapa mapa = (Mapa)o;
+            return (this.mapa.equals(mapa.obtenerMapa()));
+        }
+        return false;
+    }
 }

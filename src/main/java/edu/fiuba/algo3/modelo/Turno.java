@@ -54,4 +54,27 @@ public class Turno {
             throw new GanarPartidaError();
         }
     }
+
+    public List<Enemigo> obtenerEnemigos()
+    {
+        return enemigos;
+    }
+
+    public List<Defensa> obtenerDefensas()
+    {
+        return defensas;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o == this) {return true;}
+        if (o instanceof Turno)
+        {
+            Turno turno = (Turno)o;
+            return (this.enemigos.equals(turno.obtenerEnemigos()) && this.defensas.equals(turno.obtenerDefensas()));
+        }
+        return false;
+    }
+
 }
