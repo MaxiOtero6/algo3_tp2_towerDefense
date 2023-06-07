@@ -13,7 +13,7 @@ import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 public class Pasarela implements Parcela {
     
     protected LinkedList<Enemigo> enemigos;
-    private Posicion posicion;
+    protected Posicion posicion;
 
     public Pasarela(Posicion posicion)
     {

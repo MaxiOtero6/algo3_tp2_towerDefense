@@ -14,11 +14,15 @@ import edu.fiuba.algo3.modelo.Parser.CreadorEnemigos;
 import edu.fiuba.algo3.modelo.Parser.CreadorMapa;
 import edu.fiuba.algo3.modelo.Parser.ParserJSON;
 import edu.fiuba.algo3.modelo.Camino;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Partida;
 import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Defensas.DefensaBlanca;
 import edu.fiuba.algo3.modelo.Defensas.DefensaPlateada;
 import edu.fiuba.algo3.modelo.Enemigos.*;
+import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
+import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
 import edu.fiuba.algo3.modelo.Parcelas.*;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.*;
 import edu.fiuba.algo3.modelo.Parcelas.Tierra.*;
@@ -163,13 +167,29 @@ public class Tests2 {
     @Test
     public void test18ElJugadorGanaLaPartidaSimulada()
     {
+        Jugador.obtenerJugador().agregarCreditos(1000000);
+        Jugador.obtenerJugador().restaurarVida();
+        List<Pasarela> camino = new LinkedList<>();
+        Partida partida = new Partida(CreadorMapa.crearMapa(camino), camino);
+        partida.construir(new DefensaPlateada(), new Posicion(0,0));
+        partida.construir(new DefensaPlateada(), new Posicion(0,1));
+        partida.construir(new DefensaPlateada(), new Posicion(0,2));
+        partida.construir(new DefensaPlateada(), new Posicion(0,3));
+        partida.construir(new DefensaPlateada(), new Posicion(0,4));
+        partida.construir(new DefensaBlanca(), new Posicion(2,0));
+        partida.construir(new DefensaBlanca(), new Posicion(2,1));
+        partida.construir(new DefensaBlanca(), new Posicion(2,2));
+        partida.construir(new DefensaBlanca(), new Posicion(2,3));
 
+        assertThrows(GanarPartidaError.class, () -> partida.iniciar());
     }
 
     @Test
     public void test19ElJugadorPierdeLaPartidaSimulada()
     {
-
+        List<Pasarela> camino = new LinkedList<>();
+        Partida partida = new Partida(CreadorMapa.crearMapa(camino), camino);
+        assertThrows(PerderPartidaError.class, () -> partida.iniciar());
     }
 
     @Test

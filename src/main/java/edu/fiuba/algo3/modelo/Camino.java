@@ -37,7 +37,7 @@ public class Camino {
         }
         
         int indiceDestino = iterador + velocidad;
-        if (indiceDestino < 0) { indiceDestino = 0; }
+        if (indiceDestino > pasarelas.size() - 1) { indiceDestino = pasarelas.size() - 1; }
 
         Pasarela pasarelaFinal = pasarelas.get(indiceDestino);
 

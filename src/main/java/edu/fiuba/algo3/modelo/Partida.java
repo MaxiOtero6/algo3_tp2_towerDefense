@@ -25,14 +25,19 @@ public class Partida {
     public void iniciar()
     {
         int i = 0;
+        while (true)
+        {
+            turno.avanzarTurno(i);
+            i++;
+            if (i == 12) {i = 0;}
+        }
+    }
+
+    public void iniciarJuego()
+    {
         try
         {
-            while (i < 1)
-            {
-                turno.avanzarTurno(i);
-                i++;
-                if (i == 12) {i = 0;}
-            }
+            iniciar();
         }
         catch (GanarPartidaError g)
         {
@@ -43,6 +48,12 @@ public class Partida {
 
         }
     }
+
+    public void construir(Defensa defensa, Posicion posicion)
+    {
+        this.mapa.construir(defensa, posicion);
+    }
+
 
     public Mapa obtenerMapa()
     {

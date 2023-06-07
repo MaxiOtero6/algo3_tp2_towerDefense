@@ -16,6 +16,10 @@ public class Largada extends Pasarela {
     public void aparecerEnemigos(List<Enemigo> enemigos)
     {
         this.enemigos = new LinkedList<>(enemigos);
+        for (Enemigo enemigo : this.enemigos) 
+        {
+            enemigo.setearPosicion(this.posicion);
+        }
     }
 
 }
