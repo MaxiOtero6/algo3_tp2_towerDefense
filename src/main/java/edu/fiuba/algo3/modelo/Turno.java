@@ -23,7 +23,7 @@ public class Turno {
 
     }
     private void avanzarEnemigos(){
-        if (!(Camino.obtenerCamino().tieneEnemigos()) && Jugador.obtenerJugador().obtenerVida() > 0){
+        if (!(Camino.obtenerCamino().tieneEnemigos())){
             throw new GanarPartidaError();
         }
     }
