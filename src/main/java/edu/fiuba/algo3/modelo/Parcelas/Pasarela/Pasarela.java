@@ -19,18 +19,13 @@ public class Pasarela implements Parcela {
         this.posicion = posicion;
     }
 
-    public LinkedList<Enemigo> obtenerEnemigos()
-    {
-        return this.enemigos;
-    }
-
     public void agregarEnemigo(Enemigo enemigo)
     {
-        this.enemigos.add(enemigo);
         enemigo.setearPosicion(posicion);
+        this.enemigos.add(enemigo);
     }
 
-    private void eliminarEnemigos()
+    protected void eliminarEnemigos()
     {
         while (enemigos.size() != 0) {
             Enemigo enemigo = enemigos.getFirst();
@@ -41,7 +36,7 @@ public class Pasarela implements Parcela {
 
     public boolean compararPosicion(Posicion posicion)
     {
-        return this.posicion.igual(posicion);
+        return this.posicion.equals(posicion);
     }
     
     public void avanzarTurno()
@@ -61,11 +56,6 @@ public class Pasarela implements Parcela {
         return this.posicion;
     }
 
-    public Posicion obtenerPosicion()
-    {
-        return this.posicion;
-    }
-
     @Override
     public boolean equals(Object o)
     {
@@ -73,7 +63,7 @@ public class Pasarela implements Parcela {
         if (o instanceof Pasarela)
         {
             Pasarela pasarela = (Pasarela)o;
-            return (this.posicion.equals(pasarela.obtenerPosicion()));
+            return (this.posicion.equals(pasarela.getPosicion()));
         }
         return false;
     }
