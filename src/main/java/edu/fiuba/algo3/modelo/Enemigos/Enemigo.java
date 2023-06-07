@@ -17,6 +17,7 @@ public abstract class Enemigo {
         this.danio = danio;
         this.creditos = creditos;
         this.velocidad = velocidad;
+        this.posicion = null;
     }
 
     public void otorgarCreditos()
@@ -75,6 +76,7 @@ public abstract class Enemigo {
         if (enemigo instanceof Enemigo)
         {
             Enemigo enem = (Enemigo)enemigo;
+            if (this.posicion == null && enem.obtenerPosicion() == null) {return true;}
             return (this.posicion.equals(enem.obtenerPosicion()));
         }
         return false;

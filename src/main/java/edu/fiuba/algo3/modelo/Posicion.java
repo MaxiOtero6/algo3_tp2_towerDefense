@@ -38,7 +38,8 @@ public class Posicion {
     {
         return (coordenadasX == coordenadaX & coordenadasY == coordenadaY);
     }
-
+    
+    @Override
     public boolean equals(Object o)
     {
         if (o == this) {return true;}
