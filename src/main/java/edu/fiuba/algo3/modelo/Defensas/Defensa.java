@@ -1,14 +1,10 @@
 package edu.fiuba.algo3.modelo.Defensas;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Enemigos.*;
-// Verificar que cada defensa tarde en construirse lo que dice que tarda y que recién están
-// “operativas” cuando ya se terminaron de construir.
-
-
 
 public abstract class Defensa {
     
@@ -17,37 +13,42 @@ public abstract class Defensa {
     private int danio;
     protected Posicion posicion;
     private int progresoConstruccion;
-    Estado estado;
+    private Estado estado;
+    protected List<Enemigo> enemigos;
 
-    public Defensa(int coste, int rango, int danio, int progresoConstruccion, Posicion posicion){
+
+    public Defensa(int coste, int rango, int danio, int progresoConstruccion, Posicion posicion, List<Enemigo> enemigos)
+    {
         this.coste = coste;
         this.rango = rango;
         this.danio = danio;
         this.progresoConstruccion = progresoConstruccion;
-        this.estado = new EstadoDesactivado(this);
+        this.estado = new EstadoDesactivado();
         this.posicion = posicion;
+        this.enemigos = enemigos;
     }
 
     public void avanzarTurno(){
-        this.estado.avanzarTurno();
+        this.estado.avanzarTurno(this);
     }
 
     public boolean progresarConstruccion(){
         this.progresoConstruccion -= 1;
-        return this.progresoConstruccion == 0;
+        return this.chequearProgreso();
     }
 
-    public void cambiarEstado(){
-        this.estado = new EstadoActivado(this);
-    }
     public boolean chequearProgreso(){
         return this.progresoConstruccion == 0;
     }
 
-    public abstract Enemigo hallarEnemigoMasCercano(LinkedList<Enemigo> enemigos);
+    public void cambiarEstado(){
+        this.estado = new EstadoActivado();
+    }
 
-    public void atacar(Enemigo enemigo){
-        enemigo.recibirDanio(this.danio);
+    public abstract Enemigo hallarEnemigoMasCercano(List<Enemigo> enemigos);
+
+    public void atacar(){
+        this.hallarEnemigoMasCercano(this.enemigos).recibirDanio(this.danio);
     }
 
     public void gastarCreditos(){
