@@ -17,8 +17,6 @@ public abstract class Enemigo {
         this.danio = danio;
         this.creditos = creditos;
         this.velocidad = velocidad;
-        this.posicion = new Posicion(0, 0);
-
     }
 
     public void otorgarCreditos()
@@ -31,7 +29,16 @@ public abstract class Enemigo {
         Jugador.obtenerJugador().recibirDanio(this.danio);
     }
 
-    public abstract void recibirDanio(int danioRecibido);
+    public void recibirDanio(int danioRecibido)
+    {
+        this.energia -= danioRecibido;
+        if (this.energia <= 0)
+        {
+            this.morir();
+        }
+    }
+
+    public abstract void morir(); 
 
     public int obtenerEnergia()
     {
@@ -50,8 +57,15 @@ public abstract class Enemigo {
 
     public void mover()
     {
-        Camino camino = Camino.obtenerCamino();
-        camino.moverEnemigo(velocidad, posicion, this);
+        if (this.posicion != null)
+        {
+            Camino camino = Camino.obtenerCamino();
+            camino.moverEnemigo(velocidad, posicion, this);
+        }
+        else
+        {
+            //Log no se puede mover un enemigo q no esta en una posicion
+        }
     }
 
     @Override

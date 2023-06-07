@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.modelo.Enemigos;
 
-import edu.fiuba.algo3.modelo.Posicion;
-
 public class Hormiga extends Enemigo {
     
     private static int hormigasMuertas = 0;
@@ -12,13 +10,10 @@ public class Hormiga extends Enemigo {
     }
 
     @Override
-    public void recibirDanio(int danioRecibido)
+    public void morir()
     {
-        this.energia -= danioRecibido;
-        if (this.energia <= 0)
-        {
-            hormigasMuertas++;
-            this.otorgarCreditos();
-        }
+        enemigosMuertos++;
+        hormigasMuertas++;
+        this.otorgarCreditos();
     }
 }
