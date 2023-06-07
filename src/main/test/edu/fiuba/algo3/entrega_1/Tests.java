@@ -35,7 +35,7 @@ public class Tests {
 //“operativas” cuando ya se terminaron de construir.
     @Test
     public void test02TorrePlateadaTardeEnCrearseLoEsperado() {
-        DefensaPlateada defensaPlateada = new DefensaPlateada(null, null);
+        DefensaPlateada defensaPlateada = new DefensaPlateada(null);
         defensaPlateada.avanzarTurno();
         assertFalse(defensaPlateada.chequearProgreso());
         defensaPlateada.avanzarTurno();
@@ -45,7 +45,7 @@ public class Tests {
     }
     @Test
     public void test02TorreBlancaTardeEnCrearseLoEsperado() {
-        DefensaBlanca defensaBlanca = new DefensaBlanca(null, null);
+        DefensaBlanca defensaBlanca = new DefensaBlanca(null);
         defensaBlanca.avanzarTurno();
         assertTrue(defensaBlanca.chequearProgreso());
 
@@ -54,7 +54,7 @@ public class Tests {
     @Test
     public void test03ElJugadorCuentaConLosCreditosParaConstruirLaTorre() {
         Jugador jugador = Jugador.obtenerJugador();
-       Defensa defensa = new DefensaPlateada(null, null);
+       Defensa defensa = new DefensaPlateada(null);
         defensa.gastarCreditos();
         defensa.gastarCreditos();
         defensa.gastarCreditos();
@@ -68,7 +68,7 @@ public class Tests {
     public void test04SePuedeConstruirSobreTierra()
     {
         Tierra tierra = new Tierra(null);
-        Defensa defensa = new DefensaBlanca(null,null);
+        Defensa defensa = new DefensaBlanca(null);
 
         assertDoesNotThrow(() -> tierra.construir(defensa));
     }
@@ -77,7 +77,7 @@ public class Tests {
     public void test04NoSePuedeConstruirSobreTierraConUnaDefensa()
     {
         Tierra tierra = new Tierra(null);
-        Defensa defensa = new DefensaBlanca(null,null);
+        Defensa defensa = new DefensaBlanca(null);
 
         assertDoesNotThrow(() -> tierra.construir(defensa));
         assertThrows(TerrenoDeConstruccionInvalidoError.class,() -> tierra.construir(defensa));
@@ -87,7 +87,7 @@ public class Tests {
     public void test04NoSePuedeConstruirSobreAlgunaPasarela()
     {
         Pasarela pasarela = new Pasarela(null);
-        Defensa defensa = new DefensaBlanca(null,null);
+        Defensa defensa = new DefensaBlanca(null);
 
         assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> pasarela.construir(defensa));
     }
@@ -96,7 +96,7 @@ public class Tests {
     public void test04NoSePuedeConstruirSobreLaMeta()
     {
         Pasarela pasarela = new Meta(null);
-        Defensa defensa = new DefensaBlanca(null, null);
+        Defensa defensa = new DefensaBlanca(null);
 
         assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> pasarela.construir(defensa));
     }
@@ -105,7 +105,7 @@ public class Tests {
     public void test04NoSePuedeConstruirSobreLaLargada()
     {
         Pasarela pasarela = new Largada(null);
-        Defensa defensa = new DefensaBlanca(null, null);
+        Defensa defensa = new DefensaBlanca(null);
 
         assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> pasarela.construir(defensa));
     }
@@ -114,7 +114,7 @@ public class Tests {
     public void test04NoSePuedeConstruirSobreRocoso()
     {
         Rocoso rocoso = new Rocoso(null);
-        Defensa defensa = new DefensaBlanca(null, null);
+        Defensa defensa = new DefensaBlanca(null);
 
         assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> rocoso.construir(defensa));
     }
@@ -130,7 +130,8 @@ public class Tests {
         enemigoEsperado.setearPosicion(new Posicion(1, 1));
         enemigos.add(enemigoEsperado);
 
-        Defensa defensa = new DefensaBlanca(new Posicion(2,2), null);
+        Defensa defensa = new DefensaBlanca(null);
+        defensa.setearPosicion(new Posicion(2,2));
 
         Enemigo enemigoObtenido = defensa.hallarEnemigoMasCercano(enemigos);
 
@@ -148,7 +149,9 @@ public class Tests {
         enemigo2.setearPosicion(new Posicion(11, 11));
         enemigos.add(enemigo2);
 
-        Defensa defensa = new DefensaBlanca(new Posicion(2,2), null);
+        Defensa defensa = new DefensaBlanca(null);
+        defensa.setearPosicion(new Posicion(2,2));
+
         Enemigo enemigoEsperado = null;
 
         Enemigo enemigoObtenido = defensa.hallarEnemigoMasCercano(enemigos);
@@ -232,10 +235,9 @@ public class Tests {
         Enemigo arania = new Arania();
 
 
-        try{pasarelaInicial.agregarEnemigo(hormiga);}
-        catch (Exception e){}
-        try{pasarelaInicial.agregarEnemigo(arania);}
-        catch (Exception e){}
+        pasarelaInicial.agregarEnemigo(hormiga);
+        pasarelaInicial.agregarEnemigo(arania);
+        
         pasarelaInicial.avanzarTurno();
 
         assertTrue(pasarelaIntermedia.verificarSiEstaElEnemigo(hormiga));
@@ -271,6 +273,7 @@ public class Tests {
             meta.agregarEnemigo(new Arania());
         }
         assertAll(meta::avanzarTurno);
+        meta.agregarEnemigo(new Arania());
         assertThrows(PerderPartidaError.class, meta::avanzarTurno);
     }
 }

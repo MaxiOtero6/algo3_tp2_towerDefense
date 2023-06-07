@@ -20,4 +20,12 @@ public class Meta extends Pasarela{
     public void daniarJugador(Enemigo enemigo){
         enemigo.atacar();
     }
+
+    @Override
+    protected void eliminarEnemigos()
+    {
+        while (enemigos.size() != 0) {
+            enemigos.removeFirst();
+        }
+    }
 }

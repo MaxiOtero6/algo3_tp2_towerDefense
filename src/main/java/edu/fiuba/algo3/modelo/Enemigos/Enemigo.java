@@ -60,7 +60,7 @@ public abstract class Enemigo {
     {
         if (this.posicion != null)
         {
-            if (this.energia <= 0)
+            if (this.energia > 0)
             {
                 Camino camino = Camino.obtenerCamino();
                 camino.moverEnemigo(velocidad, posicion, this);
