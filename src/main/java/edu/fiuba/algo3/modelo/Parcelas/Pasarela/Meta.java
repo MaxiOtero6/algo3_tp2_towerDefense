@@ -31,10 +31,4 @@ public class Meta extends Pasarela{
             enemigos.removeFirst();
         }
     }
-
-    @Override
-    public void aparecerEnemigos(List<Enemigo> enemigos) throws SpawnNoEnLargadaError
-    {
-        throw new SpawnNoEnLargadaError();
-    }
 }
