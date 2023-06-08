@@ -53,8 +53,19 @@ public class Turno {
     }
 
     private void comprobarCantidadEnemigos(){
+        sacarMuertos();
         if (enemigos.size() == 0){
             throw new GanarPartidaError();
+        }
+    }
+
+    private void sacarMuertos()
+    {
+        int i = enemigos.size() - 1;
+        while (i >= 0)
+        {
+            if (!this.enemigos.get(i).vivo()) {enemigos.remove(i);}
+            i--;
         }
     }
 
