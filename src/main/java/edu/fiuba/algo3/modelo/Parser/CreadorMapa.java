@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo.Parser;
 
-import edu.fiuba.algo3.modelo.Mapa;
 import java.util.LinkedList;
 import java.util.List;
 

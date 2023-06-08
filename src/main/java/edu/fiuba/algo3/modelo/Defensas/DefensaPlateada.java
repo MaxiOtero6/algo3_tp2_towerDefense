@@ -3,7 +3,6 @@ package edu.fiuba.algo3.modelo.Defensas;
 import java.util.Comparator;
 import java.util.List;
 
-import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Enemigos.*;
 
 public class DefensaPlateada extends Defensa {

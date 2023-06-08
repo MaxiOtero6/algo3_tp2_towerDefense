@@ -2,7 +2,6 @@ package edu.fiuba.algo3.entrega_2;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.Console;
 import java.io.IOException;
 
 import org.junit.jupiter.api.MethodOrderer;
@@ -16,7 +15,6 @@ import edu.fiuba.algo3.modelo.Parser.CreadorMapa;
 import edu.fiuba.algo3.modelo.Parser.ParserJSON;
 import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Partida;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Defensas.DefensaBlanca;

@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
-import edu.fiuba.algo3.modelo.Errores.CreditosInsuficientesError;
 import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

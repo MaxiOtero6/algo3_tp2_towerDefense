@@ -14,9 +14,6 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import org.junit.jupiter.api.TestMethodOrder.*;
-import org.junit.jupiter.api.function.Executable;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
@@ -175,7 +172,6 @@ public class Tests {
 
         arania.recibirDanio(danioDelAtaque);
         hormiga.recibirDanio(danioDelAtaque);
-        Jugador.obtenerJugador().gastarCreditos(1);
 
         assertEquals(arania.obtenerEnergia(), energiaEsperadaArania);
         assertEquals(hormiga.obtenerEnergia(), energiaEsperadaHormiga);

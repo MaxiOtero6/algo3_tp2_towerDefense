@@ -5,7 +5,6 @@ import java.util.List;
 
 import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
-import edu.fiuba.algo3.modelo.Enemigos.Hormiga;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Pasarela;
 import edu.fiuba.algo3.modelo.Parser.CreadorEnemigos;

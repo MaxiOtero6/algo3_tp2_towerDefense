@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import edu.fiuba.algo3.modelo.Defensas.*;
@@ -8,7 +7,6 @@ import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
 import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Pasarela;
-import edu.fiuba.algo3.modelo.Parser.CreadorMapa;
 
 public class Partida {
 
