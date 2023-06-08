@@ -2,6 +2,7 @@ package edu.fiuba.algo3.entrega_2;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.Console;
 import java.io.IOException;
 
 import org.junit.jupiter.api.MethodOrderer;
@@ -26,6 +27,9 @@ import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
 import edu.fiuba.algo3.modelo.Parcelas.*;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.*;
 import edu.fiuba.algo3.modelo.Parcelas.Tierra.*;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -193,8 +197,23 @@ public class Tests2 {
     }
 
     @Test
-    public void test20VerificacionConsoleLog()
-    {
+    public void test020VerificacionConsoleLog()
+    {   
+        System.out.flush();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
 
+        PrintStream originalOut = System.out;
+        System.setOut(ps);
+
+        //Log a guardar
+        Jugador jugador = Jugador.obtenerJugador();
+        jugador.restaurarVida();
+
+        System.setOut(originalOut);
+
+        String consoleOutput = baos.toString();
+        assertTrue(consoleOutput.contains("Se restauro la vida del jugador"));
+        
     }
 }
