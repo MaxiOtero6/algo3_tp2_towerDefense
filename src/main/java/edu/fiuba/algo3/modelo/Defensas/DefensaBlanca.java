@@ -15,7 +15,7 @@ public class DefensaBlanca extends Defensa{
     public Enemigo hallarEnemigoMasCercano(List<Enemigo> enemigos)
     {
         Enemigo enemigoMasCercano = enemigos.stream()
-            .filter(enemigo -> enemigo.calcDistancia(this.posicion) < this.rango && enemigo.vivo())
+            .filter(enemigo -> enemigo.calcDistancia(this.posicion) < this.rango && enemigo.estaVivo())
             .min(Comparator.comparingDouble(enemigo -> enemigo.calcDistancia(this.posicion)))
             .orElse(null);
 

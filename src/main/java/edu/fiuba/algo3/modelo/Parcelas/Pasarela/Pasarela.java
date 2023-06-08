@@ -32,7 +32,7 @@ public class Pasarela implements Parcela {
     {
         while (enemigos.size() != 0) {
             Enemigo enemigo = enemigos.getFirst();
-            if (enemigo.vivo())
+            if (enemigo.estaVivo())
             {
                 enemigo.mover();
             }

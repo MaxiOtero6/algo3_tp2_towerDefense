@@ -64,7 +64,7 @@ public class Turno {
         int i = enemigos.size() - 1;
         while (i >= 0)
         {
-            if (!this.enemigos.get(i).vivo()) {enemigos.remove(i);}
+            if (!this.enemigos.get(i).estaVivo()) {enemigos.remove(i);}
             i--;
         }
     }

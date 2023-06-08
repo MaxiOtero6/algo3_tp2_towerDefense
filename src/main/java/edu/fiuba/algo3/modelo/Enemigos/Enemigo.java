@@ -39,7 +39,7 @@ public abstract class Enemigo {
         }
     }
 
-    public boolean vivo()
+    public boolean estaVivo()
     {
         return this.energia > 0;
     }
