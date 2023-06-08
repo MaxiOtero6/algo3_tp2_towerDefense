@@ -33,7 +33,7 @@ public abstract class Enemigo {
     public void recibirDanio(int danioRecibido)
     {
         this.energia -= danioRecibido;
-        if (this.energia <= 0)
+        if (!estaVivo())
         {
             this.morir();
         }
