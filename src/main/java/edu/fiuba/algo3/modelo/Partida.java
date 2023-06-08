@@ -25,11 +25,13 @@ public class Partida {
     public void iniciar()
     {
         int i = 0;
-        while (true)
+        int j = 0;
+        while (j < 500)
         {
             turno.avanzarTurno(i);
             i++;
             if (i == 12) {i = 0;}
+            j++;
         }
     }
 
