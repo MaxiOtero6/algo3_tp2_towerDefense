@@ -13,9 +13,9 @@ public class Tierra implements Parcela
     private Construible construible;
     private Posicion posicion;
     
-    public Tierra(Posicion posicion)
+    public Tierra(int coordenadaX, int coordenadaY)
     {
-        this.posicion = posicion;
+        this.posicion = new Posicion(coordenadaX, coordenadaY);
         this.construible = new EsConstruible();
     }
 

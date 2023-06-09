@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Enemigos.Arania;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
@@ -17,7 +18,7 @@ public class CreadorEnemigos {
                                         );
     
     /** 11 >= numeroTurno >= 0 */
-    public static List<Enemigo> crearEnemigos(int numeroTurno, Jugador jugador)
+    public static List<Enemigo> crearEnemigos(int numeroTurno, Jugador jugador, Camino camino)
     {
         List<Enemigo> enemigosTurno = new LinkedList<>();
 

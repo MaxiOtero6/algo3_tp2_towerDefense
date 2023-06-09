@@ -14,11 +14,11 @@ public class Mapa {
         this.mapa = parcelas;
     }
 
-    public void construir(Defensa defensa, Posicion posicion)
+    public void construir(Defensa defensa, int coordenadaX, int coordenadaY)
     {
         try
         {
-            mapa.get(posicion.obtenerY()).get(posicion.obtenerX()).construir(defensa);
+            mapa.get(coordenadaY).get(coordenadaX).construir(defensa);
         }
         catch (TerrenoDeConstruccionInvalidoError e)
         {

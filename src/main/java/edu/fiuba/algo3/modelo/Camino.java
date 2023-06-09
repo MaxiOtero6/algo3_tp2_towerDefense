@@ -47,7 +47,7 @@ public class Camino {
         int iterador = pasarelas.size() - 1;
         while (iterador >= 0)
         {
-            pasarelas.get(iterador).avanzarTurno(this);
+            pasarelas.get(iterador).avanzarTurno();
             iterador--;
         }
     }

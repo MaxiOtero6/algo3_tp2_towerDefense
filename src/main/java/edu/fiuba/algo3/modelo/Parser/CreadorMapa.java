@@ -17,8 +17,10 @@ public class CreadorMapa {
                                 "src/main/resources/json/mapa.json"
                                         );
 
-    private static Posicion posicionLargada;
-    private static Posicion posicionMeta;
+    private static int coordenadaXLargada;
+    private static int coordenadaYLargada;
+    private static int coordenadaXMeta;
+    private static int coordenadaYMeta;
 
     public static List<List<Parcela>> crearMapa(List<Pasarela> camino)
     {
@@ -46,29 +48,29 @@ public class CreadorMapa {
                     
                     if ("Tierra".equals(parcela))
                     {
-                        parcelas.get(i - 1).add(new Tierra(new Posicion(j, i - 1)));
+                        parcelas.get(i - 1).add(new Tierra(j, i - 1));
                     }
 
                     else if ("Rocoso".equals(parcela))
                     {
-                        parcelas.get(i - 1).add(new Rocoso(new Posicion(j, i - 1)));
+                        parcelas.get(i - 1).add(new Rocoso(j, i - 1));
                     }
 
                     else if ("Pasarela".equals(parcela))
                     {
-                        parcelas.get(i - 1).add(new Pasarela(new Posicion(j, i - 1)));
-                        if (camino != null) 
-                        {
-                            camino.add(new Pasarela(new Posicion(j, i - 1)));
+                        Pasarela nuevPasarela = new Pasarela(j, i - 1);
+                        parcelas.get(i - 1).add(nuevPasarela);
+                        camino.add(nuevPasarela);
 
-                            if (!posLargadaAsignada) 
-                            {
-                                posicionLargada = new Posicion(j, i - 1);
-                                posLargadaAsignada = true;
-                            }
-                            
-                            posicionMeta = new Posicion(j, i - 1);
+                        if (!posLargadaAsignada) 
+                        {
+                            coordenadaXLargada = j;
+                            coordenadaYLargada = i - 1;
+                            posLargadaAsignada = true;
                         }
+
+                        coordenadaXMeta = j;
+                        coordenadaYMeta = i - 1;
                     }
 
                     j++;
@@ -76,8 +78,8 @@ public class CreadorMapa {
             }
             if (camino != null)
             {   
-                camino.set(0, new Largada(posicionLargada));
-                camino.set(camino.size() - 1, new Meta(posicionMeta));
+                camino.set(0, new Largada(coordenadaXLargada, coordenadaYLargada));
+                camino.set(camino.size() - 1, new Meta(coordenadaXMeta, coordenadaYMeta));
             }
             return (parcelas);
         }

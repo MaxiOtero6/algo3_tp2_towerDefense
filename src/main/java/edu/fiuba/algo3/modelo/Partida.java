@@ -21,6 +21,13 @@ public class Partida {
         this.turno = new Turno(camino, jugador);
     }
 
+    public Partida(List<List<Parcela>> parcelas, List<Pasarela> camino, Jugador jugador) 
+    {
+        this.jugador = jugador;
+        this.mapa = new Mapa(parcelas);
+        this.turno = new Turno(camino, jugador);
+    }
+
     public void iniciar()
     {
         int i = 0;
@@ -50,10 +57,11 @@ public class Partida {
         }
     }
 
-    public void construir(Defensa defensa, Posicion posicion)
+    public void construir(Defensa defensa, int coordenadaX, int coordenadaY)
     {
         defensa.setJugador(this.jugador);
-        this.mapa.construir(defensa, posicion);
+        defensa.gastarCreditos();
+        this.mapa.construir(defensa, coordenadaX, coordenadaY);
         this.turno.aniadirDefensa(defensa);
     }
 

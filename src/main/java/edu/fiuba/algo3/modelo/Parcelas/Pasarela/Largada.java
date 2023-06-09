@@ -8,8 +8,9 @@ import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 
 public class Largada extends Pasarela {
     
-    public Largada(Posicion posicion){
-        super(posicion);
+    public Largada(int coordenadaX, int coordenadaY)
+    {
+        super(coordenadaX, coordenadaY);
     }
     
     @Override

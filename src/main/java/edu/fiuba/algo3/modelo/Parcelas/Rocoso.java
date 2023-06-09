@@ -10,9 +10,9 @@ public class Rocoso implements Parcela {
     
     private Posicion posicion;
 
-    public Rocoso(Posicion posicion)
+    public Rocoso(int coordenadaX, int coordenadaY)
     {
-        this.posicion = posicion;
+        this.posicion = new Posicion(coordenadaX, coordenadaY);
     }
 
     @Override

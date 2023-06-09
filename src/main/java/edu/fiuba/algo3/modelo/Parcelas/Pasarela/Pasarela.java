@@ -16,10 +16,10 @@ public class Pasarela implements Parcela {
     protected LinkedList<Enemigo> enemigos;
     protected Posicion posicion;
 
-    public Pasarela(Posicion posicion)
+    public Pasarela(int coordenadaX, int coordenadaY)
     {
         this.enemigos = new LinkedList<Enemigo>();
-        this.posicion = posicion;
+        this.posicion = new Posicion(coordenadaX, coordenadaY);
     }
 
     @Override
@@ -29,13 +29,13 @@ public class Pasarela implements Parcela {
         this.enemigos.add(enemigo);
     }
 
-    protected void eliminarEnemigos(Camino camino)
+    protected void eliminarEnemigos()
     {
         while (enemigos.size() != 0) {
             Enemigo enemigo = enemigos.getFirst();
             if (enemigo.estaVivo())
             {
-                enemigo.mover(camino);
+                enemigo.mover();
             }
             enemigos.removeFirst();
         }
@@ -46,9 +46,9 @@ public class Pasarela implements Parcela {
         return this.posicion.equals(posicion);
     }
     
-    public void avanzarTurno(Camino camino)
+    public void avanzarTurno()
     {
-        eliminarEnemigos(camino);
+        eliminarEnemigos();
     }
     
     @Override

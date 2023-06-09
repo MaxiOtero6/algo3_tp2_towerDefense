@@ -29,7 +29,7 @@ public class Turno {
         avanzarEnemigos();
         if (numeroTurno >= 0)
         {
-            List<Enemigo> enemigosTurno = CreadorEnemigos.crearEnemigos(numeroTurno, this.jugador);
+            List<Enemigo> enemigosTurno = CreadorEnemigos.crearEnemigos(numeroTurno, this.jugador, this.camino);
             for (Enemigo enemigo : enemigosTurno) 
             {
                 this.enemigos.add(enemigo);

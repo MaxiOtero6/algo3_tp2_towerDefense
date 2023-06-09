@@ -68,7 +68,7 @@ public class Tests {
     @Test
     public void test04SePuedeConstruirSobreTierra()
     {
-        Tierra tierra = new Tierra(null);
+        Tierra tierra = new Tierra(0,0);
         Defensa defensa = new DefensaBlanca();
 
         assertDoesNotThrow(() -> tierra.construir(defensa));
@@ -77,7 +77,7 @@ public class Tests {
     @Test
     public void test04NoSePuedeConstruirSobreTierraConUnaDefensa()
     {
-        Tierra tierra = new Tierra(null);
+        Tierra tierra = new Tierra(0,0);
         Defensa defensa = new DefensaBlanca();
 
         assertDoesNotThrow(() -> tierra.construir(defensa));
@@ -87,7 +87,7 @@ public class Tests {
     @Test
     public void test04NoSePuedeConstruirSobreAlgunaPasarela()
     {
-        Pasarela pasarela = new Pasarela(null);
+        Pasarela pasarela = new Pasarela(0,0);
         Defensa defensa = new DefensaBlanca();
 
         assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> pasarela.construir(defensa));
@@ -96,7 +96,7 @@ public class Tests {
     @Test
     public void test04NoSePuedeConstruirSobreLaMeta()
     {
-        Pasarela pasarela = new Meta(null);
+        Pasarela pasarela = new Meta(0,0);
         Defensa defensa = new DefensaBlanca();
 
         assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> pasarela.construir(defensa));
@@ -105,7 +105,7 @@ public class Tests {
     @Test
     public void test04NoSePuedeConstruirSobreLaLargada()
     {
-        Pasarela pasarela = new Largada(null);
+        Pasarela pasarela = new Largada(0,0);
         Defensa defensa = new DefensaBlanca();
 
         assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> pasarela.construir(defensa));
@@ -114,7 +114,7 @@ public class Tests {
     @Test
     public void test04NoSePuedeConstruirSobreRocoso()
     {
-        Rocoso rocoso = new Rocoso(null);
+        Rocoso rocoso = new Rocoso(0,0);
         Defensa defensa = new DefensaBlanca();
 
         assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> rocoso.construir(defensa));
@@ -181,10 +181,10 @@ public class Tests {
     @Test
     public void test07LasUnidadesEnemigasSoloSeMuevenSobreLaParcelaAutorizada()
     {
-        Pasarela pasarela = new Pasarela(new Posicion(0, 0));
+        Pasarela pasarela = new Pasarela(0, 0);
         Enemigo hormiga = new Hormiga(null);
-        Rocoso rocoso = new Rocoso(null);
-        Tierra tierra = new Tierra(null);
+        Rocoso rocoso = new Rocoso(1, 0);
+        Tierra tierra = new Tierra(2, 0);
 
         assertDoesNotThrow(() -> pasarela.agregarEnemigo(hormiga));
         assertThrows(Exception.class, () -> rocoso.agregarEnemigo(hormiga));
@@ -219,20 +219,20 @@ public class Tests {
     @Test
     public void test09AlPasarUnTurnoLasUnidadesEnemigasSeMuevenSegunSusCapacidades()
     {
-        Pasarela pasarelaInicial = new Pasarela(new Posicion(0, 0));
-        Pasarela pasarelaIntermedia = new Pasarela(new Posicion(1, 1));
-        Pasarela pasarelaFinal = new Pasarela(new Posicion(2, 2));
+        Pasarela pasarelaInicial = new Pasarela(0, 0);
+        Pasarela pasarelaIntermedia = new Pasarela(1, 1);
+        Pasarela pasarelaFinal = new Pasarela(2, 2);
         List<Pasarela> pasarelas = new LinkedList<>(Arrays.asList(pasarelaInicial, pasarelaIntermedia, pasarelaFinal));
 
         Camino camino = new Camino(pasarelas);
 
-        Enemigo hormiga = new Hormiga(null);
-        Enemigo arania = new Arania(null);
+        Enemigo hormiga = new Hormiga(null, camino);
+        Enemigo arania = new Arania(null, camino);
 
         pasarelaInicial.agregarEnemigo(hormiga);
         pasarelaInicial.agregarEnemigo(arania);
         
-        pasarelaInicial.avanzarTurno(camino);
+        pasarelaInicial.avanzarTurno();
 
         assertTrue(pasarelaIntermedia.verificarSiEstaElEnemigo(hormiga));
         assertTrue(pasarelaFinal.verificarSiEstaElEnemigo(arania));
@@ -240,7 +240,7 @@ public class Tests {
 
     @Test
     public void test10AlEliminarATodosLosEnemigosElJugadorGanaLaPartida() {
-        Turno turno = new Turno(new LinkedList<>(Arrays.asList(new Pasarela(new Posicion(0,0)))), new Jugador());
+        Turno turno = new Turno(new LinkedList<>(Arrays.asList(new Pasarela(0,0))), new Jugador());
         assertThrows(GanarPartidaError.class, () -> turno.avanzarTurno(PRUEBA_SIN_ENEMIGOS));
     }
 
@@ -248,22 +248,22 @@ public class Tests {
     public void test11AlNoQuedarUnidadesEnemigasSinHaberlasEliminadoTodasElJugadorConVidaPositivaEsteGanaLaPartida()
     {
         Jugador jugador = new Jugador();
-        Turno turno = new Turno(new LinkedList<>(Arrays.asList(new Pasarela(new Posicion(0,0)))), jugador);
-        Meta meta = new Meta(new Posicion(0,0));
+        Turno turno = new Turno(new LinkedList<>(Arrays.asList(new Pasarela(0,0))), jugador);
+        Meta meta = new Meta(0,0);
         meta.agregarEnemigo(new Arania(jugador));
-        assertAll(() -> meta.avanzarTurno(null)); //Meta realmente no requiere de camino
+        assertAll(() -> meta.avanzarTurno()); //Meta realmente no requiere de camino
         assertThrows(GanarPartidaError.class, () -> turno.avanzarTurno(PRUEBA_SIN_ENEMIGOS));
     }
 
     @Test
     public void test12SiElJugadorPierdeTodaLaVidaPierdeElJuego(){
         Jugador jugador = new Jugador();
-        Meta meta = new Meta(new Posicion(0,0));
+        Meta meta = new Meta(0,0);
         for (int i = 0; i < 9; i++){
             meta.agregarEnemigo(new Arania(jugador));
         }
-        assertAll(() -> meta.avanzarTurno(null));
+        assertAll(() -> meta.avanzarTurno());
         meta.agregarEnemigo(new Arania(jugador));
-        assertThrows(PerderPartidaError.class, () -> meta.avanzarTurno(null));
+        assertThrows(PerderPartidaError.class, () -> meta.avanzarTurno());
     }
 }
