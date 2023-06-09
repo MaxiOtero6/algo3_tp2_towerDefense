@@ -17,6 +17,9 @@ public class CreadorMapa {
                                 "src/main/resources/json/mapa.json"
                                         );
 
+    private static Posicion posicionLargada;
+    private static Posicion posicionMeta;
+
     public static List<List<Parcela>> crearMapa(List<Pasarela> camino)
     {
         List<List<Parcela>> parcelas = new LinkedList<>();
@@ -27,6 +30,8 @@ public class CreadorMapa {
         String indice;
         String parcela;
         int j;
+        boolean posLargadaAsignada = false;
+
         try
         {
             for (int i = 1; i - 1 < 15; i++) 
@@ -43,25 +48,38 @@ public class CreadorMapa {
                     {
                         parcelas.get(i - 1).add(new Tierra(new Posicion(j, i - 1)));
                     }
+
                     else if ("Rocoso".equals(parcela))
                     {
                         parcelas.get(i - 1).add(new Rocoso(new Posicion(j, i - 1)));
                     }
+
                     else if ("Pasarela".equals(parcela))
                     {
                         parcelas.get(i - 1).add(new Pasarela(new Posicion(j, i - 1)));
-                        if (camino != null) {camino.add(new Pasarela(new Posicion(j, i - 1)));}
+                        if (camino != null) 
+                        {
+                            camino.add(new Pasarela(new Posicion(j, i - 1)));
+
+                            if (!posLargadaAsignada) 
+                            {
+                                posicionLargada = new Posicion(j, i - 1);
+                                posLargadaAsignada = true;
+                            }
+                            
+                            posicionMeta = new Posicion(j, i - 1);
+                        }
                     }
-                    
+
                     j++;
                 }
             }
             if (camino != null)
             {   
-                camino.set(0, new Largada(camino.get(0).getPosicion()));
-                camino.set(camino.size() - 1, new Meta(camino.get(camino.size() - 1).getPosicion()));
+                camino.set(0, new Largada(posicionLargada));
+                camino.set(camino.size() - 1, new Meta(posicionMeta));
             }
-                return (parcelas);
+            return (parcelas);
         }
         catch (NullPointerException e)
         {
