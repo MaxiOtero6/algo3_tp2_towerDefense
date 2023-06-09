@@ -15,6 +15,7 @@ public abstract class Defensa {
     private int progresoConstruccion;
     private Estado estado;
     protected List<Enemigo> enemigos;
+    private Jugador jugador;
 
 
     public Defensa(int coste, int rango, int danio, int progresoConstruccion)
@@ -24,6 +25,11 @@ public abstract class Defensa {
         this.danio = danio;
         this.progresoConstruccion = progresoConstruccion;
         this.estado = new EstadoDesactivado();
+    }
+
+    public void setJugador(Jugador jugador) 
+    {
+        this.jugador = jugador;
     }
 
     public void setEnemigos(List<Enemigo> enemigos)
@@ -61,8 +67,8 @@ public abstract class Defensa {
         enemigoMasCercano.recibirDanio(this.danio);
     }
 
-    public void gastarCreditos(){
-        Jugador jugador = Jugador.obtenerJugador();
-        jugador.gastarCreditos(this.coste);
+    public void gastarCreditos()
+    {
+        this.jugador.gastarCreditos(this.coste);
     }
 }

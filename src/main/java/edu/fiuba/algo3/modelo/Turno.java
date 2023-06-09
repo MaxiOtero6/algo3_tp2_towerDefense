@@ -13,10 +13,14 @@ public class Turno {
 
     private LinkedList<Defensa> defensas;
     private LinkedList<Enemigo> enemigos;
+    private Camino camino;
+    private Jugador jugador;
 
 
-    public Turno(List<Pasarela> camino){
-        Camino.obtenerCamino().agregarPasarelas(camino);
+    public Turno(List<Pasarela> camino, Jugador jugador)
+    {
+        this.jugador = jugador;
+        this.camino = new Camino(camino);
         this.enemigos = new LinkedList<>();
         this.defensas = new LinkedList<>();
     }
@@ -25,12 +29,12 @@ public class Turno {
         avanzarEnemigos();
         if (numeroTurno >= 0)
         {
-            List<Enemigo> enemigosTurno = CreadorEnemigos.crearEnemigos(numeroTurno);
+            List<Enemigo> enemigosTurno = CreadorEnemigos.crearEnemigos(numeroTurno, this.jugador);
             for (Enemigo enemigo : enemigosTurno) 
             {
                 this.enemigos.add(enemigo);
             }
-            Camino.obtenerCamino().aparecerEnemigos(enemigosTurno);
+            this.camino.aparecerEnemigos(enemigosTurno);
         }
 
         for (Defensa defensa : defensas) {
@@ -42,13 +46,14 @@ public class Turno {
 
     public void aniadirDefensa(Defensa defensa)
     {
+        defensa.setJugador(this.jugador);
         defensa.setEnemigos(enemigos);
         defensas.add(defensa);
     }
 
     private void avanzarEnemigos()
     {
-        Camino.obtenerCamino().moverEnemigos();
+        this.camino.moverEnemigos();
     }
 
     private void comprobarCantidadEnemigos(){

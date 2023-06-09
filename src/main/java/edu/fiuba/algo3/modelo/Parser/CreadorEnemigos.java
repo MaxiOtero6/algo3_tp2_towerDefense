@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Enemigos.Arania;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Enemigos.Hormiga;
@@ -16,7 +17,7 @@ public class CreadorEnemigos {
                                         );
     
     /** 11 >= numeroTurno >= 0 */
-    public static List<Enemigo> crearEnemigos(int numeroTurno)
+    public static List<Enemigo> crearEnemigos(int numeroTurno, Jugador jugador)
     {
         List<Enemigo> enemigosTurno = new LinkedList<>();
 
@@ -32,13 +33,15 @@ public class CreadorEnemigos {
                     cantidadHormigas = turno.get("enemigos").get("hormiga").asInt();
                     cantidadAranias = turno.get("enemigos").get("arana").asInt();
                     
-                    for (int i = 0; i < cantidadHormigas; i++) {
-                            enemigosTurno.add(new Hormiga());
-                        }
+                    for (int i = 0; i < cantidadHormigas; i++) 
+                    {
+                        enemigosTurno.add(new Hormiga(jugador));
+                    }
                         
-                    for (int i = 0; i < cantidadAranias; i++) {
-                            enemigosTurno.add(new Arania());
-                        }
+                    for (int i = 0; i < cantidadAranias; i++) 
+                    {
+                        enemigosTurno.add(new Arania(jugador));
+                    }
                 }
             }
 

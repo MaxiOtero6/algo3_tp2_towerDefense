@@ -10,6 +10,11 @@ public class Creditos {
         this.creditos = 100;
     }
 
+    public Creditos(int creditos)
+    {
+        this.creditos = creditos;
+    }
+
     public int obtenerCreditos()
     {
         return this.creditos;
@@ -28,6 +33,18 @@ public class Creditos {
     public void agregarCreditos(int creditos)
     {
         this.creditos += creditos;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o == this) {return true;}
+        if (o instanceof Creditos)
+        {
+            Creditos creditos = (Creditos)o;
+            return (this.creditos == creditos.creditos);
+        }
+        return false;
     }
 
 }

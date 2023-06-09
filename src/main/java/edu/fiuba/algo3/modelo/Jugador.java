@@ -8,23 +8,23 @@ public class Jugador {
     private Creditos creditos;
     private int vida;
     private String nombre;
-    private static Jugador jugador;
     private static final Logger logger = LogManager.getLogger(Jugador.class);
 
-    private Jugador()
+    public Jugador()
     {
         this.creditos = new Creditos();
         this.vida = 20;
     }
-
+    
     public int obtenerCreditos()
     {
         return this.creditos.obtenerCreditos();
     }
 
-    public int obtenerVida()
-    {   
-        return this.vida;
+    public Jugador(int vida, int creditos)
+    {
+        this.creditos = new Creditos(creditos);
+        this.vida = vida;
     }
 
     public void agregarCreditos(int creditos)
@@ -44,18 +44,15 @@ public class Jugador {
         }
     }
 
-    public void restaurarVida(){
-        logger.info("Se restauro la vida del jugador");
-        this.vida = 20;
-    }
-
-    public static Jugador obtenerJugador()
+    @Override
+    public boolean equals(Object o)
     {
-        if (jugador == null)
+        if (o == this) {return true;}
+        if (o instanceof Jugador)
         {
-            jugador = new Jugador();
+            Jugador jugador = (Jugador)o;
+            return (this.creditos.equals(jugador.creditos) && this.vida == jugador.vida);
         }
-        return jugador;
+        return false;
     }
-
 }

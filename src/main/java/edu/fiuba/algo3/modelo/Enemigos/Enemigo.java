@@ -11,23 +11,25 @@ public abstract class Enemigo {
     private int velocidad;
     protected static int enemigosMuertos = 0;
     private Posicion posicion;
+    private Jugador jugador;
 
-    public Enemigo(int energia, int danio, int creditos, int velocidad){
+    public Enemigo(int energia, int danio, int creditos, int velocidad, Jugador jugador){
         this.energia = energia;
         this.danio = danio;
         this.creditos = creditos;
         this.velocidad = velocidad;
         this.posicion = null;
+        this.jugador = jugador;
     }
 
     public void otorgarCreditos()
     {
-        Jugador.obtenerJugador().agregarCreditos(this.creditos);
+        this.jugador.agregarCreditos(this.creditos);
     }
 
     public void atacar()
     {
-        Jugador.obtenerJugador().recibirDanio(this.danio);
+        this.jugador.recibirDanio(this.danio);
     }
 
     public void recibirDanio(int danioRecibido)
@@ -61,13 +63,12 @@ public abstract class Enemigo {
         this.posicion = posicion;
     }
 
-    public void mover()
+    public void mover(Camino camino)
     {
         if (this.posicion != null)
         {
             if (this.estaVivo())
             {
-                Camino camino = Camino.obtenerCamino();
                 camino.moverEnemigo(velocidad, posicion, this);
             }
         }

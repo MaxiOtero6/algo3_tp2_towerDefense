@@ -12,12 +12,13 @@ public class Partida {
 
     private Turno turno;
     private Mapa mapa;
+    private Jugador jugador;
 
-
-
-    public Partida(List<List<Parcela>> parcelas, List<Pasarela> camino) {
+    public Partida(List<List<Parcela>> parcelas, List<Pasarela> camino) 
+    {
+        this.jugador = new Jugador();
         this.mapa = new Mapa(parcelas);
-        this.turno = new Turno(camino);
+        this.turno = new Turno(camino, jugador);
     }
 
     public void iniciar()
@@ -51,6 +52,7 @@ public class Partida {
 
     public void construir(Defensa defensa, Posicion posicion)
     {
+        defensa.setJugador(this.jugador);
         this.mapa.construir(defensa, posicion);
         this.turno.aniadirDefensa(defensa);
     }

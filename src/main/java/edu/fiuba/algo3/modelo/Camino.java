@@ -8,19 +8,12 @@ import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Errores.SpawnNoEnLargadaError;
 
 public class Camino {
-    private LinkedList<Pasarela> pasarelas;
-    private static Camino camino;
+    private List<Pasarela> pasarelas;
 
-    private Camino()
+    public Camino(List<Pasarela> pasarelas)
     {
-        this.pasarelas = new LinkedList<Pasarela>();
+        this.pasarelas = pasarelas;
     }
-
-    public void agregarPasarelas(List<Pasarela> pasarelas)
-    {
-        this.pasarelas = new LinkedList<>(pasarelas);
-    }
-
     
     /* Busca la pasarela que requiere, al indice de la misma se suma la velocidad del
      * enemigo y mueve al enemigo a tal pasarela.
@@ -54,22 +47,9 @@ public class Camino {
         int iterador = pasarelas.size() - 1;
         while (iterador >= 0)
         {
-            pasarelas.get(iterador).avanzarTurno();
+            pasarelas.get(iterador).avanzarTurno(this);
             iterador--;
         }
-    }
-
-    public static Camino obtenerCamino()
-    {
-        if (camino == null)
-        {
-            camino = new Camino();
-        }
-        return camino;
-    }
-
-    public void borrarPasarelas(){
-        this.pasarelas = new LinkedList<Pasarela>();
     }
 
     public void aparecerEnemigos(List<Enemigo> enemigos)

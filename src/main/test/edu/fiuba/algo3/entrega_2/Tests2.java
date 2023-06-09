@@ -82,14 +82,14 @@ public class Tests2 {
     {
         LinkedList<LinkedList<Enemigo>> enemigos = new LinkedList<>();
         LinkedList<LinkedList<Enemigo>> enemigosEsperados = new LinkedList<>();
-        Enemigo[][] enemigosPorTurno = {{new Hormiga()}, {new Hormiga(), new Arania()}, {new Hormiga(), new Hormiga(), new Arania()}, {new Arania()}, {new Hormiga(), new Arania()}, {new Hormiga(), new Arania(), new Arania()}, {new Arania()}, {new Hormiga()}, {new Hormiga()}, {new Hormiga(), new Hormiga()}, {new Arania()}, {new Hormiga(), new Arania(), new Arania()}};
+        Enemigo[][] enemigosPorTurno = {{new Hormiga(null)}, {new Hormiga(null), new Arania(null)}, {new Hormiga(null), new Hormiga(null), new Arania(null)}, {new Arania(null)}, {new Hormiga(null), new Arania(null)}, {new Hormiga(null), new Arania(null), new Arania(null)}, {new Arania(null)}, {new Hormiga(null)}, {new Hormiga(null)}, {new Hormiga(null), new Hormiga(null)}, {new Arania(null)}, {new Hormiga(null), new Arania(null), new Arania(null)}};
         
         for (Enemigo[] turno : enemigosPorTurno) {    
             enemigosEsperados.add(new LinkedList<>(Arrays.asList(turno)));
         }
 
         for (int i = 0; i < enemigosPorTurno.length; i++) {
-            enemigos.add(new LinkedList<>(CreadorEnemigos.crearEnemigos(i)));
+            enemigos.add(new LinkedList<>(CreadorEnemigos.crearEnemigos(i, null)));
         }
 
         assertEquals(enemigosEsperados, enemigos);
@@ -130,9 +130,6 @@ public class Tests2 {
     @Test
     public void test17ElJuegoSeCreaAcordeALosJson()
     {
-        Camino camino = Camino.obtenerCamino();
-        camino.borrarPasarelas();
-
         List<List<Parcela>> mapa;
         List<List<Parcela>> mapaEsperado = new LinkedList<>();
         List<Pasarela> pasarelas = new LinkedList<>();
@@ -169,8 +166,7 @@ public class Tests2 {
     @Test
     public void test18ElJugadorGanaLaPartidaSimulada()
     {
-        Jugador.obtenerJugador().agregarCreditos(1000000);
-        Jugador.obtenerJugador().restaurarVida();
+        Jugador jugador = new Jugador(1000000, 1000000);
         List<Pasarela> camino = new LinkedList<>();
         Partida partida = new Partida(CreadorMapa.crearMapa(camino), camino);
         partida.construir(new DefensaPlateada(), new Posicion(0,1));

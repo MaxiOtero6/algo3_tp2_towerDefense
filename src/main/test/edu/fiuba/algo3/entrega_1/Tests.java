@@ -27,9 +27,9 @@ public class Tests {
 
     @Test
     public void test01JugadorSeCreaCon100CreditosY20Vida() {
-        Jugador jugador = Jugador.obtenerJugador();
-        assertEquals(100, jugador.obtenerCreditos());
-        assertEquals(20, jugador.obtenerVida());
+        Jugador jugador = new Jugador();
+        Jugador jugadorEsperado = new Jugador(20, 100);
+        assertEquals(jugadorEsperado, jugador);
     }
 
 //Verificar que cada defensa tarde en construirse lo que dice que tarda y que recién están
@@ -54,8 +54,8 @@ public class Tests {
 
     @Test
     public void test03ElJugadorCuentaConLosCreditosParaConstruirLaTorre() {
-        Jugador jugador = Jugador.obtenerJugador();
-       Defensa defensa = new DefensaPlateada();
+        Jugador jugador = new Jugador();
+        Defensa defensa = new DefensaPlateada(jugador);
         defensa.gastarCreditos();
         defensa.gastarCreditos();
         defensa.gastarCreditos();
@@ -124,10 +124,10 @@ public class Tests {
     public void test05LasDefensasAtacanEnElRangoEsperado()
     {
         LinkedList<Enemigo> enemigos = new LinkedList<Enemigo>();
-        Enemigo enemigo1 = new Hormiga();
+        Enemigo enemigo1 = new Hormiga(null);
         enemigo1.setearPosicion(new Posicion(0,0));
         enemigos.add(enemigo1);
-        Enemigo enemigoEsperado = new Hormiga();
+        Enemigo enemigoEsperado = new Hormiga(null);
         enemigoEsperado.setearPosicion(new Posicion(1, 1));
         enemigos.add(enemigoEsperado);
 
@@ -143,17 +143,17 @@ public class Tests {
     public void test05LasDefensasNoAtacanFueraDelRango()
     {
         LinkedList<Enemigo> enemigos = new LinkedList<Enemigo>();
-        Enemigo enemigo1 = new Hormiga();
+        Enemigo enemigo1 = new Hormiga(null);
         enemigo1.setearPosicion(new Posicion(10,10));
         enemigos.add(enemigo1);
-        Enemigo enemigo2 = new Hormiga();
+        Enemigo enemigo2 = new Hormiga(null);
         enemigo2.setearPosicion(new Posicion(11, 11));
         enemigos.add(enemigo2);
 
         Defensa defensa = new DefensaBlanca();
         defensa.setearPosicion(new Posicion(2,2));
 
-        Enemigo enemigoEsperado = null;
+        Enemigo enemigoEsperado = new NoEnemigo();
 
         Enemigo enemigoObtenido = defensa.hallarEnemigoMasCercano(enemigos);
 
@@ -163,11 +163,12 @@ public class Tests {
     @Test
     public void test06LasUnidadesEnemigasSonDaniadasAcordeAlAtaqueRecibido()
     {
-        Arania arania = new Arania();
+        Jugador jugador = new Jugador();
+        Arania arania = new Arania(jugador);
         int danioDelAtaque = 1;
         int energiaEsperadaArania = 1;
 
-        Hormiga hormiga = new Hormiga();
+        Hormiga hormiga = new Hormiga(jugador);
         int energiaEsperadaHormiga = 0;
 
         arania.recibirDanio(danioDelAtaque);
@@ -181,7 +182,7 @@ public class Tests {
     public void test07LasUnidadesEnemigasSoloSeMuevenSobreLaParcelaAutorizada()
     {
         Pasarela pasarela = new Pasarela(new Posicion(0, 0));
-        Enemigo hormiga = new Hormiga();
+        Enemigo hormiga = new Hormiga(null);
         Rocoso rocoso = new Rocoso(null);
         Tierra tierra = new Tierra(null);
 
@@ -193,28 +194,24 @@ public class Tests {
     @Test
     public void test08ElJugadorCobraAlDestruirUnEnemigoHormiga()
     {
-        Jugador jugador = Jugador.obtenerJugador();
-        int creditosEsperados = jugador.obtenerCreditos() + 1;
-        Enemigo hormiga = new Hormiga();
+        Jugador jugador = new Jugador();
+        Jugador jugadorEsperado = new Jugador(20,101);
+        Enemigo hormiga = new Hormiga(jugador);
         hormiga.recibirDanio(1);
-        assertEquals(creditosEsperados, jugador.obtenerCreditos());
-        Jugador.obtenerJugador().gastarCreditos(1);
-
+        assertEquals(jugadorEsperado, jugador);
     }
 
     @Test
     public void test08ElJugadorCobraAlDestruirUnEnemigoArania()
     {
-        Jugador jugador = Jugador.obtenerJugador();
-        int creditosInicial = jugador.obtenerCreditos();
-        int creditosEsperados = jugador.obtenerCreditos() + 10;
+        Jugador jugador = new Jugador();
+        int creditosEsperadosMin = 101;
+        int creditosEsperadosMax = 110;
 
-        Enemigo arania = new Arania();
+        Enemigo arania = new Arania(jugador);
         arania.recibirDanio(2);
-        boolean creditosValidos = ((jugador.obtenerCreditos() >= creditosInicial) && (jugador.obtenerCreditos() <= creditosEsperados));
-        jugador.agregarCreditos(100);
-        jugador.gastarCreditos(creditosEsperados);
-        assertTrue(creditosValidos);
+        assertTrue(jugador.obtenerCreditos() >= creditosEsperadosMin);
+        assertTrue(jugador.obtenerCreditos() <= creditosEsperadosMax);
 
     }
 
@@ -227,17 +224,15 @@ public class Tests {
         Pasarela pasarelaFinal = new Pasarela(new Posicion(2, 2));
         List<Pasarela> pasarelas = new LinkedList<>(Arrays.asList(pasarelaInicial, pasarelaIntermedia, pasarelaFinal));
 
-        Camino camino = Camino.obtenerCamino();
-        camino.agregarPasarelas(pasarelas);
+        Camino camino = new Camino(pasarelas);
 
-        Enemigo hormiga = new Hormiga();
-        Enemigo arania = new Arania();
-
+        Enemigo hormiga = new Hormiga(null);
+        Enemigo arania = new Arania(null);
 
         pasarelaInicial.agregarEnemigo(hormiga);
         pasarelaInicial.agregarEnemigo(arania);
         
-        pasarelaInicial.avanzarTurno();
+        pasarelaInicial.avanzarTurno(camino);
 
         assertTrue(pasarelaIntermedia.verificarSiEstaElEnemigo(hormiga));
         assertTrue(pasarelaFinal.verificarSiEstaElEnemigo(arania));
@@ -245,34 +240,30 @@ public class Tests {
 
     @Test
     public void test10AlEliminarATodosLosEnemigosElJugadorGanaLaPartida() {
-        Camino.obtenerCamino().borrarPasarelas();
-        Jugador.obtenerJugador().restaurarVida();
-        Turno turno = new Turno(new LinkedList<>(Arrays.asList(new Pasarela(new Posicion(0,0)))));
+        Turno turno = new Turno(new LinkedList<>(Arrays.asList(new Pasarela(new Posicion(0,0)))), new Jugador());
         assertThrows(GanarPartidaError.class, () -> turno.avanzarTurno(PRUEBA_SIN_ENEMIGOS));
     }
 
     @Test
     public void test11AlNoQuedarUnidadesEnemigasSinHaberlasEliminadoTodasElJugadorConVidaPositivaEsteGanaLaPartida()
     {
-        Camino.obtenerCamino().borrarPasarelas();
-        Jugador.obtenerJugador().restaurarVida();
-        Turno turno = new Turno(new LinkedList<>(Arrays.asList(new Pasarela(new Posicion(0,0)))));
+        Jugador jugador = new Jugador();
+        Turno turno = new Turno(new LinkedList<>(Arrays.asList(new Pasarela(new Posicion(0,0)))), jugador);
         Meta meta = new Meta(new Posicion(0,0));
-        meta.agregarEnemigo(new Arania());
-        assertAll(meta::avanzarTurno);
+        meta.agregarEnemigo(new Arania(jugador));
+        assertAll(() -> meta.avanzarTurno(null)); //Meta realmente no requiere de camino
         assertThrows(GanarPartidaError.class, () -> turno.avanzarTurno(PRUEBA_SIN_ENEMIGOS));
     }
 
     @Test
     public void test12SiElJugadorPierdeTodaLaVidaPierdeElJuego(){
-        Camino.obtenerCamino().borrarPasarelas();
-        Jugador.obtenerJugador().restaurarVida();
+        Jugador jugador = new Jugador();
         Meta meta = new Meta(new Posicion(0,0));
         for (int i = 0; i < 9; i++){
-            meta.agregarEnemigo(new Arania());
+            meta.agregarEnemigo(new Arania(jugador));
         }
-        assertAll(meta::avanzarTurno);
-        meta.agregarEnemigo(new Arania());
-        assertThrows(PerderPartidaError.class, meta::avanzarTurno);
+        assertAll(() -> meta.avanzarTurno(null));
+        meta.agregarEnemigo(new Arania(jugador));
+        assertThrows(PerderPartidaError.class, () -> meta.avanzarTurno(null));
     }
 }
