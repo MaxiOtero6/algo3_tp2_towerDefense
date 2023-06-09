@@ -37,11 +37,6 @@ public class Tierra implements Parcela
         throw new AgregarEnemigoError();
     }
 
-    public Posicion obtenerPosicion()
-    {
-        return this.posicion;
-    }
-
     @Override
     public boolean equals(Object o)
     {
@@ -49,7 +44,7 @@ public class Tierra implements Parcela
         if (o instanceof Tierra)
         {
             Tierra tierra = (Tierra)o;
-            return (this.posicion.equals(tierra.obtenerPosicion()));
+            return (this.posicion.equals(tierra.posicion));
         }
         return false;
     }

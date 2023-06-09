@@ -55,17 +55,6 @@ public class Partida {
         this.turno.aniadirDefensa(defensa);
     }
 
-
-    public Mapa obtenerMapa()
-    {
-        return this.mapa;
-    }
-
-    public Turno obtenerTurno()
-    {
-        return this.turno;
-    }
-
     @Override
     public boolean equals(Object o)
     {
@@ -73,7 +62,7 @@ public class Partida {
         if (o instanceof Partida)
         {
             Partida partida = (Partida)o;
-            return (this.mapa.equals(partida.obtenerMapa()) && this.turno.equals(partida.obtenerTurno()));
+            return (this.mapa.equals(partida.mapa) && this.turno.equals(partida.turno));
         }
         return false;
     }

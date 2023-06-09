@@ -65,7 +65,7 @@ public abstract class Enemigo {
     {
         if (this.posicion != null)
         {
-            if (this.energia > 0)
+            if (this.estaVivo())
             {
                 Camino camino = Camino.obtenerCamino();
                 camino.moverEnemigo(velocidad, posicion, this);
@@ -84,8 +84,8 @@ public abstract class Enemigo {
         if (enemigo instanceof Enemigo)
         {
             Enemigo enem = (Enemigo)enemigo;
-            if (this.posicion == null && enem.obtenerPosicion() == null) {return true;}
-            return (this.posicion.equals(enem.obtenerPosicion()));
+            if (this.posicion == null && enem.posicion == null) {return true;}
+            return (this.posicion.equals(enem.posicion));
         }
         return false;
     }

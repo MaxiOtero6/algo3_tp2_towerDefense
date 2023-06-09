@@ -14,11 +14,6 @@ public class Mapa {
         this.mapa = parcelas;
     }
 
-    public List<List<Parcela>> obtenerMapa()
-    {
-        return this.mapa;
-    }
-
     public void construir(Defensa defensa, Posicion posicion)
     {
         try
@@ -39,7 +34,7 @@ public class Mapa {
         if (o instanceof Mapa)
         {
             Mapa mapa = (Mapa)o;
-            return (this.mapa.equals(mapa.obtenerMapa()));
+            return (this.mapa.equals(mapa.mapa));
         }
         return false;
     }

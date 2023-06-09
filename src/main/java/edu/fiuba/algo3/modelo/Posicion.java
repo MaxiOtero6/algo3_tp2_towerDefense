@@ -24,8 +24,8 @@ public class Posicion {
     {
         return 
         Math.sqrt(
-            Math.pow(Math.abs(pos2.obtenerX() - pos1.obtenerX()), 2) 
-            + Math.pow(Math.abs(pos2.obtenerY() - pos1.obtenerY()), 2)
+            Math.pow(Math.abs(pos2.coordenadaX - pos1.coordenadaX), 2) 
+            + Math.pow(Math.abs(pos2.coordenadaY - pos1.coordenadaY), 2)
         );
     }
     
@@ -36,7 +36,7 @@ public class Posicion {
         if (o instanceof Posicion)
         {
             Posicion posicion = (Posicion)o;
-            return (this.coordenadaX == posicion.obtenerX() && this.coordenadaY == posicion.obtenerY());
+            return (this.coordenadaX == posicion.coordenadaX && this.coordenadaY == posicion.coordenadaY);
         }
         return false;
     }

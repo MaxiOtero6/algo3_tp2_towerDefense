@@ -56,12 +56,6 @@ public class Pasarela implements Parcela {
         throw new TerrenoDeConstruccionInvalidoError();
     }
 
-
-    public Posicion getPosicion()
-    {
-        return this.posicion;
-    }
-
     @Override
     public boolean equals(Object o)
     {
@@ -69,7 +63,7 @@ public class Pasarela implements Parcela {
         if (o instanceof Pasarela)
         {
             Pasarela pasarela = (Pasarela)o;
-            return (this.posicion.equals(pasarela.getPosicion()));
+            return (this.posicion.equals(pasarela.posicion));
         }
         return false;
     }

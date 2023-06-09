@@ -15,11 +15,6 @@ public class Rocoso implements Parcela {
         this.posicion = posicion;
     }
 
-    public Posicion obtenerPosicion()
-    {
-        return this.posicion;
-    }
-
     @Override
     public void construir(Defensa defensa) throws TerrenoDeConstruccionInvalidoError
     {
@@ -39,7 +34,7 @@ public class Rocoso implements Parcela {
         if (o instanceof Rocoso)
         {
             Rocoso rocoso = (Rocoso)o;
-            return (this.posicion.equals(rocoso.obtenerPosicion()));
+            return (this.posicion.equals(rocoso.posicion));
         }
         return false;
     }
