@@ -1,39 +1,26 @@
 package edu.fiuba.algo3.modelo.Defensas.Torres;
 
+import java.util.Comparator;
 import java.util.List;
 
-import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Enemigos.*;
 
-public abstract class Torre {
-    
-    private int coste;
-    protected int rango;
+public class Torre extends Defensa{
+
+    private int rango;
     private int danio;
-    protected Posicion posicion;
     private int progresoConstruccion;
     private Estado estado;
-    protected List<Enemigo> enemigos;
 
 
     public Torre(int coste, int rango, int danio, int progresoConstruccion)
     {
-        this.coste = coste;
+        super(coste);
         this.rango = rango;
         this.danio = danio;
         this.progresoConstruccion = progresoConstruccion;
         this.estado = new EstadoDesactivado();
-    }
-
-    public void setEnemigos(List<Enemigo> enemigos)
-    {
-        this.enemigos = enemigos;
-    }
-
-    public void setearPosicion(Posicion posicion)
-    {
-        this.posicion = posicion;
     }
 
     public void avanzarTurno(){
@@ -53,16 +40,21 @@ public abstract class Torre {
         this.estado = new EstadoActivado();
     }
 
-    public abstract Enemigo hallarEnemigoMasCercano(List<Enemigo> enemigos);
+    public Enemigo hallarEnemigoMasCercano(List<Enemigo> enemigos)
+    {
+        Enemigo enemigoMasCercano = enemigos.stream()
+            .filter(enemigo -> enemigo.esVisible())
+            .filter(enemigo -> enemigo.estaVivo())
+            .filter(enemigo -> enemigo.calcDistancia(this.posicion) <= this.rango)
+            .min(Comparator.comparingDouble(enemigo -> enemigo.calcDistancia(this.posicion)))
+            .orElse(new NoEnemigo());
+
+        return enemigoMasCercano;
+    }
 
     public void atacar()
     {
         Enemigo enemigoMasCercano = this.hallarEnemigoMasCercano(this.enemigos);
         enemigoMasCercano.recibirDanio(this.danio);
-    }
-
-    public void gastarCreditos(Jugador jugador)
-    {
-        jugador.gastarCreditos(this.coste);
     }
 }
