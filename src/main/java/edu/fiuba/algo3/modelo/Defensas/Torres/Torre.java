@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.Torres;
+package edu.fiuba.algo3.modelo.Defensas.Torres;
 
 import java.util.List;
 

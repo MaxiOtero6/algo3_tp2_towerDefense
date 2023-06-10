@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.Torres;
+package edu.fiuba.algo3.modelo.Defensas.Torres;
 
 import java.util.Comparator;
 import java.util.List;
@@ -6,15 +6,15 @@ import java.util.List;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Enemigos.*;
 
-public class TorrePlateada extends Torre {
-    public TorrePlateada(){
-        super(20, 5, 2, 2);
+public class TorreBlanca extends Torre{
+    public TorreBlanca(){
+        super(10, 3, 1, 1);
     }
 
-    public TorrePlateada(Jugador jugador){
-        super(20, 5, 2, 2);
+    public TorreBlanca(Jugador jugador){
+        super(10, 3, 1, 1);
         this.setJugador(jugador);
-    }  
+    }    
 
     @Override
     public Enemigo hallarEnemigoMasCercano(List<Enemigo> enemigos)
@@ -27,5 +27,6 @@ public class TorrePlateada extends Torre {
 
         return enemigoMasCercano;
     }
-    
+
+
 }
