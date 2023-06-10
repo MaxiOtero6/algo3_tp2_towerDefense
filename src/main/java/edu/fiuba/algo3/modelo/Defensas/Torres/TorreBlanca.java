@@ -10,12 +10,7 @@ public class TorreBlanca extends Torre{
     public TorreBlanca(){
         super(10, 3, 1, 1);
     }
-
-    public TorreBlanca(Jugador jugador){
-        super(10, 3, 1, 1);
-        this.setJugador(jugador);
-    }    
-
+    
     @Override
     public Enemigo hallarEnemigoMasCercano(List<Enemigo> enemigos)
     {

@@ -46,7 +46,6 @@ public class Turno {
 
     public void aniadirTorre(Torre torre)
     {
-        torre.setJugador(this.jugador);
         torre.setEnemigos(enemigos);
         torres.add(torre);
     }

@@ -15,7 +15,6 @@ public abstract class Torre {
     private int progresoConstruccion;
     private Estado estado;
     protected List<Enemigo> enemigos;
-    private Jugador jugador;
 
 
     public Torre(int coste, int rango, int danio, int progresoConstruccion)
@@ -25,11 +24,6 @@ public abstract class Torre {
         this.danio = danio;
         this.progresoConstruccion = progresoConstruccion;
         this.estado = new EstadoDesactivado();
-    }
-
-    public void setJugador(Jugador jugador) 
-    {
-        this.jugador = jugador;
     }
 
     public void setEnemigos(List<Enemigo> enemigos)
@@ -67,8 +61,8 @@ public abstract class Torre {
         enemigoMasCercano.recibirDanio(this.danio);
     }
 
-    public void gastarCreditos()
+    public void gastarCreditos(Jugador jugador)
     {
-        this.jugador.gastarCreditos(this.coste);
+        jugador.gastarCreditos(this.coste);
     }
 }

@@ -11,11 +11,6 @@ public class TorrePlateada extends Torre {
         super(20, 5, 2, 2);
     }
 
-    public TorrePlateada(Jugador jugador){
-        super(20, 5, 2, 2);
-        this.setJugador(jugador);
-    }  
-
     @Override
     public Enemigo hallarEnemigoMasCercano(List<Enemigo> enemigos)
     {

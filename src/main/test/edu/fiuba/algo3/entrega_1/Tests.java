@@ -55,14 +55,14 @@ public class Tests {
     @Test
     public void test03ElJugadorCuentaConLosCreditosParaConstruirLaTorre() {
         Jugador jugador = new Jugador();
-        Torre torre = new TorrePlateada(jugador);
-        torre.gastarCreditos();
-        torre.gastarCreditos();
-        torre.gastarCreditos();
-        torre.gastarCreditos();
-        torre.gastarCreditos();
-       assertThrows(CreditosInsuficientesError.class, torre::gastarCreditos);
-       jugador.agregarCreditos(100);
+        Torre torre = new TorrePlateada();
+        torre.gastarCreditos(jugador);
+        torre.gastarCreditos(jugador);
+        torre.gastarCreditos(jugador);
+        torre.gastarCreditos(jugador);
+        torre.gastarCreditos(jugador);
+        assertThrows(CreditosInsuficientesError.class, () -> torre.gastarCreditos(jugador));
+        jugador.agregarCreditos(100);
     }
 
     @Test

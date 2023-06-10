@@ -59,8 +59,7 @@ public class Partida {
 
     public void construir(Torre torre, int coordenadaX, int coordenadaY)
     {
-        torre.setJugador(this.jugador);
-        torre.gastarCreditos();
+        torre.gastarCreditos(this.jugador);
         this.mapa.construir(torre, coordenadaX, coordenadaY);
         this.turno.aniadirTorre(torre);
     }
