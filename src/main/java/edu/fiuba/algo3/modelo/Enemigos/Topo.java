@@ -1,11 +1,12 @@
 package edu.fiuba.algo3.modelo.Enemigos;
 
 import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.Camino;
 
 public class Topo extends Enemigo {
     
-    private static int movimientosRealizados = 0;
+    private int movimientosRealizados = 0;
+    private static int toposMuertos = 0;
+
     public Topo(Jugador jugador)
     {
         super(1,2,0,1, true, jugador);
@@ -32,6 +33,7 @@ public class Topo extends Enemigo {
     @Override
     public void morir()
     {
+        toposMuertos++;
         enemigosMuertos++;
     }
 }
