@@ -15,6 +15,7 @@ public class TorrePlateada extends Torre {
     public Enemigo hallarEnemigoMasCercano(List<Enemigo> enemigos)
     {
         Enemigo enemigoMasCercano = enemigos.stream()
+            .filter(enemigo -> enemigo.esVisible())
             .filter(enemigo -> enemigo.estaVivo())
             .filter(enemigo -> enemigo.calcDistancia(this.posicion) <= this.rango)
             .min(Comparator.comparingDouble(enemigo -> enemigo.calcDistancia(this.posicion)))

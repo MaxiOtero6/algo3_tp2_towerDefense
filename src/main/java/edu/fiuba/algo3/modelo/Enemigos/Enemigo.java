@@ -6,20 +6,22 @@ import edu.fiuba.algo3.modelo.Posicion;
 
 public abstract class Enemigo {
     protected int energia;
-    private int danio;
+    protected int danio;
     protected int creditos;
-    private int velocidad;
+    protected int velocidad;
     protected static int enemigosMuertos = 0;
     private Posicion posicion;
     private Jugador jugador;
+    private boolean subterraneo;
 
-    public Enemigo(int energia, int danio, int creditos, int velocidad, Jugador jugador){
+    public Enemigo(int energia, int danio, int creditos, int velocidad, boolean subterraneo, Jugador jugador){
         this.energia = energia;
         this.danio = danio;
         this.creditos = creditos;
         this.velocidad = velocidad;
         this.posicion = null;
         this.jugador = jugador;
+        this.subterraneo = subterraneo;
     }
 
     public void otorgarCreditos()
@@ -46,6 +48,11 @@ public abstract class Enemigo {
         return this.energia > 0;
     }
 
+    public boolean esVisible()
+    {
+        return this.subterraneo == false;
+    }
+
     public abstract void morir(); 
 
     public int obtenerEnergia()
@@ -69,7 +76,8 @@ public abstract class Enemigo {
         {
             if (this.estaVivo())
             {
-                camino.moverEnemigo(velocidad, posicion, this);
+                int velocidadActual = this.obtenerVelocidad();
+                camino.moverEnemigo(velocidadActual, posicion, this);
             }
         }
         else
@@ -94,5 +102,10 @@ public abstract class Enemigo {
     public double calcDistancia(Posicion posicion)
     {
         return Posicion.calcDistancia(posicion, this.posicion);
+    }
+
+    public int obtenerVelocidad()
+    {
+        return velocidad;
     }
 }

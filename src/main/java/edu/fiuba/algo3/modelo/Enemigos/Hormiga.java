@@ -8,7 +8,7 @@ public class Hormiga extends Enemigo {
     private static int hormigasMuertas = 0;
     public Hormiga(Jugador jugador)
     {
-        super(1,1,1,1, jugador);
+        super(1,1,1,1, false, jugador);
         if (hormigasMuertas >= 10) {this.creditos = 2;}
     }
 
