@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo.Parcelas;
 import edu.fiuba.algo3.modelo.Errores.AgregarEnemigoError;
 import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
 import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.Torres.*;
+import edu.fiuba.algo3.modelo.Defensas.Torres.*;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 
 public class Rocoso implements Parcela {

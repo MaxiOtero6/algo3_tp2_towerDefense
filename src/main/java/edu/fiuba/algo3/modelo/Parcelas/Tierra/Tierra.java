@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo.Parcelas.Tierra;
 
 import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.Torres.*;
+import edu.fiuba.algo3.modelo.Defensas.Torres.*;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Errores.AgregarEnemigoError;
