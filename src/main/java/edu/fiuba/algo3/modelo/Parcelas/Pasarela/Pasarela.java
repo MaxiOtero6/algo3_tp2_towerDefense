@@ -29,13 +29,13 @@ public class Pasarela implements Parcela {
         this.enemigos.add(enemigo);
     }
 
-    protected void eliminarEnemigos()
+    protected void eliminarEnemigos(Camino camino)
     {
         while (enemigos.size() != 0) {
             Enemigo enemigo = enemigos.getFirst();
             if (enemigo.estaVivo())
             {
-                enemigo.mover();
+                enemigo.mover(camino);
             }
             enemigos.removeFirst();
         }
@@ -46,9 +46,9 @@ public class Pasarela implements Parcela {
         return this.posicion.equals(posicion);
     }
     
-    public void avanzarTurno()
+    public void avanzarTurno(Camino camino)
     {
-        eliminarEnemigos();
+        eliminarEnemigos(camino);
     }
     
     @Override

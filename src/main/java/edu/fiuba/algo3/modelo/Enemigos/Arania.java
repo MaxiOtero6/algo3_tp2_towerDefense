@@ -13,12 +13,6 @@ public class Arania extends Enemigo {
         this.creditos = randCreditos();
     }
 
-    public Arania(Jugador jugador, Camino camino)
-    {
-        super(2,2,0,2, jugador, camino);
-        this.creditos = randCreditos();
-    }
-
     private int randCreditos()
     {
         Random rand = new Random();

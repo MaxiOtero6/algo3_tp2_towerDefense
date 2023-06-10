@@ -12,12 +12,6 @@ public class Hormiga extends Enemigo {
         if (hormigasMuertas >= 10) {this.creditos = 2;}
     }
 
-    public Hormiga(Jugador jugador, Camino camino)
-    {
-        super(1,1,1,1, jugador, camino);
-        if (hormigasMuertas >= 10) {this.creditos = 2;}
-    }
-
     @Override
     public void morir()
     {

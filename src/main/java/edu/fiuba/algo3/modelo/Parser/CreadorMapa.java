@@ -60,7 +60,7 @@ public class CreadorMapa {
                     {
                         Pasarela nuevPasarela = new Pasarela(j, i - 1);
                         parcelas.get(i - 1).add(nuevPasarela);
-                        camino.add(nuevPasarela);
+                        if (camino != null) {camino.add(nuevPasarela);}
 
                         if (!posLargadaAsignada) 
                         {

@@ -5,7 +5,6 @@ import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
 
 public abstract class Enemigo {
-    private Camino camino;
     protected int energia;
     private int danio;
     protected int creditos;
@@ -14,16 +13,6 @@ public abstract class Enemigo {
     private Posicion posicion;
     private Jugador jugador;
 
-    public Enemigo(int energia, int danio, int creditos, int velocidad, Jugador jugador, Camino camino){
-        this.energia = energia;
-        this.danio = danio;
-        this.creditos = creditos;
-        this.velocidad = velocidad;
-        this.posicion = null;
-        this.jugador = jugador;
-        this.camino = camino;
-    }
-
     public Enemigo(int energia, int danio, int creditos, int velocidad, Jugador jugador){
         this.energia = energia;
         this.danio = danio;
@@ -31,7 +20,6 @@ public abstract class Enemigo {
         this.velocidad = velocidad;
         this.posicion = null;
         this.jugador = jugador;
-        this.camino = null;
     }
 
     public void otorgarCreditos()
@@ -75,7 +63,7 @@ public abstract class Enemigo {
         this.posicion = posicion;
     }
 
-    public void mover()
+    public void mover(Camino camino)
     {
         if (this.posicion != null)
         {
