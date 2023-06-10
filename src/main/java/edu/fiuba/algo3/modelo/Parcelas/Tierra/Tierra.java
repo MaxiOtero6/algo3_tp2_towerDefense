@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo.Parcelas.Tierra;
 
 import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.Defensas.*;
+import edu.fiuba.algo3.modelo.Torres.*;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Errores.AgregarEnemigoError;
@@ -9,7 +9,7 @@ import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
 
 public class Tierra implements Parcela 
 {
-    private Defensa defensa;
+    private Torre torre;
     private Construible construible;
     private Posicion posicion;
     
@@ -20,9 +20,9 @@ public class Tierra implements Parcela
     }
 
     @Override
-    public void construir(Defensa defensa) throws TerrenoDeConstruccionInvalidoError
+    public void construir(Torre torre) throws TerrenoDeConstruccionInvalidoError
     {
-        this.defensa = construible.construir(defensa, this.posicion);
+        this.torre = construible.construir(torre, this.posicion);
         this.setConstruible(new NoEsConstruible());
     }
 

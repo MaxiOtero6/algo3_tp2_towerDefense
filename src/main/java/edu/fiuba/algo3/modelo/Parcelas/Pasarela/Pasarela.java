@@ -7,7 +7,7 @@ import edu.fiuba.algo3.modelo.Errores.SpawnNoEnLargadaError;
 import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
 import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.Defensas.*;
+import edu.fiuba.algo3.modelo.Torres.*;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 
@@ -52,7 +52,7 @@ public class Pasarela implements Parcela {
     }
     
     @Override
-    public void construir(Defensa defensa) throws TerrenoDeConstruccionInvalidoError
+    public void construir(Torre torre) throws TerrenoDeConstruccionInvalidoError
     {
         throw new TerrenoDeConstruccionInvalidoError();
     }

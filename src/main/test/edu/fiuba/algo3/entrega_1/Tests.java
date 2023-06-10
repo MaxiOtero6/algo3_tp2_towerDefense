@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.Defensas.*;
+import edu.fiuba.algo3.modelo.Torres.*;
 import edu.fiuba.algo3.modelo.Enemigos.*;
 import edu.fiuba.algo3.modelo.Errores.CreditosInsuficientesError;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
@@ -32,36 +32,36 @@ public class Tests {
         assertEquals(jugadorEsperado, jugador);
     }
 
-//Verificar que cada defensa tarde en construirse lo que dice que tarda y que recién están
+//Verificar que cada torre tarde en construirse lo que dice que tarda y que recién están
 //“operativas” cuando ya se terminaron de construir.
     @Test
     public void test02TorrePlateadaTardeEnCrearseLoEsperado() {
-        DefensaPlateada defensaPlateada = new DefensaPlateada();
-        defensaPlateada.avanzarTurno();
-        assertFalse(defensaPlateada.chequearProgreso());
-        defensaPlateada.avanzarTurno();
-        assertTrue(defensaPlateada.chequearProgreso());
+        TorrePlateada torrePlateada = new TorrePlateada();
+        torrePlateada.avanzarTurno();
+        assertFalse(torrePlateada.chequearProgreso());
+        torrePlateada.avanzarTurno();
+        assertTrue(torrePlateada.chequearProgreso());
 
 
     }
     @Test
     public void test02TorreBlancaTardeEnCrearseLoEsperado() {
-        DefensaBlanca defensaBlanca = new DefensaBlanca();
-        defensaBlanca.avanzarTurno();
-        assertTrue(defensaBlanca.chequearProgreso());
+        TorreBlanca torreBlanca = new TorreBlanca();
+        torreBlanca.avanzarTurno();
+        assertTrue(torreBlanca.chequearProgreso());
 
     }
 
     @Test
     public void test03ElJugadorCuentaConLosCreditosParaConstruirLaTorre() {
         Jugador jugador = new Jugador();
-        Defensa defensa = new DefensaPlateada(jugador);
-        defensa.gastarCreditos();
-        defensa.gastarCreditos();
-        defensa.gastarCreditos();
-        defensa.gastarCreditos();
-        defensa.gastarCreditos();
-       assertThrows(CreditosInsuficientesError.class, defensa::gastarCreditos);
+        Torre torre = new TorrePlateada(jugador);
+        torre.gastarCreditos();
+        torre.gastarCreditos();
+        torre.gastarCreditos();
+        torre.gastarCreditos();
+        torre.gastarCreditos();
+       assertThrows(CreditosInsuficientesError.class, torre::gastarCreditos);
        jugador.agregarCreditos(100);
     }
 
@@ -69,59 +69,59 @@ public class Tests {
     public void test04SePuedeConstruirSobreTierra()
     {
         Tierra tierra = new Tierra(0,0);
-        Defensa defensa = new DefensaBlanca();
+        Torre torre = new TorreBlanca();
 
-        assertDoesNotThrow(() -> tierra.construir(defensa));
+        assertDoesNotThrow(() -> tierra.construir(torre));
     }
 
     @Test
-    public void test04NoSePuedeConstruirSobreTierraConUnaDefensa()
+    public void test04NoSePuedeConstruirSobreTierraConUnaTorre()
     {
         Tierra tierra = new Tierra(0,0);
-        Defensa defensa = new DefensaBlanca();
+        Torre torre = new TorreBlanca();
 
-        assertDoesNotThrow(() -> tierra.construir(defensa));
-        assertThrows(TerrenoDeConstruccionInvalidoError.class,() -> tierra.construir(defensa));
+        assertDoesNotThrow(() -> tierra.construir(torre));
+        assertThrows(TerrenoDeConstruccionInvalidoError.class,() -> tierra.construir(torre));
     }
 
     @Test
     public void test04NoSePuedeConstruirSobreAlgunaPasarela()
     {
         Pasarela pasarela = new Pasarela(0,0);
-        Defensa defensa = new DefensaBlanca();
+        Torre torre = new TorreBlanca();
 
-        assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> pasarela.construir(defensa));
+        assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> pasarela.construir(torre));
     }
 
     @Test
     public void test04NoSePuedeConstruirSobreLaMeta()
     {
         Pasarela pasarela = new Meta(0,0);
-        Defensa defensa = new DefensaBlanca();
+        Torre torre = new TorreBlanca();
 
-        assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> pasarela.construir(defensa));
+        assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> pasarela.construir(torre));
     }
 
     @Test
     public void test04NoSePuedeConstruirSobreLaLargada()
     {
         Pasarela pasarela = new Largada(0,0);
-        Defensa defensa = new DefensaBlanca();
+        Torre torre = new TorreBlanca();
 
-        assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> pasarela.construir(defensa));
+        assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> pasarela.construir(torre));
     }
 
     @Test
     public void test04NoSePuedeConstruirSobreRocoso()
     {
         Rocoso rocoso = new Rocoso(0,0);
-        Defensa defensa = new DefensaBlanca();
+        Torre torre = new TorreBlanca();
 
-        assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> rocoso.construir(defensa));
+        assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> rocoso.construir(torre));
     }
 
     @Test
-    public void test05LasDefensasAtacanEnElRangoEsperado()
+    public void test05LasTorresAtacanEnElRangoEsperado()
     {
         LinkedList<Enemigo> enemigos = new LinkedList<Enemigo>();
         Enemigo enemigo1 = new Hormiga(null);
@@ -131,16 +131,16 @@ public class Tests {
         enemigoEsperado.setearPosicion(new Posicion(1, 1));
         enemigos.add(enemigoEsperado);
 
-        Defensa defensa = new DefensaBlanca();
-        defensa.setearPosicion(new Posicion(2,2));
+        Torre torre = new TorreBlanca();
+        torre.setearPosicion(new Posicion(2,2));
 
-        Enemigo enemigoObtenido = defensa.hallarEnemigoMasCercano(enemigos);
+        Enemigo enemigoObtenido = torre.hallarEnemigoMasCercano(enemigos);
 
         assertEquals(enemigoEsperado, enemigoObtenido);
     }
 
     @Test
-    public void test05LasDefensasNoAtacanFueraDelRango()
+    public void test05LasTorresNoAtacanFueraDelRango()
     {
         LinkedList<Enemigo> enemigos = new LinkedList<Enemigo>();
         Enemigo enemigo1 = new Hormiga(null);
@@ -150,12 +150,12 @@ public class Tests {
         enemigo2.setearPosicion(new Posicion(11, 11));
         enemigos.add(enemigo2);
 
-        Defensa defensa = new DefensaBlanca();
-        defensa.setearPosicion(new Posicion(2,2));
+        Torre torre = new TorreBlanca();
+        torre.setearPosicion(new Posicion(2,2));
 
         Enemigo enemigoEsperado = new NoEnemigo();
 
-        Enemigo enemigoObtenido = defensa.hallarEnemigoMasCercano(enemigos);
+        Enemigo enemigoObtenido = torre.hallarEnemigoMasCercano(enemigos);
 
         assertEquals(enemigoEsperado, enemigoObtenido);
     }

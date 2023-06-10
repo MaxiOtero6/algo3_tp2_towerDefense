@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo;
 import java.util.LinkedList;
 import java.util.List;
 
-import edu.fiuba.algo3.modelo.Defensas.Defensa;
+import edu.fiuba.algo3.modelo.Torres.Torre;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Pasarela;
@@ -11,7 +11,7 @@ import edu.fiuba.algo3.modelo.Parser.CreadorEnemigos;
 
 public class Turno {
 
-    private LinkedList<Defensa> defensas;
+    private LinkedList<Torre> torres;
     private LinkedList<Enemigo> enemigos;
     private Camino camino;
     private Jugador jugador;
@@ -22,7 +22,7 @@ public class Turno {
         this.jugador = jugador;
         this.camino = new Camino(camino);
         this.enemigos = new LinkedList<>();
-        this.defensas = new LinkedList<>();
+        this.torres = new LinkedList<>();
     }
 
     public void avanzarTurno(int numeroTurno) {
@@ -37,18 +37,18 @@ public class Turno {
             this.camino.aparecerEnemigos(enemigosTurno);
         }
 
-        for (Defensa defensa : defensas) {
-            defensa.avanzarTurno();
+        for (Torre torre : torres) {
+            torre.avanzarTurno();
         }
 
         comprobarCantidadEnemigos();
     }
 
-    public void aniadirDefensa(Defensa defensa)
+    public void aniadirTorre(Torre torre)
     {
-        defensa.setJugador(this.jugador);
-        defensa.setEnemigos(enemigos);
-        defensas.add(defensa);
+        torre.setJugador(this.jugador);
+        torre.setEnemigos(enemigos);
+        torres.add(torre);
     }
 
     private void avanzarEnemigos()
@@ -80,7 +80,7 @@ public class Turno {
         if (o instanceof Turno)
         {
             Turno turno = (Turno)o;
-            return (this.enemigos.equals(turno.enemigos) && this.defensas.equals(turno.defensas));
+            return (this.enemigos.equals(turno.enemigos) && this.torres.equals(turno.torres));
         }
         return false;
     }

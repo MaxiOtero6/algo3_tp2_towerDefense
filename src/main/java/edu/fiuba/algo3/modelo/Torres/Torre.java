@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.Defensas;
+package edu.fiuba.algo3.modelo.Torres;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Enemigos.*;
 
-public abstract class Defensa {
+public abstract class Torre {
     
     private int coste;
     protected int rango;
@@ -18,7 +18,7 @@ public abstract class Defensa {
     private Jugador jugador;
 
 
-    public Defensa(int coste, int rango, int danio, int progresoConstruccion)
+    public Torre(int coste, int rango, int danio, int progresoConstruccion)
     {
         this.coste = coste;
         this.rango = rango;

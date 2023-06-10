@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.Defensas;
+package edu.fiuba.algo3.modelo.Torres;
 
 import java.util.Comparator;
 import java.util.List;
@@ -6,12 +6,12 @@ import java.util.List;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Enemigos.*;
 
-public class DefensaPlateada extends Defensa {
-    public DefensaPlateada(){
+public class TorrePlateada extends Torre {
+    public TorrePlateada(){
         super(20, 5, 2, 2);
     }
 
-    public DefensaPlateada(Jugador jugador){
+    public TorrePlateada(Jugador jugador){
         super(20, 5, 2, 2);
         this.setJugador(jugador);
     }  

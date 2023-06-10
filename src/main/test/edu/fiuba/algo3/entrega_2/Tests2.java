@@ -17,8 +17,8 @@ import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Partida;
 import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.Defensas.DefensaBlanca;
-import edu.fiuba.algo3.modelo.Defensas.DefensaPlateada;
+import edu.fiuba.algo3.modelo.Torres.TorreBlanca;
+import edu.fiuba.algo3.modelo.Torres.TorrePlateada;
 import edu.fiuba.algo3.modelo.Enemigos.*;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
 import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
@@ -169,15 +169,15 @@ public class Tests2 {
         Jugador jugador = new Jugador(1000000, 1000000);
         List<Pasarela> camino = new LinkedList<>();
         Partida partida = new Partida(CreadorMapa.crearMapa(camino), camino, jugador);
-        partida.construir(new DefensaPlateada(), 0,1);
-        partida.construir(new DefensaPlateada(), 0,2);
-        partida.construir(new DefensaPlateada(), 0,3);
-        partida.construir(new DefensaPlateada(), 0,4);
-        partida.construir(new DefensaPlateada(), 0,5);
-        partida.construir(new DefensaBlanca(), 2,0);
-        partida.construir(new DefensaBlanca(), 2,1);
-        partida.construir(new DefensaBlanca(), 2,2);
-        partida.construir(new DefensaBlanca(), 2,3);
+        partida.construir(new TorrePlateada(), 0,1);
+        partida.construir(new TorrePlateada(), 0,2);
+        partida.construir(new TorrePlateada(), 0,3);
+        partida.construir(new TorrePlateada(), 0,4);
+        partida.construir(new TorrePlateada(), 0,5);
+        partida.construir(new TorreBlanca(), 2,0);
+        partida.construir(new TorreBlanca(), 2,1);
+        partida.construir(new TorreBlanca(), 2,2);
+        partida.construir(new TorreBlanca(), 2,3);
 
         assertThrows(GanarPartidaError.class, () -> partida.iniciar());
     }
