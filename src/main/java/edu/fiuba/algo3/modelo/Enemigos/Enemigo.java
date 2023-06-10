@@ -13,6 +13,7 @@ public abstract class Enemigo {
     private Posicion posicion;
     private Jugador jugador;
     private boolean subterraneo;
+    private double multiplicadorVelocidad;
 
     public Enemigo(int energia, int danio, int creditos, int velocidad, boolean subterraneo, Jugador jugador){
         this.energia = energia;
@@ -22,6 +23,7 @@ public abstract class Enemigo {
         this.posicion = null;
         this.jugador = jugador;
         this.subterraneo = subterraneo;
+        this.multiplicadorVelocidad = 1;
     }
 
     public void otorgarCreditos()
@@ -78,6 +80,7 @@ public abstract class Enemigo {
             {
                 int velocidadActual = this.obtenerVelocidad();
                 camino.moverEnemigo(velocidadActual, posicion, this);
+                this.multiplicadorVelocidad = 1;
             }
         }
         else
@@ -107,5 +110,10 @@ public abstract class Enemigo {
     public int obtenerVelocidad()
     {
         return velocidad;
+    }
+
+    public void ralentizar()
+    {
+        this.multiplicadorVelocidad = 0.5;
     }
 }
