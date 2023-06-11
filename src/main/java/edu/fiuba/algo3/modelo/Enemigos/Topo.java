@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Enemigos;
 
+import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Enemigos.Subterraneo.EsSubterraneo;
 
@@ -24,12 +25,11 @@ public class Topo extends Enemigo {
         }
     }
 
-    public int obtenerVelocidad()
+    public void acelerar()
     {
-        if(movimientosRealizados == 5) {this.velocidad = 2;}
-        if(movimientosRealizados == 10) {this.velocidad = 3;}
-        movimientosRealizados ++;
-        return this.velocidad;
+        movimientosRealizados++;
+        if(movimientosRealizados == 5) {this.velocidad++;}
+        else if(movimientosRealizados == 10) {this.velocidad++;}
     }
 
     @Override
