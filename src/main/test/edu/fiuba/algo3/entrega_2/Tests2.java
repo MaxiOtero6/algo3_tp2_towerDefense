@@ -82,14 +82,14 @@ public class Tests2 {
     {
         LinkedList<LinkedList<Enemigo>> enemigos = new LinkedList<>();
         LinkedList<LinkedList<Enemigo>> enemigosEsperados = new LinkedList<>();
-        Enemigo[][] enemigosPorTurno = {{new Hormiga(null)}, {new Hormiga(null), new Arania(null)}, {new Hormiga(null), new Hormiga(null), new Arania(null)}, {new Arania(null)}, {new Hormiga(null), new Arania(null)}, {new Hormiga(null), new Arania(null), new Arania(null)}, {new Arania(null)}, {new Hormiga(null)}, {new Hormiga(null)}, {new Hormiga(null), new Hormiga(null)}, {new Arania(null)}, {new Hormiga(null), new Arania(null), new Arania(null)}};
+        Enemigo[][] enemigosPorTurno = {{new Hormiga(null,null)}, {new Hormiga(null,null), new Arania(null,null)}, {new Hormiga(null,null), new Hormiga(null,null), new Arania(null,null)}, {new Arania(null,null)}, {new Hormiga(null,null), new Arania(null,null)}, {new Hormiga(null,null), new Arania(null,null), new Arania(null,null)}, {new Arania(null,null)}, {new Hormiga(null,null)}, {new Hormiga(null,null)}, {new Hormiga(null,null), new Hormiga(null,null)}, {new Arania(null,null)}, {new Hormiga(null,null), new Arania(null,null), new Arania(null,null)}};
         
         for (Enemigo[] turno : enemigosPorTurno) {    
             enemigosEsperados.add(new LinkedList<>(Arrays.asList(turno)));
         }
 
         for (int i = 0; i < enemigosPorTurno.length; i++) {
-            enemigos.add(new LinkedList<>(CreadorEnemigos.crearEnemigos(i, null)));
+            enemigos.add(new LinkedList<>(CreadorEnemigos.crearEnemigos(i, null,null)));
         }
 
         assertEquals(enemigosEsperados, enemigos);

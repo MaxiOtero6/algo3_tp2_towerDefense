@@ -125,10 +125,10 @@ public class Tests {
     public void test05LasTorresAtacanEnElRangoEsperado()
     {
         LinkedList<Enemigo> enemigos = new LinkedList<Enemigo>();
-        Enemigo enemigo1 = new Hormiga(null);
+        Enemigo enemigo1 = new Hormiga(null,null);
         enemigo1.setearPosicion(new Posicion(0,0));
         enemigos.add(enemigo1);
-        Enemigo enemigoEsperado = new Hormiga(null);
+        Enemigo enemigoEsperado = new Hormiga(null,null);
         enemigoEsperado.setearPosicion(new Posicion(1, 1));
         enemigos.add(enemigoEsperado);
         Posicion posicionTorre = new Posicion(2, 2);
@@ -144,7 +144,7 @@ public class Tests {
     public void test05LasTorresNoAtacanFueraDelRango()
     {
         LinkedList<Enemigo> enemigos = new LinkedList<Enemigo>();
-        Enemigo enemigo1 = new Hormiga(null);
+        Enemigo enemigo1 = new Hormiga(null,null);
         enemigo1.setearPosicion(new Posicion(0,0));
         enemigos.add(enemigo1);
         Enemigo enemigoEsperado = new NoEnemigo();
@@ -162,11 +162,11 @@ public class Tests {
     public void test06LasUnidadesEnemigasSonDaniadasAcordeAlAtaqueRecibido()
     {
         Jugador jugador = new Jugador();
-        Arania arania = new Arania(jugador);
+        Arania arania = new Arania(jugador,null);
         int danioDelAtaque = 1;
         int energiaEsperadaArania = 1;
 
-        Hormiga hormiga = new Hormiga(jugador);
+        Hormiga hormiga = new Hormiga(jugador,null);
         int energiaEsperadaHormiga = 0;
 
         arania.recibirDanio(danioDelAtaque);
@@ -180,7 +180,7 @@ public class Tests {
     public void test07LasUnidadesEnemigasSoloSeMuevenSobreLaParcelaAutorizada()
     {
         Pasarela pasarela = new Pasarela(0, 0);
-        Enemigo hormiga = new Hormiga(null);
+        Enemigo hormiga = new Hormiga(null,null);
         Rocoso rocoso = new Rocoso(1, 0);
         Tierra tierra = new Tierra(2, 0);
 
@@ -194,7 +194,7 @@ public class Tests {
     {
         Jugador jugador = new Jugador();
         Jugador jugadorEsperado = new Jugador(20,101);
-        Enemigo hormiga = new Hormiga(jugador);
+        Enemigo hormiga = new Hormiga(jugador,null);
         hormiga.recibirDanio(1);
         assertEquals(jugadorEsperado, jugador);
     }
@@ -206,7 +206,7 @@ public class Tests {
         int creditosEsperadosMin = 100;
         int creditosEsperadosMax = 110;
 
-        Enemigo arania = new Arania(jugador);
+        Enemigo arania = new Arania(jugador,null);
         arania.recibirDanio(2);
         assertTrue(jugador.obtenerCreditos() >= creditosEsperadosMin);
         assertTrue(jugador.obtenerCreditos() <= creditosEsperadosMax);
@@ -224,13 +224,13 @@ public class Tests {
 
         Camino camino = new Camino(pasarelas);
 
-        Enemigo hormiga = new Hormiga(null);
-        Enemigo arania = new Arania(null);
+        Enemigo hormiga = new Hormiga(null,camino);
+        Enemigo arania = new Arania(null,camino);
 
         pasarelaInicial.agregarEnemigo(hormiga);
         pasarelaInicial.agregarEnemigo(arania);
         
-        pasarelaInicial.avanzarTurno(camino);
+        pasarelaInicial.avanzarTurno();
 
         assertTrue(pasarelaIntermedia.verificarSiEstaElEnemigo(hormiga));
         assertTrue(pasarelaFinal.verificarSiEstaElEnemigo(arania));
@@ -248,8 +248,8 @@ public class Tests {
         Jugador jugador = new Jugador();
         Turno turno = new Turno(new LinkedList<>(Arrays.asList(new Pasarela(0,0))), jugador);
         Meta meta = new Meta(0,0);
-        meta.agregarEnemigo(new Arania(jugador));
-        assertAll(() -> meta.avanzarTurno(null)); //Meta realmente no requiere de camino
+        meta.agregarEnemigo(new Arania(jugador,null));
+        assertAll(() -> meta.avanzarTurno()); //Meta realmente no requiere de camino
         assertThrows(GanarPartidaError.class, () -> turno.avanzarTurno(PRUEBA_SIN_ENEMIGOS));
     }
 
@@ -258,10 +258,10 @@ public class Tests {
         Jugador jugador = new Jugador();
         Meta meta = new Meta(0,0);
         for (int i = 0; i < 9; i++){
-            meta.agregarEnemigo(new Arania(jugador));
+            meta.agregarEnemigo(new Arania(jugador,null));
         }
-        assertAll(() -> meta.avanzarTurno(null));
-        meta.agregarEnemigo(new Arania(jugador));
-        assertThrows(PerderPartidaError.class, () -> meta.avanzarTurno(null));
+        assertAll(() -> meta.avanzarTurno());
+        meta.agregarEnemigo(new Arania(jugador,null));
+        assertThrows(PerderPartidaError.class, () -> meta.avanzarTurno());
     }
 }

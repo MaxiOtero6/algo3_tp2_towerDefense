@@ -14,11 +14,11 @@ public class Meta extends Pasarela{
     }
 
     @Override
-    public void avanzarTurno(Camino camino){
+    public void avanzarTurno(){
         for (Enemigo enemigo : enemigos){
             this.daniarJugador(enemigo);
         }
-        eliminarEnemigos(camino);
+        eliminarEnemigos();
     }
 
     public void daniarJugador(Enemigo enemigo){
@@ -26,7 +26,7 @@ public class Meta extends Pasarela{
     }
 
     @Override
-    protected void eliminarEnemigos(Camino camino)
+    protected void eliminarEnemigos()
     {
         while (enemigos.size() != 0) {
             enemigos.removeFirst();

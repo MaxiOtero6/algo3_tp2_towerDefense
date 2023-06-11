@@ -16,7 +16,7 @@ public class CreadorEnemigos {
                                         );
     
     /** 11 >= numeroTurno >= 0 */
-    public static List<Enemigo> crearEnemigos(int numeroTurno, Jugador jugador)
+    public static List<Enemigo> crearEnemigos(int numeroTurno, Jugador jugador, Camino camino)
     {
         List<Enemigo> enemigosTurno = new LinkedList<>();
 
@@ -35,22 +35,22 @@ public class CreadorEnemigos {
 
                     for (int i = 0; i < cantidadHormigas; i++) 
                     {
-                        enemigosTurno.add(new Hormiga(jugador));
+                        enemigosTurno.add(new Hormiga(jugador, camino));
                     }
                         
                     for (int i = 0; i < cantidadAranias; i++) 
                     {
-                        enemigosTurno.add(new Arania(jugador));
+                        enemigosTurno.add(new Arania(jugador, camino));
                     }
                     
                     // for (int i = 0; i < cantidadTopos; i++) 
                     // {
-                    //     enemigosTurno.add(new Topo(jugador));
+                    //     enemigosTurno.add(new Topo(jugador, camino));
                     // }
                     
                     // for (int i = 0; i < cantidadLechuzas; i++) 
                     // {
-                    //     enemigosTurno.add(new Lechuza(jugador));
+                    //     enemigosTurno.add(new Lechuza(jugador, camino));
                     // }
                     
                 }

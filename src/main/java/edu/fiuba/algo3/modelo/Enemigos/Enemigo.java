@@ -17,14 +17,16 @@ public abstract class Enemigo {
     private Subterraneo subterraneo;
     private double multiplicadorVelocidad;
     private Volador volador;
+    private Camino camino;
 
-    public Enemigo(int energia, int danio, int creditos, int velocidad, Jugador jugador){
+    public Enemigo(int energia, int danio, int creditos, int velocidad, Jugador jugador, Camino camino){
         this.energia = energia;
         this.danio = danio;
         this.creditos = creditos;
         this.velocidad = velocidad;
         this.posicion = null;
         this.jugador = jugador;
+        this.camino = camino;
         this.subterraneo = new NoEsSubterraneo();
         this.multiplicadorVelocidad = 1;
         this.volador = new NoEsVolador();
@@ -91,14 +93,14 @@ public abstract class Enemigo {
         this.posicion = posicion;
     }
 
-    public void mover(Camino camino)
+    public void mover()
     {
         if (this.posicion != null)
         {
             if (this.estaVivo())
             {
                 int velocidadActual = this.obtenerVelocidad();
-                camino.moverEnemigo((int)(velocidadActual * multiplicadorVelocidad), posicion, this);
+                this.camino.moverEnemigo((int)(velocidadActual * multiplicadorVelocidad), posicion, this);
                 this.multiplicadorVelocidad = 1;
             }
         }

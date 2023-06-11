@@ -9,9 +9,9 @@ public class Topo extends Enemigo {
     private int movimientosRealizados = 0;
     private static int toposMuertos = 0;
 
-    public Topo(Jugador jugador)
+    public Topo(Jugador jugador, Camino camino)
     {
-        super(1,2,0,1, jugador);
+        super(1,2,0,1, jugador, camino);
         this.setSubterraneo(new EsSubterraneo());
     }
 

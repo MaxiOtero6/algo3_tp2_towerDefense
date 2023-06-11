@@ -6,9 +6,9 @@ import edu.fiuba.algo3.modelo.Camino;
 public class Hormiga extends Enemigo {
     
     private static int hormigasMuertas = 0;
-    public Hormiga(Jugador jugador)
+    public Hormiga(Jugador jugador, Camino camino)
     {
-        super(1,1,1,1, jugador);
+        super(1,1,1,1, jugador, camino);
         if (hormigasMuertas >= 10) {this.creditos = 2;}
     }
 
