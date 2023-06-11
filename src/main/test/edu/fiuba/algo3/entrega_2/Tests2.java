@@ -89,7 +89,7 @@ public class Tests2 {
         }
 
         for (int i = 0; i < enemigosPorTurno.length; i++) {
-            enemigos.add(new LinkedList<>(CreadorEnemigos.crearEnemigos(i, null, null)));
+            enemigos.add(new LinkedList<>(CreadorEnemigos.crearEnemigos(i, null)));
         }
 
         assertEquals(enemigosEsperados, enemigos);

@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Defensas.ObjetivoTorre;
 import edu.fiuba.algo3.modelo.Defensas.Torres.*;
 import edu.fiuba.algo3.modelo.Enemigos.*;
 import edu.fiuba.algo3.modelo.Errores.CreditosInsuficientesError;
@@ -130,11 +131,11 @@ public class Tests {
         Enemigo enemigoEsperado = new Hormiga(null);
         enemigoEsperado.setearPosicion(new Posicion(1, 1));
         enemigos.add(enemigoEsperado);
+        Posicion posicionTorre = new Posicion(2, 2);
+        int rangoTorre = 3;
 
-        Torre torre = new TorreBlanca();
-        torre.setearPosicion(new Posicion(2,2));
-
-        Enemigo enemigoObtenido = torre.hallarEnemigoMasCercano(enemigos);
+        ObjetivoTorre objetivo = new ObjetivoTorre();
+        Enemigo enemigoObtenido = objetivo.hallarObjetivo(posicionTorre, enemigos, rangoTorre);
 
         assertEquals(enemigoEsperado, enemigoObtenido);
     }
@@ -144,18 +145,15 @@ public class Tests {
     {
         LinkedList<Enemigo> enemigos = new LinkedList<Enemigo>();
         Enemigo enemigo1 = new Hormiga(null);
-        enemigo1.setearPosicion(new Posicion(10,10));
+        enemigo1.setearPosicion(new Posicion(0,0));
         enemigos.add(enemigo1);
-        Enemigo enemigo2 = new Hormiga(null);
-        enemigo2.setearPosicion(new Posicion(11, 11));
-        enemigos.add(enemigo2);
-
-        Torre torre = new TorreBlanca();
-        torre.setearPosicion(new Posicion(2,2));
-
         Enemigo enemigoEsperado = new NoEnemigo();
+        enemigos.add(enemigoEsperado);
+        Posicion posicionTorre = new Posicion(11, 11);
+        int rangoTorre = 3;
 
-        Enemigo enemigoObtenido = torre.hallarEnemigoMasCercano(enemigos);
+        ObjetivoTorre objetivo = new ObjetivoTorre();
+        Enemigo enemigoObtenido = objetivo.hallarObjetivo(posicionTorre, enemigos, rangoTorre);
 
         assertEquals(enemigoEsperado, enemigoObtenido);
     }
