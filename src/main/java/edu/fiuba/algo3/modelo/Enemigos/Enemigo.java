@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Enemigos;
 import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Enemigos.Volador.*;
 
 public abstract class Enemigo {
     protected int energia;
@@ -14,6 +15,7 @@ public abstract class Enemigo {
     private Jugador jugador;
     private boolean subterraneo;
     private double multiplicadorVelocidad;
+    private Volador volador;
 
     public Enemigo(int energia, int danio, int creditos, int velocidad, boolean subterraneo, Jugador jugador){
         this.energia = energia;
@@ -24,6 +26,17 @@ public abstract class Enemigo {
         this.jugador = jugador;
         this.subterraneo = subterraneo;
         this.multiplicadorVelocidad = 1;
+        this.volador = new NoEsVolador();
+    }
+
+    public void setVolador(Volador volador)
+    {
+        this.volador = volador;
+    }
+
+    public boolean volador()
+    {
+        return this.volador.volador();
     }
 
     public void otorgarCreditos()
@@ -79,7 +92,7 @@ public abstract class Enemigo {
             if (this.estaVivo())
             {
                 int velocidadActual = this.obtenerVelocidad();
-                camino.moverEnemigo(velocidadActual, posicion, this);
+                camino.moverEnemigo((int)(velocidadActual * multiplicadorVelocidad), posicion, this);
                 this.multiplicadorVelocidad = 1;
             }
         }
