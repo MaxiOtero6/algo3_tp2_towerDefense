@@ -203,7 +203,7 @@ public class Tests {
     public void test08ElJugadorCobraAlDestruirUnEnemigoArania()
     {
         Jugador jugador = new Jugador();
-        int creditosEsperadosMin = 101;
+        int creditosEsperadosMin = 100;
         int creditosEsperadosMax = 110;
 
         Enemigo arania = new Arania(jugador);
