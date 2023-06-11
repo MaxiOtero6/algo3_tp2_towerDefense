@@ -4,6 +4,9 @@ import java.util.List;
 
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Defensas.Salud.Destruida;
+import edu.fiuba.algo3.modelo.Defensas.Salud.Operativa;
+import edu.fiuba.algo3.modelo.Defensas.Salud.Salud;
 import edu.fiuba.algo3.modelo.Enemigos.*;
 
 public abstract class Defensa {
@@ -11,10 +14,22 @@ public abstract class Defensa {
     private int coste;
     protected Posicion posicion;
     protected List<Enemigo> enemigos;
+    private Salud salud;
 
     public Defensa(int coste)
     {
         this.coste = coste;
+        this.salud = new Operativa();
+    }
+
+    public boolean estaDestruida()
+    {
+        return this.salud.salud();
+    }
+
+    public void destruir()
+    {
+        this.salud = new Destruida();
     }
 
     public abstract void avanzarTurno();

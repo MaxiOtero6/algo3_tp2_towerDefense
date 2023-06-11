@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.Defensas;
+package edu.fiuba.algo3.modelo.Defensas.Objetivos;
 
 import java.util.Arrays;
 import java.util.List;

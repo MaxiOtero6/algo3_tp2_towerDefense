@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import edu.fiuba.algo3.modelo.Defensas.Defensa;
-import edu.fiuba.algo3.modelo.Defensas.ObjetivoTorre;
+import edu.fiuba.algo3.modelo.Defensas.Objetivos.ObjetivoTorre;
 import edu.fiuba.algo3.modelo.Enemigos.*;
 
 public class Torre extends Defensa{
