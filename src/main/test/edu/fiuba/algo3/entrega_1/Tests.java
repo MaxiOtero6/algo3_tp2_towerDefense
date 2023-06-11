@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.Defensas.ObjetivoTorre;
+import edu.fiuba.algo3.modelo.Defensas.Objetivos.ObjetivoTorre;
 import edu.fiuba.algo3.modelo.Defensas.Torres.*;
 import edu.fiuba.algo3.modelo.Enemigos.*;
 import edu.fiuba.algo3.modelo.Errores.CreditosInsuficientesError;
