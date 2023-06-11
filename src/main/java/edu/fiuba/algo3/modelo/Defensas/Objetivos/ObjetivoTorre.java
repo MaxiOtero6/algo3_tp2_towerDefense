@@ -11,7 +11,7 @@ public class ObjetivoTorre {
     public Enemigo hallarObjetivo(Posicion posicionTorre, List<Enemigo> enemigos, int rango)
     {
         Enemigo enemigoMasCercano = enemigos.stream()
-            .filter(enemigo -> enemigo.esVisible())
+            .filter(enemigo -> !enemigo.subterraneo())
             .filter(enemigo -> enemigo.estaVivo())
             .filter(enemigo -> enemigo.calcDistancia(posicionTorre) <= rango)
             .min(Comparator.comparingDouble(enemigo -> enemigo.calcDistancia(posicionTorre)))

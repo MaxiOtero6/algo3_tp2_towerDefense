@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.Enemigos;
 
 import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.Enemigos.Subterraneo.EsSubterraneo;
 
 public class Topo extends Enemigo {
     
@@ -9,7 +10,8 @@ public class Topo extends Enemigo {
 
     public Topo(Jugador jugador)
     {
-        super(1,2,0,1, true, jugador);
+        super(1,2,0,1, jugador);
+        this.setSubterraneo(new EsSubterraneo());
     }
 
     public void atacar()

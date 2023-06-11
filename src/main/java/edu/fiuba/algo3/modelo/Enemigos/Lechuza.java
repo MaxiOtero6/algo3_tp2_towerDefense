@@ -6,7 +6,7 @@ import edu.fiuba.algo3.modelo.Enemigos.Volador.EsVolador;
 public class Lechuza extends Enemigo {
     
     public Lechuza(Jugador jugador) {
-        super(5,0,0,5, true, jugador);
+        super(5,0,0,5, jugador);
         this.setVolador(new EsVolador());
     }
 

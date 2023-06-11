@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Enemigos;
 import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Enemigos.Subterraneo.*;
 import edu.fiuba.algo3.modelo.Enemigos.Volador.*;
 
 public abstract class Enemigo {
@@ -13,20 +14,30 @@ public abstract class Enemigo {
     protected static int enemigosMuertos = 0;
     private Posicion posicion;
     private Jugador jugador;
-    private boolean subterraneo;
+    private Subterraneo subterraneo;
     private double multiplicadorVelocidad;
     private Volador volador;
 
-    public Enemigo(int energia, int danio, int creditos, int velocidad, boolean subterraneo, Jugador jugador){
+    public Enemigo(int energia, int danio, int creditos, int velocidad, Jugador jugador){
         this.energia = energia;
         this.danio = danio;
         this.creditos = creditos;
         this.velocidad = velocidad;
         this.posicion = null;
         this.jugador = jugador;
-        this.subterraneo = subterraneo;
+        this.subterraneo = new NoEsSubterraneo();
         this.multiplicadorVelocidad = 1;
         this.volador = new NoEsVolador();
+    }
+
+    public void setSubterraneo(Subterraneo subterraneo)
+    {
+        this.subterraneo = subterraneo;
+    }
+
+    public boolean subterraneo()
+    {
+        return this.subterraneo.subterraneo();
     }
 
     public void setVolador(Volador volador)
@@ -61,11 +72,6 @@ public abstract class Enemigo {
     public boolean estaVivo()
     {
         return this.energia > 0;
-    }
-
-    public boolean esVisible()
-    {
-        return this.subterraneo == false;
     }
 
     public abstract void morir(); 

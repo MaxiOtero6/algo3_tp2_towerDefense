@@ -9,7 +9,7 @@ public class Arania extends Enemigo {
     private static int araniasMuertas = 0;
     public Arania(Jugador jugador)
     {
-        super(2,2,0,2, false, jugador);
+        super(2,2,0,2, jugador);
         this.creditos = randCreditos();
     }
 
