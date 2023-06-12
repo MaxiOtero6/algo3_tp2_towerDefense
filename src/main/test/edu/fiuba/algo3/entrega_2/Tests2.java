@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 
+import edu.fiuba.algo3.modelo.*;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -13,10 +14,6 @@ import com.fasterxml.jackson.databind.*;
 import edu.fiuba.algo3.modelo.Parser.CreadorEnemigos;
 import edu.fiuba.algo3.modelo.Parser.CreadorMapa;
 import edu.fiuba.algo3.modelo.Parser.ParserJSON;
-import edu.fiuba.algo3.modelo.Camino;
-import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.Partida;
-import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorrePlateada;
 import edu.fiuba.algo3.modelo.Enemigos.*;
@@ -32,6 +29,11 @@ import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
+import static org.mockito.Mockito.*;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @TestMethodOrder(MethodOrderer.Alphanumeric.class)
 public class Tests2 {
@@ -192,22 +194,13 @@ public class Tests2 {
 
     @Test
     public void test020VerificacionConsoleLog()
-    {   
-        // System.out.flush();
-        // ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        // PrintStream ps = new PrintStream(baos);
+    {
+        Logger mockedLogger = mock(Logger.class);
+        SingleLogger.inicializar(mockedLogger);
 
-        // PrintStream originalOut = System.out;
-        // System.setOut(ps);
+        Jugador jugador = new Jugador();
+        jugador.recibirDanio(5);
 
-        // //Log a guardar
-        // Jugador jugador = Jugador.obtenerJugador();
-        // jugador.restaurarVida();
-
-        // System.setOut(originalOut);
-
-        // String consoleOutput = baos.toString();
-        // assertTrue(consoleOutput.contains("Se restauro la vida del jugador"));
-        
+        verify(mockedLogger, times(1)).info("Enemigo llega a la meta, produce 5 daño al jugador");
     }
 }

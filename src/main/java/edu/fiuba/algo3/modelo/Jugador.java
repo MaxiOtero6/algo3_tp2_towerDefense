@@ -42,6 +42,7 @@ public class Jugador {
         if (vida <= 0){
             throw new PerderPartidaError();
         }
+        SingleLogger.obtenerLogger().imprimirLog(String.format("Enemigo llega a la meta, produce%2d daño al jugador", danio));
     }
 
     @Override

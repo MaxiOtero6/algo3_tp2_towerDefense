@@ -11,9 +11,8 @@ import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
 import edu.fiuba.algo3.modelo.Parcelas.*;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.*;
 import edu.fiuba.algo3.modelo.Parcelas.Tierra.*;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.apache.logging.log4j.LogManager;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,6 +24,11 @@ import java.util.List;
 public class Tests {
 
     private final int PRUEBA_SIN_ENEMIGOS = -1;
+
+    @BeforeEach
+    public void setup(){
+        SingleLogger.inicializar(LogManager.getLogger());
+    }
 
     @Test
     public void test01JugadorSeCreaCon100CreditosY20Vida() {

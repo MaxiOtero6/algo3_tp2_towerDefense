@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
 import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Pasarela;
+import org.apache.logging.log4j.LogManager;
 
 public class Partida {
 
@@ -19,6 +20,7 @@ public class Partida {
         this.jugador = new Jugador();
         this.mapa = new Mapa(parcelas);
         this.turno = new Turno(camino, jugador);
+        SingleLogger.inicializar(LogManager.getLogger());
     }
 
     public Partida(List<List<Parcela>> parcelas, List<Pasarela> camino, Jugador jugador) 
