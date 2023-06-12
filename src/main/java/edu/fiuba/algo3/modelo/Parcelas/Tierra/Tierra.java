@@ -1,51 +1,37 @@
 package edu.fiuba.algo3.modelo.Parcelas.Tierra;
 
-import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Defensas.Torres.*;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
-import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
-import edu.fiuba.algo3.modelo.Errores.AgregarEnemigoError;
-import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
+import edu.fiuba.algo3.modelo.Errores.DefensaEnTerrenoErroneoError;
 
-public class Tierra implements Parcela 
+public class Tierra extends Parcela 
 {
     private Torre torre;
     private Construible construible;
-    private Posicion posicion;
     
     public Tierra(int coordenadaX, int coordenadaY)
     {
-        this.posicion = new Posicion(coordenadaX, coordenadaY);
+        super(coordenadaX, coordenadaY);
         this.construible = new EsConstruible();
     }
 
     @Override
-    public void construir(Torre torre) throws TerrenoDeConstruccionInvalidoError
+    public void construir(Defensa defensa)
     {
-        this.torre = construible.construir(torre, this.posicion);
-        this.setConstruible(new NoEsConstruible());
+        if (defensa instanceof Torre)
+        {
+            this.torre = (Torre)construible.construir(defensa, this.posicion);
+            this.setConstruible(new NoEsConstruible());
+        }
+        else
+        {
+            throw new DefensaEnTerrenoErroneoError();
+        }
     }
 
     public void setConstruible(Construible construible)
     {
         this.construible = construible;
-    }
-
-    @Override
-    public void agregarEnemigo(Enemigo enemigo) throws AgregarEnemigoError
-    {
-        throw new AgregarEnemigoError();
-    }
-
-    @Override
-    public boolean equals(Object o)
-    {
-        if (o == this) {return true;}
-        if (o instanceof Tierra)
-        {
-            Tierra tierra = (Tierra)o;
-            return (this.posicion.equals(tierra.posicion));
-        }
-        return false;
     }
 }

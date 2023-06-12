@@ -6,7 +6,7 @@ import java.util.List;
 import edu.fiuba.algo3.modelo.Defensas.Torres.Torre;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
-import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Pasarela;
+import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 import edu.fiuba.algo3.modelo.Parser.CreadorEnemigos;
 
 public class Turno {
@@ -17,7 +17,7 @@ public class Turno {
     private Jugador jugador;
 
 
-    public Turno(List<Pasarela> camino, Jugador jugador)
+    public Turno(List<Parcela> camino, Jugador jugador)
     {
         this.jugador = jugador;
         this.camino = new Camino(camino);

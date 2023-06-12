@@ -22,7 +22,7 @@ public class CreadorMapa {
     private static int coordenadaXMeta;
     private static int coordenadaYMeta;
 
-    public static List<List<Parcela>> crearMapa(List<Pasarela> camino)
+    public static List<List<Parcela>> crearMapa(List<Parcela> camino)
     {
         List<List<Parcela>> parcelas = new LinkedList<>();
         for (int i = 1; i - 1 < 15; i++) {
@@ -81,6 +81,17 @@ public class CreadorMapa {
                 camino.set(0, new Largada(coordenadaXLargada, coordenadaYLargada));
                 camino.set(camino.size() - 1, new Meta(coordenadaXMeta, coordenadaYMeta));
             }
+
+            CreadorCaminoL.setMapa(parcelas);
+            CreadorCaminoL.setXLargada(coordenadaXLargada);
+            CreadorCaminoL.setYLargada(coordenadaYLargada);
+            CreadorCaminoL.setXMeta(coordenadaXMeta);
+            CreadorCaminoL.setYMeta(coordenadaYMeta);
+
+            CreadorCaminoH.setMapa(parcelas);
+            CreadorCaminoH.setXMeta(coordenadaXMeta);
+            CreadorCaminoH.setYMeta(coordenadaYMeta);
+
             return (parcelas);
         }
         catch (NullPointerException e)

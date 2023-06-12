@@ -15,7 +15,7 @@ public class Partida {
     private Mapa mapa;
     private Jugador jugador;
 
-    public Partida(List<List<Parcela>> parcelas, List<Pasarela> camino) 
+    public Partida(List<List<Parcela>> parcelas, List<Parcela> camino) 
     {
         this.jugador = new Jugador();
         this.mapa = new Mapa(parcelas);
@@ -23,7 +23,7 @@ public class Partida {
         SingleLogger.inicializar(LogManager.getLogger());
     }
 
-    public Partida(List<List<Parcela>> parcelas, List<Pasarela> camino, Jugador jugador) 
+    public Partida(List<List<Parcela>> parcelas, List<Parcela> camino, Jugador jugador) 
     {
         this.jugador = jugador;
         this.mapa = new Mapa(parcelas);
