@@ -81,6 +81,17 @@ public class CreadorMapa {
                 camino.set(0, new Largada(coordenadaXLargada, coordenadaYLargada));
                 camino.set(camino.size() - 1, new Meta(coordenadaXMeta, coordenadaYMeta));
             }
+
+            CreadorCaminoL.setMapa(parcelas);
+            CreadorCaminoL.setXLargada(coordenadaXLargada);
+            CreadorCaminoL.setYLargada(coordenadaYLargada);
+            CreadorCaminoL.setXMeta(coordenadaXMeta);
+            CreadorCaminoL.setYMeta(coordenadaYMeta);
+
+            CreadorCaminoH.setMapa(parcelas);
+            CreadorCaminoH.setXMeta(coordenadaXMeta);
+            CreadorCaminoH.setYMeta(coordenadaYMeta);
+
             return (parcelas);
         }
         catch (NullPointerException e)

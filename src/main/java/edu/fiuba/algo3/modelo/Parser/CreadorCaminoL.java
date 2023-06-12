@@ -43,6 +43,8 @@ public class CreadorCaminoL {
         int j = 0;
         List<Parcela> caminoL = new LinkedList<>();
 
+        caminoL.add(mapa.get(coordenadaYLargada + j).get(coordenadaXLargada + i));
+
         while ((coordenadaXLargada + i != coordenadaXMeta) && (coordenadaYLargada + j != coordenadaYMeta))
         {
             if (coordenadaXLargada < coordenadaXMeta) {i++;}

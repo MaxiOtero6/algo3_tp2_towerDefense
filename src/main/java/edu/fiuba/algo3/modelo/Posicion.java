@@ -40,4 +40,15 @@ public class Posicion {
         }
         return false;
     }
+
+    public int diferenciaEnX(int coordenadaX)
+    {
+        return (this.coordenadaX - coordenadaX);
+    }
+
+    public int diferenciaEnY(int coordenadaY)
+    {
+        return (this.coordenadaY - coordenadaY);
+    }
+
 }
