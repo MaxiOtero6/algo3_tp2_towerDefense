@@ -3,16 +3,17 @@ package edu.fiuba.algo3.modelo;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.*;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Errores.SpawnNoEnLargadaError;
 
 public class Camino {
-    private List<Pasarela> pasarelas;
+    private List<Parcela> parcelas;
 
-    public Camino(List<Pasarela> pasarelas)
+    public Camino(List<Parcela> parcelas)
     {
-        this.pasarelas = pasarelas;
+        this.parcelas = parcelas;
     }
     
     /* Busca la pasarela que requiere, al indice de la misma se suma la velocidad del
@@ -24,15 +25,15 @@ public class Camino {
     public void moverEnemigo(int velocidad, Posicion posicion, Enemigo enemigo)
     {
         int iterador = 0;
-        while (!pasarelas.get(iterador).compararPosicion(posicion) && iterador < pasarelas.size() - 1)
+        while (!parcelas.get(iterador).compararPosicion(posicion) && iterador < parcelas.size() - 1)
         {
             iterador++;
         }
         
         int indiceDestino = iterador + velocidad;
-        if (indiceDestino > pasarelas.size() - 1) { indiceDestino = pasarelas.size() - 1; }
+        if (indiceDestino > parcelas.size() - 1) { indiceDestino = parcelas.size() - 1; }
 
-        Pasarela pasarelaFinal = pasarelas.get(indiceDestino);
+        Parcela pasarelaFinal = parcelas.get(indiceDestino);
 
         pasarelaFinal.agregarEnemigo(enemigo);
     }
@@ -44,10 +45,10 @@ public class Camino {
      */
     public void moverEnemigos()
     {
-        int iterador = pasarelas.size() - 1;
+        int iterador = parcelas.size() - 1;
         while (iterador >= 0)
         {
-            pasarelas.get(iterador).avanzarTurno();
+            parcelas.get(iterador).avanzarTurno();
             iterador--;
         }
     }
@@ -56,7 +57,7 @@ public class Camino {
     {
         try
         {
-            (pasarelas.get(0)).aparecerEnemigos(enemigos);
+            (parcelas.get(0)).aparecerEnemigos(enemigos);
         }
         catch (SpawnNoEnLargadaError e)
         {

@@ -14,14 +14,14 @@ public class Partida {
     private Mapa mapa;
     private Jugador jugador;
 
-    public Partida(List<List<Parcela>> parcelas, List<Pasarela> camino) 
+    public Partida(List<List<Parcela>> parcelas, List<Parcela> camino) 
     {
         this.jugador = new Jugador();
         this.mapa = new Mapa(parcelas);
         this.turno = new Turno(camino, jugador);
     }
 
-    public Partida(List<List<Parcela>> parcelas, List<Pasarela> camino, Jugador jugador) 
+    public Partida(List<List<Parcela>> parcelas, List<Parcela> camino, Jugador jugador) 
     {
         this.jugador = jugador;
         this.mapa = new Mapa(parcelas);

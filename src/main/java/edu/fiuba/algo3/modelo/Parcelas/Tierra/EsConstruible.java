@@ -1,15 +1,16 @@
 package edu.fiuba.algo3.modelo.Parcelas.Tierra;
 
 import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Defensas.Torres.*;
 import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
 
 public class EsConstruible implements Construible{
     
     @Override
-    public Torre construir(Torre torre, Posicion posicion) throws TerrenoDeConstruccionInvalidoError
+    public Defensa construir(Defensa defensa, Posicion posicion)
     {
-        torre.setearPosicion(posicion);
-        return torre;
+        defensa.setearPosicion(posicion);
+        return defensa;
     }
 }

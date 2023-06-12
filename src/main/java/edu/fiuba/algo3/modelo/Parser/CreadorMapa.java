@@ -22,7 +22,7 @@ public class CreadorMapa {
     private static int coordenadaXMeta;
     private static int coordenadaYMeta;
 
-    public static List<List<Parcela>> crearMapa(List<Pasarela> camino)
+    public static List<List<Parcela>> crearMapa(List<Parcela> camino)
     {
         List<List<Parcela>> parcelas = new LinkedList<>();
         for (int i = 1; i - 1 < 15; i++) {

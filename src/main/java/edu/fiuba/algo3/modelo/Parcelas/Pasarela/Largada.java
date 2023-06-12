@@ -4,9 +4,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
+import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
+import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 
-public class Largada extends Pasarela {
+public class Largada extends Parcela {
     
     public Largada(int coordenadaX, int coordenadaY)
     {
@@ -23,4 +26,9 @@ public class Largada extends Pasarela {
         }
     }
 
+    @Override
+    public void construir(Defensa defensa)
+    {
+        throw new TerrenoDeConstruccionInvalidoError();
+    }
 }
