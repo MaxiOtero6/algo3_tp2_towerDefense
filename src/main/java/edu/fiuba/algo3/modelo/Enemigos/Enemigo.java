@@ -141,7 +141,7 @@ public abstract class Enemigo {
 
     public double calcDistancia(Posicion posicion)
     {
-        return Posicion.calcDistancia(posicion, this.posicion);
+        return this.posicion.calcDistancia(posicion);
     }
 
     public void ralentizar()

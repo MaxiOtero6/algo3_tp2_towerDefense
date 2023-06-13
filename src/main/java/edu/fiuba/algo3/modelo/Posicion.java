@@ -20,12 +20,12 @@ public class Posicion {
         return this.coordenadaY;
     }
 
-    public static double calcDistancia(Posicion pos1, Posicion pos2)
+    public double calcDistancia(Posicion pos)
     {
         return 
         Math.sqrt(
-            Math.pow(Math.abs(pos2.coordenadaX - pos1.coordenadaX), 2) 
-            + Math.pow(Math.abs(pos2.coordenadaY - pos1.coordenadaY), 2)
+            Math.pow(Math.abs(pos.coordenadaX - this.coordenadaX), 2) 
+            + Math.pow(Math.abs(pos.coordenadaY - this.coordenadaY), 2)
         );
     }
     
