@@ -13,7 +13,7 @@ public class Hormiga extends Enemigo {
     }
 
     @Override
-    public void morir()
+    protected void morir()
     {
         enemigosMuertos++;
         hormigasMuertas++;

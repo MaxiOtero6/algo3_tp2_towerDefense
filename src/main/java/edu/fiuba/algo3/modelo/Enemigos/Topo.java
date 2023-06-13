@@ -44,7 +44,7 @@ public class Topo extends Enemigo {
     }
 
     @Override
-    public void morir()
+    protected void morir()
     {
         toposMuertos++;
         enemigosMuertos++;

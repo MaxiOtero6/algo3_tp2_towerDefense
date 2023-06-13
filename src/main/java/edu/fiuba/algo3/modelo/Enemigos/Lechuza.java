@@ -11,10 +11,14 @@ public class Lechuza extends Enemigo {
     
     private static int lechuzasMuertas = 0;
 
+    public Lechuza(Jugador jugador, Camino camino) {
+        super(5,0,5,5, jugador, camino);
+        this.setVolador(new EsVolador());
+    }
+
     public Lechuza(Jugador jugador) {
         super(5,0,5,5, jugador, new Camino(CreadorCaminoL.crearCaminoL()));
         this.setVolador(new EsVolador());
-
     }
 
     @Override
@@ -24,7 +28,7 @@ public class Lechuza extends Enemigo {
     }
 
     @Override
-    public void morir() 
+    protected void morir() 
     {
         lechuzasMuertas++;
         enemigosMuertos++;
@@ -33,7 +37,7 @@ public class Lechuza extends Enemigo {
     @Override
     public void mover()
     {
-        if (this.tieneMitadDeVida()) {this.setCamino(new Camino(CreadorCaminoH.crearCaminoH(this.posicion)));}
+        if (this.tieneMitadDeVida()) {this.camino = new Camino(CreadorCaminoH.crearCaminoH(this.posicion));}
         super.mover();
     }
 }

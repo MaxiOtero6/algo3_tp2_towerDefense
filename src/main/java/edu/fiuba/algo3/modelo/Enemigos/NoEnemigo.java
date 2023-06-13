@@ -7,7 +7,7 @@ public class NoEnemigo extends Enemigo {
     }
 
     @Override
-    public void morir() {}
+    protected void morir() {}
 
     @Override
     public void recibirDanio(int danioRecibido, String tipoTorre){}

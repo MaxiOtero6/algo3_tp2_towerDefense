@@ -18,7 +18,7 @@ public abstract class Enemigo {
     private Subterraneo subterraneo;
     private double multiplicadorVelocidad;
     private Volador volador;
-    private Camino camino;
+    protected Camino camino;
 
     public Enemigo(int energia, int danio, int creditos, int velocidad, Jugador jugador, Camino camino){
         this.energia = energia;
@@ -78,7 +78,7 @@ public abstract class Enemigo {
             this.morir();
         }
         String tipoEnemigo = this.getClass().getSimpleName();
-       String coordenadas;
+        String coordenadas;
         try {
             coordenadas = posicion.imprimirPosicion();
         }catch (NullPointerException e){
@@ -93,17 +93,12 @@ public abstract class Enemigo {
         return (this.energia <= (this.energia/2));
     } 
 
-    public void setCamino(Camino camino)
-    {
-        this.camino = camino;
-    }
-
     public boolean estaVivo()
     {
         return this.energia > 0;
     }
 
-    public abstract void morir(); 
+    protected abstract void morir(); 
 
     public void setearPosicion(Posicion posicion)
     {

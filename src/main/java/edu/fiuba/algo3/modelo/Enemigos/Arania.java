@@ -20,7 +20,7 @@ public class Arania extends Enemigo {
     }
 
     @Override
-    public void morir()
+    protected void morir()
     {
         enemigosMuertos++;
         araniasMuertas++;
