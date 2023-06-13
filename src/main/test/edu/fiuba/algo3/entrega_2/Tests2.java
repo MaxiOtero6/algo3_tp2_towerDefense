@@ -134,7 +134,7 @@ public class Tests2 {
     {
         List<List<Parcela>> mapa;
         List<List<Parcela>> mapaEsperado = new LinkedList<>();
-        List<Pasarela> pasarelas = new LinkedList<>();
+        List<Parcela> pasarelas = new LinkedList<>();
         
         Parcela[][] filasMapa = {
             {new Rocoso(0,0),new Pasarela(1,0),new Tierra(2,0),new Tierra(3,0),new Tierra(4,0),new Tierra(5,0),new Tierra(6,0),new Tierra(7,0),new Tierra(8,0),new Tierra(9,0),new Rocoso(10,0),new Rocoso(11,0),new Rocoso(12,0),new Rocoso(13,0),new Rocoso(14,0)},
@@ -169,7 +169,7 @@ public class Tests2 {
     public void test18ElJugadorGanaLaPartidaSimulada()
     {
         Jugador jugador = new Jugador(1000000, 1000000);
-        List<Pasarela> camino = new LinkedList<>();
+        List<Parcela> camino = new LinkedList<>();
         Partida partida = new Partida(CreadorMapa.crearMapa(camino), camino, jugador);
         partida.construir(new TorrePlateada(), 0,1);
         partida.construir(new TorrePlateada(), 0,2);
@@ -187,7 +187,7 @@ public class Tests2 {
     @Test
     public void test19ElJugadorPierdeLaPartidaSimulada()
     {
-        List<Pasarela> camino = new LinkedList<>();
+        List<Parcela> camino = new LinkedList<>();
         Partida partida = new Partida(CreadorMapa.crearMapa(camino), camino);
         assertThrows(PerderPartidaError.class, () -> partida.iniciar());
     }

@@ -1,10 +1,13 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Defensas.Objetivos.ObjetivoTorre;
 import edu.fiuba.algo3.modelo.Defensas.Torres.*;
+import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
 import edu.fiuba.algo3.modelo.Enemigos.*;
 import edu.fiuba.algo3.modelo.Errores.CreditosInsuficientesError;
+import edu.fiuba.algo3.modelo.Errores.DefensaEnTerrenoErroneoError;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
 import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
 import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
@@ -90,39 +93,94 @@ public class Tests {
     }
 
     @Test
-    public void test04NoSePuedeConstruirSobreAlgunaPasarela()
+    public void test04NoSePuedeConstruirUnaTrampaSobreTierra()
+    {
+        Tierra tierra = new Tierra(0,0);
+        TrampaArenosa trampa = new TrampaArenosa();
+
+        assertThrows(DefensaEnTerrenoErroneoError.class,() -> tierra.construir(trampa));
+    }
+
+    @Test
+    public void test04NoSePuedeConstruirUnaTorreSobreAlgunaPasarela()
     {
         Pasarela pasarela = new Pasarela(0,0);
         Torre torre = new TorreBlanca();
 
-        assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> pasarela.construir(torre));
+        assertThrows(DefensaEnTerrenoErroneoError.class, () -> pasarela.construir(torre));
     }
 
     @Test
-    public void test04NoSePuedeConstruirSobreLaMeta()
+    public void test04NoSePuedeConstruirSobreUnaPasarelaConUnaTrampa()
     {
-        Pasarela pasarela = new Meta(0,0);
+        Pasarela pasarela = new Pasarela(0,0);
+        TrampaArenosa trampa = new TrampaArenosa();
+
+        assertDoesNotThrow(() -> pasarela.construir(trampa));
+        assertThrows(TerrenoDeConstruccionInvalidoError.class,() -> pasarela.construir(trampa));
+    }
+
+    @Test
+    public void test04SePuedeConstruirUnaTrampaSobreAlgunaPasarela()
+    {
+        Pasarela pasarela = new Pasarela(0,0);
+        Defensa trampa = new TrampaArenosa();
+
+        assertDoesNotThrow(() -> pasarela.construir(trampa));
+    }
+
+    @Test
+    public void test04NoSePuedeConstruirUnaTorreSobreLaMeta()
+    {
+        Meta pasarela = new Meta(0,0);
         Torre torre = new TorreBlanca();
 
         assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> pasarela.construir(torre));
     }
 
     @Test
-    public void test04NoSePuedeConstruirSobreLaLargada()
+    public void test04NoSePuedeConstruirUnaTrampaSobreLaMeta()
     {
-        Pasarela pasarela = new Largada(0,0);
+        Meta pasarela = new Meta(0,0);
+        TrampaArenosa trampa = new TrampaArenosa();
+
+        assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> pasarela.construir(trampa));
+    }
+
+    @Test
+    public void test04NoSePuedeConstruirUnaTorreSobreLaLargada()
+    {
+        Largada pasarela = new Largada(0,0);
         Torre torre = new TorreBlanca();
 
         assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> pasarela.construir(torre));
     }
 
     @Test
-    public void test04NoSePuedeConstruirSobreRocoso()
+    public void test04NoSePuedeConstruirUnaTrampaSobreLaLargada()
+    {
+        Largada pasarela = new Largada(0,0);
+        TrampaArenosa trampa = new TrampaArenosa();
+
+        assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> pasarela.construir(trampa));
+    }
+
+    @Test
+    public void test04NoSePuedeConstruirUnaTorreSobreRocoso()
     {
         Rocoso rocoso = new Rocoso(0,0);
         Torre torre = new TorreBlanca();
 
         assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> rocoso.construir(torre));
+    }
+
+    @Test
+    public void test04NoSePuedeConstruirUnaTrampaSobreRocoso()
+    {
+        Rocoso rocoso = new Rocoso(0,0);
+        TrampaArenosa trampa = new TrampaArenosa();
+
+        assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> rocoso.construir(trampa));
     }
 
     @Test
@@ -183,14 +241,18 @@ public class Tests {
     @Test
     public void test07LasUnidadesEnemigasSoloSeMuevenSobreLaParcelaAutorizada()
     {
-        Pasarela pasarela = new Pasarela(0, 0);
-        Enemigo hormiga = new Hormiga(null,null);
-        Rocoso rocoso = new Rocoso(1, 0);
-        Tierra tierra = new Tierra(2, 0);
+        Rocoso rocoso = new Rocoso(0, 0);
+        Tierra tierra = new Tierra(1,1);
+        Pasarela pasarela = new Pasarela(2,2);
+        Largada largada = new Largada(3,3);
+        Meta meta = new Meta(4,4);
 
-        assertDoesNotThrow(() -> pasarela.agregarEnemigo(hormiga));
-        assertThrows(Exception.class, () -> rocoso.agregarEnemigo(hormiga));
-        assertThrows(Exception.class, () -> tierra.agregarEnemigo(hormiga));
+        assertDoesNotThrow(() -> rocoso.agregarEnemigo(new NoEnemigo()));
+        assertDoesNotThrow(() -> tierra.agregarEnemigo(new NoEnemigo()));
+        assertDoesNotThrow(() -> pasarela.agregarEnemigo(new NoEnemigo()));
+        assertDoesNotThrow(() -> largada.agregarEnemigo(new NoEnemigo()));
+        assertDoesNotThrow(() -> meta.agregarEnemigo(new NoEnemigo()));
+
     }
 
     @Test
@@ -224,7 +286,7 @@ public class Tests {
         Pasarela pasarelaInicial = new Pasarela(0, 0);
         Pasarela pasarelaIntermedia = new Pasarela(1, 1);
         Pasarela pasarelaFinal = new Pasarela(2, 2);
-        List<Pasarela> pasarelas = new LinkedList<>(Arrays.asList(pasarelaInicial, pasarelaIntermedia, pasarelaFinal));
+        List<Parcela> pasarelas = new LinkedList<>(Arrays.asList(pasarelaInicial, pasarelaIntermedia, pasarelaFinal));
 
         Camino camino = new Camino(pasarelas);
 
