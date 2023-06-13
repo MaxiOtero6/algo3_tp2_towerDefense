@@ -67,7 +67,7 @@ public class JugadorTest {
     public void test04AmbosJugadoresNoSonIguales()
     {
         Jugador jugador1 = new Jugador();
-        Jugador jugador2 = new Jugador(22,101);
+        Jugador jugador2 = new Jugador(22,100);
         int jugador3 = 100;
         assertNotEquals(jugador1, jugador2);
         assertNotEquals(jugador1, jugador3);
