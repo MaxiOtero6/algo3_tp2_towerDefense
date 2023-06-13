@@ -33,9 +33,10 @@ public class Camino {
         int indiceDestino = iterador + velocidad;
         if (indiceDestino > parcelas.size() - 1) { indiceDestino = parcelas.size() - 1; }
 
-        Parcela pasarelaFinal = parcelas.get(indiceDestino);
+        Parcela parcelaFinal = parcelas.get(indiceDestino);
 
-        pasarelaFinal.agregarEnemigo(enemigo);
+        parcelaFinal.agregarEnemigo(enemigo);
+        parcelas.get(iterador).eliminarEnemigo(enemigo);
     }
 
     /** Itera desde la meta hacia la largada para evitar perder informacion

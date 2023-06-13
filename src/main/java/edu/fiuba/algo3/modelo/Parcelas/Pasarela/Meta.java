@@ -29,6 +29,13 @@ public class Meta extends Parcela{
     }
 
     @Override
+    public void eliminarEnemigo(Enemigo enemigo)
+    {
+        enemigo.atacar();
+        enemigos.remove(enemigo);
+    }
+
+    @Override
     protected void eliminarEnemigos()
     {
         while (enemigos.size() != 0) {

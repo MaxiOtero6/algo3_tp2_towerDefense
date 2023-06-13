@@ -43,6 +43,11 @@ public abstract class Parcela {
         }
     }
 
+    public void eliminarEnemigo(Enemigo enemigo)
+    {
+        enemigos.remove(enemigo);
+    }
+
     public boolean compararPosicion(Posicion posicion)
     {
         return this.posicion.equals(posicion);

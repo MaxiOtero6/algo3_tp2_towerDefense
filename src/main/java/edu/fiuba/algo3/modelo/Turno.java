@@ -27,7 +27,7 @@ public class Turno {
         this.enemigos = new LinkedList<>();
         this.torres = new LinkedList<>();
         this.trampas = new LinkedList<>();
-        ObjetivoLechuza.setTorres(torres);
+        //ObjetivoLechuza.setTorres(torres);
     }
 
     public void avanzarTurno(int numeroTurno) {
@@ -42,11 +42,20 @@ public class Turno {
             this.camino.aparecerEnemigos(enemigosTurno);
         }
 
+        avanzarDefensas();
+
+        comprobarCantidadEnemigos();
+    }
+
+    public void avanzarDefensas()
+    {
         for (Torre torre : torres) {
             torre.avanzarTurno();
         }
 
-        comprobarCantidadEnemigos();
+        for (TrampaArenosa trampa : trampas) {
+            trampa.avanzarTurno();
+        }
     }
 
     public void aniadirTorre(Torre torre)
@@ -57,7 +66,9 @@ public class Turno {
 
     private void avanzarEnemigos()
     {
-        this.camino.moverEnemigos();
+        for (Enemigo enemigo : enemigos) {
+            enemigo.mover();
+        }
     }
 
     private void comprobarCantidadEnemigos(){
