@@ -8,5 +8,9 @@ public class NoEnemigo extends Enemigo {
 
     @Override
     public void morir() {}
+
+    @Override
+
+    public void recibirDanio(int danioRecibido){}
     
 }
