@@ -115,7 +115,7 @@ public class Turno {
         if (o instanceof Turno)
         {
             Turno turno = (Turno)o;
-            return (this.enemigos.equals(turno.enemigos) && this.torres.equals(turno.torres));
+            return (this.enemigos.equals(turno.enemigos) && this.torres.equals(turno.torres) && this.trampas.equals(turno.trampas));
         }
         return false;
     }
