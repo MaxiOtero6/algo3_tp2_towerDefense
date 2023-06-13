@@ -176,15 +176,15 @@ public class Tests2 {
         Jugador jugador = new Jugador(1000000, 1000000);
         List<Parcela> camino = new LinkedList<>();
         Partida partida = new Partida(CreadorMapa.crearMapa(camino), camino, jugador);
-        partida.construir(new TorrePlateada(), 0,1);
-        partida.construir(new TorrePlateada(), 0,2);
-        partida.construir(new TorrePlateada(), 0,3);
-        partida.construir(new TorrePlateada(), 0,4);
-        partida.construir(new TorrePlateada(), 0,5);
-        partida.construir(new TorreBlanca(), 2,0);
-        partida.construir(new TorreBlanca(), 2,1);
-        partida.construir(new TorreBlanca(), 2,2);
-        partida.construir(new TorreBlanca(), 2,3);
+        partida.construirTorre(new TorrePlateada(), 0,1);
+        partida.construirTorre(new TorrePlateada(), 0,2);
+        partida.construirTorre(new TorrePlateada(), 0,3);
+        partida.construirTorre(new TorrePlateada(), 0,4);
+        partida.construirTorre(new TorrePlateada(), 0,5);
+        partida.construirTorre(new TorreBlanca(), 2,0);
+        partida.construirTorre(new TorreBlanca(), 2,1);
+        partida.construirTorre(new TorreBlanca(), 2,2);
+        partida.construirTorre(new TorreBlanca(), 2,3);
 
         assertThrows(GanarPartidaError.class, () -> partida.iniciar());
     }

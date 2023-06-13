@@ -43,7 +43,7 @@ public class Turno {
         }
 
         avanzarDefensas();
-
+        comprobarDefensas();
         comprobarCantidadEnemigos();
     }
 
@@ -64,6 +64,12 @@ public class Turno {
         torres.add(torre);
     }
 
+    public void aniadirTrampa(TrampaArenosa trampa)
+    {
+        trampa.setEnemigos(enemigos);
+        trampas.add(trampa);
+    }
+
     private void avanzarEnemigos()
     {
         for (Enemigo enemigo : enemigos) {
@@ -75,6 +81,21 @@ public class Turno {
         sacarMuertos();
         if (enemigos.size() == 0){
             throw new GanarPartidaError();
+        }
+    }
+
+    private void comprobarDefensas(){
+        sacarDefensasDestruidas();
+    }
+
+    private void sacarDefensasDestruidas()
+    {
+        for (Torre torre : torres) {
+            if (torre.estaDestruida()) {torres.remove(torre);}
+        }
+
+        for (TrampaArenosa trampa : trampas) {
+            if (trampa.estaDestruida()) {trampas.remove(trampa);}
         }
     }
 
