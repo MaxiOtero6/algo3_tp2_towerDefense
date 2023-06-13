@@ -4,7 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import edu.fiuba.algo3.modelo.Defensas.Torres.Torre;
+import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
+import edu.fiuba.algo3.modelo.Enemigos.Objetivos.ObjetivoLechuza;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 import edu.fiuba.algo3.modelo.Parser.CreadorEnemigos;
@@ -12,6 +14,7 @@ import edu.fiuba.algo3.modelo.Parser.CreadorEnemigos;
 public class Turno {
 
     private LinkedList<Torre> torres;
+    private LinkedList<TrampaArenosa> trampas;
     private LinkedList<Enemigo> enemigos;
     private Camino camino;
     private Jugador jugador;
@@ -23,6 +26,8 @@ public class Turno {
         this.camino = new Camino(camino);
         this.enemigos = new LinkedList<>();
         this.torres = new LinkedList<>();
+        this.trampas = new LinkedList<>();
+        ObjetivoLechuza.setTorres(torres);
     }
 
     public void avanzarTurno(int numeroTurno) {

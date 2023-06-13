@@ -17,6 +17,5 @@ public class Hormiga extends Enemigo {
     {
         enemigosMuertos++;
         hormigasMuertas++;
-        this.otorgarCreditos();
     }
 }

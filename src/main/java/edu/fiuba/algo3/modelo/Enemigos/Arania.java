@@ -24,6 +24,5 @@ public class Arania extends Enemigo {
     {
         enemigosMuertos++;
         araniasMuertas++;
-        this.otorgarCreditos();
     }
 }

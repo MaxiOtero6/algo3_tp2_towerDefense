@@ -7,12 +7,12 @@ import edu.fiuba.algo3.modelo.Enemigos.Subterraneo.*;
 import edu.fiuba.algo3.modelo.Enemigos.Volador.*;
 
 public abstract class Enemigo {
-    protected int energia;
+    private int energia;
     protected int danio;
     protected int creditos;
     protected int velocidad;
     protected static int enemigosMuertos = 0;
-    private Posicion posicion;
+    protected Posicion posicion;
     private Jugador jugador;
     private Subterraneo subterraneo;
     private double multiplicadorVelocidad;
@@ -52,7 +52,7 @@ public abstract class Enemigo {
         return this.volador.volador();
     }
 
-    public void otorgarCreditos()
+    private void otorgarCreditos()
     {
         this.jugador.agregarCreditos(this.creditos);
     }
@@ -67,8 +67,19 @@ public abstract class Enemigo {
         this.energia -= danioRecibido;
         if (!estaVivo())
         {
+            this.otorgarCreditos();
             this.morir();
         }
+    }
+
+    protected boolean tieneMitadDeVida()
+    {
+        return (this.energia <= (this.energia/2));
+    } 
+
+    public void setCamino(Camino camino)
+    {
+        this.camino = camino;
     }
 
     public boolean estaVivo()
@@ -77,16 +88,6 @@ public abstract class Enemigo {
     }
 
     public abstract void morir(); 
-
-    public int obtenerEnergia()
-    {
-        return this.energia;
-    }
-
-    public Posicion obtenerPosicion()
-    {
-        return this.posicion;
-    }
 
     public void setearPosicion(Posicion posicion)
     {
@@ -99,8 +100,7 @@ public abstract class Enemigo {
         {
             if (this.estaVivo())
             {
-                int velocidadActual = this.obtenerVelocidad();
-                this.camino.moverEnemigo((int)(velocidadActual * multiplicadorVelocidad), posicion, this);
+                this.camino.moverEnemigo((int)(this.velocidad * this.multiplicadorVelocidad), this.posicion, this);
                 this.multiplicadorVelocidad = 1;
             }
         }
@@ -126,11 +126,6 @@ public abstract class Enemigo {
     public double calcDistancia(Posicion posicion)
     {
         return Posicion.calcDistancia(posicion, this.posicion);
-    }
-
-    public int obtenerVelocidad()
-    {
-        return velocidad;
     }
 
     public void ralentizar()
