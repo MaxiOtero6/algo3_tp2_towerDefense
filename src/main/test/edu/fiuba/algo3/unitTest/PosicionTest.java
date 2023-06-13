@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.unitTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.Random;
 
@@ -8,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import edu.fiuba.algo3.modelo.Creditos;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.SingleLogger;
 
@@ -62,5 +64,24 @@ public class PosicionTest {
 
         int diferenciaCalculada = Math.abs(posicion1.diferenciaEnY(y2));
         assertEquals(diferenciaEsperada, diferenciaCalculada);
+    }
+
+    @Test
+    public void test04AmbosPosicionSonIguales()
+    {
+        Posicion posicion1 = new Posicion(0,0);
+        Posicion posicion2 = new Posicion(0,0);
+        assertEquals(posicion1, posicion2);
+        assertEquals(posicion1, posicion1);
+    }
+
+    @Test
+    public void test04AmbosPosicionNoSonIguales()
+    {
+        Posicion posicion1 = new Posicion(0,0);
+        Posicion posicion2 = new Posicion(1,1);
+        int posicion3 = 0;
+        assertNotEquals(posicion1, posicion2);
+        assertNotEquals(posicion1, posicion3);
     }
 }
