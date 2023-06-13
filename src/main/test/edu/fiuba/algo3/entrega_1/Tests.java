@@ -224,18 +224,17 @@ public class Tests {
     public void test06LasUnidadesEnemigasSonDaniadasAcordeAlAtaqueRecibido()
     {
         Jugador jugador = new Jugador();
+        Jugador jugadorEsperado = new Jugador(20, 101);
         Arania arania = new Arania(jugador,null);
         int danioDelAtaque = 1;
-        int energiaEsperadaArania = 1;
 
         Hormiga hormiga = new Hormiga(jugador,null);
-        int energiaEsperadaHormiga = 0;
 
         arania.recibirDanio(danioDelAtaque);
         hormiga.recibirDanio(danioDelAtaque);
 
-        assertEquals(arania.obtenerEnergia(), energiaEsperadaArania);
-        assertEquals(hormiga.obtenerEnergia(), energiaEsperadaHormiga);
+        //La hormiga debe haber muerto por lo cual le suma al jugador 1 creditos, mientras que la arania no
+        assertEquals(jugadorEsperado, jugador);
     }
 
     @Test
