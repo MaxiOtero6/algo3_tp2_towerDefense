@@ -30,6 +30,26 @@ public class Turno {
         ObjetivoLechuza.setTorres(torres);
     }
 
+    public Turno(Camino camino, Jugador jugador)
+    {
+        this.jugador = jugador;
+        this.camino = camino;
+        this.enemigos = new LinkedList<>();
+        this.torres = new LinkedList<>();
+        this.trampas = new LinkedList<>();
+        ObjetivoLechuza.setTorres(torres);
+    }
+
+    public Turno(Camino camino, Jugador jugador, LinkedList<Torre> torres, LinkedList<TrampaArenosa> trampas)
+    {
+        this.jugador = jugador;
+        this.camino = camino;
+        this.enemigos = new LinkedList<>();
+        this.torres = torres;
+        this.trampas = trampas;
+        ObjetivoLechuza.setTorres(torres);
+    }
+
     public void avanzarTurno(int numeroTurno) {
         avanzarEnemigos();
         comprobarDefensas();
