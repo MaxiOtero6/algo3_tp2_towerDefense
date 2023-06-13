@@ -12,9 +12,7 @@ public class SingleLogger{
         this.logger = logger;
     }
     public static void inicializar(Logger logger){
-        if (singleLogger == null){
-            singleLogger = new SingleLogger(logger);
-        }
+        singleLogger = new SingleLogger(logger);
     }
     public static SingleLogger obtenerLogger(){
         return singleLogger;

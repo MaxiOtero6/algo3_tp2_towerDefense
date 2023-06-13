@@ -45,6 +45,7 @@ public class Torre extends Defensa{
 
     public void atacar()
     {
-        objetivo.hallarObjetivo(this.posicion, this.enemigos, this.rango).recibirDanio(this.danio);
+        String tipoTorre = this.getClass().getSimpleName();
+        objetivo.hallarObjetivo(this.posicion, this.enemigos, this.rango).recibirDanio(this.danio, tipoTorre);
     }
 }
