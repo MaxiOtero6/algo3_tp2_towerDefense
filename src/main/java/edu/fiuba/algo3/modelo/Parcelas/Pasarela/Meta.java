@@ -17,30 +17,10 @@ public class Meta extends Parcela{
     }
 
     @Override
-    public void avanzarTurno(){
-        for (Enemigo enemigo : enemigos){
-            this.daniarJugador(enemigo);
-        }
-        eliminarEnemigos();
-    }
-
-    public void daniarJugador(Enemigo enemigo){
-        enemigo.atacar();
-    }
-
-    @Override
     public void eliminarEnemigo(Enemigo enemigo)
     {
         enemigo.atacar();
         enemigos.remove(enemigo);
-    }
-
-    @Override
-    protected void eliminarEnemigos()
-    {
-        while (enemigos.size() != 0) {
-            enemigos.removeFirst();
-        }
     }
 
     @Override

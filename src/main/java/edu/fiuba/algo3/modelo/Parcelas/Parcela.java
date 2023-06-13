@@ -31,18 +31,6 @@ public abstract class Parcela {
         this.enemigos.add(enemigo);
     }
 
-    protected void eliminarEnemigos()
-    {
-        while (enemigos.size() != 0) {
-            Enemigo enemigo = enemigos.getFirst();
-            if (enemigo.estaVivo())
-            {
-                enemigo.mover();
-            }
-            enemigos.removeFirst();
-        }
-    }
-
     public void eliminarEnemigo(Enemigo enemigo)
     {
         enemigos.remove(enemigo);
@@ -51,11 +39,6 @@ public abstract class Parcela {
     public boolean compararPosicion(Posicion posicion)
     {
         return this.posicion.equals(posicion);
-    }
-    
-    public void avanzarTurno()
-    {
-        eliminarEnemigos();
     }
 
     @Override

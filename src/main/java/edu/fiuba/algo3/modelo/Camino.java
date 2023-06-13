@@ -39,31 +39,9 @@ public class Camino {
         parcelas.get(iterador).eliminarEnemigo(enemigo);
     }
 
-    /** Itera desde la meta hacia la largada para evitar perder informacion
-     * @param velocidad
-     * @param posicion
-     * @param enemigo
-     */
-    public void moverEnemigos()
-    {
-        int iterador = parcelas.size() - 1;
-        while (iterador >= 0)
-        {
-            parcelas.get(iterador).avanzarTurno();
-            iterador--;
-        }
-    }
-
     public void aparecerEnemigos(List<Enemigo> enemigos)
     {
-        try
-        {
-            (parcelas.get(0)).aparecerEnemigos(enemigos);
-        }
-        catch (SpawnNoEnLargadaError e)
-        {
-            //Log
-        }
+        (parcelas.get(0)).aparecerEnemigos(enemigos);
     }
 
 }
