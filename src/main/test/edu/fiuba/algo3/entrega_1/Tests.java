@@ -230,8 +230,8 @@ public class Tests {
 
         Hormiga hormiga = new Hormiga(jugador,null);
 
-        arania.recibirDanio(danioDelAtaque);
-        hormiga.recibirDanio(danioDelAtaque);
+        arania.recibirDanio(danioDelAtaque, "Prueba");
+        hormiga.recibirDanio(danioDelAtaque, "Prueba");
 
         //La hormiga debe haber muerto por lo cual le suma al jugador 1 creditos, mientras que la arania no
         assertEquals(jugadorEsperado, jugador);
@@ -260,7 +260,7 @@ public class Tests {
         Jugador jugador = new Jugador();
         Jugador jugadorEsperado = new Jugador(20,101);
         Enemigo hormiga = new Hormiga(jugador,null);
-        hormiga.recibirDanio(1);
+        hormiga.recibirDanio(1, "Prueba");
         assertEquals(jugadorEsperado, jugador);
     }
 
@@ -272,7 +272,7 @@ public class Tests {
         int creditosEsperadosMax = 110;
 
         Enemigo arania = new Arania(jugador,null);
-        arania.recibirDanio(2);
+        arania.recibirDanio(2, "Prueba");
         assertTrue(jugador.obtenerCreditos() >= creditosEsperadosMin);
         assertTrue(jugador.obtenerCreditos() <= creditosEsperadosMax);
 

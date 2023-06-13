@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Enemigos.Subterraneo.*;
 import edu.fiuba.algo3.modelo.Enemigos.Volador.*;
+import edu.fiuba.algo3.modelo.SingleLogger;
 
 public abstract class Enemigo {
     private int energia;
@@ -59,10 +60,11 @@ public abstract class Enemigo {
 
     public void atacar()
     {
-        this.jugador.recibirDanio(this.danio);
+        String tipoEnemigo = this.getClass().getSimpleName();
+        this.jugador.recibirDanio(this.danio, tipoEnemigo);
     }
 
-    public void recibirDanio(int danioRecibido)
+    public void recibirDanio(int danioRecibido, String tipoTorre)
     {
         this.energia -= danioRecibido;
         if (!estaVivo())
@@ -70,6 +72,15 @@ public abstract class Enemigo {
             this.otorgarCreditos();
             this.morir();
         }
+        String tipoEnemigo = this.getClass().getSimpleName();
+       String coordenadas;
+        try {
+            coordenadas = posicion.imprimirPosicion();
+        }catch (NullPointerException e){
+            coordenadas = "null";
+    }
+        SingleLogger.obtenerLogger().imprimirLog(String.format(
+                "%s ataca a %s en la posicion %s", tipoTorre, tipoEnemigo, coordenadas));
     }
 
     protected boolean tieneMitadDeVida()

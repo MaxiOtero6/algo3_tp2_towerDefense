@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.IOException;
 
 import edu.fiuba.algo3.modelo.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -37,7 +38,11 @@ import org.apache.logging.log4j.Logger;
 
 @TestMethodOrder(MethodOrderer.Alphanumeric.class)
 public class Tests2 {
-    
+
+    @BeforeEach
+    public void setup(){
+        SingleLogger.inicializar(LogManager.getLogger());
+    }
     @Test
     public void test13ElFormatoDelJsonEnemigosEsValido()
     {
@@ -193,14 +198,14 @@ public class Tests2 {
     }
 
     @Test
-    public void test020VerificacionConsoleLog()
+    public void test20VerificacionConsoleLog()
     {
         Logger mockedLogger = mock(Logger.class);
         SingleLogger.inicializar(mockedLogger);
 
         Jugador jugador = new Jugador();
-        jugador.recibirDanio(5);
+        jugador.recibirDanio(5, "Arania");
 
-        verify(mockedLogger, times(1)).info("Enemigo llega a la meta, produce 5 daño al jugador");
+        verify(mockedLogger, times(1)).info("Arania llega a la meta, produce 5 de daño al jugador");
     }
 }

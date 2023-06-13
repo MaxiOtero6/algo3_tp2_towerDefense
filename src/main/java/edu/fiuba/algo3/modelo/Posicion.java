@@ -51,4 +51,8 @@ public class Posicion {
         return (this.coordenadaY - coordenadaY);
     }
 
+    public String imprimirPosicion(){
+        return String.format("(%d,%d)", coordenadaX, coordenadaY);
+    }
+
 }

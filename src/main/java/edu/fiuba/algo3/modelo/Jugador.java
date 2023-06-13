@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
+import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -36,13 +37,14 @@ public class Jugador {
         creditos.gastarCreditos(creditosAGastar);
     }
 
-    public void recibirDanio(int danio)
+    public void recibirDanio(int danio, String enemigo)
     {
         this.vida -= danio;
         if (vida <= 0){
             throw new PerderPartidaError();
         }
-        SingleLogger.obtenerLogger().imprimirLog(String.format("Enemigo llega a la meta, produce%2d daño al jugador", danio));
+        SingleLogger.obtenerLogger().imprimirLog(String.format(
+                "%s llega a la meta, produce %d de daño al jugador", enemigo, danio));
     }
 
     @Override
