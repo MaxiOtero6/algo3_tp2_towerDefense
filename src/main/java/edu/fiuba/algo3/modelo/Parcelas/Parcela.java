@@ -45,7 +45,7 @@ public abstract class Parcela {
     public boolean equals(Object o)
     {
         if (o == this) {return true;}
-        if (o instanceof Parcela)
+        if (o.getClass() == this.getClass())
         {
             Parcela parcela = (Parcela)o;
             return (this.posicion.equals(parcela.posicion));
