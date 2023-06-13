@@ -27,11 +27,12 @@ public class Turno {
         this.enemigos = new LinkedList<>();
         this.torres = new LinkedList<>();
         this.trampas = new LinkedList<>();
-        //ObjetivoLechuza.setTorres(torres);
+        ObjetivoLechuza.setTorres(torres);
     }
 
     public void avanzarTurno(int numeroTurno) {
         avanzarEnemigos();
+        comprobarDefensas();
         if (numeroTurno >= 0)
         {
             List<Enemigo> enemigosTurno = CreadorEnemigos.crearEnemigos(numeroTurno, this.jugador, this.camino);
@@ -41,9 +42,7 @@ public class Turno {
             }
             this.camino.aparecerEnemigos(enemigosTurno);
         }
-
         avanzarDefensas();
-        comprobarDefensas();
         comprobarCantidadEnemigos();
     }
 
