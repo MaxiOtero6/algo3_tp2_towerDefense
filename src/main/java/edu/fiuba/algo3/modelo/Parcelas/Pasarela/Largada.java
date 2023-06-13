@@ -3,7 +3,6 @@ package edu.fiuba.algo3.modelo.Parcelas.Pasarela;
 import java.util.LinkedList;
 import java.util.List;
 
-import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
