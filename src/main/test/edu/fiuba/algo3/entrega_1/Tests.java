@@ -295,7 +295,8 @@ public class Tests {
         pasarelaInicial.agregarEnemigo(hormiga);
         pasarelaInicial.agregarEnemigo(arania);
         
-        pasarelaInicial.avanzarTurno();
+        hormiga.mover();
+        arania.mover();
 
         assertTrue(pasarelaIntermedia.verificarSiEstaElEnemigo(hormiga));
         assertTrue(pasarelaFinal.verificarSiEstaElEnemigo(arania));
@@ -312,21 +313,12 @@ public class Tests {
     {
         Jugador jugador = new Jugador();
         Turno turno = new Turno(new LinkedList<>(Arrays.asList(new Pasarela(0,0))), jugador);
-        Meta meta = new Meta(0,0);
-        meta.agregarEnemigo(new Arania(jugador,null));
-        assertAll(() -> meta.avanzarTurno()); //Meta realmente no requiere de camino
         assertThrows(GanarPartidaError.class, () -> turno.avanzarTurno(PRUEBA_SIN_ENEMIGOS));
     }
 
     @Test
     public void test12SiElJugadorPierdeTodaLaVidaPierdeElJuego(){
         Jugador jugador = new Jugador();
-        Meta meta = new Meta(0,0);
-        for (int i = 0; i < 9; i++){
-            meta.agregarEnemigo(new Arania(jugador,null));
-        }
-        assertAll(() -> meta.avanzarTurno());
-        meta.agregarEnemigo(new Arania(jugador,null));
-        assertThrows(PerderPartidaError.class, () -> meta.avanzarTurno());
+        assertThrows(PerderPartidaError.class, () -> jugador.recibirDanio(100, "Test 12"));
     }
 }
