@@ -17,14 +17,7 @@ public class Mapa {
 
     public void construir(Defensa defensa, int coordenadaX, int coordenadaY)
     {
-        try
-        {
-            mapa.get(coordenadaY).get(coordenadaX).construir(defensa);
-        }
-        catch (TerrenoDeConstruccionInvalidoError e)
-        {
-            //Log
-        }
+        mapa.get(coordenadaY).get(coordenadaX).construir(defensa);
     }
 
 
