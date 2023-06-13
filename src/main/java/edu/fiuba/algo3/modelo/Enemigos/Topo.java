@@ -8,21 +8,32 @@ public class Topo extends Enemigo {
     
     private int movimientosRealizados = 0;
     private static int toposMuertos = 0;
+    private int numeroTurno;
 
     public Topo(Jugador jugador, Camino camino)
     {
-        super(1,2,0,1, jugador, camino);
+        super(1,2,3,1, jugador, camino);
         this.setSubterraneo(new EsSubterraneo());
     }
 
+    @Override
     public void atacar()
     {
-        if(movimientosRealizados % 2 == 0) {
-            super.atacar();
-        } else {
-            this.danio = 5;
-            super.atacar();
-        }
+        if(numeroTurno % 2 == 0) {super.atacar(2);} 
+        else {super.atacar(5);}
+    }
+
+    public void setNumeroTurno(int numeroTurno)
+    {
+        this.numeroTurno = numeroTurno;
+    }
+
+    @Override
+    public void mover()
+    {
+        this.numeroTurno++;
+        super.mover();
+        acelerar();
     }
 
     public void acelerar()

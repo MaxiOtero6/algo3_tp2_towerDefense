@@ -45,7 +45,9 @@ public class CreadorEnemigos {
                     
                     // for (int i = 0; i < cantidadTopos; i++) 
                     // {
-                    //     enemigosTurno.add(new Topo(jugador, camino));
+                    //     Topo topo = new Topo(jugador, camino);
+                    //     topo.setNumeroTurno(numeroTurno);
+                    //     enemigosTurno.add(topo);
                     // }
                     
                     // for (int i = 0; i < cantidadLechuzas; i++) 

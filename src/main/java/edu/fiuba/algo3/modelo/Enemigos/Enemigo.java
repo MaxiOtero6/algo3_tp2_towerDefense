@@ -60,8 +60,13 @@ public abstract class Enemigo {
 
     public void atacar()
     {
+        this.atacar(this.danio);
+    }
+
+    protected void atacar(int danioAtaque)
+    {
         String tipoEnemigo = this.getClass().getSimpleName();
-        this.jugador.recibirDanio(this.danio, tipoEnemigo);
+        this.jugador.recibirDanio(danioAtaque, tipoEnemigo);
     }
 
     public void recibirDanio(int danioRecibido, String tipoTorre)
