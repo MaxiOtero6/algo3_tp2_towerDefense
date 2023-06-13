@@ -5,6 +5,7 @@ import java.util.List;
 import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Defensas.Objetivos.ObjetivoTrampa;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
+import edu.fiuba.algo3.modelo.Enemigos.Subterraneo.NoEsSubterraneo;
 
 public class TrampaArenosa extends Defensa
 {
@@ -40,6 +41,7 @@ public class TrampaArenosa extends Defensa
         for (Enemigo enemigo : enemigoObjetivos) 
         {
             enemigo.ralentizar();
+            enemigo.setSubterraneo(new NoEsSubterraneo());
         }
     }    
 
