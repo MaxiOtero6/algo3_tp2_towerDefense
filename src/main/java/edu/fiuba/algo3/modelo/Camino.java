@@ -25,7 +25,7 @@ public class Camino {
     public void moverEnemigo(int velocidad, Posicion posicion, Enemigo enemigo)
     {
         int iterador = 0;
-        while (!parcelas.get(iterador).compararPosicion(posicion) && iterador < parcelas.size() - 1)
+        while (!parcelas.get(iterador).compararPosicion(posicion))
         {
             iterador++;
         }
