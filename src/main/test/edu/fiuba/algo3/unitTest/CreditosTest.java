@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.unitTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,5 +36,24 @@ public class CreditosTest {
         creditos.gastarCreditos(10);
 
         assertEquals(creditosEsperado, creditos);
+    }
+
+    @Test
+    public void test03AmbosCreditosSonIguales()
+    {
+        Creditos creditos1 = new Creditos();
+        Creditos creditos2 = new Creditos();
+        assertEquals(creditos1, creditos2);
+        assertEquals(creditos1, creditos1);
+    }
+
+    @Test
+    public void test03AmbosCreditosNoSonIguales()
+    {
+        Creditos creditos1 = new Creditos();
+        Creditos creditos2 = new Creditos(101);
+        int creditos3 = 100;
+        assertNotEquals(creditos1, creditos2);
+        assertNotEquals(creditos1, creditos3);
     }
 }

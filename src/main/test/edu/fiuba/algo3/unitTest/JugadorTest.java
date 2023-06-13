@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.unitTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import edu.fiuba.algo3.modelo.Creditos;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.SingleLogger;
 
@@ -50,5 +52,24 @@ public class JugadorTest {
         jugador.recibirDanio(10, "Test03 jugador");
 
         assertEquals(jugadorEsperado, jugador);
+    }
+
+    @Test
+    public void test04AmbosJugadoresSonIguales()
+    {
+        Jugador jugador1 = new Jugador();
+        Jugador jugador2 = new Jugador();
+        assertEquals(jugador1, jugador2);
+        assertEquals(jugador1, jugador1);
+    }
+
+    @Test
+    public void test04AmbosJugadoresNoSonIguales()
+    {
+        Jugador jugador1 = new Jugador();
+        Jugador jugador2 = new Jugador(20,101);
+        int jugador3 = 100;
+        assertNotEquals(jugador1, jugador2);
+        assertNotEquals(jugador1, jugador3);
     }
 }
