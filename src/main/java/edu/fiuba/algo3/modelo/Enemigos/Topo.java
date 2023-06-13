@@ -36,7 +36,7 @@ public class Topo extends Enemigo {
         acelerar();
     }
 
-    public void acelerar()
+    private void acelerar()
     {
         movimientosRealizados++;
         if(movimientosRealizados == 5) {this.velocidad++;}
