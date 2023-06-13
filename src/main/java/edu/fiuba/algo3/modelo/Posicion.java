@@ -9,16 +9,6 @@ public class Posicion {
         this.coordenadaX = coordenadaX;
         this.coordenadaY = coordenadaY;
     }
-    
-    public int obtenerX()
-    {
-        return this.coordenadaX;
-    }
-    
-    public int obtenerY()
-    {
-        return this.coordenadaY;
-    }
 
     public double calcDistancia(Posicion pos)
     {
