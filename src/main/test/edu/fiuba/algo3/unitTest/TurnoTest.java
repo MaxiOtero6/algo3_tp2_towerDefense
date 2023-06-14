@@ -161,7 +161,8 @@ public class TurnoTest {
         assertNotEquals(turno1, turno2);
 
         assertNotEquals(turno1, turno3);
+        turno1.aniadirTrampa(trampaArenosa);
         turno1.avanzarTurno(0);
-        assertNotEquals(turno1, turno3);
+        assertNotEquals(turno1, turno2);
     }
 }
