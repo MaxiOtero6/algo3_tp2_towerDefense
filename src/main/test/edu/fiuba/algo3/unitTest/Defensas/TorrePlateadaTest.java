@@ -4,8 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -38,6 +40,7 @@ public class TorrePlateadaTest {
         LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
         when(enemigoMock.subterraneo()).thenReturn(false);
         when(enemigoMock.estaVivo()).thenReturn(true);
+        doReturn(0.0).when(enemigoMock).calcDistancia(any());
 
         Defensa defensa = new TorrePlateada();
         defensa.setEnemigos(enemigos);

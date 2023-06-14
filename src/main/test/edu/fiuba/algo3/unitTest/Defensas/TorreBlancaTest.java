@@ -3,8 +3,10 @@ package edu.fiuba.algo3.unitTest.Defensas;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -37,6 +39,7 @@ public class TorreBlancaTest {
         LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
         when(enemigoMock.subterraneo()).thenReturn(false);
         when(enemigoMock.estaVivo()).thenReturn(true);
+        doReturn(0.0).when(enemigoMock).calcDistancia(any());
 
         Defensa defensa = new TorreBlanca();
         defensa.setEnemigos(enemigos);
