@@ -16,11 +16,6 @@ public class Jugador {
         this.creditos = new Creditos();
         this.vida = 20;
     }
-    
-    public int obtenerCreditos()
-    {
-        return this.creditos.obtenerCreditos();
-    }
 
     public Jugador(int vida, int creditos)
     {
