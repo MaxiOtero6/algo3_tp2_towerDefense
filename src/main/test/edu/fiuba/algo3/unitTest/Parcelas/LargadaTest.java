@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.unitTest.Parcelas;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.LinkedList;
@@ -17,7 +19,9 @@ import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Enemigos.Hormiga;
 import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
+import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Largada;
+import edu.fiuba.algo3.modelo.Parcelas.Tierra.Tierra;
 
 public class LargadaTest {
     @BeforeEach
@@ -49,5 +53,24 @@ public class LargadaTest {
         List<Enemigo> lista = new LinkedList<>();
         lista.add(enemigo);
         assertDoesNotThrow(() -> parcela.aparecerEnemigos(lista));
+    }
+
+    @Test
+    public void test03AmbosLargadaSonIguales()
+    {
+        Parcela parcela1 = new Largada(0,0);
+        Parcela parcela2 = new Largada(0,0);
+        assertEquals(parcela1, parcela2);
+        assertEquals(parcela1, parcela1);
+    }
+
+    @Test
+    public void test03AmbosLargadaNoSonIguales()
+    {
+        Parcela parcela1 = new Largada(0,0);
+        Parcela parcela2 = new Largada(1,1);
+        int parcela3 = 100;
+        assertNotEquals(parcela1, parcela2);
+        assertNotEquals(parcela1, parcela3);
     }
 }
