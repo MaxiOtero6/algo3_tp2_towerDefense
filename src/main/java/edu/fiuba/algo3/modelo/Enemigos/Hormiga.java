@@ -18,4 +18,9 @@ public class Hormiga extends Enemigo {
         enemigosMuertos++;
         hormigasMuertas++;
     }
+
+    public static void resetContador()
+    {
+        hormigasMuertas = 0;
+    }
 }
