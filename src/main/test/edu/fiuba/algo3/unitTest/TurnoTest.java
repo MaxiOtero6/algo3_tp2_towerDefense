@@ -154,17 +154,22 @@ public class TurnoTest {
         Turno turno1 = new Turno(camino, null);
         Turno turno2 = new Turno(camino, null);
 
-        turno2.aniadirTorre(new TorreBlanca());
-        
-        assertNotEquals(turno1, turno2);
-        
-        turno1.aniadirTorre(torre);
-        turno2.aniadirTrampa(trampaArenosa);
-        assertNotEquals(turno1, turno2);
-
-        assertNotEquals(turno1, turno3);
-        turno1.aniadirTrampa(trampaArenosa);
         turno1.avanzarTurno(0);
         assertNotEquals(turno1, turno2);
+        
+        turno2.avanzarTurno(0);
+        assertEquals(turno1, turno2);
+
+        turno1.aniadirTorre(torre);
+        assertNotEquals(turno1, turno2);
+        turno2.aniadirTorre(torre);
+        assertEquals(turno1, turno2);
+        
+        turno1.aniadirTrampa(trampaArenosa);
+        assertNotEquals(turno1, turno2);
+        turno2.aniadirTrampa(trampaArenosa);
+        assertEquals(turno1, turno2);
+
+        assertNotEquals(turno1, turno3);
     }
 }
