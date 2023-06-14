@@ -15,11 +15,6 @@ public class Creditos {
         this.creditos = creditos;
     }
 
-    public int obtenerCreditos()
-    {
-        return this.creditos;
-    }
-
     public void gastarCreditos(int creditosAGastar)
     {
         if (this.creditos < creditosAGastar){
