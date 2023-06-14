@@ -204,6 +204,7 @@ public class Tests {
         Enemigo enemigoObtenido = objetivo.hallarObjetivo(posicionTorre, enemigos, rangoTorre);
 
         assertEquals(enemigoEsperado, enemigoObtenido);
+        Hormiga.resetContador();
     }
 
     @Test
@@ -222,6 +223,7 @@ public class Tests {
         Enemigo enemigoObtenido = objetivo.hallarObjetivo(posicionTorre, enemigos, rangoTorre);
 
         assertEquals(enemigoEsperado, enemigoObtenido);
+        Hormiga.resetContador();
     }
 
     @Test
@@ -239,6 +241,7 @@ public class Tests {
 
         //La hormiga debe haber muerto por lo cual le suma al jugador 1 creditos, mientras que la arania no
         assertEquals(jugadorEsperado, jugador);
+        Hormiga.resetContador();
     }
 
     @Test
@@ -266,6 +269,7 @@ public class Tests {
         Enemigo hormiga = new Hormiga(jugador,null);
         hormiga.recibirDanio(1, "Prueba");
         assertEquals(jugadorEsperado, jugador);
+        Hormiga.resetContador();
     }
 
     @Test

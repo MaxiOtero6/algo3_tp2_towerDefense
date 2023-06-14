@@ -187,6 +187,7 @@ public class Tests2 {
         partida.construirTorre(new TorreBlanca(), 2,3);
 
         assertThrows(GanarPartidaError.class, () -> partida.iniciar());
+        Hormiga.resetContador();
     }
 
     @Test

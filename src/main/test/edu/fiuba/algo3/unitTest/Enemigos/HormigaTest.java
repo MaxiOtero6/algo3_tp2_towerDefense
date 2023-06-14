@@ -39,12 +39,12 @@ public class HormigaTest {
         enemigo.recibirDanio(1, "Test");
         assertTrue(!enemigo.estaVivo());
         verify(jugadorMock, times(1)).agregarCreditos(anyInt());
+        Hormiga.resetContador();
     }
 
     @Test
     public void test03LaHormigaNumeroOnceMuertaDaDosCreditos()
     {
-        Hormiga.resetContador();
         Jugador jugador = new Jugador();
         Jugador jugadorEsperado = new Jugador(20,112);
         Hormiga hormiga;
@@ -55,5 +55,6 @@ public class HormigaTest {
         hormiga = new Hormiga(jugador,null);
         hormiga.recibirDanio(1, "Test03");
         assertEquals(jugadorEsperado, jugador);
+        Hormiga.resetContador();
     }
 }
