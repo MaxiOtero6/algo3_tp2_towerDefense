@@ -34,6 +34,11 @@ public class Lechuza extends Enemigo {
         enemigosMuertos++;
     }
 
+    private boolean tieneMitadDeVida()
+    {
+        return (this.energia <= (5/2));
+    } 
+
     @Override
     public void mover()
     {

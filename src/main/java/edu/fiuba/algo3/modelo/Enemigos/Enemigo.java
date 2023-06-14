@@ -8,7 +8,7 @@ import edu.fiuba.algo3.modelo.Enemigos.Volador.*;
 import edu.fiuba.algo3.modelo.SingleLogger;
 
 public abstract class Enemigo {
-    private int energia;
+    protected int energia;
     protected int danio;
     protected int creditos;
     protected int velocidad;
@@ -87,11 +87,6 @@ public abstract class Enemigo {
         SingleLogger.obtenerLogger().imprimirLog(String.format(
                 "%s ataca a %s en la posicion %s", tipoTorre, tipoEnemigo, coordenadas));
     }
-
-    protected boolean tieneMitadDeVida()
-    {
-        return (this.energia <= (this.energia/2));
-    } 
 
     public boolean estaVivo()
     {
