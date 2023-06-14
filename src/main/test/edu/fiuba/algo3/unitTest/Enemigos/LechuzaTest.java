@@ -90,6 +90,7 @@ public class LechuzaTest {
         enemigo.mover();
         caminoHMock.verify(() -> CreadorCaminoH.crearCaminoH(null), times(1));
         caminoHMock.close();
+        caminoLMock.close();
     }
 
     @Test
@@ -108,5 +109,6 @@ public class LechuzaTest {
         enemigo.mover();
         caminoHMock.verify(() -> CreadorCaminoH.crearCaminoH(null), never());
         caminoHMock.close();
+        caminoLMock.close();
     }
 }
