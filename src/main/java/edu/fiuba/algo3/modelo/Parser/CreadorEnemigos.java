@@ -52,7 +52,7 @@ public class CreadorEnemigos {
                     
                     // for (int i = 0; i < cantidadLechuzas; i++) 
                     // {
-                    //     enemigosTurno.add(new Lechuza(jugador, camino));
+                    //     enemigosTurno.add(new Lechuza(jugador)));
                     // }
                     
                 }
