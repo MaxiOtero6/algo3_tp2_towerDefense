@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Enemigos.Objetivos.ObjetivoLechuza;
 import edu.fiuba.algo3.modelo.Enemigos.Volador.EsVolador;
+import edu.fiuba.algo3.modelo.Errores.EnemigoNoRalentizableError;
 import edu.fiuba.algo3.modelo.Parser.CreadorCaminoH;
 import edu.fiuba.algo3.modelo.Parser.CreadorCaminoL;
 
@@ -42,7 +43,13 @@ public class Lechuza extends Enemigo {
     @Override
     public void mover()
     {
-        if (this.tieneMitadDeVida()) {this.camino = new Camino(CreadorCaminoH.crearCaminoH(this.posicion));}
+        if (this.tieneMitadDeVida() && this.estaVivo()) {this.camino = new Camino(CreadorCaminoH.crearCaminoH(this.posicion));}
         super.mover();
+    }
+
+    @Override
+    public void ralentizar()
+    {
+        throw new EnemigoNoRalentizableError();
     }
 }
