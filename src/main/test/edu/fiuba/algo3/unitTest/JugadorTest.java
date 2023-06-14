@@ -69,7 +69,9 @@ public class JugadorTest {
         Jugador jugador1 = new Jugador();
         Jugador jugador2 = new Jugador(22,100);
         int jugador3 = 100;
+        Jugador jugador4 = new Jugador(20,101);
         assertNotEquals(jugador1, jugador2);
         assertNotEquals(jugador1, jugador3);
+        assertNotEquals(jugador1, jugador4);
     }
 }
