@@ -19,7 +19,7 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) {
         IntroMenu intro = new IntroMenu();
-        VBox root = intro.crearUI();
+        VBox root = intro.crearUI(primaryStage);
 
         Scene scene = new Scene(root, 300, 300);
         primaryStage.setScene(scene);
