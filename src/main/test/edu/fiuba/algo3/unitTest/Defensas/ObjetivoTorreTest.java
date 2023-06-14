@@ -7,6 +7,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,8 +16,10 @@ import org.junit.jupiter.api.Test;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.SingleLogger;
 import edu.fiuba.algo3.modelo.Defensas.Objetivos.ObjetivoTorre;
+import edu.fiuba.algo3.modelo.Defensas.Objetivos.ObjetivoTrampa;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Enemigos.Hormiga;
+import edu.fiuba.algo3.modelo.Enemigos.NoEnemigo;
 import edu.fiuba.algo3.modelo.Enemigos.Topo;
 
 public class ObjetivoTorreTest {
@@ -127,6 +130,25 @@ public class ObjetivoTorreTest {
         when(enemigoMock.subterraneo()).thenReturn(false);
         when(enemigoMock.estaVivo()).thenReturn(false);
         doReturn(1000.0).when(enemigoMock).calcDistancia(any());
+
+        ObjetivoTorre objetivo = new ObjetivoTorre();
+        Enemigo enemigoObtenido = objetivo.hallarObjetivo(posicion1, enemigos, 3);
+
+        assertEquals(enemigotemp, enemigoObtenido);
+    }
+
+    @Test
+    public void test06SiNingunEnemigoCumpleLosRequisitosSeGeneraUnFalsoObjetivo()
+    {
+        Enemigo enemigoMock = mock(Hormiga.class);
+        LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
+        Posicion posicion1 = new Posicion(0, 0);
+
+        Enemigo enemigotemp = new NoEnemigo();
+        
+        when(enemigoMock.subterraneo()).thenReturn(true);
+        when(enemigoMock.estaVivo()).thenReturn(false);
+        doReturn(100.0).when(enemigoMock).calcDistancia(any());
 
         ObjetivoTorre objetivo = new ObjetivoTorre();
         Enemigo enemigoObtenido = objetivo.hallarObjetivo(posicion1, enemigos, 3);
