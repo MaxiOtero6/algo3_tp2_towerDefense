@@ -50,4 +50,17 @@ public abstract class Defensa {
     {
         this.posicion = posicion;
     }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o == this) {return true;}
+        if (o instanceof Defensa)
+        {
+            Defensa defensa = (Defensa)o;
+            if (this.posicion == null && defensa.posicion == null) {return true;}
+            return (this.posicion.equals(defensa.posicion));
+        }
+        return false;
+    }
 }
