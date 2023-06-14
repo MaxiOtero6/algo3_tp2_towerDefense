@@ -6,6 +6,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -88,6 +89,24 @@ public class LechuzaTest {
         enemigo.recibirDanio(3, "Test04Lechuza");
         enemigo.mover();
         caminoHMock.verify(() -> CreadorCaminoH.crearCaminoH(null), times(1));
+        caminoHMock.close();
+    }
+
+    @Test
+    public void test05LaLechuzaAlNoTenerMitadDeVidaNoCambiaSuCamino()
+    {
+        MockedStatic<CreadorCaminoH> caminoHMock = mockStatic(CreadorCaminoH.class);
+        MockedStatic<CreadorCaminoL> caminoLMock = mockStatic(CreadorCaminoL.class);
+        Parcela parcelaMock = mock(Parcela.class);
+        LinkedList<Parcela> lista = new LinkedList<>();
+        lista.add(parcelaMock);
+        caminoHMock.when(() -> CreadorCaminoH.crearCaminoH(null)).thenReturn(lista);
+        caminoLMock.when(() -> CreadorCaminoL.crearCaminoL()).thenReturn(lista);
+        
+        Enemigo enemigo = new Lechuza(null);
+
+        enemigo.mover();
+        caminoHMock.verify(() -> CreadorCaminoH.crearCaminoH(null), never());
         caminoHMock.close();
     }
 }
