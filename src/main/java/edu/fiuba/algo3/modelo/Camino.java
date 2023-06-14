@@ -35,8 +35,8 @@ public class Camino {
 
         Parcela parcelaFinal = parcelas.get(indiceDestino);
 
-        parcelaFinal.agregarEnemigo(enemigo);
         parcelas.get(iterador).eliminarEnemigo(enemigo);
+        parcelaFinal.agregarEnemigo(enemigo);
     }
 
     public void aparecerEnemigos(List<Enemigo> enemigos)
