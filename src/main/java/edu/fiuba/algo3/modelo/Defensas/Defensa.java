@@ -55,11 +55,11 @@ public abstract class Defensa {
     public boolean equals(Object o)
     {
         if (o == this) {return true;}
-        if (o instanceof Defensa)
+        if (o.getClass() == this.getClass())
         {
             Defensa defensa = (Defensa)o;
             if (this.posicion == null && defensa.posicion == null) {return true;}
-            return (this.posicion.equals(defensa.posicion));
+            return (this.posicion.equals(defensa.posicion) && this.estaDestruida() == defensa.estaDestruida());
         }
         return false;
     }
