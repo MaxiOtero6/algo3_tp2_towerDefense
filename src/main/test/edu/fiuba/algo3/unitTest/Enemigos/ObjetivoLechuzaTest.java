@@ -14,7 +14,7 @@ import edu.fiuba.algo3.modelo.Defensas.Torres.Torre;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Enemigos.Objetivos.ObjetivoLechuza;
 
-public class ObjetivoTest {
+public class ObjetivoLechuzaTest {
     @BeforeEach
     public void setup(){
         SingleLogger.inicializar(LogManager.getLogger());
