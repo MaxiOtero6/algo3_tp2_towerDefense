@@ -1,5 +1,9 @@
 package edu.fiuba.algo3.unitTest.Enemigos;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
@@ -20,12 +24,16 @@ import org.mockito.MockedStatic;
 
 import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.SingleLogger;
 import edu.fiuba.algo3.modelo.Defensas.Torres.Torre;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
+import edu.fiuba.algo3.modelo.Enemigos.Arania;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
+import edu.fiuba.algo3.modelo.Enemigos.Hormiga;
 import edu.fiuba.algo3.modelo.Enemigos.Lechuza;
 import edu.fiuba.algo3.modelo.Enemigos.Objetivos.ObjetivoLechuza;
+import edu.fiuba.algo3.modelo.Errores.EnemigoNoRalentizableError;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 import edu.fiuba.algo3.modelo.Parser.CreadorCaminoH;
 import edu.fiuba.algo3.modelo.Parser.CreadorCaminoL;
@@ -110,5 +118,76 @@ public class LechuzaTest {
         caminoHMock.verify(() -> CreadorCaminoH.crearCaminoH(null), never());
         caminoHMock.close();
         caminoLMock.close();
+    }
+
+    @Test
+    public void test06UnaLechuzaNoEstaVivaSiRecibeCincoDeDanio()
+    {
+        Jugador jugador = mock(Jugador.class);
+        doNothing().when(jugador).agregarCreditos(anyInt());
+        Enemigo enemigo = new Lechuza(jugador,null);
+        assertTrue(enemigo.estaVivo());
+        enemigo.recibirDanio(5, "Test04Lechuza");
+        assertFalse(enemigo.estaVivo());
+    }
+
+    @Test
+    public void test07UnaLechuzaMuertaNoPuedeMoverse()
+    {
+        Camino caminoMock = mock(Camino.class);
+        Jugador jugadorMock = mock(Jugador.class);
+        doNothing().when(jugadorMock).agregarCreditos(anyInt());
+        Posicion posicion = new Posicion(0,0);
+        Enemigo enemigo = new Lechuza(jugadorMock, caminoMock);
+        enemigo.setearPosicion(posicion);
+        
+        enemigo.recibirDanio(5, "Test07Lechuza");
+        assertFalse(enemigo.estaVivo());
+        enemigo.mover();
+        verify(caminoMock, never()).moverEnemigo(5, posicion, enemigo);
+    }
+
+    @Test
+    public void test08UnaLechuzaNoSePuedeRalentizar()
+    {
+        Enemigo enemigo = new Lechuza(null, null);
+        
+        assertThrows(EnemigoNoRalentizableError.class, enemigo::ralentizar);
+    }
+
+    @Test
+    public void test09AmbosLechuzaSonIguales()
+    {
+        Enemigo enemigo1 = new Lechuza(null,null);
+        Enemigo enemigo2 = new Lechuza(null,null);
+        assertEquals(enemigo1, enemigo2);
+        assertEquals(enemigo1, enemigo1);
+    }
+
+    @Test
+    public void test10AmbosLechuzaNoSonIguales()
+    {
+        Jugador jugadorMock = mock(Jugador.class);
+        doNothing().when(jugadorMock).agregarCreditos(anyInt());
+        Enemigo enemigo1 = new Lechuza(jugadorMock,null);
+        Enemigo enemigo2 = new Lechuza(jugadorMock,null);
+        String enemigo3 = "Lechuza";
+        
+        Posicion posicion1 = new Posicion(0, 0);
+        Posicion posicion2 = new Posicion(1,1);
+        
+        assertEquals(enemigo1, enemigo2);
+        
+        enemigo2.setearPosicion(posicion2);
+        enemigo1.setearPosicion(posicion1);
+        assertNotEquals(enemigo1, enemigo2);
+        
+        enemigo1.setearPosicion(posicion2);
+        assertEquals(enemigo1, enemigo2);
+        
+        enemigo2.recibirDanio(1, "Test10Lechuza");
+        assertNotEquals(enemigo1, enemigo2);
+        
+        assertNotEquals(enemigo1, enemigo3);
     }
 }

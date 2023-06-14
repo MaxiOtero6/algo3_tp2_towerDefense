@@ -1,16 +1,23 @@
 package edu.fiuba.algo3.unitTest.Enemigos;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
 import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.SingleLogger;
 import edu.fiuba.algo3.modelo.Enemigos.Arania;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
+import edu.fiuba.algo3.modelo.Enemigos.Hormiga;
 
 public class AraniaTest {
     @BeforeEach
@@ -35,5 +42,85 @@ public class AraniaTest {
         enemigo.recibirDanio(2, "Test");
         assertTrue(!enemigo.estaVivo());
         verify(jugadorMock, times(1)).agregarCreditos(anyInt());
+    }
+
+    @Test
+    public void test03UnaAraniaNoEstaVivaSiRecibeDosDeDanio()
+    {
+        Jugador jugador = mock(Jugador.class);
+        doNothing().when(jugador).agregarCreditos(anyInt());
+        Enemigo enemigo = new Arania(jugador,null);
+        assertTrue(enemigo.estaVivo());
+        enemigo.recibirDanio(2, "Test04Arania");
+        assertFalse(enemigo.estaVivo());
+    }
+
+    @Test
+    public void test04UnaAraniaMuertaNoPuedeMoverse()
+    {
+        Camino caminoMock = mock(Camino.class);
+        Jugador jugadorMock = mock(Jugador.class);
+        doNothing().when(jugadorMock).agregarCreditos(anyInt());
+        Posicion posicion = new Posicion(0,0);
+        Enemigo enemigo = new Arania(jugadorMock, caminoMock);
+        enemigo.setearPosicion(posicion);
+        
+        enemigo.recibirDanio(2, "Test04Arania");
+        assertFalse(enemigo.estaVivo());
+        enemigo.mover();
+        verify(caminoMock, never()).moverEnemigo(2, posicion, enemigo);
+    }
+
+    @Test
+    public void test05UnaAraniaRalentizadaTieneUnoDeVelocidadUnTurno()
+    {
+        Camino caminoMock = mock(Camino.class);
+        Enemigo enemigo = new Arania(null, caminoMock);
+        Posicion posicion = new Posicion(0,0);
+        enemigo.setearPosicion(posicion);
+        
+        enemigo.ralentizar();
+        enemigo.mover();
+
+        verify(caminoMock, times(1)).moverEnemigo(1, posicion, enemigo);
+    
+        enemigo.mover();
+        verify(caminoMock, times(1)).moverEnemigo(2, posicion, enemigo);
+    }
+
+    @Test
+    public void test06AmbosAraniaSonIguales()
+    {
+        Enemigo enemigo1 = new Arania(null,null);
+        Enemigo enemigo2 = new Arania(null,null);
+        assertEquals(enemigo1, enemigo2);
+        assertEquals(enemigo1, enemigo1);
+    }
+
+    @Test
+    public void test07AmbosAraniaNoSonIguales()
+    {
+        Jugador jugadorMock = mock(Jugador.class);
+        doNothing().when(jugadorMock).agregarCreditos(anyInt());
+        Enemigo enemigo1 = new Arania(jugadorMock,null);
+        Enemigo enemigo2 = new Arania(jugadorMock,null);
+        String enemigo3 = "Arania";
+        
+        Posicion posicion1 = new Posicion(0, 0);
+        Posicion posicion2 = new Posicion(1,1);
+        
+        assertEquals(enemigo1, enemigo2);
+        
+        enemigo2.setearPosicion(posicion2);
+        enemigo1.setearPosicion(posicion1);
+        assertNotEquals(enemigo1, enemigo2);
+        
+        enemigo1.setearPosicion(posicion2);
+        assertEquals(enemigo1, enemigo2);
+        
+        enemigo2.recibirDanio(1, "Test07Arania");
+        assertNotEquals(enemigo1, enemigo2);
+        
+        assertNotEquals(enemigo1, enemigo3);
     }
 }
