@@ -149,6 +149,8 @@ public class TurnoTest {
         int turno3 = 100;
         Torre torre = new TorreBlanca();
         TrampaArenosa trampaArenosa = new TrampaArenosa();
+        torre.setearPosicion(new Posicion(0, 0));
+        trampaArenosa.setearPosicion(new Posicion(3, 3));
         Turno turno1 = new Turno(camino, null);
         Turno turno2 = new Turno(camino, null);
 
