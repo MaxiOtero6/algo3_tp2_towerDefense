@@ -18,6 +18,10 @@ import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -267,15 +271,11 @@ public class Tests {
     @Test
     public void test08ElJugadorCobraAlDestruirUnEnemigoArania()
     {
-        Jugador jugador = new Jugador();
-        int creditosEsperadosMin = 100;
-        int creditosEsperadosMax = 110;
+        Jugador jugador = mock(Jugador.class);
 
         Enemigo arania = new Arania(jugador,null);
         arania.recibirDanio(2, "Prueba");
-        assertTrue(jugador.obtenerCreditos() >= creditosEsperadosMin);
-        assertTrue(jugador.obtenerCreditos() <= creditosEsperadosMax);
-
+        verify(jugador, times(1)).agregarCreditos(anyInt());
     }
 
 
