@@ -120,11 +120,11 @@ public abstract class Enemigo {
     public boolean equals(Object enemigo)
     {
         if (enemigo == this) {return true;}
-        if (enemigo instanceof Enemigo)
+        if (enemigo.getClass() == this.getClass())
         {
             Enemigo enem = (Enemigo)enemigo;
             if (this.posicion == null && enem.posicion == null) {return true;}
-            return (this.posicion.equals(enem.posicion));
+            return (this.posicion.equals(enem.posicion) && this.energia == enem.energia);
         }
         return false;
     }
