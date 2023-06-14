@@ -26,6 +26,8 @@ import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
 import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
+import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Largada;
+import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Pasarela;
 import edu.fiuba.algo3.modelo.Parser.CreadorEnemigos;
 import edu.fiuba.algo3.modelo.Parser.CreadorMapa;
 
@@ -140,8 +142,11 @@ public class TurnoTest {
     @Test
     public void test03AmbosTurnoNoSonIguales()
     {
+        LinkedList<Parcela> parcelas = new LinkedList<>();
+        parcelas.add(new Largada(0,0));
+        Camino camino = new Camino(parcelas);
+
         int turno3 = 100;
-        Camino camino = null;
         Torre torre = new TorreBlanca();
         TrampaArenosa trampaArenosa = new TrampaArenosa();
         Turno turno1 = new Turno(camino, null);
@@ -154,7 +159,9 @@ public class TurnoTest {
         turno1.aniadirTorre(torre);
         turno2.aniadirTrampa(trampaArenosa);
         assertNotEquals(turno1, turno2);
-        
+
+        assertNotEquals(turno1, turno3);
+        turno1.avanzarTurno(0);
         assertNotEquals(turno1, turno3);
     }
 }
