@@ -44,6 +44,7 @@ public class HormigaTest {
     @Test
     public void test03LaHormigaNumeroOnceMuertaDaDosCreditos()
     {
+        Hormiga.resetContador();
         Jugador jugador = new Jugador();
         Jugador jugadorEsperado = new Jugador(20,112);
         Hormiga hormiga;
