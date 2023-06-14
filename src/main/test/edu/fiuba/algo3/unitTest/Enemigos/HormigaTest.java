@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.unitTest.Enemigos;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
@@ -38,5 +39,20 @@ public class HormigaTest {
         enemigo.recibirDanio(1, "Test");
         assertTrue(!enemigo.estaVivo());
         verify(jugadorMock, times(1)).agregarCreditos(anyInt());
+    }
+
+    @Test
+    public void test03LaHormigaNumeroOnceMuertaDaDosCreditos()
+    {
+        Jugador jugador = new Jugador();
+        Jugador jugadorEsperado = new Jugador(20,112);
+        Hormiga hormiga;
+        for (int i = 0; i < 10; i++) {
+            hormiga = new Hormiga(jugador,null);
+            hormiga.recibirDanio(1, "Test03");
+        }
+        hormiga = new Hormiga(jugador,null);
+        hormiga.recibirDanio(1, "Test03");
+        assertEquals(jugadorEsperado, jugador);
     }
 }
