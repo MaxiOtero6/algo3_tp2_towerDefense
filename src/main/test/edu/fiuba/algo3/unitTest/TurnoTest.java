@@ -11,6 +11,8 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 
 import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Partida;
@@ -28,6 +30,7 @@ import edu.fiuba.algo3.modelo.Parser.CreadorEnemigos;
 import edu.fiuba.algo3.modelo.Parser.CreadorMapa;
 
 public class TurnoTest {
+
     @BeforeEach
     public void setup(){
         SingleLogger.inicializar(LogManager.getLogger());
@@ -45,11 +48,12 @@ public class TurnoTest {
         Camino caminoMock = mock(Camino.class);
         doNothing().when(caminoMock).aparecerEnemigos(lista);
 
-        mockStatic(CreadorEnemigos.class);
+        MockedStatic<CreadorEnemigos> creadorEnemigoMock = mockStatic(CreadorEnemigos.class);
         when(CreadorEnemigos.crearEnemigos(0, null, caminoMock)).thenReturn(lista);
 
         Turno turno = new Turno(caminoMock, null);
         assertThrows(GanarPartidaError.class, () -> turno.avanzarTurno(0));
+        creadorEnemigoMock.close();
     }
 
     @Test
@@ -65,7 +69,7 @@ public class TurnoTest {
         Camino caminoMock = mock(Camino.class);
         doNothing().when(caminoMock).aparecerEnemigos(lista);
         
-        mockStatic(CreadorEnemigos.class);
+        MockedStatic<CreadorEnemigos> creadorEnemigoMock = mockStatic(CreadorEnemigos.class);
         when(CreadorEnemigos.crearEnemigos(0, null, caminoMock)).thenReturn(lista);
         
         Turno turno = new Turno(caminoMock, null);
@@ -83,6 +87,7 @@ public class TurnoTest {
         verify(enemigoMock, atLeastOnce()).mover();
         verify(torreMock, atLeastOnce()).avanzarTurno();
         verify(trampaMock, atLeastOnce()).avanzarTurno();
+        creadorEnemigoMock.close();
     }
 
     @Test
@@ -97,7 +102,7 @@ public class TurnoTest {
         Camino caminoMock = mock(Camino.class);
         doNothing().when(caminoMock).aparecerEnemigos(lista);
         
-        mockStatic(CreadorEnemigos.class);
+        MockedStatic<CreadorEnemigos> creadorEnemigoMock = mockStatic(CreadorEnemigos.class);
         when(CreadorEnemigos.crearEnemigos(0, null, caminoMock)).thenReturn(lista);
         
         
@@ -119,6 +124,7 @@ public class TurnoTest {
         turno.avanzarTurno(0);
         verify(spy1, atMost(1)).remove(torre);
         verify(spy2, atMost(1)).remove(trampa);
+        creadorEnemigoMock.close();
     }
 
     @Test
