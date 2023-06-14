@@ -140,13 +140,21 @@ public class TurnoTest {
     @Test
     public void test03AmbosTurnoNoSonIguales()
     {
+        int turno3 = 100;
         Camino camino = null;
-
+        Torre torre = new TorreBlanca();
+        TrampaArenosa trampaArenosa = new TrampaArenosa();
         Turno turno1 = new Turno(camino, null);
         Turno turno2 = new Turno(camino, null);
+
         turno2.aniadirTorre(new TorreBlanca());
-        int turno3 = 100;
+        
         assertNotEquals(turno1, turno2);
+        
+        turno1.aniadirTorre(torre);
+        turno2.aniadirTrampa(trampaArenosa);
+        assertNotEquals(turno1, turno2);
+        
         assertNotEquals(turno1, turno3);
     }
 }
