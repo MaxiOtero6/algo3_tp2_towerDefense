@@ -68,31 +68,6 @@ public class IntroMenu {
 
     private void IniciarPartida(Stage stagePrincipal) {
 
-        // //TORRE PLATEADA DE EJEMPLO
-        // ImageView torrePlateada = new ImageView(getClass().getResource("torrePlateada.png").toExternalForm());
-        // root.add(torrePlateada,3,2);
-
-        // //TORRE BLANCA DE EJEMPLO
-        // ImageView torreBlanca = new ImageView(getClass().getResource("torreBlanca.png").toExternalForm());
-        // root.add(torreBlanca,7,7);
-
-        // //HORMIGA DE EJEMPLO
-        // ImageView hormiga = new ImageView(getClass().getResource("hormiga.png").toExternalForm());
-        // root.add(hormiga,1,1);
-
-        // //ARANIA DE EJEMPLO
-        // ImageView arania = new ImageView(getClass().getResource("arania.png").toExternalForm());
-        // root.add(arania,6,4);
-
-        // //TOPO DE EJEMPLO
-        // ImageView topo = new ImageView(getClass().getResource("topo.png").toExternalForm());
-        // root.add(topo,6,1);
-
-        // //LECHUZA DE EJEMPLO
-        // ImageView lechuza = new ImageView(getClass().getResource("lechuza.png").toExternalForm());
-        // root.add(lechuza,5,10);
-
-
         validationLabel.setText("Partida iniciada");
 
         List<Parcela> pasarelas = new LinkedList<>();
@@ -121,7 +96,7 @@ public class IntroMenu {
 
                 if(parcelaActual instanceof Tierra) {casillaMapa.setStyle("-fx-background-color: #699922;");}
                 if(parcelaActual instanceof Largada) {casillaMapa.setStyle("-fx-background-color: #599ed4;");}
-                if(parcelaActual instanceof Meta) {casillaMapa.setStyle("-fx-background-color: #599ed4;");}
+                if(parcelaActual instanceof Meta) {casillaMapa.setStyle("-fx-background-color: #FFA500;");}
                 if(parcelaActual instanceof Rocoso) {casillaMapa.setStyle("-fx-background-color: #38393b;");}
                 if(parcelaActual instanceof Pasarela) {casillaMapa.setStyle("-fx-background-color: #d1b680;");}
 
@@ -150,6 +125,14 @@ public class IntroMenu {
             }
         }
 
+        // //TORRE PLATEADA DE EJEMPLO
+        ImageView torrePlateada = new ImageView((new File("src/main/java/edu/fiuba/algo3/modelo/Vista/torrePlateada.png")).toURI().toString());
+        root.add(torrePlateada,3,2);
+
+        // //TORRE BLANCA DE EJEMPLO
+        ImageView torreBlanca = new ImageView((new File("src/main/java/edu/fiuba/algo3/modelo/Vista/torreBlanca.png")).toURI().toString());
+        root.add(torreBlanca,7,7);
+        
         //HORMIGA DE EJEMPLO
         ImageView hormiga = new ImageView((new File("src/main/java/edu/fiuba/algo3/modelo/Vista/hormiga.png")).toURI().toString());
         root.add(hormiga,1,1);
