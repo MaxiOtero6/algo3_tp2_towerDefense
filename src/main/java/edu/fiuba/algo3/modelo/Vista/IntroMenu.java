@@ -92,7 +92,7 @@ public class IntroMenu {
                 casillaMapa.setPrefWidth(50);
                 casillaMapa.setAlignment(Pos.CENTER);
 
-                Parcela parcelaActual = mapa.get(x).get(y);
+                Parcela parcelaActual = mapa.get(y).get(x);
 
                 if(parcelaActual instanceof Tierra) {casillaMapa.setStyle("-fx-background-color: #699922;");}
                 if(parcelaActual instanceof Largada) {casillaMapa.setStyle("-fx-background-color: #599ed4;");}
@@ -139,11 +139,11 @@ public class IntroMenu {
 
         //ARANIA DE EJEMPLO
         ImageView arania = new ImageView((new File("src/main/java/edu/fiuba/algo3/modelo/Vista/arania.png")).toURI().toString());
-        root.add(arania,6,4);
+        root.add(arania,7,6);
 
         //TOPO DE EJEMPLO
         ImageView topo = new ImageView((new File("src/main/java/edu/fiuba/algo3/modelo/Vista/topo.png")).toURI().toString());
-        root.add(topo,6,1);
+        root.add(topo,6,6);
 
         //LECHUZA DE EJEMPLO
         ImageView lechuza = new ImageView((new File("src/main/java/edu/fiuba/algo3/modelo/Vista/lechuza.png")).toURI().toString());
