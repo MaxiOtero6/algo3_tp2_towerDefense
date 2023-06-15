@@ -12,6 +12,9 @@ import edu.fiuba.algo3.modelo.Partida;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 import edu.fiuba.algo3.modelo.Parcelas.Rocoso;
 import edu.fiuba.algo3.modelo.Parser.CreadorMapa;
+
+import edu.fiuba.algo3.modelo.Defensas.Torres.*;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -19,7 +22,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.application.Application;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
@@ -78,10 +80,38 @@ public class IntroMenu {
     }
 
     private void IniciarPartida(Stage stagePrincipal) {
+
+        // //TORRE PLATEADA DE EJEMPLO
+        // ImageView torrePlateada = new ImageView(getClass().getResource("torrePlateada.png").toExternalForm());
+        // root.add(torrePlateada,3,2);
+
+        // //TORRE BLANCA DE EJEMPLO
+        // ImageView torreBlanca = new ImageView(getClass().getResource("torreBlanca.png").toExternalForm());
+        // root.add(torreBlanca,7,7);
+
+        // //HORMIGA DE EJEMPLO
+        // ImageView hormiga = new ImageView(getClass().getResource("hormiga.png").toExternalForm());
+        // root.add(hormiga,1,1);
+
+        // //ARANIA DE EJEMPLO
+        // ImageView arania = new ImageView(getClass().getResource("arania.png").toExternalForm());
+        // root.add(arania,6,4);
+
+        // //TOPO DE EJEMPLO
+        // ImageView topo = new ImageView(getClass().getResource("topo.png").toExternalForm());
+        // root.add(topo,6,1);
+
+        // //LECHUZA DE EJEMPLO
+        // ImageView lechuza = new ImageView(getClass().getResource("lechuza.png").toExternalForm());
+        // root.add(lechuza,5,10);
+
+
         validationLabel.setText("Partida iniciada");
 
         List<Parcela> pasarelas = new LinkedList<>();
         List<List<Parcela>> mapa = CreadorMapa.crearMapa(pasarelas);
+
+        ContenedorTorre torreAux = new ContenedorTorre();
         
         int SIZE = 15;
         int length = SIZE;
@@ -92,29 +122,46 @@ public class IntroMenu {
         for(int y = 0; y < length; y++){
             for(int x = 0; x < width; x++){
 
-                StackPane matriz = new StackPane();
-                matriz.setPrefHeight(50);
-                matriz.setPrefWidth(50);
-                matriz.setAlignment(Pos.CENTER);
+                int coordenadaX = x;
+                int coordenaday = y;
 
-                if(mapa.get(x).get(y) instanceof Tierra) {matriz.setStyle("-fx-background-color: #699922;");}
-                if(mapa.get(x).get(y) instanceof Largada) {matriz.setStyle("-fx-background-color: #599ed4;");}
-                if(mapa.get(x).get(y) instanceof Meta) {matriz.setStyle("-fx-background-color: #599ed4;");}
-                if(mapa.get(x).get(y) instanceof Rocoso) {matriz.setStyle("-fx-background-color: #38393b;");}
-                if(mapa.get(x).get(y) instanceof Pasarela) {matriz.setStyle("-fx-background-color: #d1b680;");}
+                Button casillaMapa = new Button();
+                casillaMapa.setPrefHeight(50);
+                casillaMapa.setPrefWidth(50);
+                casillaMapa.setAlignment(Pos.CENTER);
+
+                Parcela parcelaActual = mapa.get(x).get(y);
+
+                if(parcelaActual instanceof Tierra) {casillaMapa.setStyle("-fx-background-color: #699922;");}
+                if(parcelaActual instanceof Largada) {casillaMapa.setStyle("-fx-background-color: #599ed4;");}
+                if(parcelaActual instanceof Meta) {casillaMapa.setStyle("-fx-background-color: #599ed4;");}
+                if(parcelaActual instanceof Rocoso) {casillaMapa.setStyle("-fx-background-color: #38393b;");}
+                if(parcelaActual instanceof Pasarela) {casillaMapa.setStyle("-fx-background-color: #d1b680;");}
+
+                casillaMapa.setOnAction(event -> {
+                    if(!torreAux.puseTorre){
+                        Torre torreActual = torreAux.getTorre();
+                        parcelaActual.construir(torreActual);
+
+                        if(torreActual instanceof TorrePlateada) {
+                            torreAux.ponerTorre();
+                            ImageView torrePlateada = new ImageView(getClass().getResource("torrePlateada.png").toExternalForm());
+                            root.add(torrePlateada,coordenadaX,coordenaday);
+                        }
+                        if(torreActual instanceof TorreBlanca) {
+                            torreAux.ponerTorre();
+                            ImageView torreBlanca = new ImageView(getClass().getResource("torreBlanca.png").toExternalForm());
+                            root.add(torreBlanca,coordenadaX,coordenaday);
+                        }
+                    }
+
+                });
+
  
-                root.add(matriz, x, y);
+                root.add(casillaMapa, x, y);
                 
             }
         }
-
-        //TORRE PLATEADA DE EJEMPLO
-        ImageView torrePlateada = new ImageView(getClass().getResource("torrePlateada.png").toExternalForm());
-        root.add(torrePlateada,3,2);
-
-        //TORRE BLANCA DE EJEMPLO
-        ImageView torreBlanca = new ImageView(getClass().getResource("torreBlanca.png").toExternalForm());
-        root.add(torreBlanca,7,7);
 
         //HORMIGA DE EJEMPLO
         ImageView hormiga = new ImageView(getClass().getResource("hormiga.png").toExternalForm());
@@ -132,17 +179,23 @@ public class IntroMenu {
         ImageView lechuza = new ImageView(getClass().getResource("lechuza.png").toExternalForm());
         root.add(lechuza,5,10);
 
-
-
         ImageView imagenBotonPlateada = new ImageView(new Image(getClass().getResourceAsStream("torrePlateada.png")));
         Button botonPlateada = new Button();
         botonPlateada.setGraphic(imagenBotonPlateada);
         botonPlateada.setText("Torre Plateada");
+        botonPlateada.setOnAction(event -> {
+            TorrePlateada torreCreada = new TorrePlateada();
+            torreAux.setTorre(torreCreada);
+        });
 
         ImageView imagenBotonBlanca = new ImageView(new Image(getClass().getResourceAsStream("torreBlanca.png")));
         Button botonBlanca = new Button();
         botonBlanca.setGraphic(imagenBotonBlanca);
         botonBlanca.setText("Torre Blanca");
+        botonBlanca.setOnAction(event -> {
+            TorreBlanca torreCreada = new TorreBlanca();
+            torreAux.setTorre(torreCreada);
+        });
 
         VBox vbox = new VBox();
         vbox.getChildren().addAll(botonPlateada, botonBlanca);
@@ -150,7 +203,6 @@ public class IntroMenu {
 
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(root);
-        borderPane.setMargin(root, new Insets(10));
 
         borderPane.setRight(vbox);
 
@@ -159,6 +211,28 @@ public class IntroMenu {
         stagePrincipal.setScene(scene);
         stagePrincipal.show();
     }
+
+    class ContenedorTorre {
+    private Torre torre;
+    public boolean puseTorre = false;
+
+    public Torre getTorre() {
+        return torre;
+    }
+
+    public void setTorre(Torre torre) {
+        this.torre = torre;
+        puseTorre = false;
+    }
+
+    public void ponerTorre() {
+        puseTorre = true;
+    }
+
+    public boolean puseTorre() {
+        return puseTorre;
+    }
+}
   
 }
 
