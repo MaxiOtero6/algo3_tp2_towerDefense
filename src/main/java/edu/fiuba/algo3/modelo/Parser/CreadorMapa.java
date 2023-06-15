@@ -9,7 +9,6 @@ import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Largada;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Meta;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Pasarela;
 import edu.fiuba.algo3.modelo.Parcelas.Tierra.Tierra;
-import edu.fiuba.algo3.modelo.Posicion;
 
 public class CreadorMapa {
     
@@ -76,11 +75,17 @@ public class CreadorMapa {
                     j++;
                 }
             }
+            Largada largada = new Largada(coordenadaXLargada, coordenadaYLargada);
+            Meta meta = new Meta(coordenadaXMeta, coordenadaYMeta);
+
             if (camino != null)
             {   
-                camino.set(0, new Largada(coordenadaXLargada, coordenadaYLargada));
-                camino.set(camino.size() - 1, new Meta(coordenadaXMeta, coordenadaYMeta));
+                camino.set(0, largada);
+                camino.set(camino.size() - 1, meta);
             }
+
+            parcelas.get(coordenadaYLargada).set(coordenadaXLargada, largada);
+            parcelas.get(coordenadaYMeta).set(coordenadaXMeta, meta);
 
             CreadorCaminoL.setMapa(parcelas);
             CreadorCaminoL.setXLargada(coordenadaXLargada);
