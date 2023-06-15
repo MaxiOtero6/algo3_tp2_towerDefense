@@ -126,30 +126,30 @@ public class IntroMenu {
         }
 
         // //TORRE PLATEADA DE EJEMPLO
-        ImageView torrePlateada = new ImageView((new File("src/main/java/edu/fiuba/algo3/modelo/Vista/torrePlateada.png")).toURI().toString());
+        ImageView torrePlateada = new ImageView((new File("src/main/resources/image/torrePlateada.png")).toURI().toString());
         root.add(torrePlateada,3,2);
 
         // //TORRE BLANCA DE EJEMPLO
-        ImageView torreBlanca = new ImageView((new File("src/main/java/edu/fiuba/algo3/modelo/Vista/torreBlanca.png")).toURI().toString());
+        ImageView torreBlanca = new ImageView((new File("src/main/resources/image/torreBlanca.png")).toURI().toString());
         root.add(torreBlanca,7,7);
         
         //HORMIGA DE EJEMPLO
-        ImageView hormiga = new ImageView((new File("src/main/java/edu/fiuba/algo3/modelo/Vista/hormiga.png")).toURI().toString());
+        ImageView hormiga = new ImageView((new File("src/main/resources/image/hormiga.png")).toURI().toString());
         root.add(hormiga,1,1);
 
         //ARANIA DE EJEMPLO
-        ImageView arania = new ImageView((new File("src/main/java/edu/fiuba/algo3/modelo/Vista/arania.png")).toURI().toString());
+        ImageView arania = new ImageView((new File("src/main/resources/image/arania.png")).toURI().toString());
         root.add(arania,7,6);
 
         //TOPO DE EJEMPLO
-        ImageView topo = new ImageView((new File("src/main/java/edu/fiuba/algo3/modelo/Vista/topo.png")).toURI().toString());
+        ImageView topo = new ImageView((new File("src/main/resources/image/topo.png")).toURI().toString());
         root.add(topo,6,6);
 
         //LECHUZA DE EJEMPLO
-        ImageView lechuza = new ImageView((new File("src/main/java/edu/fiuba/algo3/modelo/Vista/lechuza.png")).toURI().toString());
+        ImageView lechuza = new ImageView((new File("src/main/resources/image/lechuza.png")).toURI().toString());
         root.add(lechuza,5,10);
 
-        ImageView imagenBotonPlateada = new ImageView((new File("src/main/java/edu/fiuba/algo3/modelo/Vista/torrePlateada.png")).toURI().toString());
+        ImageView imagenBotonPlateada = new ImageView((new File("src/main/resources/image/torrePlateada.png")).toURI().toString());
         Button botonPlateada = new Button();
         botonPlateada.setGraphic(imagenBotonPlateada);
         botonPlateada.setText("Torre Plateada");
@@ -158,7 +158,7 @@ public class IntroMenu {
             torreAux.setTorre(torreCreada);
         });
 
-        ImageView imagenBotonBlanca = new ImageView((new File("src/main/java/edu/fiuba/algo3/modelo/Vista/torreBlanca.png")).toURI().toString());
+        ImageView imagenBotonBlanca = new ImageView((new File("src/main/resources/image/torreBlanca.png")).toURI().toString());
         Button botonBlanca = new Button();
         botonBlanca.setGraphic(imagenBotonBlanca);
         botonBlanca.setText("Torre Blanca");
