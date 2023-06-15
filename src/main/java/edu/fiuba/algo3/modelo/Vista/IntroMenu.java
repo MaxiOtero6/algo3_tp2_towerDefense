@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Vista;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -164,22 +165,22 @@ public class IntroMenu {
         }
 
         //HORMIGA DE EJEMPLO
-        ImageView hormiga = new ImageView(getClass().getResource("hormiga.png").toExternalForm());
+        ImageView hormiga = new ImageView((new File("src/main/java/edu/fiuba/algo3/modelo/Vista/hormiga.png")).toURI().toString());
         root.add(hormiga,1,1);
 
         //ARANIA DE EJEMPLO
-        ImageView arania = new ImageView(getClass().getResource("arania.png").toExternalForm());
+        ImageView arania = new ImageView((new File("src/main/java/edu/fiuba/algo3/modelo/Vista/arania.png")).toURI().toString());
         root.add(arania,6,4);
 
         //TOPO DE EJEMPLO
-        ImageView topo = new ImageView(getClass().getResource("topo.png").toExternalForm());
+        ImageView topo = new ImageView((new File("src/main/java/edu/fiuba/algo3/modelo/Vista/topo.png")).toURI().toString());
         root.add(topo,6,1);
 
         //LECHUZA DE EJEMPLO
-        ImageView lechuza = new ImageView(getClass().getResource("lechuza.png").toExternalForm());
+        ImageView lechuza = new ImageView((new File("src/main/java/edu/fiuba/algo3/modelo/Vista/lechuza.png")).toURI().toString());
         root.add(lechuza,5,10);
 
-        ImageView imagenBotonPlateada = new ImageView(new Image(getClass().getResourceAsStream("torrePlateada.png")));
+        ImageView imagenBotonPlateada = new ImageView((new File("src/main/java/edu/fiuba/algo3/modelo/Vista/torrePlateada.png")).toURI().toString());
         Button botonPlateada = new Button();
         botonPlateada.setGraphic(imagenBotonPlateada);
         botonPlateada.setText("Torre Plateada");
@@ -188,7 +189,7 @@ public class IntroMenu {
             torreAux.setTorre(torreCreada);
         });
 
-        ImageView imagenBotonBlanca = new ImageView(new Image(getClass().getResourceAsStream("torreBlanca.png")));
+        ImageView imagenBotonBlanca = new ImageView((new File("src/main/java/edu/fiuba/algo3/modelo/Vista/torreBlanca.png")).toURI().toString());
         Button botonBlanca = new Button();
         botonBlanca.setGraphic(imagenBotonBlanca);
         botonBlanca.setText("Torre Blanca");
