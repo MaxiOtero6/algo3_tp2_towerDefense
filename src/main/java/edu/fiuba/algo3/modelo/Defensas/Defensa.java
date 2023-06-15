@@ -8,6 +8,7 @@ import edu.fiuba.algo3.modelo.Defensas.Salud.Destruida;
 import edu.fiuba.algo3.modelo.Defensas.Salud.Operativa;
 import edu.fiuba.algo3.modelo.Defensas.Salud.Salud;
 import edu.fiuba.algo3.modelo.Enemigos.*;
+import edu.fiuba.algo3.modelo.SingleLogger;
 
 public abstract class Defensa {
     
@@ -48,6 +49,9 @@ public abstract class Defensa {
 
     public void setearPosicion(Posicion posicion)
     {
+        String tipoDefensa = this.getClass().getSimpleName();
+        SingleLogger.obtenerLogger().imprimirLog(String.format(
+                "El jugador construye %s en la posicion %s", tipoDefensa, posicion.imprimirPosicion() ));
         this.posicion = posicion;
     }
 

@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Parcelas.Tierra;
 
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Defensas.Defensa;
+import edu.fiuba.algo3.modelo.SingleLogger;
 
 public class EsConstruible implements Construible{
     

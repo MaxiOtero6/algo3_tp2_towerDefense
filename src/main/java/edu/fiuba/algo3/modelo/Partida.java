@@ -52,11 +52,11 @@ public class Partida {
         }
         catch (GanarPartidaError g)
         {
-
+            SingleLogger.obtenerLogger().imprimirLog("Jugador gana la partida");
         }
         catch (PerderPartidaError p)
         {
-
+            SingleLogger.obtenerLogger().imprimirLog("Jugador pierde la partida");
         }
     }
 
