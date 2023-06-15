@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.unitTest.Parcelas;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.apache.logging.log4j.LogManager;
@@ -12,7 +11,6 @@ import edu.fiuba.algo3.modelo.SingleLogger;
 import edu.fiuba.algo3.modelo.Defensas.Torres.Torre;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
-import edu.fiuba.algo3.modelo.Parcelas.Tierra.EsConstruible;
 import edu.fiuba.algo3.modelo.Parcelas.Tierra.NoEsConstruible;
 
 public class NoEsConstruibleTest {

@@ -23,8 +23,6 @@ import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
 import edu.fiuba.algo3.modelo.Parcelas.*;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.*;
 import edu.fiuba.algo3.modelo.Parcelas.Tierra.*;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 
 import java.util.Arrays;

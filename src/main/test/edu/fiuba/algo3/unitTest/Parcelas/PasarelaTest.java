@@ -22,7 +22,6 @@ import edu.fiuba.algo3.modelo.Errores.DefensaEnTerrenoErroneoError;
 import edu.fiuba.algo3.modelo.Errores.SpawnNoEnLargadaError;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Pasarela;
-import edu.fiuba.algo3.modelo.Parcelas.Tierra.Tierra;
 
 public class PasarelaTest {
     @BeforeEach

@@ -12,10 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
-import org.mockito.Mockito;
-
 import edu.fiuba.algo3.modelo.Camino;
-import edu.fiuba.algo3.modelo.Partida;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.SingleLogger;
 import edu.fiuba.algo3.modelo.Turno;
@@ -24,12 +21,9 @@ import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
-import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Largada;
-import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Pasarela;
 import edu.fiuba.algo3.modelo.Parser.CreadorEnemigos;
-import edu.fiuba.algo3.modelo.Parser.CreadorMapa;
 
 public class TurnoTest {
 

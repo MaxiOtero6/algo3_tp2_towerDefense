@@ -26,10 +26,7 @@ import edu.fiuba.algo3.modelo.Enemigos.Topo;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Largada;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Pasarela;
-import edu.fiuba.algo3.modelo.Enemigos.Arania;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
-import edu.fiuba.algo3.modelo.Enemigos.Hormiga;
-import edu.fiuba.algo3.modelo.Enemigos.Lechuza;
 
 public class TopoTest {
     @BeforeEach

@@ -3,40 +3,26 @@ package edu.fiuba.algo3.modelo.Vista;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
-
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Largada;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Meta;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Pasarela;
 import edu.fiuba.algo3.modelo.Parcelas.Tierra.Tierra;
-import edu.fiuba.algo3.modelo.Partida;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 import edu.fiuba.algo3.modelo.Parcelas.Rocoso;
 import edu.fiuba.algo3.modelo.Parser.CreadorMapa;
 
 import edu.fiuba.algo3.modelo.Defensas.Torres.*;
 
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class IntroMenu {

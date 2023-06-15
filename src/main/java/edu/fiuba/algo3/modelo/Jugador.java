@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
-import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -1,12 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
-import edu.fiuba.algo3.modelo.Parcelas.Pasarela.*;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
-import edu.fiuba.algo3.modelo.Errores.SpawnNoEnLargadaError;
 
 public class Camino {
     private List<Parcela> parcelas;

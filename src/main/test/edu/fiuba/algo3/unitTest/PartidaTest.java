@@ -1,14 +1,7 @@
 package edu.fiuba.algo3.unitTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
 import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import edu.fiuba.algo3.modelo.Creditos;
-import edu.fiuba.algo3.modelo.Partida;
 import edu.fiuba.algo3.modelo.SingleLogger;
 
 public class PartidaTest {

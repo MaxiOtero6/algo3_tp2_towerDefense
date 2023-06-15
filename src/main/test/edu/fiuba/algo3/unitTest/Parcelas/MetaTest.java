@@ -21,7 +21,6 @@ import edu.fiuba.algo3.modelo.Errores.SpawnNoEnLargadaError;
 import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Meta;
-import edu.fiuba.algo3.modelo.Parcelas.Tierra.Tierra;
 
 public class MetaTest {
     @BeforeEach
