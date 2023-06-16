@@ -4,9 +4,9 @@ import edu.fiuba.algo3.modelo.Errores.DefensaEnTerrenoErroneoError;
 import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
-import edu.fiuba.algo3.modelo.Parcelas.Tierra.Construible;
-import edu.fiuba.algo3.modelo.Parcelas.Tierra.EsConstruible;
-import edu.fiuba.algo3.modelo.Parcelas.Tierra.NoEsConstruible;
+import edu.fiuba.algo3.modelo.Parcelas.Construible.Construible;
+import edu.fiuba.algo3.modelo.Parcelas.Construible.EsConstruible;
+import edu.fiuba.algo3.modelo.Parcelas.Construible.NoEsConstruible;
 
 public class Pasarela extends Parcela {
 

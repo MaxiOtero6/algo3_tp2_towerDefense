@@ -11,7 +11,7 @@ import edu.fiuba.algo3.modelo.SingleLogger;
 import edu.fiuba.algo3.modelo.Defensas.Torres.Torre;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
-import edu.fiuba.algo3.modelo.Parcelas.Tierra.NoEsConstruible;
+import edu.fiuba.algo3.modelo.Parcelas.Construible.NoEsConstruible;
 
 public class NoEsConstruibleTest {
     @BeforeEach

@@ -3,6 +3,9 @@ package edu.fiuba.algo3.modelo.Parcelas.Tierra;
 import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Defensas.Torres.*;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
+import edu.fiuba.algo3.modelo.Parcelas.Construible.Construible;
+import edu.fiuba.algo3.modelo.Parcelas.Construible.EsConstruible;
+import edu.fiuba.algo3.modelo.Parcelas.Construible.NoEsConstruible;
 import edu.fiuba.algo3.modelo.Errores.DefensaEnTerrenoErroneoError;
 
 public class Tierra extends Parcela 
