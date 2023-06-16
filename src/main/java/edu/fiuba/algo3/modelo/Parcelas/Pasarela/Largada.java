@@ -18,10 +18,9 @@ public class Largada extends Parcela {
     @Override
     public void aparecerEnemigos(List<Enemigo> enemigos)
     {
-        this.enemigos = new LinkedList<>(enemigos);
-        for (Enemigo enemigo : this.enemigos) 
+        for (Enemigo enemigo : enemigos) 
         {
-            enemigo.setearPosicion(this.posicion);
+            this.agregarEnemigo(enemigo);
         }
     }
 

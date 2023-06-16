@@ -11,7 +11,7 @@ import edu.fiuba.algo3.modelo.Errores.SpawnNoEnLargadaError;
 public abstract class Parcela {
 
     protected Posicion posicion;
-    protected LinkedList<Enemigo> enemigos;
+    private LinkedList<Enemigo> enemigos;
 
     public Parcela(int coordenadaX, int coordenadaY)
     {
