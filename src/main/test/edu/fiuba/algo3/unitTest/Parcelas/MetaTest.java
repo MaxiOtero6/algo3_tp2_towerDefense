@@ -19,8 +19,8 @@ import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Enemigos.Hormiga;
 import edu.fiuba.algo3.modelo.Errores.SpawnNoEnLargadaError;
 import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
+import edu.fiuba.algo3.modelo.Parcelas.Meta;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
-import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Meta;
 
 public class MetaTest {
     @BeforeEach

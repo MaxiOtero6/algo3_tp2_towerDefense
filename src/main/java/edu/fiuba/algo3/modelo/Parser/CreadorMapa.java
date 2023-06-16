@@ -5,10 +5,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import edu.fiuba.algo3.modelo.Parcelas.*;
-import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Largada;
-import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Meta;
-import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Pasarela;
-import edu.fiuba.algo3.modelo.Parcelas.Tierra.Tierra;
 
 public class CreadorMapa {
     

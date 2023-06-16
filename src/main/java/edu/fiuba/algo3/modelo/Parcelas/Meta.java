@@ -1,9 +1,8 @@
-package edu.fiuba.algo3.modelo.Parcelas.Pasarela;
+package edu.fiuba.algo3.modelo.Parcelas;
 
 import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
-import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 
 public class Meta extends Parcela{
     

@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.Parcelas.Pasarela;
+package edu.fiuba.algo3.modelo.Parcelas;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -6,7 +6,6 @@ import java.util.List;
 import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
-import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 
 public class Largada extends Parcela {
     

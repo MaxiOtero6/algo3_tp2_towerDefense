@@ -21,8 +21,8 @@ import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
+import edu.fiuba.algo3.modelo.Parcelas.Largada;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
-import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Largada;
 import edu.fiuba.algo3.modelo.Parser.CreadorEnemigos;
 
 public class TurnoTest {

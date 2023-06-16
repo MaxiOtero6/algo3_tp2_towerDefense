@@ -18,12 +18,12 @@ import edu.fiuba.algo3.modelo.SingleLogger;
 import edu.fiuba.algo3.modelo.Defensas.Torres.Torre;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
+import edu.fiuba.algo3.modelo.Parcelas.Largada;
+import edu.fiuba.algo3.modelo.Parcelas.Meta;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
+import edu.fiuba.algo3.modelo.Parcelas.Pasarela;
 import edu.fiuba.algo3.modelo.Parcelas.Rocoso;
-import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Largada;
-import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Meta;
-import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Pasarela;
-import edu.fiuba.algo3.modelo.Parcelas.Tierra.Tierra;
+import edu.fiuba.algo3.modelo.Parcelas.Tierra;
 
 public class MapaTest {
     @BeforeEach

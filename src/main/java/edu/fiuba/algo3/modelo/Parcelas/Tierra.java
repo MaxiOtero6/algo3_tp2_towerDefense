@@ -1,30 +1,29 @@
-package edu.fiuba.algo3.modelo.Parcelas.Pasarela;
+package edu.fiuba.algo3.modelo.Parcelas;
 
-import edu.fiuba.algo3.modelo.Errores.DefensaEnTerrenoErroneoError;
 import edu.fiuba.algo3.modelo.Defensas.Defensa;
-import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
-import edu.fiuba.algo3.modelo.Parcelas.Parcela;
+import edu.fiuba.algo3.modelo.Defensas.Torres.*;
 import edu.fiuba.algo3.modelo.Parcelas.Construible.Construible;
 import edu.fiuba.algo3.modelo.Parcelas.Construible.EsConstruible;
 import edu.fiuba.algo3.modelo.Parcelas.Construible.NoEsConstruible;
+import edu.fiuba.algo3.modelo.Errores.DefensaEnTerrenoErroneoError;
 
-public class Pasarela extends Parcela {
-
-    private TrampaArenosa trampa;
+public class Tierra extends Parcela 
+{
+    private Torre torre;
     private Construible construible;
-
-    public Pasarela(int coordenadaX, int coordenadaY)
+    
+    public Tierra(int coordenadaX, int coordenadaY)
     {
         super(coordenadaX, coordenadaY);
         this.construible = new EsConstruible();
     }
-    
+
     @Override
     public void construir(Defensa defensa)
     {
-        if (defensa instanceof TrampaArenosa)
+        if (defensa instanceof Torre)
         {
-            this.trampa = (TrampaArenosa)construible.construir(defensa, this.posicion);
+            this.torre = (Torre)construible.construir(defensa, this.posicion);
             this.setConstruible(new NoEsConstruible());
         }
         else

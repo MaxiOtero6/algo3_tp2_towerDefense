@@ -21,7 +21,7 @@ import edu.fiuba.algo3.modelo.Enemigos.Hormiga;
 import edu.fiuba.algo3.modelo.Errores.DefensaEnTerrenoErroneoError;
 import edu.fiuba.algo3.modelo.Errores.SpawnNoEnLargadaError;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
-import edu.fiuba.algo3.modelo.Parcelas.Tierra.Tierra;
+import edu.fiuba.algo3.modelo.Parcelas.Tierra;
 
 public class TierraTest {
     @BeforeEach

@@ -23,8 +23,8 @@ import edu.fiuba.algo3.modelo.Defensas.Torres.TorrePlateada;
 import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
 import edu.fiuba.algo3.modelo.Enemigos.Hormiga;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
+import edu.fiuba.algo3.modelo.Parcelas.Pasarela;
 import edu.fiuba.algo3.modelo.Parcelas.Rocoso;
-import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Pasarela;
 import edu.fiuba.algo3.modelo.Parser.CreadorMapa;
 
 public class PartidaTest {

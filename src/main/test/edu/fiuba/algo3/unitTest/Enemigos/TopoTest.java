@@ -23,9 +23,9 @@ import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.SingleLogger;
 import edu.fiuba.algo3.modelo.Enemigos.Topo;
+import edu.fiuba.algo3.modelo.Parcelas.Largada;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
-import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Largada;
-import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Pasarela;
+import edu.fiuba.algo3.modelo.Parcelas.Pasarela;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 
 public class TopoTest {

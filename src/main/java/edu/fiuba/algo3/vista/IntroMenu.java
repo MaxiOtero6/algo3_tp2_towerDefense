@@ -3,12 +3,13 @@ package edu.fiuba.algo3.vista;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
-import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Largada;
-import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Meta;
-import edu.fiuba.algo3.modelo.Parcelas.Pasarela.Pasarela;
-import edu.fiuba.algo3.modelo.Parcelas.Tierra.Tierra;
+
+import edu.fiuba.algo3.modelo.Parcelas.Largada;
+import edu.fiuba.algo3.modelo.Parcelas.Meta;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
+import edu.fiuba.algo3.modelo.Parcelas.Pasarela;
 import edu.fiuba.algo3.modelo.Parcelas.Rocoso;
+import edu.fiuba.algo3.modelo.Parcelas.Tierra;
 import edu.fiuba.algo3.modelo.Parser.CreadorMapa;
 
 import edu.fiuba.algo3.modelo.Defensas.Torres.*;
