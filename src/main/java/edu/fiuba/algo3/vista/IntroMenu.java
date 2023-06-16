@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.Vista;
+package edu.fiuba.algo3.vista;
 
 import java.io.File;
 import java.util.LinkedList;
