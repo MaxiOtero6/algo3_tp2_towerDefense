@@ -102,18 +102,13 @@ public abstract class Enemigo {
 
     public void mover()
     {
-        if (this.posicion != null)
+
+        if (this.estaVivo())
         {
-            if (this.estaVivo())
-            {
-                this.camino.moverEnemigo((int)(this.velocidad * this.multiplicadorVelocidad), this.posicion, this);
-                this.multiplicadorVelocidad = 1;
-            }
+            this.camino.moverEnemigo((int)(this.velocidad * this.multiplicadorVelocidad), this.posicion, this);
+            this.multiplicadorVelocidad = 1;
         }
-        else
-        {
-            //Log no se puede mover un enemigo q no esta en una posicion
-        }
+
     }
 
     @Override
