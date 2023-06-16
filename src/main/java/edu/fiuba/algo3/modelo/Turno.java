@@ -64,7 +64,7 @@ public class Turno {
         comprobarCantidadEnemigos();
     }
 
-    public void avanzarDefensas()
+    private void avanzarDefensas()
     {
         for (Torre torre : torres) {
             torre.avanzarTurno();
