@@ -35,7 +35,7 @@ public class Torre extends Defensa{
         return this.progresoConstruccion == 0;
     }
 
-    public void cambiarEstado(){
+    public void activarTorre(){
         this.estado = new EstadoActivado();
     }
 

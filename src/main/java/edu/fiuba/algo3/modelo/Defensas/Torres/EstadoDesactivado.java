@@ -5,7 +5,7 @@ public class EstadoDesactivado implements Estado {
     @Override
     public void avanzarTurno(Torre torre){
         if(torre.progresarConstruccion()){
-            torre.cambiarEstado();
+            torre.activarTorre();
         };
     }
     
