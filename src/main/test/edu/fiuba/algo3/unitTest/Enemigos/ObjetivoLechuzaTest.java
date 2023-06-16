@@ -29,10 +29,10 @@ public class ObjetivoLechuzaTest {
         LinkedList<Torre> torres = new LinkedList<>();
         torres.add(torre1); torres.add(torre2);
 
-        ObjetivoLechuza.setTorres(torres);
+        ObjetivoLechuza objetivo = new ObjetivoLechuza();
         Torre torreEsperada = torre1;
 
-        Torre torreObtenida = ObjetivoLechuza.hallarObjetivo();
+        Torre torreObtenida = objetivo.hallarObjetivo(torres);
 
         assertEquals(torreEsperada, torreObtenida);
     }
@@ -40,9 +40,9 @@ public class ObjetivoLechuzaTest {
     @Test
     public void test01ElObjetivoDeUnaLechuzaSiNoHayTorresEs()
     {
-        ObjetivoLechuza.setTorres(null);
+        ObjetivoLechuza objetivo = new ObjetivoLechuza();
         Torre torreEsperada = new NoTorre();
-        Torre torreObtenida = ObjetivoLechuza.hallarObjetivo();
+        Torre torreObtenida = objetivo.hallarObjetivo(null);
 
 
         assertEquals(torreEsperada, torreObtenida);

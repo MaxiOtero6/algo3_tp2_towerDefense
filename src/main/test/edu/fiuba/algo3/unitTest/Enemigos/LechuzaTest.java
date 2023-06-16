@@ -27,7 +27,6 @@ import edu.fiuba.algo3.modelo.Defensas.Torres.Torre;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Enemigos.Lechuza;
-import edu.fiuba.algo3.modelo.Enemigos.Objetivos.ObjetivoLechuza;
 import edu.fiuba.algo3.modelo.Errores.EnemigoNoRalentizableError;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 import edu.fiuba.algo3.modelo.Parser.CreadorCaminoH;
@@ -43,10 +42,10 @@ public class LechuzaTest {
     public void test01LaLechuzaNoDebeAtacarAlJugador()
     {
         Jugador jugadorMock = mock(Jugador.class);
-        Enemigo enemigo = new Lechuza(jugadorMock, null);
+        Lechuza enemigo = new Lechuza(jugadorMock, null);
         LinkedList<Torre> torres = new LinkedList<>();
         torres.add(new TorreBlanca());
-        ObjetivoLechuza.setTorres(torres);
+        enemigo.setTorres(torres);
         enemigo.atacar();
         verify(jugadorMock, times(0)).recibirDanio(0, enemigo.getClass().getSimpleName());
     }
@@ -55,11 +54,11 @@ public class LechuzaTest {
     public void test02LaLechuzaDestruyeLaTorre()
     {
         Jugador jugadorMock = mock(Jugador.class);
-        Enemigo enemigo = new Lechuza(jugadorMock, null);
+        Lechuza enemigo = new Lechuza(jugadorMock, null);
         LinkedList<Torre> torres = new LinkedList<>();
         Torre torre = new TorreBlanca();
         torres.add(torre);
-        ObjetivoLechuza.setTorres(torres);
+        enemigo.setTorres(torres);
         enemigo.atacar();
         verify(jugadorMock, times(0)).recibirDanio(0, enemigo.getClass().getSimpleName());
         assertTrue(torre.estaDestruida());

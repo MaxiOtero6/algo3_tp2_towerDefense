@@ -6,7 +6,7 @@ import java.util.List;
 import edu.fiuba.algo3.modelo.Defensas.Torres.Torre;
 import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
-import edu.fiuba.algo3.modelo.Enemigos.Objetivos.ObjetivoLechuza;
+import edu.fiuba.algo3.modelo.Enemigos.Lechuza;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 import edu.fiuba.algo3.modelo.Parser.CreadorEnemigos;
@@ -27,7 +27,6 @@ public class Turno {
         this.enemigos = new LinkedList<>();
         this.torres = new LinkedList<>();
         this.trampas = new LinkedList<>();
-        ObjetivoLechuza.setTorres(torres);
     }
 
     public Turno(Camino camino, Jugador jugador)
@@ -37,7 +36,6 @@ public class Turno {
         this.enemigos = new LinkedList<>();
         this.torres = new LinkedList<>();
         this.trampas = new LinkedList<>();
-        ObjetivoLechuza.setTorres(torres);
     }
 
     public Turno(Camino camino, Jugador jugador, LinkedList<Torre> torres, LinkedList<TrampaArenosa> trampas)
@@ -47,7 +45,6 @@ public class Turno {
         this.enemigos = new LinkedList<>();
         this.torres = torres;
         this.trampas = trampas;
-        ObjetivoLechuza.setTorres(torres);
     }
 
     public void avanzarTurno(int numeroTurno) {
@@ -59,6 +56,7 @@ public class Turno {
             for (Enemigo enemigo : enemigosTurno) 
             {
                 this.enemigos.add(enemigo);
+                if (enemigo instanceof Lechuza) {((Lechuza)enemigo).setTorres(this.torres);}
             }
             this.camino.aparecerEnemigos(enemigosTurno);
         }
