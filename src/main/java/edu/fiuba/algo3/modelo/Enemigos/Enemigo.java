@@ -67,6 +67,7 @@ public abstract class Enemigo {
     {
         String tipoEnemigo = this.getClass().getSimpleName();
         this.jugador.recibirDanio(danioAtaque, tipoEnemigo);
+        this.energia = 0;
     }
 
     public void recibirDanio(int danioRecibido, String tipoTorre)

@@ -10,6 +10,9 @@ public class NoEnemigo extends Enemigo {
     protected void morir() {}
 
     @Override
+    public void atacar(){morir();}
+
+    @Override
     public void recibirDanio(int danioRecibido, String tipoTorre){morir();}
     
 }
