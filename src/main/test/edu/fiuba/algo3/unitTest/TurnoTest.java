@@ -16,7 +16,7 @@ import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.SingleLogger;
 import edu.fiuba.algo3.modelo.Turno;
-import edu.fiuba.algo3.modelo.Defensas.Torres.Torre;
+import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
@@ -71,7 +71,7 @@ public class TurnoTest {
         Turno turno = new Turno(caminoMock, null);
         turno.avanzarTurno(0); //Aparecen los enemigos
         
-        Torre torreMock = mock(TorreBlanca.class);
+        TorreBlanca torreMock = mock(TorreBlanca.class);
         doNothing().when(torreMock).avanzarTurno();
         turno.aniadirTorre(torreMock);
 
@@ -102,9 +102,9 @@ public class TurnoTest {
         when(CreadorEnemigos.crearEnemigos(0, null, caminoMock)).thenReturn(lista);
         
         
-        Torre torre = new TorreBlanca();
-        LinkedList<Torre> torres = new LinkedList<>();
-        LinkedList<Torre> spy1 = spy(torres);
+        TorreBlanca torre = new TorreBlanca();
+        LinkedList<TorreBlanca> torres = new LinkedList<>();
+        LinkedList<TorreBlanca> spy1 = spy(torres);
         
         TrampaArenosa trampa = new TrampaArenosa();
         LinkedList<TrampaArenosa> trampas = new LinkedList<>();
@@ -141,7 +141,7 @@ public class TurnoTest {
         Camino camino = new Camino(parcelas);
 
         int turno3 = 100;
-        Torre torre = new TorreBlanca();
+        TorreBlanca torre = new TorreBlanca();
         TrampaArenosa trampaArenosa = new TrampaArenosa();
         torre.setearPosicion(new Posicion(0, 0));
         trampaArenosa.setearPosicion(new Posicion(3, 3));

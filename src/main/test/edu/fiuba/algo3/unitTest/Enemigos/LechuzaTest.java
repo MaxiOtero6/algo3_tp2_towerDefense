@@ -23,7 +23,7 @@ import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.SingleLogger;
-import edu.fiuba.algo3.modelo.Defensas.Torres.Torre;
+import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Enemigos.Lechuza;
@@ -43,7 +43,7 @@ public class LechuzaTest {
     {
         Jugador jugadorMock = mock(Jugador.class);
         Lechuza enemigo = new Lechuza(jugadorMock, null);
-        LinkedList<Torre> torres = new LinkedList<>();
+        LinkedList<TorreBlanca> torres = new LinkedList<>();
         torres.add(new TorreBlanca());
         enemigo.setTorres(torres);
         enemigo.atacar();
@@ -55,8 +55,8 @@ public class LechuzaTest {
     {
         Jugador jugadorMock = mock(Jugador.class);
         Lechuza enemigo = new Lechuza(jugadorMock, null);
-        LinkedList<Torre> torres = new LinkedList<>();
-        Torre torre = new TorreBlanca();
+        LinkedList<TorreBlanca> torres = new LinkedList<>();
+        TorreBlanca torre = new TorreBlanca();
         torres.add(torre);
         enemigo.setTorres(torres);
         enemigo.atacar();

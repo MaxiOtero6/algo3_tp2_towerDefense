@@ -1,14 +1,14 @@
 package edu.fiuba.algo3.unitTest.Defensas;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -23,9 +23,11 @@ import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.SingleLogger;
 import edu.fiuba.algo3.modelo.Defensas.Defensa;
+import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorrePlateada;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Enemigos.Hormiga;
+import edu.fiuba.algo3.modelo.Enemigos.Lechuza;
 
 public class TorrePlateadaTest {
     @BeforeEach
@@ -51,10 +53,20 @@ public class TorrePlateadaTest {
     @Test
     public void test02TorrePlateadaTardeEnCrearseLoEsperado() {
         TorrePlateada torrePlateada = new TorrePlateada();
-        torrePlateada.avanzarTurno();
-        assertFalse(torrePlateada.chequearProgreso());
-        torrePlateada.avanzarTurno();
-        assertTrue(torrePlateada.chequearProgreso());
+        TorreBlanca spy = spy(torrePlateada);
+        LinkedList<Enemigo> enemigos = new LinkedList<>();
+        Enemigo enemigo = new Lechuza(null,null); 
+        enemigo.setearPosicion(new Posicion(0, 0));
+        enemigos.add(enemigo);
+        spy.setEnemigos(enemigos);
+        spy.setearPosicion(new Posicion(1,1));
+
+        spy.avanzarTurno();
+        verify(spy, never()).atacar();
+        spy.avanzarTurno();
+        verify(spy, never()).atacar();
+        spy.avanzarTurno();
+        verify(spy, times(1)).atacar();
     }
 
     @Test

@@ -8,6 +8,8 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -25,6 +27,7 @@ import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Enemigos.Hormiga;
+import edu.fiuba.algo3.modelo.Enemigos.Lechuza;
 
 public class TorreBlancaTest {
     @BeforeEach
@@ -50,8 +53,18 @@ public class TorreBlancaTest {
     @Test
     public void test02TorreBlancaTardeEnCrearseLoEsperado() {
         TorreBlanca torreBlanca = new TorreBlanca();
-        torreBlanca.avanzarTurno();
-        assertTrue(torreBlanca.chequearProgreso());
+        TorreBlanca spy = spy(torreBlanca);
+        LinkedList<Enemigo> enemigos = new LinkedList<>();
+        Enemigo enemigo = new Lechuza(null,null); 
+        enemigo.setearPosicion(new Posicion(0, 0));
+        enemigos.add(enemigo);
+        spy.setEnemigos(enemigos);
+        spy.setearPosicion(new Posicion(1,1));
+
+        spy.avanzarTurno();
+        verify(spy, never()).atacar();
+        spy.avanzarTurno();
+        verify(spy, times(1)).atacar();
     }
 
     @Test

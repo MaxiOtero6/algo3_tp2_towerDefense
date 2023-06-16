@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import edu.fiuba.algo3.modelo.SingleLogger;
 import edu.fiuba.algo3.modelo.Defensas.Torres.NoTorre;
-import edu.fiuba.algo3.modelo.Defensas.Torres.Torre;
+import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Enemigos.Objetivos.ObjetivoLechuza;
 
@@ -23,16 +23,16 @@ public class ObjetivoLechuzaTest {
     @Test
     public void test01ElObjetivoDeUnaLechuzaEsLaPrimeraTorreConstruidaPorElUsuario()
     {
-        Torre torre1 = new TorreBlanca();
-        Torre torre2 = new TorreBlanca();
+        TorreBlanca torre1 = new TorreBlanca();
+        TorreBlanca torre2 = new TorreBlanca();
 
-        LinkedList<Torre> torres = new LinkedList<>();
+        LinkedList<TorreBlanca> torres = new LinkedList<>();
         torres.add(torre1); torres.add(torre2);
 
         ObjetivoLechuza objetivo = new ObjetivoLechuza();
-        Torre torreEsperada = torre1;
+        TorreBlanca torreEsperada = torre1;
 
-        Torre torreObtenida = objetivo.hallarObjetivo(torres);
+        TorreBlanca torreObtenida = objetivo.hallarObjetivo(torres);
 
         assertEquals(torreEsperada, torreObtenida);
     }
@@ -41,8 +41,8 @@ public class ObjetivoLechuzaTest {
     public void test01ElObjetivoDeUnaLechuzaSiNoHayTorresEs()
     {
         ObjetivoLechuza objetivo = new ObjetivoLechuza();
-        Torre torreEsperada = new NoTorre();
-        Torre torreObtenida = objetivo.hallarObjetivo(null);
+        TorreBlanca torreEsperada = new NoTorre();
+        TorreBlanca torreObtenida = objetivo.hallarObjetivo(null);
 
 
         assertEquals(torreEsperada, torreObtenida);

@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.SingleLogger;
-import edu.fiuba.algo3.modelo.Defensas.Torres.Torre;
+import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
 import edu.fiuba.algo3.modelo.Parcelas.Largada;
@@ -34,7 +34,7 @@ public class MapaTest {
     @Test
     public void test01NoSePuedeConstruirEnRocoso()
     {
-        Torre defensa = new TorreBlanca();
+        TorreBlanca defensa = new TorreBlanca();
         Rocoso rocosoMock = mock(Rocoso.class);
         doThrow(new TerrenoDeConstruccionInvalidoError()).when(rocosoMock).construir(defensa);
         List<List<Parcela>> lista = new LinkedList<>();
@@ -48,7 +48,7 @@ public class MapaTest {
     @Test
     public void test01SePuedeConstruirEnTierra()
     {
-        Torre defensa = new TorreBlanca();
+        TorreBlanca defensa = new TorreBlanca();
         Tierra tierraMock = mock(Tierra.class);
         doNothing().when(tierraMock).construir(defensa);
         List<List<Parcela>> lista = new LinkedList<>();
@@ -62,7 +62,7 @@ public class MapaTest {
     @Test
     public void test01NoSePuedeConstruirEnTierraOcupada()
     {
-        Torre defensa = new TorreBlanca();
+        TorreBlanca defensa = new TorreBlanca();
         Tierra tierraMock = mock(Tierra.class);
         doThrow(new TerrenoDeConstruccionInvalidoError()).when(tierraMock).construir(defensa);
         List<List<Parcela>> lista = new LinkedList<>();
@@ -76,7 +76,7 @@ public class MapaTest {
     @Test
     public void test01SePuedeConstruirEnPasarela()
     {
-        Torre defensa = new TorreBlanca();
+        TorreBlanca defensa = new TorreBlanca();
         Pasarela pasarelaMock = mock(Pasarela.class);
         doNothing().when(pasarelaMock).construir(defensa);
         List<List<Parcela>> lista = new LinkedList<>();
@@ -90,7 +90,7 @@ public class MapaTest {
     @Test
     public void test01NoSePuedeConstruirEnPasarelaOcupada()
     {
-        Torre defensa = new TorreBlanca();
+        TorreBlanca defensa = new TorreBlanca();
         Pasarela pasarelaMock = mock(Pasarela.class);
         doThrow(new TerrenoDeConstruccionInvalidoError()).when(pasarelaMock).construir(defensa);
         List<List<Parcela>> lista = new LinkedList<>();
@@ -104,7 +104,7 @@ public class MapaTest {
     @Test
     public void test01NoSePuedeConstruirEnMeta()
     {
-        Torre defensa = new TorreBlanca();
+        TorreBlanca defensa = new TorreBlanca();
         Meta metaMock = mock(Meta.class);
         doThrow(new TerrenoDeConstruccionInvalidoError()).when(metaMock).construir(defensa);
         List<List<Parcela>> lista = new LinkedList<>();
@@ -118,7 +118,7 @@ public class MapaTest {
     @Test
     public void test01NoSePuedeConstruirEnLargada()
     {
-        Torre defensa = new TorreBlanca();
+        TorreBlanca defensa = new TorreBlanca();
         Largada largadaMock = mock(Largada.class);
         doThrow(new TerrenoDeConstruccionInvalidoError()).when(largadaMock).construir(defensa);
         List<List<Parcela>> lista = new LinkedList<>();

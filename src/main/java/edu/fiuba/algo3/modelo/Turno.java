@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo;
 import java.util.LinkedList;
 import java.util.List;
 
-import edu.fiuba.algo3.modelo.Defensas.Torres.Torre;
+import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Enemigos.Lechuza;
@@ -13,7 +13,7 @@ import edu.fiuba.algo3.modelo.Parser.CreadorEnemigos;
 
 public class Turno {
 
-    private LinkedList<Torre> torres;
+    private LinkedList<TorreBlanca> torres;
     private LinkedList<TrampaArenosa> trampas;
     private LinkedList<Enemigo> enemigos;
     private Camino camino;
@@ -38,7 +38,7 @@ public class Turno {
         this.trampas = new LinkedList<>();
     }
 
-    public Turno(Camino camino, Jugador jugador, LinkedList<Torre> torres, LinkedList<TrampaArenosa> trampas)
+    public Turno(Camino camino, Jugador jugador, LinkedList<TorreBlanca> torres, LinkedList<TrampaArenosa> trampas)
     {
         this.jugador = jugador;
         this.camino = camino;
@@ -66,7 +66,7 @@ public class Turno {
 
     private void avanzarDefensas()
     {
-        for (Torre torre : torres) {
+        for (TorreBlanca torre : torres) {
             torre.avanzarTurno();
         }
 
@@ -75,7 +75,7 @@ public class Turno {
         }
     }
 
-    public void aniadirTorre(Torre torre)
+    public void aniadirTorre(TorreBlanca torre)
     {
         torre.setEnemigos(enemigos);
         torres.add(torre);
@@ -107,7 +107,7 @@ public class Turno {
 
     private void sacarDefensasDestruidas()
     {
-        for (Torre torre : torres) {
+        for (TorreBlanca torre : torres) {
             if (torre.estaDestruida()) {torres.remove(torre);}
         }
 

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.fiuba.algo3.modelo.SingleLogger;
-import edu.fiuba.algo3.modelo.Defensas.Torres.Torre;
+import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
@@ -32,7 +32,7 @@ public class MetaTest {
     public void test01AlConstruirEnMetaUnaTorreDebeTirarExcepcion()
     {   
         Meta parcela = new Meta(0,0);
-        Torre defensa = new TorreBlanca();
+        TorreBlanca defensa = new TorreBlanca();
         assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> parcela.construir(defensa));
     }
 

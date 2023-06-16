@@ -103,7 +103,7 @@ public class IntroMenu {
 
                 casillaMapa.setOnAction(event -> {
                     if(!torreAux.puseTorre){
-                        Torre torreActual = torreAux.getTorre();
+                        TorreBlanca torreActual = torreAux.getTorre();
                         parcelaActual.construir(torreActual);
 
                         if(torreActual instanceof TorrePlateada) {
@@ -153,7 +153,7 @@ public class IntroMenu {
         ImageView imagenBotonPlateada = new ImageView((new File("src/main/resources/image/torrePlateada.png")).toURI().toString());
         Button botonPlateada = new Button();
         botonPlateada.setGraphic(imagenBotonPlateada);
-        botonPlateada.setText("Torre Plateada");
+        botonPlateada.setText("TorreBlanca Plateada");
         botonPlateada.setOnAction(event -> {
             TorrePlateada torreCreada = new TorrePlateada();
             torreAux.setTorre(torreCreada);
@@ -162,7 +162,7 @@ public class IntroMenu {
         ImageView imagenBotonBlanca = new ImageView((new File("src/main/resources/image/torreBlanca.png")).toURI().toString());
         Button botonBlanca = new Button();
         botonBlanca.setGraphic(imagenBotonBlanca);
-        botonBlanca.setText("Torre Blanca");
+        botonBlanca.setText("TorreBlanca Blanca");
         botonBlanca.setOnAction(event -> {
             TorreBlanca torreCreada = new TorreBlanca();
             torreAux.setTorre(torreCreada);
@@ -184,14 +184,14 @@ public class IntroMenu {
     }
 
     class ContenedorTorre {
-    private Torre torre;
+    private TorreBlanca torre;
     public boolean puseTorre = false;
 
-    public Torre getTorre() {
+    public TorreBlanca getTorre() {
         return torre;
     }
 
-    public void setTorre(Torre torre) {
+    public void setTorre(TorreBlanca torre) {
         this.torre = torre;
         puseTorre = false;
     }

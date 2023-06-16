@@ -9,7 +9,7 @@ import edu.fiuba.algo3.modelo.Errores.DefensaEnTerrenoErroneoError;
 
 public class Tierra extends Parcela 
 {
-    private Torre torre;
+    private TorreBlanca torre;
     private Construible construible;
     
     public Tierra(int coordenadaX, int coordenadaY)
@@ -21,9 +21,9 @@ public class Tierra extends Parcela
     @Override
     public void construir(Defensa defensa)
     {
-        if (defensa instanceof Torre)
+        if (defensa instanceof TorreBlanca)
         {
-            this.torre = (Torre)construible.construir(defensa, this.posicion);
+            this.torre = (TorreBlanca)construible.construir(defensa, this.posicion);
             this.setConstruible(new NoEsConstruible());
         }
         else

@@ -20,8 +20,10 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.spy;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -44,30 +46,46 @@ public class Tests {
         assertEquals(jugadorEsperado, jugador);
     }
 
-//Verificar que cada torre tarde en construirse lo que dice que tarda y que recién están
-//“operativas” cuando ya se terminaron de construir.
     @Test
     public void test02TorrePlateadaTardeEnCrearseLoEsperado() {
         TorrePlateada torrePlateada = new TorrePlateada();
-        torrePlateada.avanzarTurno();
-        assertFalse(torrePlateada.chequearProgreso());
-        torrePlateada.avanzarTurno();
-        assertTrue(torrePlateada.chequearProgreso());
+        TorreBlanca spy = spy(torrePlateada);
+        LinkedList<Enemigo> enemigos = new LinkedList<>();
+        Enemigo enemigo = new Lechuza(null,null); 
+        enemigo.setearPosicion(new Posicion(0, 0));
+        enemigos.add(enemigo);
+        spy.setEnemigos(enemigos);
+        spy.setearPosicion(new Posicion(1,1));
 
-
+        spy.avanzarTurno();
+        verify(spy, never()).atacar();
+        spy.avanzarTurno();
+        verify(spy, never()).atacar();
+        spy.avanzarTurno();
+        verify(spy, times(1)).atacar();
     }
     @Test
     public void test02TorreBlancaTardeEnCrearseLoEsperado() {
         TorreBlanca torreBlanca = new TorreBlanca();
-        torreBlanca.avanzarTurno();
-        assertTrue(torreBlanca.chequearProgreso());
+        TorreBlanca spy = spy(torreBlanca);
+        LinkedList<Enemigo> enemigos = new LinkedList<>();
+        Enemigo enemigo = new Lechuza(null,null); 
+        enemigo.setearPosicion(new Posicion(0, 0));
+        enemigos.add(enemigo);
+        spy.setEnemigos(enemigos);
+        spy.setearPosicion(new Posicion(1,1));
+
+        spy.avanzarTurno();
+        verify(spy, never()).atacar();
+        spy.avanzarTurno();
+        verify(spy, times(1)).atacar();
 
     }
 
     @Test
     public void test03ElJugadorCuentaConLosCreditosParaConstruirLaTorre() {
         Jugador jugador = new Jugador();
-        Torre torre = new TorrePlateada();
+        TorreBlanca torre = new TorrePlateada();
         torre.gastarCreditos(jugador);
         torre.gastarCreditos(jugador);
         torre.gastarCreditos(jugador);
@@ -81,7 +99,7 @@ public class Tests {
     public void test04SePuedeConstruirSobreTierra()
     {
         Tierra tierra = new Tierra(0,0);
-        Torre torre = new TorreBlanca();
+        TorreBlanca torre = new TorreBlanca();
 
         assertDoesNotThrow(() -> tierra.construir(torre));
     }
@@ -90,7 +108,7 @@ public class Tests {
     public void test04NoSePuedeConstruirSobreTierraConUnaTorre()
     {
         Tierra tierra = new Tierra(0,0);
-        Torre torre = new TorreBlanca();
+        TorreBlanca torre = new TorreBlanca();
 
         assertDoesNotThrow(() -> tierra.construir(torre));
         assertThrows(TerrenoDeConstruccionInvalidoError.class,() -> tierra.construir(torre));
@@ -109,7 +127,7 @@ public class Tests {
     public void test04NoSePuedeConstruirUnaTorreSobreAlgunaPasarela()
     {
         Pasarela pasarela = new Pasarela(0,0);
-        Torre torre = new TorreBlanca();
+        TorreBlanca torre = new TorreBlanca();
 
         assertThrows(DefensaEnTerrenoErroneoError.class, () -> pasarela.construir(torre));
     }
@@ -137,7 +155,7 @@ public class Tests {
     public void test04NoSePuedeConstruirUnaTorreSobreLaMeta()
     {
         Meta pasarela = new Meta(0,0);
-        Torre torre = new TorreBlanca();
+        TorreBlanca torre = new TorreBlanca();
 
         assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> pasarela.construir(torre));
     }
@@ -155,7 +173,7 @@ public class Tests {
     public void test04NoSePuedeConstruirUnaTorreSobreLaLargada()
     {
         Largada pasarela = new Largada(0,0);
-        Torre torre = new TorreBlanca();
+        TorreBlanca torre = new TorreBlanca();
 
         assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> pasarela.construir(torre));
     }
@@ -173,7 +191,7 @@ public class Tests {
     public void test04NoSePuedeConstruirUnaTorreSobreRocoso()
     {
         Rocoso rocoso = new Rocoso(0,0);
-        Torre torre = new TorreBlanca();
+        TorreBlanca torre = new TorreBlanca();
 
         assertThrows(TerrenoDeConstruccionInvalidoError.class, () -> rocoso.construir(torre));
     }

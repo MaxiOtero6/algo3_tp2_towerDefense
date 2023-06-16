@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.Defensas.Torres.Torre;
+import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Enemigos.Objetivos.ObjetivoLechuza;
 import edu.fiuba.algo3.modelo.Enemigos.Volador.EsVolador;
 import edu.fiuba.algo3.modelo.Errores.EnemigoNoRalentizableError;
@@ -15,7 +15,7 @@ public class Lechuza extends Enemigo {
     
     private static int lechuzasMuertas = 0;
     private ObjetivoLechuza objetivo = new ObjetivoLechuza();
-    private LinkedList<Torre> torres;
+    private LinkedList<TorreBlanca> torres;
 
     public Lechuza(Jugador jugador, Camino camino) {
         super(5,0,5,5, jugador, camino);
@@ -58,7 +58,7 @@ public class Lechuza extends Enemigo {
         throw new EnemigoNoRalentizableError();
     }
 
-    public void setTorres(LinkedList<Torre> torres)
+    public void setTorres(LinkedList<TorreBlanca> torres)
     {
         this.torres = torres;
     }
