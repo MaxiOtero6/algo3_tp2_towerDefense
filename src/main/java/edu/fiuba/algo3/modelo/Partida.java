@@ -3,8 +3,6 @@ package edu.fiuba.algo3.modelo;
 import java.util.List;
 
 import edu.fiuba.algo3.modelo.Defensas.Defensa;
-import edu.fiuba.algo3.modelo.Defensas.Torres.*;
-import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
 import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
@@ -14,19 +12,16 @@ public class Partida {
 
     private Turno turno;
     private Mapa mapa;
-    private Jugador jugador;
 
     public Partida(List<List<Parcela>> parcelas, List<Parcela> camino) 
     {
-        this.jugador = new Jugador();
         this.mapa = new Mapa(parcelas);
-        this.turno = new Turno(camino, jugador);
+        this.turno = new Turno(camino, new Jugador());
         SingleLogger.inicializar(LogManager.getLogger());
     }
 
     public Partida(List<List<Parcela>> parcelas, List<Parcela> camino, Jugador jugador) 
     {
-        this.jugador = jugador;
         this.mapa = new Mapa(parcelas);
         this.turno = new Turno(camino, jugador);
     }
