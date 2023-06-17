@@ -88,9 +88,7 @@ public class Turno {
     }
 
     private void comprobarCantidadEnemigos(){
-        if (enemigos.size() == 0){
-            throw new GanarPartidaError();
-        }
+        GanarPartidaError.comprobarGanarJuego(enemigos);
     }
 
     @Override
