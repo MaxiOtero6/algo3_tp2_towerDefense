@@ -17,12 +17,8 @@ public class Creditos {
 
     public void gastarCreditos(int creditosAGastar)
     {
-        if (this.creditos < creditosAGastar){
-            throw new CreditosInsuficientesError();
-        }
-        else {
-            creditos -= creditosAGastar;
-        }
+        CreditosInsuficientesError.comprobarCreditos(creditosAGastar, this.creditos);
+        creditos -= creditosAGastar;
     }
 
     public void agregarCreditos(int creditos)
