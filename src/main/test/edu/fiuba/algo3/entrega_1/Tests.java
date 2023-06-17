@@ -90,7 +90,6 @@ public class Tests {
         torre.gastarCreditos(jugador);
         torre.gastarCreditos(jugador);
         assertThrows(CreditosInsuficientesError.class, () -> torre.gastarCreditos(jugador));
-        jugador.agregarCreditos(100);
     }
 
     @Test
