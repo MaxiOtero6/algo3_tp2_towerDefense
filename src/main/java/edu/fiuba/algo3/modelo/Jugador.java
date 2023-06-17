@@ -34,9 +34,7 @@ public class Jugador {
     public void recibirDanio(int danio, String enemigo)
     {
         this.vida -= danio;
-        if (vida <= 0){
-            throw new PerderPartidaError();
-        }
+        PerderPartidaError.comprobarPerderJuego(this.vida);
         SingleLogger.obtenerLogger().imprimirLog(String.format(
                 "%s llega a la meta, produce %d de daño al jugador", enemigo, danio));
     }
