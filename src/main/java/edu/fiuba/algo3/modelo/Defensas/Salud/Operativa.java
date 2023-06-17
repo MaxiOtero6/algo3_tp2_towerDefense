@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Defensas.Defensa;
 
 public class Operativa implements Salud
 {
+    @Override
     public void avanzarTurno(LinkedList<Defensa> defensas, Defensa defensa) 
     {
         defensa.avanzarTurno();
