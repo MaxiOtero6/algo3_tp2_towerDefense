@@ -9,6 +9,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -18,6 +19,7 @@ import java.util.LinkedList;
 import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
@@ -78,16 +80,16 @@ public class TrampaArenosaTest {
         doReturn(0.0).when(enemigoMock).calcDistancia(posicion);
 
         TrampaArenosa trampaArenosa = new TrampaArenosa();
-        trampaArenosa.setEnemigos(enemigos);
+        TrampaArenosa spy = Mockito.spy(trampaArenosa);
+        spy.setEnemigos(enemigos);
 
         for (int i = 0; i < 2; i++) {
-            trampaArenosa.avanzarTurno();
-            assertFalse(trampaArenosa.estaDestruida());    
+            spy.avanzarTurno();
+            verify(spy, never()).destruir();    
         }
 
-        trampaArenosa.avanzarTurno(); //Ataca por 3ra vez y se destruye
-        assertTrue(trampaArenosa.estaDestruida());    
-        
+        spy.avanzarTurno(); //Ataca x 3ra vez y se destruye
+        verify(spy, times(1)).destruir();
     }
 
     @Test

@@ -3,8 +3,7 @@ package edu.fiuba.algo3.modelo;
 import java.util.LinkedList;
 import java.util.List;
 
-import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
-import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
+import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Enemigos.Lechuza;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
@@ -13,8 +12,7 @@ import edu.fiuba.algo3.modelo.Parser.CreadorEnemigos;
 
 public class Turno {
 
-    private LinkedList<TorreBlanca> torres;
-    private LinkedList<TrampaArenosa> trampas;
+    private LinkedList<Defensa> defensas;
     private LinkedList<Enemigo> enemigos;
     private Camino camino;
     private Jugador jugador;
@@ -25,8 +23,7 @@ public class Turno {
         this.jugador = jugador;
         this.camino = new Camino(camino);
         this.enemigos = new LinkedList<>();
-        this.torres = new LinkedList<>();
-        this.trampas = new LinkedList<>();
+        this.defensas = new LinkedList<>();
     }
 
     public Turno(Camino camino, Jugador jugador)
@@ -34,29 +31,26 @@ public class Turno {
         this.jugador = jugador;
         this.camino = camino;
         this.enemigos = new LinkedList<>();
-        this.torres = new LinkedList<>();
-        this.trampas = new LinkedList<>();
+        this.defensas = new LinkedList<>();
     }
 
-    public Turno(Camino camino, Jugador jugador, LinkedList<TorreBlanca> torres, LinkedList<TrampaArenosa> trampas)
+    public Turno(Camino camino, Jugador jugador, LinkedList<Defensa> defensas)
     {
         this.jugador = jugador;
         this.camino = camino;
         this.enemigos = new LinkedList<>();
-        this.torres = torres;
-        this.trampas = trampas;
+        this.defensas = defensas;
     }
 
     public void avanzarTurno(int numeroTurno) {
         avanzarEnemigos();
-        comprobarDefensas();
         if (numeroTurno >= 0)
         {
             List<Enemigo> enemigosTurno = CreadorEnemigos.crearEnemigos(numeroTurno, this.jugador, this.camino);
             for (Enemigo enemigo : enemigosTurno) 
             {
                 this.enemigos.add(enemigo);
-                if (enemigo instanceof Lechuza) {((Lechuza)enemigo).setTorres(this.torres);}
+                //if (enemigo instanceof Lechuza) {((Lechuza)enemigo).setTorres(this.defensas);}
             }
             this.camino.aparecerEnemigos(enemigosTurno);
         }
@@ -66,25 +60,16 @@ public class Turno {
 
     private void avanzarDefensas()
     {
-        for (TorreBlanca torre : torres) {
-            torre.avanzarTurno();
-        }
-
-        for (TrampaArenosa trampa : trampas) {
-            trampa.avanzarTurno();
+        for (Defensa defensa : defensas) {
+            defensa.avanzarTurno();
         }
     }
 
-    public void aniadirTorre(TorreBlanca torre)
+    public void aniadirDefensa(Defensa defensa)
     {
-        torre.setEnemigos(enemigos);
-        torres.add(torre);
-    }
-
-    public void aniadirTrampa(TrampaArenosa trampa)
-    {
-        trampa.setEnemigos(enemigos);
-        trampas.add(trampa);
+        defensa.gastarCreditos(this.jugador);
+        defensa.setEnemigos(enemigos);
+        defensas.add(defensa);
     }
 
     private void avanzarEnemigos()
@@ -98,21 +83,6 @@ public class Turno {
         sacarMuertos();
         if (enemigos.size() == 0){
             throw new GanarPartidaError();
-        }
-    }
-
-    private void comprobarDefensas(){
-        sacarDefensasDestruidas();
-    }
-
-    private void sacarDefensasDestruidas()
-    {
-        for (TorreBlanca torre : torres) {
-            if (torre.estaDestruida()) {torres.remove(torre);}
-        }
-
-        for (TrampaArenosa trampa : trampas) {
-            if (trampa.estaDestruida()) {trampas.remove(trampa);}
         }
     }
 
@@ -133,9 +103,8 @@ public class Turno {
         if (o instanceof Turno)
         {
             Turno turno = (Turno)o;
-            return (this.enemigos.equals(turno.enemigos) && this.torres.equals(turno.torres) && this.trampas.equals(turno.trampas));
+            return (this.enemigos.equals(turno.enemigos) && this.defensas.equals(turno.defensas));
         }
         return false;
     }
-
 }

@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Defensas;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import edu.fiuba.algo3.modelo.Jugador;
@@ -23,14 +24,14 @@ public abstract class Defensa {
         this.salud = new Operativa();
     }
 
-    public boolean estaDestruida()
-    {
-        return this.salud.salud();
-    }
-
     public void destruir()
     {
         this.salud = new Destruida();
+    }
+
+    public void avanzarTurno(LinkedList<Defensa> defensas)
+    {
+        this.salud.avanzarTurno(defensas, this);
     }
 
     public abstract void avanzarTurno();
@@ -63,7 +64,7 @@ public abstract class Defensa {
         {
             Defensa defensa = (Defensa)o;
             if (this.posicion == null && defensa.posicion == null) {return true;}
-            return (this.posicion.equals(defensa.posicion) && this.estaDestruida() == defensa.estaDestruida());
+            return (this.posicion.equals(defensa.posicion) && this.salud.getClass() == defensa.salud.getClass());
         }
         return false;
     }

@@ -18,6 +18,7 @@ import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 
 import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Jugador;
@@ -57,11 +58,12 @@ public class LechuzaTest {
         Lechuza enemigo = new Lechuza(jugadorMock, null);
         LinkedList<TorreBlanca> torres = new LinkedList<>();
         TorreBlanca torre = new TorreBlanca();
-        torres.add(torre);
+        TorreBlanca spy = Mockito.spy(torre);
+        torres.add(spy);
         enemigo.setTorres(torres);
         enemigo.atacar();
         verify(jugadorMock, times(0)).recibirDanio(0, enemigo.getClass().getSimpleName());
-        assertTrue(torre.estaDestruida());
+        verify(spy, times(1)).destruir();
     }
 
     @Test

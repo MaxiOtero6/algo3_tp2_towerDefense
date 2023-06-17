@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.List;
 
+import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Defensas.Torres.*;
 import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
@@ -59,18 +60,10 @@ public class Partida {
         }
     }
 
-    public void construirTorre(TorreBlanca torre, int coordenadaX, int coordenadaY)
+    public void construirDefensa(Defensa defensa, int coordenadaX, int coordenadaY)
     {
-        torre.gastarCreditos(this.jugador);
-        this.mapa.construir(torre, coordenadaX, coordenadaY);
-        this.turno.aniadirTorre(torre);
-    }
-
-    public void construirTrampa(TrampaArenosa trampa, int coordenadaX, int coordenadaY)
-    {
-        trampa.gastarCreditos(this.jugador);
-        this.mapa.construir(trampa, coordenadaX, coordenadaY);
-        this.turno.aniadirTrampa(trampa);
+        this.mapa.construir(defensa, coordenadaX, coordenadaY);
+        this.turno.aniadirDefensa(defensa);
     }
 
     @Override

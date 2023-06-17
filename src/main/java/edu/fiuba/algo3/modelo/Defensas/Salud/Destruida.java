@@ -1,11 +1,13 @@
 package edu.fiuba.algo3.modelo.Defensas.Salud;
 
-public class Destruida implements Salud {
+import java.util.LinkedList;
 
+import edu.fiuba.algo3.modelo.Defensas.Defensa;
+
+public class Destruida implements Salud {
     @Override
-    public boolean salud() 
+    public void avanzarTurno(LinkedList<Defensa> defensas, Defensa defensa) 
     {
-        return true;    
+        defensas.remove(defensa);
     }
-    
 }

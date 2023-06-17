@@ -13,9 +13,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import edu.fiuba.algo3.modelo.Camino;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.SingleLogger;
 import edu.fiuba.algo3.modelo.Turno;
+import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
@@ -55,7 +57,7 @@ public class TurnoTest {
     @Test
     public void test02EnUnTurnoSimuladoOcurrenLasAccionesIndicadas()
     {
-        
+        Jugador jugadorMock = mock(Jugador.class);
         Enemigo enemigoMock = mock(Enemigo.class);
         doNothing().when(enemigoMock).mover();
         doReturn(true).when(enemigoMock).estaVivo();
@@ -66,18 +68,18 @@ public class TurnoTest {
         doNothing().when(caminoMock).aparecerEnemigos(lista);
         
         MockedStatic<CreadorEnemigos> creadorEnemigoMock = mockStatic(CreadorEnemigos.class);
-        when(CreadorEnemigos.crearEnemigos(0, null, caminoMock)).thenReturn(lista);
+        when(CreadorEnemigos.crearEnemigos(0, jugadorMock, caminoMock)).thenReturn(lista);
         
-        Turno turno = new Turno(caminoMock, null);
+        Turno turno = new Turno(caminoMock, jugadorMock);
         turno.avanzarTurno(0); //Aparecen los enemigos
         
         TorreBlanca torreMock = mock(TorreBlanca.class);
         doNothing().when(torreMock).avanzarTurno();
-        turno.aniadirTorre(torreMock);
+        turno.aniadirDefensa(torreMock);
 
         TrampaArenosa trampaMock = mock(TrampaArenosa.class);
         doNothing().when(trampaMock).avanzarTurno();
-        turno.aniadirTrampa(trampaMock);
+        turno.aniadirDefensa(trampaMock);
 
         turno.avanzarTurno(0);
         verify(enemigoMock, atLeastOnce()).mover();
@@ -89,6 +91,7 @@ public class TurnoTest {
     @Test
     public void test03SiUnaTorreSeDestruyeEnUnTurnoSeEliminaDeLaListaDeTorres()
     {
+        Jugador jugadorMock = mock(Jugador.class);
         Enemigo enemigoMock = mock(Enemigo.class);
         doNothing().when(enemigoMock).mover();
         doReturn(true).when(enemigoMock).estaVivo();
@@ -99,27 +102,24 @@ public class TurnoTest {
         doNothing().when(caminoMock).aparecerEnemigos(lista);
         
         MockedStatic<CreadorEnemigos> creadorEnemigoMock = mockStatic(CreadorEnemigos.class);
-        when(CreadorEnemigos.crearEnemigos(0, null, caminoMock)).thenReturn(lista);
+        when(CreadorEnemigos.crearEnemigos(0, jugadorMock, caminoMock)).thenReturn(lista);
         
         
         TorreBlanca torre = new TorreBlanca();
-        LinkedList<TorreBlanca> torres = new LinkedList<>();
-        LinkedList<TorreBlanca> spy1 = spy(torres);
-        
+        LinkedList<Defensa> torres = new LinkedList<>();
+        LinkedList<Defensa> spy1 = spy(torres);
         TrampaArenosa trampa = new TrampaArenosa();
-        LinkedList<TrampaArenosa> trampas = new LinkedList<>();
-        LinkedList<TrampaArenosa> spy2 = spy(trampas);
         
-        Turno turno = new Turno(caminoMock, null, spy1, spy2);
-        turno.aniadirTorre(torre);
-        turno.aniadirTrampa(trampa);
+        Turno turno = new Turno(caminoMock, jugadorMock, spy1);
+        turno.aniadirDefensa(torre);
+        turno.aniadirDefensa(trampa);
 
         torre.destruir();
         trampa.destruir();
         
         turno.avanzarTurno(0);
         verify(spy1, atMost(1)).remove(torre);
-        verify(spy2, atMost(1)).remove(trampa);
+        verify(spy1, atMost(1)).remove(trampa);
         creadorEnemigoMock.close();
     }
 
@@ -136,6 +136,7 @@ public class TurnoTest {
     @Test
     public void test03AmbosTurnoNoSonIguales()
     {
+        Jugador jugadorMock = mock(Jugador.class);
         LinkedList<Parcela> parcelas = new LinkedList<>();
         parcelas.add(new Largada(0,0));
         Camino camino = new Camino(parcelas);
@@ -145,8 +146,8 @@ public class TurnoTest {
         TrampaArenosa trampaArenosa = new TrampaArenosa();
         torre.setearPosicion(new Posicion(0, 0));
         trampaArenosa.setearPosicion(new Posicion(3, 3));
-        Turno turno1 = new Turno(camino, null);
-        Turno turno2 = new Turno(camino, null);
+        Turno turno1 = new Turno(camino, jugadorMock);
+        Turno turno2 = new Turno(camino, jugadorMock);
 
         turno1.avanzarTurno(0);
         assertNotEquals(turno1, turno2);
@@ -154,14 +155,14 @@ public class TurnoTest {
         turno2.avanzarTurno(0);
         assertEquals(turno1, turno2);
 
-        turno1.aniadirTorre(torre);
+        turno1.aniadirDefensa(torre);
         assertNotEquals(turno1, turno2);
-        turno2.aniadirTorre(torre);
+        turno2.aniadirDefensa(torre);
         assertEquals(turno1, turno2);
         
-        turno1.aniadirTrampa(trampaArenosa);
+        turno1.aniadirDefensa(trampaArenosa);
         assertNotEquals(turno1, turno2);
-        turno2.aniadirTrampa(trampaArenosa);
+        turno2.aniadirDefensa(trampaArenosa);
         assertEquals(turno1, turno2);
 
         assertNotEquals(turno1, turno3);

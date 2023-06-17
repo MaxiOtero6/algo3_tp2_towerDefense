@@ -40,18 +40,18 @@ public class PartidaTest {
         Jugador jugador = new Jugador(1000000, 1000000);
         List<Parcela> camino = new LinkedList<>();
         Partida partida = new Partida(CreadorMapa.crearMapa(camino), camino, jugador);
-        partida.construirTorre(new TorrePlateada(), 0,1);
-        partida.construirTorre(new TorrePlateada(), 0,2);
-        partida.construirTorre(new TorrePlateada(), 0,3);
-        partida.construirTorre(new TorrePlateada(), 0,4);
-        partida.construirTorre(new TorrePlateada(), 0,5);
-        partida.construirTorre(new TorreBlanca(), 2,0);
-        partida.construirTorre(new TorreBlanca(), 2,1);
-        partida.construirTorre(new TorreBlanca(), 2,2);
-        partida.construirTorre(new TorreBlanca(), 2,3);
-        partida.construirTrampa(new TrampaArenosa(), 1,6);
-        partida.construirTrampa(new TrampaArenosa(), 2,6);
-        partida.construirTrampa(new TrampaArenosa(), 3,6);
+        partida.construirDefensa(new TorrePlateada(), 0,1);
+        partida.construirDefensa(new TorrePlateada(), 0,2);
+        partida.construirDefensa(new TorrePlateada(), 0,3);
+        partida.construirDefensa(new TorrePlateada(), 0,4);
+        partida.construirDefensa(new TorrePlateada(), 0,5);
+        partida.construirDefensa(new TorreBlanca(), 2,0);
+        partida.construirDefensa(new TorreBlanca(), 2,1);
+        partida.construirDefensa(new TorreBlanca(), 2,2);
+        partida.construirDefensa(new TorreBlanca(), 2,3);
+        partida.construirDefensa(new TrampaArenosa(), 1,6);
+        partida.construirDefensa(new TrampaArenosa(), 2,6);
+        partida.construirDefensa(new TrampaArenosa(), 3,6);
         
         Logger mockedLogger = mock(Logger.class);
         SingleLogger.inicializar(mockedLogger);
@@ -102,7 +102,7 @@ public class PartidaTest {
 
         Partida partida1 = new Partida(lista1, subLista);
         Partida partida2 = new Partida(lista1, subLista);
-        partida2.construirTrampa(new TrampaArenosa(), 0, 0);
+        partida2.construirDefensa(new TrampaArenosa(), 0, 0);
 
         assertNotEquals(partida1, partida2);
 
