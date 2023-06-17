@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.SingleLogger;
 import edu.fiuba.algo3.modelo.Defensas.Objetivos.ObjetivoTorre;
+import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Enemigos.Hormiga;
 import edu.fiuba.algo3.modelo.Enemigos.NoEnemigo;
@@ -38,38 +39,16 @@ public class ObjetivoTorreTest {
         enemigotemp.setearPosicion(posicion2);
         enemigos.add(enemigotemp);
 
-        when(enemigoMock.subterraneo()).thenReturn(false);
-        doReturn(1.0).when(enemigoMock).calcDistancia(any());
+        doReturn(1.0).when(enemigoMock).calcDistancia(any(), any(TorreBlanca.class));
 
         ObjetivoTorre objetivo = new ObjetivoTorre();
-        Enemigo enemigoObtenido = objetivo.hallarObjetivo(posicion1, enemigos, 3);
+        Enemigo enemigoObtenido = objetivo.hallarObjetivo(posicion1, enemigos, 3, new TorreBlanca());
 
         assertEquals(enemigoMock, enemigoObtenido);
     }
 
     @Test
-    public void test02SiUnEnemigoEsSubterraneoNoEsObjetivo()
-    {
-        Enemigo enemigoMock = mock(Topo.class);
-        LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
-        Posicion posicion1 = new Posicion(0, 0);
-        Posicion posicion2 = new Posicion(3, 0);
-        
-        Enemigo enemigotemp = new Hormiga(null,null);
-        enemigotemp.setearPosicion(posicion2);
-        enemigos.add(enemigotemp);
-
-        when(enemigoMock.subterraneo()).thenReturn(true);
-        doReturn(1.0).when(enemigoMock).calcDistancia(any());
-
-        ObjetivoTorre objetivo = new ObjetivoTorre();
-        Enemigo enemigoObtenido = objetivo.hallarObjetivo(posicion1, enemigos, 3);
-
-        assertEquals(enemigotemp, enemigoObtenido);
-    }
-
-    @Test
-    public void test03ElEnemigoMasCercanoEsElObjetivo()
+    public void test02ElEnemigoMasCercanoEsElObjetivo()
     {
         LinkedList<Enemigo> enemigos = new LinkedList<>();
         Posicion posicion1 = new Posicion(0, 0);
@@ -84,34 +63,13 @@ public class ObjetivoTorreTest {
         enemigos.add(enemigo2);
 
         ObjetivoTorre objetivo = new ObjetivoTorre();
-        Enemigo enemigoObtenido = objetivo.hallarObjetivo(posicion1, enemigos, 3);
+        Enemigo enemigoObtenido = objetivo.hallarObjetivo(posicion1, enemigos, 3, new TorreBlanca());
 
         assertEquals(enemigo1, enemigoObtenido);
     }
 
     @Test
-    public void test04SiUnEnemigoNoEsSubterraneoPeroNoEstaEnRangoNoEsObjetivo()
-    {
-        Enemigo enemigoMock = mock(Topo.class);
-        LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
-        Posicion posicion1 = new Posicion(0, 0);
-        Posicion posicion2 = new Posicion(3, 0);
-        
-        Enemigo enemigotemp = new Hormiga(null,null);
-        enemigotemp.setearPosicion(posicion2);
-        enemigos.add(enemigotemp);
-
-        when(enemigoMock.subterraneo()).thenReturn(false);
-        doReturn(1000.0).when(enemigoMock).calcDistancia(any());
-
-        ObjetivoTorre objetivo = new ObjetivoTorre();
-        Enemigo enemigoObtenido = objetivo.hallarObjetivo(posicion1, enemigos, 3);
-
-        assertEquals(enemigotemp, enemigoObtenido);
-    }
-
-    @Test
-    public void test05SiNingunEnemigoCumpleLosRequisitosSeGeneraUnFalsoObjetivo()
+    public void test03SiNingunEnemigoCumpleLosRequisitosSeGeneraUnFalsoObjetivo()
     {
         Enemigo enemigoMock = mock(Hormiga.class);
         LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
@@ -119,11 +77,10 @@ public class ObjetivoTorreTest {
 
         Enemigo enemigotemp = new NoEnemigo();
         
-        when(enemigoMock.subterraneo()).thenReturn(true);
-        doReturn(100.0).when(enemigoMock).calcDistancia(any());
+        doReturn(100.0).when(enemigoMock).calcDistancia(any(), any(TorreBlanca.class));
 
         ObjetivoTorre objetivo = new ObjetivoTorre();
-        Enemigo enemigoObtenido = objetivo.hallarObjetivo(posicion1, enemigos, 3);
+        Enemigo enemigoObtenido = objetivo.hallarObjetivo(posicion1, enemigos, 3, new TorreBlanca());
 
         assertEquals(enemigotemp, enemigoObtenido);
     }

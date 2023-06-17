@@ -38,12 +38,13 @@ public class TorreBlancaTest {
     @Test
     public void test01AlAtacarLaTorreElEnemigoRecibeDanio()
     {
-        Enemigo enemigoMock = mock(Hormiga.class);
-        LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
-        when(enemigoMock.subterraneo()).thenReturn(false);
-        doReturn(0.0).when(enemigoMock).calcDistancia(any());
-
         Defensa defensa = new TorreBlanca();
+        Posicion posicion = new Posicion(0, 0);
+        Enemigo enemigoMock = mock(Hormiga.class);
+        enemigoMock.setearPosicion(posicion);
+        LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
+        doReturn(0.0).when(enemigoMock).calcDistancia(posicion, defensa);
+
         defensa.setEnemigos(enemigos);
         defensa.atacar();
         verify(enemigoMock, times(1)).recibirDanio(1, defensa.getClass().getSimpleName());

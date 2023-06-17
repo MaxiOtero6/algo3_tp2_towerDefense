@@ -11,6 +11,7 @@ import edu.fiuba.algo3.modelo.Enemigos.Salud.Vivo;
 import edu.fiuba.algo3.modelo.Enemigos.Subterraneo.*;
 import edu.fiuba.algo3.modelo.Enemigos.Volador.*;
 import edu.fiuba.algo3.modelo.SingleLogger;
+import edu.fiuba.algo3.modelo.Defensas.Defensa;
 
 public abstract class Enemigo {
     protected int energia;
@@ -45,19 +46,9 @@ public abstract class Enemigo {
         this.subterraneo = subterraneo;
     }
 
-    public boolean subterraneo()
-    {
-        return this.subterraneo.subterraneo();
-    }
-
     public void setVolador(Volador volador)
     {
         this.volador = volador;
-    }
-
-    public boolean volador()
-    {
-        return this.volador.volador();
     }
 
     private void otorgarCreditos()
@@ -133,9 +124,13 @@ public abstract class Enemigo {
         return false;
     }
 
-    public double calcDistancia(Posicion posicion)
+    public double calcDistancia(Posicion posicion, Defensa defensa)
     {
-        return this.posicion.calcDistancia(posicion);
+        return (
+                this.posicion.calcDistancia(posicion) 
+                + volador.volador(defensa) 
+                + subterraneo.subterraneo(defensa)
+                );
     }
 
     public void ralentizar()

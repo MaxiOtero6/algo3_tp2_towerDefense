@@ -12,8 +12,6 @@ import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
 import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
 import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
 import edu.fiuba.algo3.modelo.Parcelas.*;
-import edu.fiuba.algo3.modelo.Parcelas.Pasarela.*;
-import edu.fiuba.algo3.modelo.Parcelas.Tierra.*;
 import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.*;
 
@@ -219,7 +217,7 @@ public class Tests {
         int rangoTorre = 3;
 
         ObjetivoTorre objetivo = new ObjetivoTorre();
-        Enemigo enemigoObtenido = objetivo.hallarObjetivo(posicionTorre, enemigos, rangoTorre);
+        Enemigo enemigoObtenido = objetivo.hallarObjetivo(posicionTorre, enemigos, rangoTorre, new TorreBlanca());
 
         assertEquals(enemigoEsperado, enemigoObtenido);
         Hormiga.resetContador();
@@ -237,7 +235,7 @@ public class Tests {
         int rangoTorre = 3;
 
         ObjetivoTorre objetivo = new ObjetivoTorre();
-        Enemigo enemigoObtenido = objetivo.hallarObjetivo(posicionTorre, enemigos, rangoTorre);
+        Enemigo enemigoObtenido = objetivo.hallarObjetivo(posicionTorre, enemigos, rangoTorre, new TorreBlanca());
 
         assertEquals(enemigoEsperado, enemigoObtenido);
         Hormiga.resetContador();

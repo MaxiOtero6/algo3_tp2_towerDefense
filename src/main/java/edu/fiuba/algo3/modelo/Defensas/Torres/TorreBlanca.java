@@ -46,6 +46,6 @@ public class TorreBlanca extends Defensa{
     public void atacar()
     {
         String tipoTorre = this.getClass().getSimpleName();
-        objetivo.hallarObjetivo(this.posicion, this.enemigos, this.rango).recibirDanio(this.danio, tipoTorre);
+        objetivo.hallarObjetivo(this.posicion, this.enemigos, this.rango, this).recibirDanio(this.danio, tipoTorre);
     }
 }

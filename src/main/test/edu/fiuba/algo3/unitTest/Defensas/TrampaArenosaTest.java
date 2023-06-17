@@ -40,13 +40,12 @@ public class TrampaArenosaTest {
     @Test
     public void test01AlAtacarLaTrampaElEnemigoEsRalentizado()
     {
+        Defensa defensa = new TrampaArenosa();
         Enemigo enemigoMock = mock(Hormiga.class);
         LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
         Posicion posicion = new Posicion(0,0);
-        when(enemigoMock.volador()).thenReturn(false);
-        doReturn(0.0).when(enemigoMock).calcDistancia(posicion);
+        doReturn(0.0).when(enemigoMock).calcDistancia(posicion, defensa);
 
-        Defensa defensa = new TrampaArenosa();
         defensa.setEnemigos(enemigos);
         defensa.atacar();
         verify(enemigoMock, times(1)).ralentizar();
@@ -55,13 +54,12 @@ public class TrampaArenosaTest {
     @Test
     public void test02AlAtacarLaTrampaElTopoEsReveladoYRalentizado()
     {
+        Defensa defensa = new TrampaArenosa();
         Enemigo enemigoMock = mock(Topo.class);
         LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
         Posicion posicion = new Posicion(0,0);
-        when(enemigoMock.volador()).thenReturn(false);
-        doReturn(0.0).when(enemigoMock).calcDistancia(posicion);
+        doReturn(0.0).when(enemigoMock).calcDistancia(posicion, defensa);
 
-        Defensa defensa = new TrampaArenosa();
         defensa.setEnemigos(enemigos);
         defensa.atacar();
         verify(enemigoMock, times(1)).ralentizar();
@@ -70,14 +68,14 @@ public class TrampaArenosaTest {
 
     @Test
     public void test03TrampaArenosaTardaEnDestruirseLoEsperado() {
+        TrampaArenosa trampaArenosa = new TrampaArenosa();
+        TrampaArenosa spy = Mockito.spy(trampaArenosa);
+        
         Enemigo enemigoMock = mock(Hormiga.class);
         LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
         Posicion posicion = new Posicion(0,0);
-        when(enemigoMock.volador()).thenReturn(false);
-        doReturn(0.0).when(enemigoMock).calcDistancia(posicion);
+        doReturn(0.0).when(enemigoMock).calcDistancia(posicion, spy);
 
-        TrampaArenosa trampaArenosa = new TrampaArenosa();
-        TrampaArenosa spy = Mockito.spy(trampaArenosa);
         spy.setEnemigos(enemigos);
 
         for (int i = 0; i < 2; i++) {
