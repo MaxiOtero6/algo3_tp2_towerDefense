@@ -303,8 +303,10 @@ public class Tests {
     {
         Pasarela pasarelaInicial = new Pasarela(0, 0);
         Pasarela pasarelaIntermedia = new Pasarela(1, 1);
+        Pasarela spy1 = spy(pasarelaIntermedia);
         Pasarela pasarelaFinal = new Pasarela(2, 2);
-        List<Parcela> pasarelas = new LinkedList<>(Arrays.asList(pasarelaInicial, pasarelaIntermedia, pasarelaFinal));
+        Pasarela spy2 = spy(pasarelaFinal);
+        List<Parcela> pasarelas = new LinkedList<>(Arrays.asList(pasarelaInicial, spy1, spy2));
 
         Camino camino = new Camino(pasarelas);
 
@@ -317,8 +319,8 @@ public class Tests {
         hormiga.mover();
         arania.mover();
 
-        assertTrue(pasarelaIntermedia.verificarSiEstaElEnemigo(hormiga));
-        assertTrue(pasarelaFinal.verificarSiEstaElEnemigo(arania));
+        verify(spy1, times(1)).agregarEnemigo(hormiga);
+        verify(spy2, times(1)).agregarEnemigo(arania);
     }
 
     @Test

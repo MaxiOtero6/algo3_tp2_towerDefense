@@ -53,9 +53,4 @@ public abstract class Parcela {
     {
         throw new SpawnNoEnLargadaError();
     }
-
-    public boolean verificarSiEstaElEnemigo(Enemigo enemigo)
-    {
-        return this.enemigos.contains(enemigo);
-    }
 }
