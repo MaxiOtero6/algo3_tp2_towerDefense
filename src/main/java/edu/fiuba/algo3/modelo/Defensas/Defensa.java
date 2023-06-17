@@ -7,7 +7,7 @@ import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Defensas.Salud.Destruida;
 import edu.fiuba.algo3.modelo.Defensas.Salud.Operativa;
-import edu.fiuba.algo3.modelo.Defensas.Salud.Salud;
+import edu.fiuba.algo3.modelo.Defensas.Salud.SaludDefensa;
 import edu.fiuba.algo3.modelo.Enemigos.*;
 import edu.fiuba.algo3.modelo.SingleLogger;
 
@@ -16,7 +16,7 @@ public abstract class Defensa {
     private int coste;
     protected Posicion posicion;
     protected List<Enemigo> enemigos;
-    private Salud salud;
+    private SaludDefensa salud;
 
     public Defensa(int coste)
     {
