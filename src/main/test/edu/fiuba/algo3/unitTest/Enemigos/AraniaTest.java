@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
+import java.util.LinkedList;
+
 import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,19 +41,18 @@ public class AraniaTest {
         Jugador jugadorMock = mock(Jugador.class);
         Enemigo enemigo = new Arania(jugadorMock, null);
         enemigo.recibirDanio(2, "Test");
-        assertTrue(!enemigo.estaVivo());
         verify(jugadorMock, times(1)).agregarCreditos(anyInt());
     }
 
     @Test
     public void test03UnaAraniaNoEstaVivaSiRecibeDosDeDanio()
     {
-        Jugador jugador = mock(Jugador.class);
-        doNothing().when(jugador).agregarCreditos(anyInt());
-        Enemigo enemigo = new Arania(jugador,null);
-        assertTrue(enemigo.estaVivo());
+        Jugador jugadorMock = mock(Jugador.class);
+        doNothing().when(jugadorMock).agregarCreditos(anyInt());
+        Enemigo enemigo = new Arania(jugadorMock,null);
+        verify(jugadorMock, never()).agregarCreditos(anyInt());
         enemigo.recibirDanio(2, "Test04Arania");
-        assertFalse(enemigo.estaVivo());
+        verify(jugadorMock, times(1)).agregarCreditos(anyInt());
     }
 
     @Test
@@ -63,10 +64,11 @@ public class AraniaTest {
         Posicion posicion = new Posicion(0,0);
         Enemigo enemigo = new Arania(jugadorMock, caminoMock);
         enemigo.setearPosicion(posicion);
+        LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigo);
         
         enemigo.recibirDanio(2, "Test04Arania");
-        assertFalse(enemigo.estaVivo());
-        enemigo.mover();
+        verify(jugadorMock, times(1)).agregarCreditos(anyInt());
+        enemigo.avanzarTurno(enemigos);;
         verify(caminoMock, never()).moverEnemigo(2, posicion, enemigo);
     }
 

@@ -27,7 +27,7 @@ public class ObjetivoTorreTest {
     }
 
     @Test
-    public void test01SiUnEnemigoNoEsSubterraneoEstaVivoYEstaEnRangoEsObjetivo()
+    public void test01SiUnEnemigoNoEsSubterraneoYEstaEnRangoEsObjetivo()
     {
         Enemigo enemigoMock = mock(Topo.class);
         LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
@@ -39,7 +39,6 @@ public class ObjetivoTorreTest {
         enemigos.add(enemigotemp);
 
         when(enemigoMock.subterraneo()).thenReturn(false);
-        when(enemigoMock.estaVivo()).thenReturn(true);
         doReturn(1.0).when(enemigoMock).calcDistancia(any());
 
         ObjetivoTorre objetivo = new ObjetivoTorre();
@@ -61,7 +60,6 @@ public class ObjetivoTorreTest {
         enemigos.add(enemigotemp);
 
         when(enemigoMock.subterraneo()).thenReturn(true);
-        when(enemigoMock.estaVivo()).thenReturn(true);
         doReturn(1.0).when(enemigoMock).calcDistancia(any());
 
         ObjetivoTorre objetivo = new ObjetivoTorre();
@@ -92,7 +90,7 @@ public class ObjetivoTorreTest {
     }
 
     @Test
-    public void test04SiUnEnemigoNoEsSubterraneoPeroNoEstaVivoNoEsObjetivo()
+    public void test04SiUnEnemigoNoEsSubterraneoPeroNoEstaEnRangoNoEsObjetivo()
     {
         Enemigo enemigoMock = mock(Topo.class);
         LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
@@ -104,29 +102,6 @@ public class ObjetivoTorreTest {
         enemigos.add(enemigotemp);
 
         when(enemigoMock.subterraneo()).thenReturn(false);
-        when(enemigoMock.estaVivo()).thenReturn(false);
-        doReturn(1.0).when(enemigoMock).calcDistancia(any());
-
-        ObjetivoTorre objetivo = new ObjetivoTorre();
-        Enemigo enemigoObtenido = objetivo.hallarObjetivo(posicion1, enemigos, 3);
-
-        assertEquals(enemigotemp, enemigoObtenido);
-    }
-
-    @Test
-    public void test05SiUnEnemigoNoEsSubterraneoEstaVivoPeroNoEstaEnRangoNoEsObjetivo()
-    {
-        Enemigo enemigoMock = mock(Topo.class);
-        LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
-        Posicion posicion1 = new Posicion(0, 0);
-        Posicion posicion2 = new Posicion(3, 0);
-        
-        Enemigo enemigotemp = new Hormiga(null,null);
-        enemigotemp.setearPosicion(posicion2);
-        enemigos.add(enemigotemp);
-
-        when(enemigoMock.subterraneo()).thenReturn(false);
-        when(enemigoMock.estaVivo()).thenReturn(false);
         doReturn(1000.0).when(enemigoMock).calcDistancia(any());
 
         ObjetivoTorre objetivo = new ObjetivoTorre();
@@ -136,7 +111,7 @@ public class ObjetivoTorreTest {
     }
 
     @Test
-    public void test06SiNingunEnemigoCumpleLosRequisitosSeGeneraUnFalsoObjetivo()
+    public void test05SiNingunEnemigoCumpleLosRequisitosSeGeneraUnFalsoObjetivo()
     {
         Enemigo enemigoMock = mock(Hormiga.class);
         LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
@@ -145,7 +120,6 @@ public class ObjetivoTorreTest {
         Enemigo enemigotemp = new NoEnemigo();
         
         when(enemigoMock.subterraneo()).thenReturn(true);
-        when(enemigoMock.estaVivo()).thenReturn(false);
         doReturn(100.0).when(enemigoMock).calcDistancia(any());
 
         ObjetivoTorre objetivo = new ObjetivoTorre();

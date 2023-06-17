@@ -24,6 +24,7 @@ import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.SingleLogger;
+import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
@@ -44,9 +45,9 @@ public class LechuzaTest {
     {
         Jugador jugadorMock = mock(Jugador.class);
         Lechuza enemigo = new Lechuza(jugadorMock, null);
-        LinkedList<TorreBlanca> torres = new LinkedList<>();
+        LinkedList<Defensa> torres = new LinkedList<>();
         torres.add(new TorreBlanca());
-        enemigo.setTorres(torres);
+        enemigo.setDefensas(torres);
         enemigo.atacar();
         verify(jugadorMock, times(0)).recibirDanio(0, enemigo.getClass().getSimpleName());
     }
@@ -56,11 +57,11 @@ public class LechuzaTest {
     {
         Jugador jugadorMock = mock(Jugador.class);
         Lechuza enemigo = new Lechuza(jugadorMock, null);
-        LinkedList<TorreBlanca> torres = new LinkedList<>();
+        LinkedList<Defensa> torres = new LinkedList<>();
         TorreBlanca torre = new TorreBlanca();
         TorreBlanca spy = Mockito.spy(torre);
         torres.add(spy);
-        enemigo.setTorres(torres);
+        enemigo.setDefensas(torres);
         enemigo.atacar();
         verify(jugadorMock, times(0)).recibirDanio(0, enemigo.getClass().getSimpleName());
         verify(spy, times(1)).destruir();
@@ -72,7 +73,6 @@ public class LechuzaTest {
         Jugador jugadorMock = mock(Jugador.class);
         Enemigo enemigo = new Lechuza(jugadorMock, null);
         enemigo.recibirDanio(5, "Test");
-        assertTrue(!enemigo.estaVivo());
         verify(jugadorMock, times(1)).agregarCreditos(anyInt());
     }
 
@@ -118,12 +118,11 @@ public class LechuzaTest {
     @Test
     public void test06UnaLechuzaNoEstaVivaSiRecibeCincoDeDanio()
     {
-        Jugador jugador = mock(Jugador.class);
-        doNothing().when(jugador).agregarCreditos(anyInt());
-        Enemigo enemigo = new Lechuza(jugador,null);
-        assertTrue(enemigo.estaVivo());
+        Jugador jugadorMock = mock(Jugador.class);
+        doNothing().when(jugadorMock).agregarCreditos(anyInt());
+        Enemigo enemigo = new Lechuza(jugadorMock,null);
         enemigo.recibirDanio(5, "Test04Lechuza");
-        assertFalse(enemigo.estaVivo());
+        verify(jugadorMock, times(1)).agregarCreditos(anyInt());
     }
 
     @Test
@@ -135,10 +134,11 @@ public class LechuzaTest {
         Posicion posicion = new Posicion(0,0);
         Enemigo enemigo = new Lechuza(jugadorMock, caminoMock);
         enemigo.setearPosicion(posicion);
-        
+        LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigo);
+
         enemigo.recibirDanio(5, "Test07Lechuza");
-        assertFalse(enemigo.estaVivo());
-        enemigo.mover();
+        verify(jugadorMock, times(1)).agregarCreditos(anyInt());
+        enemigo.avanzarTurno(enemigos);
         verify(caminoMock, never()).moverEnemigo(5, posicion, enemigo);
     }
 

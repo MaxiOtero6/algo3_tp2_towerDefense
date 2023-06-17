@@ -60,7 +60,6 @@ public class TopoTest {
         Jugador jugadorMock = mock(Jugador.class);
         Enemigo enemigo = new Topo(jugadorMock, null);
         enemigo.recibirDanio(1, "Test");
-        assertTrue(!enemigo.estaVivo());
         verify(jugadorMock, times(1)).agregarCreditos(anyInt());
     }
 
@@ -106,12 +105,12 @@ public class TopoTest {
     @Test
     public void test04UnTopoNoEstaVivaSiRecibeUnoDeDanio()
     {
-        Jugador jugador = mock(Jugador.class);
-        doNothing().when(jugador).agregarCreditos(anyInt());
-        Enemigo enemigo = new Topo(jugador,null);
-        assertTrue(enemigo.estaVivo());
+        Jugador jugadorMock = mock(Jugador.class);
+        doNothing().when(jugadorMock).agregarCreditos(anyInt());
+        Enemigo enemigo = new Topo(jugadorMock,null);
+        verify(jugadorMock, never()).agregarCreditos(anyInt());
         enemigo.recibirDanio(1, "Test04Topo");
-        assertFalse(enemigo.estaVivo());
+        verify(jugadorMock, times(1)).agregarCreditos(anyInt());
     }
 
     @Test
@@ -123,10 +122,11 @@ public class TopoTest {
         Posicion posicion = new Posicion(0,0);
         Enemigo enemigo = new Topo(jugadorMock, caminoMock);
         enemigo.setearPosicion(posicion);
+        LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigo);
         
         enemigo.recibirDanio(1, "Test05Topo");
-        assertFalse(enemigo.estaVivo());
-        enemigo.mover();
+        verify(jugadorMock, times(1)).agregarCreditos(anyInt());
+        enemigo.avanzarTurno(enemigos);
         verify(caminoMock, never()).moverEnemigo(1, posicion, enemigo);
     }
 

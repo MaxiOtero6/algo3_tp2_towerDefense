@@ -44,7 +44,6 @@ public class TrampaArenosaTest {
         LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
         Posicion posicion = new Posicion(0,0);
         when(enemigoMock.volador()).thenReturn(false);
-        when(enemigoMock.estaVivo()).thenReturn(true);
         doReturn(0.0).when(enemigoMock).calcDistancia(posicion);
 
         Defensa defensa = new TrampaArenosa();
@@ -60,7 +59,6 @@ public class TrampaArenosaTest {
         LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
         Posicion posicion = new Posicion(0,0);
         when(enemigoMock.volador()).thenReturn(false);
-        when(enemigoMock.estaVivo()).thenReturn(true);
         doReturn(0.0).when(enemigoMock).calcDistancia(posicion);
 
         Defensa defensa = new TrampaArenosa();
@@ -76,7 +74,6 @@ public class TrampaArenosaTest {
         LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
         Posicion posicion = new Posicion(0,0);
         when(enemigoMock.volador()).thenReturn(false);
-        when(enemigoMock.estaVivo()).thenReturn(true);
         doReturn(0.0).when(enemigoMock).calcDistancia(posicion);
 
         TrampaArenosa trampaArenosa = new TrampaArenosa();

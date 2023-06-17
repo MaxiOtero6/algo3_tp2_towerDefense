@@ -27,7 +27,7 @@ public class ObjetivoTrampaTest {
     }
 
     @Test
-    public void test01SiUnEnemigoNoEsVoladorEstaVivoYEstaEnRangoEsObjetivo()
+    public void test01SiUnEnemigoNoEsVoladorYEstaEnRangoEsObjetivo()
     {
         Enemigo enemigoMock = mock(Hormiga.class);
         LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
@@ -42,7 +42,6 @@ public class ObjetivoTrampaTest {
         enemigos.add(enemigotemp);
 
         when(enemigoMock.volador()).thenReturn(false);
-        when(enemigoMock.estaVivo()).thenReturn(true);
         doReturn(0.0).when(enemigoMock).calcDistancia(any());
 
         ObjetivoTrampa objetivo = new ObjetivoTrampa();
@@ -66,7 +65,6 @@ public class ObjetivoTrampaTest {
         enemigoEsperado.add(enemigotemp);
         
         when(enemigoMock.volador()).thenReturn(true);
-        when(enemigoMock.estaVivo()).thenReturn(true);
         doReturn(0.0).when(enemigoMock).calcDistancia(any());
 
         ObjetivoTrampa objetivo = new ObjetivoTrampa();
@@ -75,32 +73,9 @@ public class ObjetivoTrampaTest {
         assertEquals(enemigoEsperado, enemigoObtenido);
     }
 
-    @Test
-    public void test03SiUnEnemigoNoEsVoladorPeroNoEstaVivoNoEsObjetivo()
-    {
-        Enemigo enemigoMock = mock(Hormiga.class);
-        LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
-        Posicion posicion1 = new Posicion(0, 0);
-
-        Enemigo enemigotemp = new Hormiga(null,null);
-        enemigotemp.setearPosicion(posicion1);
-        enemigos.add(enemigotemp);
-        
-        List<Enemigo> enemigoEsperado = new LinkedList<>();
-        enemigoEsperado.add(enemigotemp);
-        
-        when(enemigoMock.volador()).thenReturn(false);
-        when(enemigoMock.estaVivo()).thenReturn(false);
-        doReturn(0.0).when(enemigoMock).calcDistancia(any());
-
-        ObjetivoTrampa objetivo = new ObjetivoTrampa();
-        List<Enemigo> enemigoObtenido = objetivo.hallarObjetivo(posicion1, enemigos);
-
-        assertEquals(enemigoEsperado, enemigoObtenido);
-    }
 
     @Test
-    public void test04SiUnEnemigoNoEsSubterraneoEstaVivoPeroNoEstaEnRangoNoEsObjetivo()
+    public void test03SiUnEnemigoNoEsSubterraneoPeroNoEstaEnRangoNoEsObjetivo()
     {
         Enemigo enemigoMock = mock(Hormiga.class);
         LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
@@ -114,7 +89,6 @@ public class ObjetivoTrampaTest {
         enemigoEsperado.add(enemigotemp);
         
         when(enemigoMock.volador()).thenReturn(true);
-        when(enemigoMock.estaVivo()).thenReturn(true);
         doReturn(1.0).when(enemigoMock).calcDistancia(any());
 
         ObjetivoTrampa objetivo = new ObjetivoTrampa();
@@ -124,7 +98,7 @@ public class ObjetivoTrampaTest {
     }
 
     @Test
-    public void test05SiNingunEnemigoCumpleLosRequisitosSeGeneraUnFalsoObjetivo()
+    public void test04SiNingunEnemigoCumpleLosRequisitosSeGeneraUnFalsoObjetivo()
     {
         Enemigo enemigoMock = mock(Hormiga.class);
         LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
@@ -135,7 +109,6 @@ public class ObjetivoTrampaTest {
         enemigoEsperado.add(enemigotemp);
         
         when(enemigoMock.volador()).thenReturn(true);
-        when(enemigoMock.estaVivo()).thenReturn(true);
         doReturn(1.0).when(enemigoMock).calcDistancia(any());
 
         ObjetivoTrampa objetivo = new ObjetivoTrampa();

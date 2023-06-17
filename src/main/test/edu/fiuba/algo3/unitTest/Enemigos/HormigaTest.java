@@ -11,6 +11,8 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import java.util.LinkedList;
+
 import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,7 +45,6 @@ public class HormigaTest {
         Jugador jugadorMock = mock(Jugador.class);
         Enemigo enemigo = new Hormiga(jugadorMock, null);
         enemigo.recibirDanio(1, "Test");
-        assertTrue(!enemigo.estaVivo());
         verify(jugadorMock, times(1)).agregarCreditos(anyInt());
         Hormiga.resetContador();
     }
@@ -67,12 +68,12 @@ public class HormigaTest {
     @Test
     public void test04UnaHormigaNoEstaVivaSiRecibeUnoDeDanio()
     {
-        Jugador jugador = mock(Jugador.class);
-        doNothing().when(jugador).agregarCreditos(anyInt());
-        Enemigo enemigo = new Hormiga(jugador,null);
-        assertTrue(enemigo.estaVivo());
+        Jugador jugadorMock = mock(Jugador.class);
+        doNothing().when(jugadorMock).agregarCreditos(anyInt());
+        Enemigo enemigo = new Hormiga(jugadorMock,null);
+        verify(jugadorMock, never()).agregarCreditos(anyInt());
         enemigo.recibirDanio(1, "Test04Hormiga");
-        assertFalse(enemigo.estaVivo());
+        verify(jugadorMock, times(1)).agregarCreditos(anyInt());
     }
 
     @Test
@@ -84,10 +85,11 @@ public class HormigaTest {
         Posicion posicion = new Posicion(0,0);
         Enemigo enemigo = new Hormiga(jugadorMock, caminoMock);
         enemigo.setearPosicion(posicion);
+        LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigo);
         
         enemigo.recibirDanio(1, "Test05Hormiga");
-        assertFalse(enemigo.estaVivo());
-        enemigo.mover();
+        verify(jugadorMock, times(1)).agregarCreditos(anyInt());
+        enemigo.avanzarTurno(enemigos);
         verify(caminoMock, never()).moverEnemigo(1, posicion, enemigo);
     }
 

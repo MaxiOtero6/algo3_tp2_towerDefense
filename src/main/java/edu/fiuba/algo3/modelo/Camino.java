@@ -21,24 +21,34 @@ public class Camino {
      */
     public void moverEnemigo(int velocidad, Posicion posicion, Enemigo enemigo)
     {
+        int iterador = indiceParcela(posicion);
+        parcelas.get(iterador).eliminarEnemigo(enemigo);
+        
+        int indiceDestino = iterador + velocidad;
+        if (indiceDestino > parcelas.size() - 1) { indiceDestino = parcelas.size() - 1; }
+
+        parcelas.get(indiceDestino).agregarEnemigo(enemigo);
+    }
+
+    private int indiceParcela(Posicion posicion)
+    {
         int iterador = 0;
         while (iterador < parcelas.size() - 1 && !parcelas.get(iterador).compararPosicion(posicion))
         {
             iterador++;
         }
-        
-        int indiceDestino = iterador + velocidad;
-        if (indiceDestino > parcelas.size() - 1) { indiceDestino = parcelas.size() - 1; }
-
-        Parcela parcelaFinal = parcelas.get(indiceDestino);
-
-        parcelas.get(iterador).eliminarEnemigo(enemigo);
-        parcelaFinal.agregarEnemigo(enemigo);
+        return iterador;
     }
 
     public void aparecerEnemigos(List<Enemigo> enemigos)
     {
         (parcelas.get(0)).aparecerEnemigos(enemigos);
+    }
+
+    public void eliminarEnemigo(Posicion posicion, Enemigo enemigo)
+    {
+        int iterador = indiceParcela(posicion);
+        parcelas.get(iterador).eliminarEnemigo(enemigo);
     }
 
 }

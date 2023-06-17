@@ -12,7 +12,6 @@ public class ObjetivoTorre {
     {
         Enemigo enemigoMasCercano = enemigos.stream()
             .filter(enemigo -> !enemigo.subterraneo())
-            .filter(enemigo -> enemigo.estaVivo())
             .filter(enemigo -> enemigo.calcDistancia(posicionTorre) <= rango)
             .min(Comparator.comparingDouble(enemigo -> enemigo.calcDistancia(posicionTorre)))
             .orElse(new NoEnemigo());

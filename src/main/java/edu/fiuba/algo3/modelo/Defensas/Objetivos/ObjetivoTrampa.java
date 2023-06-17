@@ -16,7 +16,6 @@ public class ObjetivoTrampa {
 
         List<Enemigo> enemigosEnParcela = enemigos.stream()
             .filter(enemigo -> !enemigo.volador())
-            .filter(enemigo -> enemigo.estaVivo())
             .filter(enemigo -> enemigo.calcDistancia(posicionTorre) == 0)
             .collect(Collectors.toList());
         

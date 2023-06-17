@@ -35,13 +35,9 @@ public class TurnoTest {
     }
 
     @Test
-    public void test01ElJugadorPierdeLaPartidaSiNoHayEnemigos()
+    public void test01ElJugadorGanaLaPartidaSiNoHayEnemigos()
     {
-        Enemigo enemigoMock = mock(Enemigo.class);
-        doNothing().when(enemigoMock).mover();
-        doReturn(false).when(enemigoMock).estaVivo();
         List<Enemigo> lista = new LinkedList<>();
-        lista.add(enemigoMock);
         
         Camino caminoMock = mock(Camino.class);
         doNothing().when(caminoMock).aparecerEnemigos(lista);
@@ -60,7 +56,6 @@ public class TurnoTest {
         Jugador jugadorMock = mock(Jugador.class);
         Enemigo enemigoMock = mock(Enemigo.class);
         doNothing().when(enemigoMock).mover();
-        doReturn(true).when(enemigoMock).estaVivo();
         List<Enemigo> lista = new LinkedList<>();
         lista.add(enemigoMock);
         
@@ -82,9 +77,9 @@ public class TurnoTest {
         turno.aniadirDefensa(trampaMock);
 
         turno.avanzarTurno(0);
-        verify(enemigoMock, atLeastOnce()).mover();
-        verify(torreMock, atLeastOnce()).avanzarTurno();
-        verify(trampaMock, atLeastOnce()).avanzarTurno();
+        verify(enemigoMock, atLeastOnce()).avanzarTurno(any());
+        verify(torreMock, atLeastOnce()).avanzarTurno(any());
+        verify(trampaMock, atLeastOnce()).avanzarTurno(any());
         creadorEnemigoMock.close();
     }
 
@@ -94,7 +89,6 @@ public class TurnoTest {
         Jugador jugadorMock = mock(Jugador.class);
         Enemigo enemigoMock = mock(Enemigo.class);
         doNothing().when(enemigoMock).mover();
-        doReturn(true).when(enemigoMock).estaVivo();
         List<Enemigo> lista = new LinkedList<>();
         lista.add(enemigoMock);
         
@@ -124,7 +118,7 @@ public class TurnoTest {
     }
 
     @Test
-    public void test03AmbosTurnoSonIguales()
+    public void test04AmbosTurnoSonIguales()
     {
         Camino camino = null;
         Turno turno1 = new Turno(camino,null);
@@ -134,7 +128,7 @@ public class TurnoTest {
     }
 
     @Test
-    public void test03AmbosTurnoNoSonIguales()
+    public void test05AmbosTurnoNoSonIguales()
     {
         Jugador jugadorMock = mock(Jugador.class);
         LinkedList<Parcela> parcelas = new LinkedList<>();

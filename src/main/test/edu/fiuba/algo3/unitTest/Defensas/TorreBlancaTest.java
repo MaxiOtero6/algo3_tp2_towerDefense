@@ -41,7 +41,6 @@ public class TorreBlancaTest {
         Enemigo enemigoMock = mock(Hormiga.class);
         LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigoMock);
         when(enemigoMock.subterraneo()).thenReturn(false);
-        when(enemigoMock.estaVivo()).thenReturn(true);
         doReturn(0.0).when(enemigoMock).calcDistancia(any());
 
         Defensa defensa = new TorreBlanca();

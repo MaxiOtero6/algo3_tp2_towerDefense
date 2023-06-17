@@ -233,7 +233,6 @@ public class Tests {
         enemigo1.setearPosicion(new Posicion(0,0));
         enemigos.add(enemigo1);
         Enemigo enemigoEsperado = new NoEnemigo();
-        enemigos.add(enemigoEsperado);
         Posicion posicionTorre = new Posicion(11, 11);
         int rangoTorre = 3;
 
@@ -326,7 +325,7 @@ public class Tests {
 
     @Test
     public void test10AlEliminarATodosLosEnemigosElJugadorGanaLaPartida() {
-        Turno turno = new Turno(new LinkedList<>(Arrays.asList(new Pasarela(0,0))), new Jugador());
+        Turno turno = new Turno(new LinkedList<>(Arrays.asList(new Largada(0,0))), new Jugador());
         assertThrows(GanarPartidaError.class, () -> turno.avanzarTurno(PRUEBA_SIN_ENEMIGOS));
     }
 
@@ -334,7 +333,7 @@ public class Tests {
     public void test11AlNoQuedarUnidadesEnemigasSinHaberlasEliminadoTodasElJugadorConVidaPositivaEsteGanaLaPartida()
     {
         Jugador jugador = new Jugador();
-        Turno turno = new Turno(new LinkedList<>(Arrays.asList(new Pasarela(0,0))), jugador);
+        Turno turno = new Turno(new LinkedList<>(Arrays.asList(new Largada(0,0))), jugador);
         assertThrows(GanarPartidaError.class, () -> turno.avanzarTurno(PRUEBA_SIN_ENEMIGOS));
     }
 

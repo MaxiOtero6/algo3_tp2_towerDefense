@@ -43,25 +43,30 @@ public class Turno {
     }
 
     public void avanzarTurno(int numeroTurno) {
-        avanzarEnemigos();
-        if (numeroTurno >= 0)
-        {
-            List<Enemigo> enemigosTurno = CreadorEnemigos.crearEnemigos(numeroTurno, this.jugador, this.camino);
-            for (Enemigo enemigo : enemigosTurno) 
-            {
-                this.enemigos.add(enemigo);
-                //if (enemigo instanceof Lechuza) {((Lechuza)enemigo).setTorres(this.defensas);}
-            }
-            this.camino.aparecerEnemigos(enemigosTurno);
-        }
+        crearOleada(numeroTurno);
         avanzarDefensas();
+        avanzarEnemigos();
         comprobarCantidadEnemigos();
+    }
+
+    private void crearOleada(int numeroTurno)
+    {
+        List<Enemigo> enemigosTurno = CreadorEnemigos.crearEnemigos(numeroTurno, this.jugador, this.camino);
+        for (Enemigo enemigo : enemigosTurno) 
+        {
+            this.enemigos.add(enemigo);
+            if (enemigo instanceof Lechuza) {((Lechuza)enemigo).setDefensas(defensas);}
+        }
+        this.camino.aparecerEnemigos(enemigosTurno);
     }
 
     private void avanzarDefensas()
     {
-        for (Defensa defensa : defensas) {
-            defensa.avanzarTurno();
+        int i = defensas.size() - 1;
+        while (i >= 0)
+        {
+            defensas.get(i).avanzarTurno(defensas);
+            i--;
         }
     }
 
@@ -74,25 +79,17 @@ public class Turno {
 
     private void avanzarEnemigos()
     {
-        for (Enemigo enemigo : enemigos) {
-            enemigo.mover();
+        int i = enemigos.size() - 1;
+        while (i >= 0)
+        {
+            enemigos.get(i).avanzarTurno(enemigos);
+            i--;
         }
     }
 
     private void comprobarCantidadEnemigos(){
-        sacarMuertos();
         if (enemigos.size() == 0){
             throw new GanarPartidaError();
-        }
-    }
-
-    private void sacarMuertos()
-    {
-        int i = enemigos.size() - 1;
-        while (i >= 0)
-        {
-            if (!this.enemigos.get(i).estaVivo()) {enemigos.remove(i);}
-            i--;
         }
     }
 

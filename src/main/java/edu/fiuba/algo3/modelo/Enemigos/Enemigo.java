@@ -1,8 +1,13 @@
 package edu.fiuba.algo3.modelo.Enemigos;
 
+import java.util.LinkedList;
+
 import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Enemigos.Salud.Muerto;
+import edu.fiuba.algo3.modelo.Enemigos.Salud.SaludEnemigo;
+import edu.fiuba.algo3.modelo.Enemigos.Salud.Vivo;
 import edu.fiuba.algo3.modelo.Enemigos.Subterraneo.*;
 import edu.fiuba.algo3.modelo.Enemigos.Volador.*;
 import edu.fiuba.algo3.modelo.SingleLogger;
@@ -19,6 +24,7 @@ public abstract class Enemigo {
     private double multiplicadorVelocidad;
     private Volador volador;
     protected Camino camino;
+    private SaludEnemigo salud;
 
     public Enemigo(int energia, int danio, int creditos, int velocidad, Jugador jugador, Camino camino){
         this.energia = energia;
@@ -31,6 +37,7 @@ public abstract class Enemigo {
         this.subterraneo = new NoEsSubterraneo();
         this.multiplicadorVelocidad = 1;
         this.volador = new NoEsVolador();
+        this.salud = new Vivo();
     }
 
     public void setSubterraneo(Subterraneo subterraneo)
@@ -67,16 +74,17 @@ public abstract class Enemigo {
     {
         String tipoEnemigo = this.getClass().getSimpleName();
         this.jugador.recibirDanio(danioAtaque, tipoEnemigo);
-        this.energia = 0;
+        this.salud = new Muerto();
     }
 
     public void recibirDanio(int danioRecibido, String tipoTorre)
     {
         this.energia -= danioRecibido;
-        if (!estaVivo())
+        if (this.energia <= 0)
         {
             this.otorgarCreditos();
             this.morir();
+            this.salud = new Muerto();
         }
         String tipoEnemigo = this.getClass().getSimpleName();
         String coordenadas;
@@ -89,11 +97,6 @@ public abstract class Enemigo {
                 "%s ataca a %s en la posicion %s", tipoTorre, tipoEnemigo, coordenadas));
     }
 
-    public boolean estaVivo()
-    {
-        return this.energia > 0;
-    }
-
     protected abstract void morir(); 
 
     public void setearPosicion(Posicion posicion)
@@ -101,15 +104,20 @@ public abstract class Enemigo {
         this.posicion = posicion;
     }
 
+    public void avanzarTurno(LinkedList<Enemigo> enemigos)
+    {
+        this.salud.avanzarTurno(enemigos, this);
+    }
+
     public void mover()
     {
+        this.camino.moverEnemigo((int)(this.velocidad * this.multiplicadorVelocidad), this.posicion, this);
+        this.multiplicadorVelocidad = 1;
+    }
 
-        if (this.estaVivo())
-        {
-            this.camino.moverEnemigo((int)(this.velocidad * this.multiplicadorVelocidad), this.posicion, this);
-            this.multiplicadorVelocidad = 1;
-        }
-
+    public void eliminar()
+    {
+        this.camino.eliminarEnemigo(posicion, this);
     }
 
     @Override
