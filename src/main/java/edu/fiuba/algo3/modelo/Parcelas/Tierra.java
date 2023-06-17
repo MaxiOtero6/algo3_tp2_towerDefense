@@ -21,15 +21,10 @@ public class Tierra extends Parcela
     @Override
     public void construir(Defensa defensa)
     {
-        if (defensa instanceof TorreBlanca)
-        {
-            this.torre = (TorreBlanca)construible.construir(defensa, this.posicion);
-            this.setConstruible(new NoEsConstruible());
-        }
-        else
-        {
-            throw new DefensaEnTerrenoErroneoError();
-        }
+        DefensaEnTerrenoErroneoError.comprobarTerreno(this, defensa);
+        this.torre = (TorreBlanca)construible.construir(defensa, this.posicion);
+        this.setConstruible(new NoEsConstruible());
+
     }
 
     public void setConstruible(Construible construible)
