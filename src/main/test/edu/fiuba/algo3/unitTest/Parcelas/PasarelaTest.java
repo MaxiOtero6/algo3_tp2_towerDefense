@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import edu.fiuba.algo3.modelo.SingleLogger;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
+import edu.fiuba.algo3.modelo.Defensas.Torres.TorrePlateada;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
@@ -30,10 +31,18 @@ public class PasarelaTest {
     }
 
     @Test
-    public void test01AlConstruirEnPasarelaUnaTorreDebeTirarExcepcion()
+    public void test01AlConstruirEnPasarelaUnaTorreBlancaDebeTirarExcepcion()
     {   
         Pasarela parcela = new Pasarela(0,0);
         TorreBlanca defensa = new TorreBlanca();
+        assertThrows(DefensaEnTerrenoErroneoError.class, () -> parcela.construir(defensa));
+    }
+
+    @Test
+    public void test01AlConstruirEnPasarelaUnaTorrePlateadaDebeTirarExcepcion()
+    {   
+        Pasarela parcela = new Pasarela(0,0);
+        TorreBlanca defensa = new TorrePlateada();
         assertThrows(DefensaEnTerrenoErroneoError.class, () -> parcela.construir(defensa));
     }
 
