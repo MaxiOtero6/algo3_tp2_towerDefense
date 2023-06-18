@@ -356,7 +356,10 @@ public class Tests {
     public void test11AlNoQuedarUnidadesEnemigasSinHaberlasEliminadoTodasElJugadorConVidaPositivaEsteGanaLaPartida()
     {
         Jugador jugador = new Jugador();
-        Turno turno = new Turno(new LinkedList<>(Arrays.asList(new Largada(0,0))), jugador);
+        Largada largada = new Largada(0,0);
+        Meta meta = new Meta(1,1);
+        Turno turno = new Turno(new LinkedList<>(Arrays.asList(largada, meta)), jugador);
+        turno.avanzarTurno(0);
         assertThrows(GanarPartidaError.class, () -> turno.avanzarTurno(PRUEBA_SIN_ENEMIGOS));
     }
 
