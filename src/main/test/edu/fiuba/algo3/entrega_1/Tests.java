@@ -270,18 +270,33 @@ public class Tests {
     @Test
     public void test07LasUnidadesEnemigasSoloSeMuevenSobreLaParcelaAutorizada()
     {
-        Rocoso rocoso = new Rocoso(0, 0);
-        Tierra tierra = new Tierra(1,1);
-        Pasarela pasarela = new Pasarela(2,2);
-        Largada largada = new Largada(3,3);
-        Meta meta = new Meta(4,4);
+        Parcela parcela1 = new Largada(0,0);
+        Parcela parcela2 = new Pasarela(1, 1);
+        Parcela parcela3 = new Pasarela(2,2);
+        Parcela parcela4 = new Pasarela(3, 3);
 
-        assertDoesNotThrow(() -> rocoso.agregarEnemigo(new NoEnemigo()));
-        assertDoesNotThrow(() -> tierra.agregarEnemigo(new NoEnemigo()));
-        assertDoesNotThrow(() -> pasarela.agregarEnemigo(new NoEnemigo()));
-        assertDoesNotThrow(() -> largada.agregarEnemigo(new NoEnemigo()));
-        assertDoesNotThrow(() -> meta.agregarEnemigo(new NoEnemigo()));
+        Parcela spy1 = spy(parcela1);
+        Parcela spy2 = spy(parcela2);
+        Parcela spy3 = spy(parcela3);
+        Parcela spy4 = spy(parcela4);
 
+        LinkedList<Parcela> parcelas = new LinkedList<>();
+        parcelas.add(spy1); parcelas.add(spy2); parcelas.add(spy4);
+        Camino camino = new Camino(parcelas);
+
+        LinkedList<Enemigo> enemigos = new LinkedList<>(); 
+        Enemigo enemigo = new Hormiga(null, camino);
+        enemigos.add(enemigo);
+
+        camino.aparecerEnemigos(enemigos);
+        verify(spy1, times(1)).agregarEnemigo(enemigo);
+
+        enemigo.mover();
+        verify(spy2, times(1)).agregarEnemigo(enemigo);
+
+        enemigo.mover();
+        verify(spy4, times(1)).agregarEnemigo(enemigo);
+        verify(spy3, never()).agregarEnemigo(enemigo);
     }
 
     @Test
