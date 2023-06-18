@@ -1,11 +1,14 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
 import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
+import edu.fiuba.algo3.modelo.Parser.CreadorMapa;
+
 import org.apache.logging.log4j.LogManager;
 
 public class Partida {
@@ -13,10 +16,12 @@ public class Partida {
     private Turno turno;
     private Mapa mapa;
 
-    public Partida(List<List<Parcela>> parcelas, List<Parcela> camino) 
+    public Partida() 
     {
-        this.mapa = new Mapa(parcelas);
-        this.turno = new Turno(camino, new Jugador());
+        List<Parcela> camino = new LinkedList<>();
+        Jugador jugador = new Jugador();
+        this.mapa = new Mapa(CreadorMapa.crearMapa(camino));
+        this.turno = new Turno(camino, jugador);
         SingleLogger.inicializar(LogManager.getLogger());
     }
 

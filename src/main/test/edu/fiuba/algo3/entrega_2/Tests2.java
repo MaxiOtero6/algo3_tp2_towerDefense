@@ -160,10 +160,10 @@ public class Tests2 {
         for (Parcela[] fila : filasMapa) {    
             mapaEsperado.add(new LinkedList<>(Arrays.asList(fila)));
         }
-        Partida partidaEsperada = new Partida(mapaEsperado, pasarelas);
+        Partida partidaEsperada = new Partida(mapaEsperado, pasarelas, new Jugador());
 
         mapa = CreadorMapa.crearMapa(pasarelas);
-        Partida partida = new Partida(mapa, pasarelas);
+        Partida partida = new Partida(mapa, pasarelas, new Jugador());
         
         assertEquals(partidaEsperada, partida);
     }
@@ -191,8 +191,7 @@ public class Tests2 {
     @Test
     public void test19ElJugadorPierdeLaPartidaSimulada()
     {
-        List<Parcela> camino = new LinkedList<>();
-        Partida partida = new Partida(CreadorMapa.crearMapa(camino), camino);
+        Partida partida = new Partida();
         assertThrows(PerderPartidaError.class, () -> partida.iniciar());
     }
 
