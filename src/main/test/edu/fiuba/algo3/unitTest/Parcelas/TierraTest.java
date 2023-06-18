@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import edu.fiuba.algo3.modelo.SingleLogger;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
-import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
+import edu.fiuba.algo3.modelo.Defensas.Torres.TorrePlateada;
 import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Enemigos.Hormiga;
@@ -30,7 +30,7 @@ public class TierraTest {
     }
 
     @Test
-    public void test01AlConstruirEnTierraUnaTorreNoDebeTirarExcepcion()
+    public void test01AlConstruirEnTierraUnaTrampaDebeTirarUnaExcepcion()
     {   
         Tierra parcela = new Tierra(0,0);
         TrampaArenosa defensa = new TrampaArenosa();
@@ -38,10 +38,18 @@ public class TierraTest {
     }
 
     @Test
-    public void test01AlConstruirEnTierraUnaTrampaDebeTirarUnaExcepcion()
+    public void test01AlConstruirEnTierraUnaTorreBlancaNoDebeTirarExcepcion()
     {
         Tierra parcela = new Tierra(0,0);
         TorreBlanca defensa = new TorreBlanca();
+        assertDoesNotThrow(() -> parcela.construir(defensa));    
+    }
+
+    @Test
+    public void test01AlConstruirEnTierraUnaTorrePlateadaNoDebeTirarExcepcion()
+    {
+        Tierra parcela = new Tierra(0,0);
+        TorreBlanca defensa = new TorrePlateada();
         assertDoesNotThrow(() -> parcela.construir(defensa));    
     }
 

@@ -121,10 +121,19 @@ public class Tests {
     }
 
     @Test
-    public void test04NoSePuedeConstruirUnaTorreSobreAlgunaPasarela()
+    public void test04NoSePuedeConstruirUnaTorreBlancaSobreAlgunaPasarela()
     {
         Pasarela pasarela = new Pasarela(0,0);
         TorreBlanca torre = new TorreBlanca();
+
+        assertThrows(DefensaEnTerrenoErroneoError.class, () -> pasarela.construir(torre));
+    }
+
+    @Test
+    public void test04NoSePuedeConstruirUnaTorrePlateadaSobreAlgunaPasarela()
+    {
+        Pasarela pasarela = new Pasarela(0,0);
+        TorreBlanca torre = new TorrePlateada();
 
         assertThrows(DefensaEnTerrenoErroneoError.class, () -> pasarela.construir(torre));
     }
