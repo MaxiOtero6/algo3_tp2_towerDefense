@@ -39,18 +39,16 @@ public class PartidaTest {
         Jugador jugador = new Jugador(1000000, 1000000);
         List<Parcela> camino = new LinkedList<>();
         Partida partida = new Partida(CreadorMapa.crearMapa(camino), camino, jugador);
-        partida.construirDefensa(new TorrePlateada(), 0,1);
-        partida.construirDefensa(new TorrePlateada(), 0,2);
-        partida.construirDefensa(new TorrePlateada(), 0,3);
-        partida.construirDefensa(new TorrePlateada(), 0,4);
-        partida.construirDefensa(new TorrePlateada(), 0,5);
-        partida.construirDefensa(new TorreBlanca(), 2,0);
-        partida.construirDefensa(new TorreBlanca(), 2,1);
-        partida.construirDefensa(new TorreBlanca(), 2,2);
-        partida.construirDefensa(new TorreBlanca(), 2,3);
-        partida.construirDefensa(new TrampaArenosa(), 1,6);
-        partida.construirDefensa(new TrampaArenosa(), 2,6);
-        partida.construirDefensa(new TrampaArenosa(), 3,6);
+        TorreBlanca torre = new TorrePlateada();
+        torre.avanzarTurno();
+        torre.avanzarTurno();
+        
+        TorreBlanca torre2 = new TorrePlateada();
+        torre2.avanzarTurno();
+        torre2.avanzarTurno();
+        
+        partida.construirDefensa(torre, 0,1);
+        partida.construirDefensa(torre2, 0,2);
         
         Logger mockedLogger = mock(Logger.class);
         SingleLogger.inicializar(mockedLogger);

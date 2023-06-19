@@ -30,8 +30,8 @@ public class CreadorEnemigos {
                 {    
                     cantidadHormigas = turno.get("enemigos").get("hormiga").asInt();
                     cantidadAranias = turno.get("enemigos").get("arana").asInt();
-                    //cantidadTopos = turno.get("enemigos").get("topo").asInt();
-                    //cantidadLechuzas = turno.get("enemigos").get("lechuza").asInt();
+                    cantidadTopos = turno.get("enemigos").get("topo").asInt();
+                    cantidadLechuzas = turno.get("enemigos").get("lechuza").asInt();
 
                     for (int i = 0; i < cantidadHormigas; i++) 
                     {
@@ -43,17 +43,17 @@ public class CreadorEnemigos {
                         enemigosTurno.add(new Arania(jugador, camino));
                     }
                     
-                    // for (int i = 0; i < cantidadTopos; i++) 
-                    // {
-                    //     Topo topo = new Topo(jugador, camino);
-                    //     topo.setNumeroTurno(numeroTurno);
-                    //     enemigosTurno.add(topo);
-                    // }
+                    for (int i = 0; i < cantidadTopos; i++) 
+                    {
+                        Topo topo = new Topo(jugador, camino);
+                        topo.setNumeroTurno(numeroTurno);
+                        enemigosTurno.add(topo);
+                    }
                     
-                    // for (int i = 0; i < cantidadLechuzas; i++) 
-                    // {
-                    //     enemigosTurno.add(new Lechuza(jugador)));
-                    // }
+                    for (int i = 0; i < cantidadLechuzas; i++) 
+                    {
+                        enemigosTurno.add(new Lechuza(jugador, camino));
+                    }
                     
                 }
             }

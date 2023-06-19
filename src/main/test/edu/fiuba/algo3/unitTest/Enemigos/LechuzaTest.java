@@ -87,7 +87,7 @@ public class LechuzaTest {
         caminoHMock.when(() -> CreadorCaminoH.crearCaminoH(null)).thenReturn(lista);
         caminoLMock.when(() -> CreadorCaminoL.crearCaminoL()).thenReturn(lista);
         
-        Enemigo enemigo = new Lechuza(null);
+        Enemigo enemigo = new Lechuza(null,null);
 
         enemigo.recibirDanio(3, "Test04Lechuza");
         enemigo.mover();
@@ -107,7 +107,7 @@ public class LechuzaTest {
         caminoHMock.when(() -> CreadorCaminoH.crearCaminoH(null)).thenReturn(lista);
         caminoLMock.when(() -> CreadorCaminoL.crearCaminoL()).thenReturn(lista);
         
-        Enemigo enemigo = new Lechuza(null);
+        Enemigo enemigo = new Lechuza(null,null);
 
         enemigo.mover();
         caminoHMock.verify(() -> CreadorCaminoH.crearCaminoH(null), never());

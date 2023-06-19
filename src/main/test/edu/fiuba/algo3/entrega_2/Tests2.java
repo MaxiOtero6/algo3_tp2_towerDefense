@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.*;
 import edu.fiuba.algo3.modelo.Parser.CreadorEnemigos;
 import edu.fiuba.algo3.modelo.Parser.CreadorMapa;
 import edu.fiuba.algo3.modelo.Parser.ParserJSON;
+import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorrePlateada;
 import edu.fiuba.algo3.modelo.Enemigos.*;
@@ -45,7 +46,7 @@ public class Tests2 {
     public void test13ElFormatoDelJsonEnemigosEsValido()
     {
         JsonNode lecturaJson;        
-        String jsonSimulado = "[{\"turno\": 1,\"enemigos\": {\"hormiga\": 1,\"arana\": 0}},	{\"turno\": 2,\"enemigos\": {\"hormiga\": 1,\"arana\": 1}},{\"turno\": 3,\"enemigos\": {\"hormiga\": 2,\"arana\": 1}},{\"turno\": 4,\"enemigos\": {\"hormiga\": 0,\"arana\": 1}},	{\"turno\": 5,\"enemigos\": {\"hormiga\": 1,\"arana\": 1}},	{\"turno\": 6,\"enemigos\": {\"hormiga\": 1,\"arana\": 2}},	{\"turno\": 7,\"enemigos\": {\"hormiga\": 0,\"arana\": 1}},	{\"turno\": 8,\"enemigos\": {\"hormiga\": 1,\"arana\": 0}},	{\"turno\": 9,\"enemigos\": {\"hormiga\": 1,\"arana\": 0}},	{\"turno\": 10,\"enemigos\": {\"hormiga\": 2,\"arana\": 0}},	{\"turno\": 11,\"enemigos\": {\"hormiga\": 0,\"arana\": 1}},	{\"turno\": 12,\"enemigos\": {\"hormiga\": 1,\"arana\": 2}}]";
+        String jsonSimulado = "[{\"turno\": 1,\"enemigos\": {\"hormiga\": 1,\"arana\": 0,\"topo\": 0,\"lechuza\":0}},	{\"turno\": 2,\"enemigos\": {\"hormiga\": 1,\"arana\": 1,\"topo\": 0,\"lechuza\":0}},{\"turno\": 3,\"enemigos\": {\"hormiga\": 2,\"arana\": 1,\"topo\": 0,\"lechuza\":0}},{\"turno\": 4,\"enemigos\": {\"hormiga\": 0,\"arana\": 0,\"topo\": 0,\"lechuza\":1}},	{\"turno\": 5,\"enemigos\": {\"hormiga\": 0,\"arana\": 0,\"topo\": 1,\"lechuza\":0}},	{\"turno\": 6,\"enemigos\": {\"hormiga\": 1,\"arana\": 0,\"topo\": 0,\"lechuza\":0}},	{\"turno\": 7,\"enemigos\": {\"hormiga\": 0,\"arana\": 1,\"topo\": 0,\"lechuza\":0}},	{\"turno\": 8,\"enemigos\": {\"hormiga\": 1,\"arana\": 0,\"topo\": 0,\"lechuza\":0}},	{\"turno\": 9,\"enemigos\": {\"hormiga\": 1,\"arana\": 0,\"topo\": 0,\"lechuza\":0}},	{\"turno\": 10,\"enemigos\": {\"hormiga\": 2,\"arana\": 0,\"topo\": 0,\"lechuza\":1}},	{\"turno\": 11,\"enemigos\": {\"hormiga\": 0,\"arana\": 0,\"topo\": 1,\"lechuza\":0}},	{\"turno\": 12,\"enemigos\": {\"hormiga\": 1,\"arana\": 1,\"topo\": 0,\"lechuza\":0}}]";
         JsonNode lecturaEsperada = null;   
         
         try
@@ -87,7 +88,7 @@ public class Tests2 {
     {
         LinkedList<LinkedList<Enemigo>> enemigos = new LinkedList<>();
         LinkedList<LinkedList<Enemigo>> enemigosEsperados = new LinkedList<>();
-        Enemigo[][] enemigosPorTurno = {{new Hormiga(null,null)}, {new Hormiga(null,null), new Arania(null,null)}, {new Hormiga(null,null), new Hormiga(null,null), new Arania(null,null)}, {new Arania(null,null)}, {new Hormiga(null,null), new Arania(null,null)}, {new Hormiga(null,null), new Arania(null,null), new Arania(null,null)}, {new Arania(null,null)}, {new Hormiga(null,null)}, {new Hormiga(null,null)}, {new Hormiga(null,null), new Hormiga(null,null)}, {new Arania(null,null)}, {new Hormiga(null,null), new Arania(null,null), new Arania(null,null)}};
+        Enemigo[][] enemigosPorTurno = {{new Hormiga(null,null)}, {new Hormiga(null,null), new Arania(null,null)}, {new Hormiga(null,null), new Hormiga(null,null), new Arania(null,null)}, {new Lechuza(null,null)}, {new Topo(null,null)}, {new Hormiga(null,null)}, {new Arania(null,null)}, {new Hormiga(null,null)}, {new Hormiga(null,null)}, {new Hormiga(null,null), new Hormiga(null,null), new Lechuza(null,null)}, {new Topo(null,null)}, {new Hormiga(null,null), new Arania(null,null)}};
         
         for (Enemigo[] turno : enemigosPorTurno) {    
             enemigosEsperados.add(new LinkedList<>(Arrays.asList(turno)));
@@ -174,15 +175,16 @@ public class Tests2 {
         Jugador jugador = new Jugador(1000000, 1000000);
         List<Parcela> camino = new LinkedList<>();
         Partida partida = new Partida(CreadorMapa.crearMapa(camino), camino, jugador);
-        partida.construirDefensa(new TorrePlateada(), 0,1);
-        partida.construirDefensa(new TorrePlateada(), 0,2);
-        partida.construirDefensa(new TorrePlateada(), 0,3);
-        partida.construirDefensa(new TorrePlateada(), 0,4);
-        partida.construirDefensa(new TorrePlateada(), 0,5);
-        partida.construirDefensa(new TorreBlanca(), 2,0);
-        partida.construirDefensa(new TorreBlanca(), 2,1);
-        partida.construirDefensa(new TorreBlanca(), 2,2);
-        partida.construirDefensa(new TorreBlanca(), 2,3);
+        TorreBlanca torre = new TorrePlateada();
+        torre.avanzarTurno();
+        torre.avanzarTurno();
+        
+        TorreBlanca torre2 = new TorrePlateada();
+        torre2.avanzarTurno();
+        torre2.avanzarTurno();
+        
+        partida.construirDefensa(torre, 0,1);
+        partida.construirDefensa(torre2, 0,2);
 
         assertThrows(GanarPartidaError.class, () -> partida.iniciar());
         Hormiga.resetContador();
