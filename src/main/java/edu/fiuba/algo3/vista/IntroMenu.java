@@ -35,12 +35,21 @@ public class IntroMenu {
     private Label validationLabel;
 
     public VBox crearUI(Stage stagePrincipal) {
+        String css = "-fx-prompt-text-fill: black;";
+
+
         textField = new TextField();
+        textField.setPromptText("Ingrese nombre");
         textField.setStyle("-fx-control-inner-background: #FFC864;");
+        textField.setStyle(textField.getStyle() + css);
+
+        
         okButton = new Button("OK");
         okButton.setStyle("-fx-background-color: #FFA500;");
+
         iniButton = new Button("Iniciar Partida");
         iniButton.setStyle("-fx-background-color: #FFA500;");
+
         validationLabel = new Label();
         validationLabel.setStyle("-fx-text-fill: #FFA500;");
 
@@ -51,6 +60,7 @@ public class IntroMenu {
         });
 
         iniButton.setOnAction(event -> {
+            
             IniciarPartida(stagePrincipal);
         });
 
