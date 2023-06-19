@@ -12,8 +12,9 @@ import edu.fiuba.algo3.modelo.Parcelas.Rocoso;
 import edu.fiuba.algo3.modelo.Parcelas.Tierra;
 import edu.fiuba.algo3.modelo.Parser.CreadorMapa;
 
+import edu.fiuba.algo3.modelo.Defensas.*;
 import edu.fiuba.algo3.modelo.Defensas.Torres.*;
-
+import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -119,8 +120,8 @@ public class IntroMenu {
                 if(parcelaActual instanceof Pasarela) {casillaMapa.setStyle("-fx-background-color: #d1b680;");}
 
                 casillaMapa.setOnAction(event -> {
-                    if(!torreAux.puseTorre){
-                        TorreBlanca torreActual = torreAux.getTorre();
+                    if(!torreAux.puseDefensa){
+                        Defensa torreActual = torreAux.getTorre();
                         parcelaActual.construir(torreActual);
 
                         if(torreActual instanceof TorrePlateada) {
@@ -132,6 +133,11 @@ public class IntroMenu {
                             torreAux.ponerTorre();
                             ImageView torreBlanca = new ImageView(getClass().getResource("torreBlanca.png").toExternalForm());
                             root.add(torreBlanca,coordenadaX,coordenaday);
+                        }
+                        if(torreActual instanceof TrampaArenosa) {
+                            torreAux.ponerTorre();
+                            ImageView trampaArenosa = new ImageView(getClass().getResource("trampaArenosa.png").toExternalForm());
+                            root.add(trampaArenosa,coordenadaX,coordenaday);
                         }
                     }
 
@@ -151,6 +157,10 @@ public class IntroMenu {
         ImageView torreBlanca = new ImageView((new File("src/main/resources/image/torreBlanca.png")).toURI().toString());
         root.add(torreBlanca,7,7);
         
+        //TRAMPA ARENOSA DE EJEMPLO
+        ImageView trampaArenosa = new ImageView((new File("src/main/resources/image/trampaArenosa.png")).toURI().toString());
+        root.add(trampaArenosa,6,6);
+
         //HORMIGA DE EJEMPLO
         ImageView hormiga = new ImageView((new File("src/main/resources/image/hormiga.png")).toURI().toString());
         root.add(hormiga,1,1);
@@ -161,7 +171,11 @@ public class IntroMenu {
 
         //TOPO DE EJEMPLO
         ImageView topo = new ImageView((new File("src/main/resources/image/topo.png")).toURI().toString());
-        root.add(topo,6,6);
+        root.add(topo,8,6);
+
+        //TOPO ESCONDIDO DE EJEMPLO
+        ImageView topoEscondido = new ImageView((new File("src/main/resources/image/topo_escondido.png")).toURI().toString());
+        root.add(topoEscondido,5,6);
 
         //LECHUZA DE EJEMPLO
         ImageView lechuza = new ImageView((new File("src/main/resources/image/lechuza.png")).toURI().toString());
@@ -185,6 +199,15 @@ public class IntroMenu {
             torreAux.setTorre(torreCreada);
         });
 
+        ImageView imagenTrampaArenosa = new ImageView((new File("src/main/resources/image/trampaArenosa.png")).toURI().toString());
+        Button botonTrampa = new Button();
+        botonTrampa.setGraphic(imagenTrampaArenosa);
+        botonTrampa.setText("Trampa Arenosa");
+        botonTrampa.setOnAction(event -> {
+            TrampaArenosa trampaCreada = new TrampaArenosa();
+            torreAux.setTorre(trampaCreada);
+        });
+
         Button botonSkipTurno = new Button();
         botonSkipTurno.setText("Skip Turno");
         botonSkipTurno.setOnAction(event -> {
@@ -196,7 +219,7 @@ public class IntroMenu {
         VBox vbox = new VBox();
         vbox.setSpacing(10);
         vbox.setStyle("-fx-background-color: #A9A9A9;");
-        vbox.getChildren().addAll(botonPlateada, botonBlanca, botonSkipTurno);
+        vbox.getChildren().addAll(botonPlateada, botonBlanca, botonTrampa, botonSkipTurno);
         vbox.setPadding(new Insets(10));
 
         BorderPane borderPane = new BorderPane();
@@ -211,24 +234,24 @@ public class IntroMenu {
     }
 
     class ContenedorTorre {
-    private TorreBlanca torre;
-    public boolean puseTorre = false;
+    private Defensa defensa;
+    public boolean puseDefensa = false;
 
-    public TorreBlanca getTorre() {
-        return torre;
+    public Defensa getTorre() {
+        return defensa;
     }
 
-    public void setTorre(TorreBlanca torre) {
-        this.torre = torre;
-        puseTorre = false;
+    public void setTorre(Defensa defensa) {
+        this.defensa = defensa;
+        puseDefensa = false;
     }
 
     public void ponerTorre() {
-        puseTorre = true;
+        puseDefensa = true;
     }
 
     public boolean puseTorre() {
-        return puseTorre;
+        return puseDefensa;
     }
 }
   
