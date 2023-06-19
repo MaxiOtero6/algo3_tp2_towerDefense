@@ -23,6 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 
@@ -35,9 +36,13 @@ public class IntroMenu {
 
     public VBox crearUI(Stage stagePrincipal) {
         textField = new TextField();
+        textField.setStyle("-fx-control-inner-background: #FFC864;");
         okButton = new Button("OK");
+        okButton.setStyle("-fx-background-color: #FFA500;");
         iniButton = new Button("Iniciar Partida");
+        iniButton.setStyle("-fx-background-color: #FFA500;");
         validationLabel = new Label();
+        validationLabel.setStyle("-fx-text-fill: #FFA500;");
 
         iniButton.setVisible(false); 
 
@@ -81,6 +86,8 @@ public class IntroMenu {
         int width = SIZE;
         
         GridPane root = new GridPane();
+        root.setPadding(new Insets(10));
+        root.setStyle("-fx-background-color: #A9A9A9;");
 
         for(int y = 0; y < length; y++){
             for(int x = 0; x < width; x++){
@@ -168,8 +175,18 @@ public class IntroMenu {
             torreAux.setTorre(torreCreada);
         });
 
+        Button botonSkipTurno = new Button();
+        botonSkipTurno.setText("Skip Turno");
+        botonSkipTurno.setOnAction(event -> {
+            //ACA VA EL CODIGO PARA PASAR DE TURNO
+        });
+
+
+
         VBox vbox = new VBox();
-        vbox.getChildren().addAll(botonPlateada, botonBlanca);
+        vbox.setSpacing(10);
+        vbox.setStyle("-fx-background-color: #A9A9A9;");
+        vbox.getChildren().addAll(botonPlateada, botonBlanca, botonSkipTurno);
         vbox.setPadding(new Insets(10));
 
         BorderPane borderPane = new BorderPane();
