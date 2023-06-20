@@ -17,6 +17,7 @@ import edu.fiuba.algo3.modelo.Defensas.*;
 import edu.fiuba.algo3.modelo.Defensas.Torres.*;
 import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
 import edu.fiuba.algo3.modelo.Mapa;
+import edu.fiuba.algo3.modelo.Enemigos.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -215,7 +216,7 @@ public class IntroMenu {
                 
             }
         }
-
+/* 
         // //TORRE PLATEADA DE EJEMPLO
         root.add(new ImageView(imagenTorrePlateada),4,7);
 
@@ -239,7 +240,7 @@ public class IntroMenu {
 
         //LECHUZA DE EJEMPLO
         root.add(new ImageView(imagenLechuza),5,10);
-
+*/
         Jugador jugador = partida.obtenerJugador();
         VBox datosUsuario = new VBox();
         datosUsuario.setSpacing(10);
@@ -288,7 +289,7 @@ public class IntroMenu {
             partida.avanzarTurno(turno);
             turno++;
             //ubica la imagen de los enemigos en el mapa
-            /*for(int i = 0; i < partida.obtenerEnemigos().size(); i++){
+            for(int i = 0; i < partida.obtenerEnemigos().size(); i++){
                 Enemigo enemigoActual = partida.obtenerEnemigos().get(i);
                 int coordenadaX = enemigoActual.obtenerPosicion().obtenerCoordenadaX();
                 int coordenadaY = enemigoActual.obtenerPosicion().obtenerCoordenadaY();
@@ -298,12 +299,12 @@ public class IntroMenu {
                     root.add(new ImageView(imagenArania),coordenadaX,coordenadaY);
                 } else if(enemigoActual instanceof Topo) {
                     root.add(new ImageView(imagenTopo),coordenadaX,coordenadaY);
-                } else if(enemigoActual instanceof TopoEscondido) {
+                } else if(enemigoActual instanceof Topo) {
                     root.add(new ImageView(imagenTopoEscondido),coordenadaX,coordenadaY);
                 } else if(enemigoActual instanceof Lechuza) {
                     root.add(new ImageView(imagenLechuza),coordenadaX,coordenadaY);
                 }
-            }*/
+            }
         });
 
         BackgroundFill backgroundFill = new BackgroundFill(Color.ORANGE, new CornerRadii(8), Insets.EMPTY);

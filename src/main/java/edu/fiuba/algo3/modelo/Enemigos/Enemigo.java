@@ -137,4 +137,12 @@ public abstract class Enemigo {
     {
         this.multiplicadorVelocidad = 0.5;
     }
+
+    //getter posicion
+
+    public Posicion obtenerPosicion()
+    {
+        return this.posicion;
+    }
+
 }

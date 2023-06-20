@@ -45,4 +45,15 @@ public class Posicion {
         return String.format("(%d,%d)", coordenadaX, coordenadaY);
     }
 
+    //getters coordenadas
+    public int obtenerCoordenadaX()
+    {
+        return this.coordenadaX;
+    }
+
+    public int obtenerCoordenadaY()
+    {
+        return this.coordenadaY;
+    }
+
 }
