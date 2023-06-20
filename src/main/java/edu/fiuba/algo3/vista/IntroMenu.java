@@ -11,10 +11,11 @@ import edu.fiuba.algo3.modelo.Parcelas.Pasarela;
 import edu.fiuba.algo3.modelo.Parcelas.Rocoso;
 import edu.fiuba.algo3.modelo.Parcelas.Tierra;
 import edu.fiuba.algo3.modelo.Parser.CreadorMapa;
-
+import edu.fiuba.algo3.modelo.Partida;
 import edu.fiuba.algo3.modelo.Defensas.*;
 import edu.fiuba.algo3.modelo.Defensas.Torres.*;
 import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
+import edu.fiuba.algo3.modelo.Mapa;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -41,8 +42,11 @@ import javafx.scene.shape.StrokeType;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderStroke;
 
+
+
 public class IntroMenu {
 
+    private int turno = 0;
     private TextField textoNombre;
     private Button okButton;
     private Button iniButton;
@@ -134,6 +138,10 @@ public class IntroMenu {
 
     private void IniciarPartida(Stage stagePrincipal) {
 
+
+        Partida partida = new Partida();
+        partida.iniciarJuego();
+
         ImageView imagenTorrePlateada = new ImageView((new File("src/main/resources/image/torrePlateada.png")).toURI().toString());
         ImageView imagenTorreBlanca = new ImageView((new File("src/main/resources/image/torreBlanca.png")).toURI().toString());
         ImageView imagenTrampaArenosa = new ImageView((new File("src/main/resources/image/trampaArenosa.png")).toURI().toString());
@@ -145,9 +153,14 @@ public class IntroMenu {
 
         validationLabel.setText("Partida iniciada");
 
-        pasarelas = new LinkedList<>();
-        mapa = CreadorMapa.crearMapa(pasarelas);
+        //pasarelas = new LinkedList<>();
+        //mapa = CreadorMapa.crearMapa(pasarelas);
 
+        //GETTER
+        List<List<Parcela>> mapa = partida.obtenerMapa().obtenerMapa();
+        //GETTER
+
+        
         ContenedorTorre torreAux = new ContenedorTorre();
         
         int SIZE = 15;
@@ -234,8 +247,8 @@ public class IntroMenu {
         botonPlateada.setText("Torre Plateada");
         botonPlateada.setOnAction(event -> {
             desactivarBotonesInvalidos();
-            TorrePlateada torreCreada = new TorrePlateada();
-            torreAux.setTorre(torreCreada);
+            //TorrePlateada torreCreada = new TorrePlateada();
+            //torreAux.setTorre(torreCreada);
         });
 
         Button botonBlanca = new Button();
@@ -259,19 +272,19 @@ public class IntroMenu {
         Button botonSkipTurno = new Button();
         botonSkipTurno.setText("Skip Turno");
         botonSkipTurno.setOnAction(event -> {
-            //ACA VA EL CODIGO PARA PASAR DE TURNO
+            //Avanzar turno
+            //partida.avanzarTurno(turno);
+            //turno++;
         });
 
         
         VBox vbox = new VBox();
         vbox.setSpacing(10);
-        //vbox.setStyle("-fx-background-color: #A9A9A9;");
+        
         vbox.getChildren().addAll(botonPlateada, botonBlanca, botonTrampa, botonSkipTurno);
         vbox.setPadding(new Insets(10));
 
-        // BorderPane borderPane = new BorderPane();
-        // borderPane.setCenter(root);
-        // borderPane.setRight(vbox);
+        
 
         HBox seccionMapa = new HBox();
         seccionMapa.getChildren().addAll(root, vbox);

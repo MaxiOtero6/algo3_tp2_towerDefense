@@ -44,6 +44,11 @@ public class Partida {
         }
     }
 
+    public void avanzarTurno(int i)
+    {
+        turno.avanzarTurno(i);
+    }
+
     public void iniciarJuego()
     {
         try
@@ -76,6 +81,11 @@ public class Partida {
             return (this.mapa.equals(partida.mapa) && this.turno.equals(partida.turno));
         }
         return false;
+    }
+
+    public Mapa obtenerMapa()
+    {
+        return this.mapa;
     }
 
 }

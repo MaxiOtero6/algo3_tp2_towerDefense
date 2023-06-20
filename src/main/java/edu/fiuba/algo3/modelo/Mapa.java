@@ -30,4 +30,9 @@ public class Mapa {
         }
         return false;
     }
+
+    public List<List<Parcela>> obtenerMapa()
+    {
+        return this.mapa;
+    }
 }
