@@ -19,14 +19,11 @@ public class App extends Application {
     public void start(Stage primaryStage) {
         
         IntroMenu intro = new IntroMenu();
-        VBox root = intro.crearUI(primaryStage);
+        intro.crearUI(primaryStage);
         
-        root.setStyle("-fx-background-color: grey;");
-        Scene scene = new Scene(root, 300, 300);
         primaryStage.setTitle("AlgoDefense");
         Image icon = new Image("file:src/main/resources/image/torrePlateada.png");
         primaryStage.getIcons().add(icon);
-        primaryStage.setScene(scene);
         primaryStage.show();
 
     }

@@ -22,29 +22,50 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.StrokeType;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.Node;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.StrokeType;
+import javafx.stage.Stage;
+import javafx.scene.layout.BorderStroke;
 
 public class IntroMenu {
 
-    private TextField textField;
+    private TextField textoNombre;
     private Button okButton;
     private Button iniButton;
     private Label validationLabel;
+    private String nombre;
 
-    public VBox crearUI(Stage stagePrincipal) {
+    private Button botonInicial;
+    List<Parcela> pasarelas;
+    List<List<Parcela>> mapa;
+    GridPane root;
+
+    public void crearUI(Stage stagePrincipal) {
         String css = "-fx-prompt-text-fill: black;";
+        ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/logo.png")).toURI().toString());
+        ImageView backgroundImageView = new ImageView((new File("src/main/resources/image/image.png")).toURI().toString());
+        backgroundImageView.fitWidthProperty().bind(stagePrincipal.widthProperty());
+        backgroundImageView.fitHeightProperty().bind(stagePrincipal.heightProperty());
 
-
-        textField = new TextField();
-        textField.setPromptText("Ingrese nombre");
-        textField.setStyle("-fx-control-inner-background: #FFC864;");
-        textField.setStyle(textField.getStyle() + css);
-
+        textoNombre = new TextField();
+        textoNombre.setPromptText("Ingrese nombre");
+        textoNombre.setStyle("-fx-control-inner-background: #FFC864;");
+        textoNombre.setStyle(textoNombre.getStyle() + css);
         
+
         okButton = new Button("OK");
         okButton.setStyle("-fx-background-color: #FFA500;");
 
@@ -52,34 +73,58 @@ public class IntroMenu {
         iniButton.setStyle("-fx-background-color: #FFA500;");
 
         validationLabel = new Label();
-        validationLabel.setStyle("-fx-text-fill: #FFA500;");
-
-        iniButton.setVisible(false); 
-
-        okButton.setOnAction(event -> {
-            validarNombre();
-        });
 
         iniButton.setOnAction(event -> {
             
             IniciarPartida(stagePrincipal);
+        });  
+
+        botonInicial = new Button("Siguiente");
+        botonInicial.setStyle("-fx-background-color: #FFA500;");
+        botonInicial.setFont(new Font(15));
+        botonInicial.setPrefWidth(botonInicial.getPrefWidth() + 100);
+        botonInicial.setPrefHeight(botonInicial.getPrefHeight() + 50);
+
+        Scene nuevaEscena = new Scene(new VBox(textoNombre, okButton), 800, 600);
+        stagePrincipal.setScene(nuevaEscena);
+
+
+        StackPane pantallaInicial = new StackPane();
+
+        VBox inicio = new VBox();
+        inicio.setAlignment(Pos.CENTER);
+        inicio.setSpacing(10);
+
+        okButton.setOnAction(event -> {
+            validarNombre(inicio);
         });
 
-        VBox root = new VBox(textField, okButton, validationLabel, iniButton);
-        root.setSpacing(10);
+        inicio.getChildren().addAll(logoAlgoDefense, botonInicial);
 
-        return root;
+        botonInicial.setOnAction(event -> {
+            inicio.getChildren().remove(botonInicial);
+            inicio.getChildren().addAll(textoNombre, okButton);
+        });
+
+
+        pantallaInicial.getChildren().addAll(backgroundImageView, inicio);
+
+        Scene escenaInicial = new Scene(pantallaInicial, 800, 600);
+        stagePrincipal.setScene(escenaInicial);
     }
 
-    private void validarNombre() {
-        String inputText = textField.getText();
+    private void validarNombre(VBox inicio) {
+        String inputText = textoNombre.getText();
         if (inputText.length() >= 6) {
-            validationLabel.setText("Nombre valido: " + inputText);
-            textField.setDisable(true);
-            okButton.setDisable(true);
-            iniButton.setVisible(true);
+            nombre = inputText;
+            validationLabel.setText("Nombre elegido: " + nombre);
+            validationLabel.setStyle("-fx-text-fill: #a86f13;");
+            inicio.getChildren().removeAll(botonInicial, textoNombre, okButton);
+            inicio.getChildren().addAll(validationLabel, iniButton);
         } else {
             validationLabel.setText("Ingrese un nombre de al menos 6 caracteres");
+            validationLabel.setStyle("-fx-text-fill: #FF0000;");
+            inicio.getChildren().add(validationLabel);
         }
     }
 
@@ -87,8 +132,8 @@ public class IntroMenu {
 
         validationLabel.setText("Partida iniciada");
 
-        List<Parcela> pasarelas = new LinkedList<>();
-        List<List<Parcela>> mapa = CreadorMapa.crearMapa(pasarelas);
+        pasarelas = new LinkedList<>();
+        mapa = CreadorMapa.crearMapa(pasarelas);
 
         ContenedorTorre torreAux = new ContenedorTorre();
         
@@ -96,7 +141,7 @@ public class IntroMenu {
         int length = SIZE;
         int width = SIZE;
         
-        GridPane root = new GridPane();
+        root = new GridPane();
         root.setPadding(new Insets(10));
         root.setStyle("-fx-background-color: #A9A9A9;");
 
@@ -139,6 +184,7 @@ public class IntroMenu {
                             ImageView trampaArenosa = new ImageView(getClass().getResource("trampaArenosa.png").toExternalForm());
                             root.add(trampaArenosa,coordenadaX,coordenaday);
                         }
+                        activarBotones();
                     }
 
                 });
@@ -186,6 +232,7 @@ public class IntroMenu {
         botonPlateada.setGraphic(imagenBotonPlateada);
         botonPlateada.setText("TorreBlanca Plateada");
         botonPlateada.setOnAction(event -> {
+            desactivarBotonesInvalidos();
             TorrePlateada torreCreada = new TorrePlateada();
             torreAux.setTorre(torreCreada);
         });
@@ -195,6 +242,7 @@ public class IntroMenu {
         botonBlanca.setGraphic(imagenBotonBlanca);
         botonBlanca.setText("TorreBlanca Blanca");
         botonBlanca.setOnAction(event -> {
+            desactivarBotonesInvalidos();
             TorreBlanca torreCreada = new TorreBlanca();
             torreAux.setTorre(torreCreada);
         });
@@ -204,6 +252,7 @@ public class IntroMenu {
         botonTrampa.setGraphic(imagenTrampaArenosa);
         botonTrampa.setText("Trampa Arenosa");
         botonTrampa.setOnAction(event -> {
+            desactivarBotonesInvalidos();
             TrampaArenosa trampaCreada = new TrampaArenosa();
             torreAux.setTorre(trampaCreada);
         });
@@ -254,6 +303,63 @@ public class IntroMenu {
         return puseDefensa;
     }
 }
-  
+
+    private void desactivarBotonesInvalidos(){
+
+        Color bordeRojo = Color.RED;
+        Color borderVerde = Color.GREENYELLOW;
+        double borderWidth = 2.0; 
+        
+        for(int y = 0; y < 15; y++){
+            for(int x = 0; x < 15; x++){
+
+                Parcela parcelaActual = mapa.get(y).get(x);
+                if(!(parcelaActual instanceof Tierra)){
+                    for (Node botonActual : root.getChildren()) {
+                        if (GridPane.getRowIndex(botonActual) == y && GridPane.getColumnIndex(botonActual) == x) {
+                            Button boton = (Button)botonActual;
+                            
+                            boton.setOnMouseEntered(event -> boton.setBorder(new javafx.scene.layout.Border(
+                                    new javafx.scene.layout.BorderStroke(bordeRojo, javafx.scene.layout.BorderStrokeStyle.SOLID,
+                                            new CornerRadii(2), new javafx.scene.layout.BorderWidths(borderWidth)))));
+
+                            boton.setOnMouseExited(event -> boton.setBorder(null));
+
+                        break;
+                        }           
+                    }
+                } else {
+                    for (Node botonActual : root.getChildren()) {
+                        if (GridPane.getRowIndex(botonActual) == y && GridPane.getColumnIndex(botonActual) == x) {
+                            Button boton = (Button)botonActual;
+                            
+                            boton.setOnMouseEntered(event -> boton.setBorder(new javafx.scene.layout.Border(
+                                    new javafx.scene.layout.BorderStroke(borderVerde, javafx.scene.layout.BorderStrokeStyle.SOLID,
+                                            new CornerRadii(2), new javafx.scene.layout.BorderWidths(borderWidth)))));
+
+                            boton.setOnMouseExited(event -> boton.setBorder(null));
+
+                        break;
+                        }           
+                    }
+                }
+            }
+        }
+
+    
+        
+    }
+
+    private void activarBotones(){
+            for (Node botonActual : root.getChildren()) {
+                    Button boton = (Button)botonActual;
+                    
+                    boton.setOnMouseEntered(null);
+                break;
+            }           
+    }     
 }
+
+  
+
 
