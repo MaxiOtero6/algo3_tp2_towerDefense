@@ -45,13 +45,18 @@ public class CreadorCaminoL {
 
         caminoL.add(mapa.get(coordenadaYLargada + j).get(coordenadaXLargada + i));
 
-        while ((coordenadaXLargada + i != coordenadaXMeta) && (coordenadaYLargada + j != coordenadaYMeta))
+        while (coordenadaXLargada + i != coordenadaXMeta)
         {
             if (coordenadaXLargada < coordenadaXMeta) {i++;}
             else if (coordenadaXLargada > coordenadaXMeta) {i--;}
-            else if (coordenadaYLargada < coordenadaYMeta) {j++;}
-            else if (coordenadaYLargada > coordenadaYMeta) {j--;}
 
+            caminoL.add(mapa.get(coordenadaYLargada + j).get(coordenadaXLargada + i));
+        }
+
+        while (coordenadaYLargada + j != coordenadaYMeta)
+        {
+            if (coordenadaYLargada < coordenadaYMeta) {j++;}
+            else if (coordenadaYLargada > coordenadaYMeta) {j--;}
             caminoL.add(mapa.get(coordenadaYLargada + j).get(coordenadaXLargada + i));
         }
         return caminoL;
