@@ -34,6 +34,10 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+// import javafx.scene.media.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.StrokeType;
@@ -297,9 +301,11 @@ public class IntroMenu {
         });
 
         Button botonSkipTurno = new Button();
+        //AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/Hormiga.mp3").toURI().toString());
         botonSkipTurno.setText("Skip Turno");
         botonSkipTurno.setOnAction(event -> {
             //Avanzar turno
+            //soundClip.play();
             partida.avanzarTurno(turno);
             turno++;
             List<Node> nodesToRemove = new ArrayList<>();
