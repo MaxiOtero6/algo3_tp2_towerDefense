@@ -245,7 +245,7 @@ public class IntroMenu {
         botonPlateada.setGraphic(new ImageView(imagenTorrePlateada));
         botonPlateada.setText("Torre Plateada");
         botonPlateada.setOnAction(event -> {
-            desactivarBotonesInvalidos();
+            activarBordesTorres();
             TorrePlateada torreCreada = new TorrePlateada();
             torreAux.setTorre(torreCreada);
         });
@@ -254,7 +254,7 @@ public class IntroMenu {
         botonBlanca.setGraphic(new ImageView(imagenTorreBlanca));
         botonBlanca.setText("Torre Blanca");
         botonBlanca.setOnAction(event -> {
-            desactivarBotonesInvalidos();
+            activarBordesTorres();
             TorreBlanca torreCreada = new TorreBlanca();
             torreAux.setTorre(torreCreada);
         });
@@ -263,7 +263,7 @@ public class IntroMenu {
         botonTrampa.setGraphic(new ImageView(imagenTrampaArenosa));
         botonTrampa.setText("Trampa Arenosa");
         botonTrampa.setOnAction(event -> {
-            desactivarBotonesInvalidos();
+            activarBordesTrampaArena();
             TrampaArenosa trampaCreada = new TrampaArenosa();
             torreAux.setTorre(trampaCreada);
         });
@@ -324,7 +324,7 @@ public class IntroMenu {
     }
 }
 
-    private void desactivarBotonesInvalidos(){
+    private void activarBordesTorres(){
 
         Color bordeRojo = Color.RED;
         Color borderVerde = Color.GREENYELLOW;
@@ -364,22 +364,73 @@ public class IntroMenu {
                     }
                 }
             }
-        }
+        }   
+    }
 
-    
+    private void activarBordesTrampaArena(){
+
+        Color bordeRojo = Color.RED;
+        Color borderVerde = Color.GREENYELLOW;
+        double borderWidth = 2.0; 
         
+        for(int y = 0; y < 15; y++){
+            for(int x = 0; x < 15; x++){
+
+                Parcela parcelaActual = mapa.get(y).get(x);
+                if(!(parcelaActual instanceof Pasarela)){
+                    for (Node botonActual : root.getChildren()) {
+                        if (GridPane.getRowIndex(botonActual) == y && GridPane.getColumnIndex(botonActual) == x) {
+                            Button boton = (Button)botonActual;
+                            
+                            boton.setOnMouseEntered(event -> boton.setBorder(new javafx.scene.layout.Border(
+                                    new javafx.scene.layout.BorderStroke(bordeRojo, javafx.scene.layout.BorderStrokeStyle.SOLID,
+                                            new CornerRadii(2), new javafx.scene.layout.BorderWidths(borderWidth)))));
+
+                            boton.setOnMouseExited(event -> boton.setBorder(null));
+
+                        break;
+                        }           
+                    }
+                } else {
+                    for (Node botonActual : root.getChildren()) {
+                        if (GridPane.getRowIndex(botonActual) == y && GridPane.getColumnIndex(botonActual) == x) {
+                            Button boton = (Button)botonActual;
+                            
+                            boton.setOnMouseEntered(event -> boton.setBorder(new javafx.scene.layout.Border(
+                                    new javafx.scene.layout.BorderStroke(borderVerde, javafx.scene.layout.BorderStrokeStyle.SOLID,
+                                            new CornerRadii(2), new javafx.scene.layout.BorderWidths(borderWidth)))));
+
+                            boton.setOnMouseExited(event -> boton.setBorder(null));
+
+                        break;
+                        }           
+                    }
+                }
+            }
+        }   
     }
 
     private void activarBotones(){
-            for (Node botonActual : root.getChildren()) {
-                    Button boton = (Button)botonActual;
-                    
-                    boton.setOnMouseEntered(null);
-                break;
-            }           
-    }     
-}
+        for(int y = 0; y < 15; y++){
+            for(int x = 0; x < 15; x++){
 
-  
+                Parcela parcelaActual = mapa.get(y).get(x);
+                if((parcelaActual instanceof Parcela)){
+                    for (Node botonActual : root.getChildren()) {
+                        if (GridPane.getRowIndex(botonActual) == y && GridPane.getColumnIndex(botonActual) == x) {
+                            Button boton = (Button)botonActual;
+                            
+                            boton.setOnMouseEntered(event -> boton.setBorder(null));
+
+                            boton.setOnMouseExited(event -> boton.setBorder(null));
+
+                        break;
+                        }           
+                    }
+                }   
+            }               
+        }  
+    }
+}
 
 
