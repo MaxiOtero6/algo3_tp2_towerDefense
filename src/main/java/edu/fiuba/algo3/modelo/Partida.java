@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import edu.fiuba.algo3.modelo.Defensas.Defensa;
+import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
 import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
@@ -97,6 +98,11 @@ public class Partida {
     public List<List<Parcela>> obtenerMapa()
     {
         return this.mapa.obtenerMapa();
+    }
+
+    public LinkedList<Enemigo> obtenerEnemigos()
+    {
+        return this.turno.obtenerEnemigos();
     }
 
 }

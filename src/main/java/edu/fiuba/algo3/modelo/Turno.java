@@ -102,4 +102,9 @@ public class Turno {
         }
         return false;
     }
+
+    public LinkedList<Enemigo> obtenerEnemigos()
+    {
+        return this.enemigos;
+    }
 }

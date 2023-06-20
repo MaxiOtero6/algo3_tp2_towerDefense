@@ -183,6 +183,7 @@ public class IntroMenu {
                 casillaMapa.setAlignment(Pos.CENTER);
 
                 Parcela parcelaActual = mapa.get(y).get(x);
+                
 
                 if(parcelaActual instanceof Tierra) {casillaMapa.setStyle("-fx-background-color: #699922;");}
                 if(parcelaActual instanceof Largada) {casillaMapa.setStyle("-fx-background-color: #599ed4;");}
@@ -274,6 +275,23 @@ public class IntroMenu {
             //Avanzar turno
             partida.avanzarTurno(turno);
             turno++;
+            //ubica la imagen de los enemigos en el mapa
+            /*for(int i = 0; i < partida.obtenerEnemigos().size(); i++){
+                Enemigo enemigoActual = partida.obtenerEnemigos().get(i);
+                int coordenadaX = enemigoActual.obtenerPosicion().obtenerCoordenadaX();
+                int coordenadaY = enemigoActual.obtenerPosicion().obtenerCoordenadaY();
+                if(enemigoActual instanceof Hormiga) {
+                    root.add(new ImageView(imagenHormiga),coordenadaX,coordenadaY);
+                } else if(enemigoActual instanceof Arania) {
+                    root.add(new ImageView(imagenArania),coordenadaX,coordenadaY);
+                } else if(enemigoActual instanceof Topo) {
+                    root.add(new ImageView(imagenTopo),coordenadaX,coordenadaY);
+                } else if(enemigoActual instanceof TopoEscondido) {
+                    root.add(new ImageView(imagenTopoEscondido),coordenadaX,coordenadaY);
+                } else if(enemigoActual instanceof Lechuza) {
+                    root.add(new ImageView(imagenLechuza),coordenadaX,coordenadaY);
+                }
+            }*/
         });
 
         
