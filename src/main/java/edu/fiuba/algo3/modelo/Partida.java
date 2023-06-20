@@ -105,4 +105,8 @@ public class Partida {
         return this.turno.obtenerEnemigos();
     }
 
+    public Jugador obtenerJugador(){
+        return this.turno.obtenerJugador();
+    }
+
 }

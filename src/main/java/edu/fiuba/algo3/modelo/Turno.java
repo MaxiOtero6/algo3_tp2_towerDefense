@@ -107,4 +107,8 @@ public class Turno {
     {
         return this.enemigos;
     }
+
+    public Jugador obtenerJugador() {
+        return this.jugador;
+    }
 }

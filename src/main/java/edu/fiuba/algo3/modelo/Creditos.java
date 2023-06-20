@@ -38,4 +38,8 @@ public class Creditos {
         return false;
     }
 
+    public int obtenerCreditosRestantes(){
+        return this.creditos;
+    }
+
 }

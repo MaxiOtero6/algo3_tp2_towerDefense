@@ -50,4 +50,12 @@ public class Jugador {
         }
         return false;
     }
+
+    public int obtenerVidaRestante(){
+        return this.vida;
+    }
+
+    public int obtenerCreditosRestantes(){
+        return this.creditos.obtenerCreditosRestantes();
+    }
 }
