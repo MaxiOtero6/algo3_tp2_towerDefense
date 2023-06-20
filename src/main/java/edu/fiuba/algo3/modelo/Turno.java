@@ -43,9 +43,9 @@ public class Turno {
     }
 
     public void avanzarTurno(int numeroTurno) {
+        avanzarEnemigos();
         crearOleada(numeroTurno);
         avanzarDefensas();
-        avanzarEnemigos();
         comprobarCantidadEnemigos();
     }
 
@@ -106,5 +106,9 @@ public class Turno {
     public LinkedList<Enemigo> obtenerEnemigos()
     {
         return this.enemigos;
+    }
+
+    public Jugador obtenerJugador() {
+        return this.jugador;
     }
 }

@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.vista;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,16 +13,20 @@ import edu.fiuba.algo3.modelo.Parcelas.Rocoso;
 import edu.fiuba.algo3.modelo.Parcelas.Tierra;
 import edu.fiuba.algo3.modelo.Parser.CreadorMapa;
 import edu.fiuba.algo3.modelo.Partida;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Defensas.*;
 import edu.fiuba.algo3.modelo.Defensas.Torres.*;
 import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
 import edu.fiuba.algo3.modelo.Mapa;
+import edu.fiuba.algo3.modelo.Enemigos.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -57,6 +62,8 @@ public class IntroMenu {
     List<Parcela> pasarelas;
     List<List<Parcela>> mapa;
     GridPane root;
+
+    
 
     public void crearUI(Stage stagePrincipal) {
         String css = "-fx-prompt-text-fill: black;";
@@ -140,7 +147,6 @@ public class IntroMenu {
 
 
         Partida partida = new Partida();
-        partida.iniciarJuego();
 
         String imagenTorrePlateada = (new File("src/main/resources/image/torrePlateada.png")).toURI().toString();
         String imagenTorreBlanca = (new File("src/main/resources/image/torreBlanca.png")).toURI().toString();
@@ -153,12 +159,7 @@ public class IntroMenu {
 
         validationLabel.setText("Partida iniciada");
 
-        //pasarelas = new LinkedList<>();
-       // mapa = CreadorMapa.crearMapa(pasarelas);
-
-        //GETTER
         mapa = partida.obtenerMapa();
-        //GETTER
 
         
         ContenedorTorre torreAux = new ContenedorTorre();
@@ -169,7 +170,6 @@ public class IntroMenu {
         
         root = new GridPane();
         root.setPadding(new Insets(10));
-        //root.setStyle("-fx-background-color: #A9A9A9;");
 
         for(int y = 0; y < length; y++){
             for(int x = 0; x < width; x++){
@@ -190,6 +190,19 @@ public class IntroMenu {
                 if(parcelaActual instanceof Meta) {casillaMapa.setStyle("-fx-background-color: #FFA500;");}
                 if(parcelaActual instanceof Rocoso) {casillaMapa.setStyle("-fx-background-color: #38393b;");}
                 if(parcelaActual instanceof Pasarela) {casillaMapa.setStyle("-fx-background-color: #d1b680;");}
+                for(int i = 0; i < partida.obtenerEnemigos().size(); i++){
+                
+                Enemigo enemigoActual = partida.obtenerEnemigos().get(i);
+                if(enemigoActual instanceof Hormiga) {
+                    root.add(new ImageView(imagenHormiga),coordenadaX,coordenaday);
+                } else if(enemigoActual instanceof Arania) {
+                    root.add(new ImageView(imagenArania),coordenadaX,coordenaday);
+                } else if(enemigoActual instanceof Topo) {
+                    root.add(new ImageView(imagenTopo),coordenadaX,coordenaday);
+                } else if(enemigoActual instanceof Lechuza) {
+                    root.add(new ImageView(imagenLechuza),coordenadaX,coordenaday);
+                }
+                }
 
                 casillaMapa.setOnAction(event -> {
                     if(!torreAux.puseDefensa){
@@ -217,7 +230,7 @@ public class IntroMenu {
                 
             }
         }
-
+/* 
         // //TORRE PLATEADA DE EJEMPLO
         root.add(new ImageView(imagenTorrePlateada),4,7);
 
@@ -241,6 +254,17 @@ public class IntroMenu {
 
         //LECHUZA DE EJEMPLO
         root.add(new ImageView(imagenLechuza),5,10);
+*/
+        Jugador jugador = partida.obtenerJugador();
+        VBox datosUsuario = new VBox();
+        datosUsuario.setSpacing(10);
+        datosUsuario.setPadding(new Insets(10));
+        
+
+        Label label1 = new Label("Nombre: " + nombre);
+        Label label2 = new Label(jugador.obtenerVidaRestante() + "/20");
+        Label label3 = new Label("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
+        datosUsuario.getChildren().addAll(label1, label2, label3);
 
         Button botonPlateada = new Button();
         botonPlateada.setGraphic(new ImageView(imagenTorrePlateada));
@@ -249,6 +273,7 @@ public class IntroMenu {
             activarBordesTorres();
             TorrePlateada torreCreada = new TorrePlateada();
             torreAux.setTorre(torreCreada);
+            label3.setText("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
         });
 
         Button botonBlanca = new Button();
@@ -258,6 +283,7 @@ public class IntroMenu {
             activarBordesTorres();
             TorreBlanca torreCreada = new TorreBlanca();
             torreAux.setTorre(torreCreada);
+            label3.setText("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
         });
 
         Button botonTrampa = new Button();
@@ -267,6 +293,7 @@ public class IntroMenu {
             activarBordesTrampaArena();
             TrampaArenosa trampaCreada = new TrampaArenosa();
             torreAux.setTorre(trampaCreada);
+            label3.setText("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
         });
 
         Button botonSkipTurno = new Button();
@@ -275,8 +302,23 @@ public class IntroMenu {
             //Avanzar turno
             partida.avanzarTurno(turno);
             turno++;
-            //ubica la imagen de los enemigos en el mapa
-            /*for(int i = 0; i < partida.obtenerEnemigos().size(); i++){
+            List<Node> nodesToRemove = new ArrayList<>();
+            for (Node node : root.getChildren()) {
+                if (node instanceof ImageView) {
+
+                    ImageView imageView = (ImageView) node;
+                    Image image = imageView.getImage();
+                    String imageUrl = image.getUrl();
+                    if (imageUrl.equals(imagenHormiga) ||
+                        imageUrl.equals(imagenArania) ||
+                        imageUrl.equals(imagenTopo) ||
+                        imageUrl.equals(imagenLechuza)) {
+                        nodesToRemove.add(node);
+                    }
+                }
+            }
+            root.getChildren().removeAll(nodesToRemove);
+            for(int i = 0; i < partida.obtenerEnemigos().size(); i++){
                 Enemigo enemigoActual = partida.obtenerEnemigos().get(i);
                 int coordenadaX = enemigoActual.obtenerPosicion().obtenerCoordenadaX();
                 int coordenadaY = enemigoActual.obtenerPosicion().obtenerCoordenadaY();
@@ -286,30 +328,34 @@ public class IntroMenu {
                     root.add(new ImageView(imagenArania),coordenadaX,coordenadaY);
                 } else if(enemigoActual instanceof Topo) {
                     root.add(new ImageView(imagenTopo),coordenadaX,coordenadaY);
-                } else if(enemigoActual instanceof TopoEscondido) {
-                    root.add(new ImageView(imagenTopoEscondido),coordenadaX,coordenadaY);
                 } else if(enemigoActual instanceof Lechuza) {
                     root.add(new ImageView(imagenLechuza),coordenadaX,coordenadaY);
                 }
-            }*/
+            }
         });
 
-        
-        VBox vbox = new VBox();
-        vbox.setSpacing(10);
-        
-        vbox.getChildren().addAll(botonPlateada, botonBlanca, botonTrampa, botonSkipTurno);
-        vbox.setPadding(new Insets(10));
+        BackgroundFill backgroundFill = new BackgroundFill(Color.ORANGE, new CornerRadii(8), Insets.EMPTY);
+        Background background = new Background(backgroundFill);
+        datosUsuario.setBackground(background);
 
+        Color bordeAzul = Color.BLANCHEDALMOND;
+        double borderWidth = 2.0; 
+        datosUsuario.setBorder(new javafx.scene.layout.Border(
+                                    new javafx.scene.layout.BorderStroke(bordeAzul, javafx.scene.layout.BorderStrokeStyle.SOLID,
+                                            new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
+
+        VBox seccionBotones = new VBox();
+        seccionBotones.setSpacing(10);
         
+        seccionBotones.getChildren().addAll(datosUsuario, botonPlateada, botonBlanca, botonTrampa, botonSkipTurno);
+        seccionBotones.setPadding(new Insets(10));
 
         HBox seccionMapa = new HBox();
-        seccionMapa.getChildren().addAll(root, vbox);
+        seccionMapa.getChildren().addAll(root, seccionBotones);
 
         ImageView backgroundImageView = new ImageView((new File("src/main/resources/image/image.png")).toURI().toString());
         backgroundImageView.fitWidthProperty().bind(seccionMapa.widthProperty());
         backgroundImageView.fitHeightProperty().bind(seccionMapa.heightProperty());
-
 
         StackPane fondoMapa = new StackPane();
         fondoMapa.getChildren().addAll(backgroundImageView, seccionMapa);
