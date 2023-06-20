@@ -128,7 +128,17 @@ public class IntroMenu {
         }
     }
 
+
     private void IniciarPartida(Stage stagePrincipal) {
+
+        ImageView imagenTorrePlateada = new ImageView((new File("src/main/resources/image/torrePlateada.png")).toURI().toString());
+        ImageView imagenTorreBlanca = new ImageView((new File("src/main/resources/image/torreBlanca.png")).toURI().toString());
+        ImageView imagenTrampaArenosa = new ImageView((new File("src/main/resources/image/trampaArenosa.png")).toURI().toString());
+        ImageView imagenHormiga = new ImageView((new File("src/main/resources/image/hormiga.png")).toURI().toString());
+        ImageView imagenArania = new ImageView((new File("src/main/resources/image/arania.png")).toURI().toString());
+        ImageView imagenTopo = new ImageView((new File("src/main/resources/image/topo.png")).toURI().toString());
+        ImageView imagenTopoEscondido = new ImageView((new File("src/main/resources/image/topo_escondido.png")).toURI().toString());
+        ImageView imagenLechuza = new ImageView((new File("src/main/resources/image/lechuza.png")).toURI().toString());
 
         validationLabel.setText("Partida iniciada");
 
@@ -171,18 +181,15 @@ public class IntroMenu {
 
                         if(torreActual instanceof TorrePlateada) {
                             torreAux.ponerTorre();
-                            ImageView torrePlateada = new ImageView(getClass().getResource("torrePlateada.png").toExternalForm());
-                            root.add(torrePlateada,coordenadaX,coordenaday);
+                            root.add(imagenTorrePlateada,coordenadaX,coordenaday);
                         }
                         if(torreActual instanceof TorreBlanca) {
                             torreAux.ponerTorre();
-                            ImageView torreBlanca = new ImageView(getClass().getResource("torreBlanca.png").toExternalForm());
-                            root.add(torreBlanca,coordenadaX,coordenaday);
+                            root.add(imagenTorreBlanca,coordenadaX,coordenaday);
                         }
                         if(torreActual instanceof TrampaArenosa) {
                             torreAux.ponerTorre();
-                            ImageView trampaArenosa = new ImageView(getClass().getResource("trampaArenosa.png").toExternalForm());
-                            root.add(trampaArenosa,coordenadaX,coordenaday);
+                            root.add(imagenTrampaArenosa,coordenadaX,coordenaday);
                         }
                         activarBotones();
                     }
@@ -196,58 +203,47 @@ public class IntroMenu {
         }
 
         // //TORRE PLATEADA DE EJEMPLO
-        ImageView torrePlateada = new ImageView((new File("src/main/resources/image/torrePlateada.png")).toURI().toString());
-        root.add(torrePlateada,3,2);
+        root.add(imagenTorrePlateada,3,2);
 
         // //TORRE BLANCA DE EJEMPLO
-        ImageView torreBlanca = new ImageView((new File("src/main/resources/image/torreBlanca.png")).toURI().toString());
-        root.add(torreBlanca,7,7);
+        root.add(imagenTorreBlanca,7,7);
         
         //TRAMPA ARENOSA DE EJEMPLO
-        ImageView trampaArenosa = new ImageView((new File("src/main/resources/image/trampaArenosa.png")).toURI().toString());
-        root.add(trampaArenosa,6,6);
+        root.add(imagenTrampaArenosa,6,6);
 
         //HORMIGA DE EJEMPLO
-        ImageView hormiga = new ImageView((new File("src/main/resources/image/hormiga.png")).toURI().toString());
-        root.add(hormiga,1,1);
+        root.add(imagenHormiga,1,1);
 
         //ARANIA DE EJEMPLO
-        ImageView arania = new ImageView((new File("src/main/resources/image/arania.png")).toURI().toString());
-        root.add(arania,7,6);
+        root.add(imagenArania,7,6);
 
         //TOPO DE EJEMPLO
-        ImageView topo = new ImageView((new File("src/main/resources/image/topo.png")).toURI().toString());
-        root.add(topo,8,6);
+        root.add(imagenTopo,8,6);
 
         //TOPO ESCONDIDO DE EJEMPLO
-        ImageView topoEscondido = new ImageView((new File("src/main/resources/image/topo_escondido.png")).toURI().toString());
-        root.add(topoEscondido,5,6);
+        root.add(imagenTopoEscondido,5,6);
 
         //LECHUZA DE EJEMPLO
-        ImageView lechuza = new ImageView((new File("src/main/resources/image/lechuza.png")).toURI().toString());
-        root.add(lechuza,5,10);
+        root.add(imagenLechuza,5,10);
 
-        ImageView imagenBotonPlateada = new ImageView((new File("src/main/resources/image/torrePlateada.png")).toURI().toString());
         Button botonPlateada = new Button();
-        botonPlateada.setGraphic(imagenBotonPlateada);
-        botonPlateada.setText("TorreBlanca Plateada");
+        botonPlateada.setGraphic(imagenTorrePlateada);
+        botonPlateada.setText("Torre Plateada");
         botonPlateada.setOnAction(event -> {
             desactivarBotonesInvalidos();
             TorrePlateada torreCreada = new TorrePlateada();
             torreAux.setTorre(torreCreada);
         });
 
-        ImageView imagenBotonBlanca = new ImageView((new File("src/main/resources/image/torreBlanca.png")).toURI().toString());
         Button botonBlanca = new Button();
-        botonBlanca.setGraphic(imagenBotonBlanca);
-        botonBlanca.setText("TorreBlanca Blanca");
+        botonBlanca.setGraphic(imagenTorreBlanca);
+        botonBlanca.setText("Torre Blanca");
         botonBlanca.setOnAction(event -> {
             desactivarBotonesInvalidos();
             TorreBlanca torreCreada = new TorreBlanca();
             torreAux.setTorre(torreCreada);
         });
 
-        ImageView imagenTrampaArenosa = new ImageView((new File("src/main/resources/image/trampaArenosa.png")).toURI().toString());
         Button botonTrampa = new Button();
         botonTrampa.setGraphic(imagenTrampaArenosa);
         botonTrampa.setText("Trampa Arenosa");
@@ -262,7 +258,6 @@ public class IntroMenu {
         botonSkipTurno.setOnAction(event -> {
             //ACA VA EL CODIGO PARA PASAR DE TURNO
         });
-
 
 
         VBox vbox = new VBox();
