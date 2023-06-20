@@ -43,9 +43,9 @@ public class Turno {
     }
 
     public void avanzarTurno(int numeroTurno) {
+        avanzarEnemigos();
         crearOleada(numeroTurno);
         avanzarDefensas();
-        avanzarEnemigos();
         comprobarCantidadEnemigos();
     }
 

@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.vista;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -189,6 +190,19 @@ public class IntroMenu {
                 if(parcelaActual instanceof Meta) {casillaMapa.setStyle("-fx-background-color: #FFA500;");}
                 if(parcelaActual instanceof Rocoso) {casillaMapa.setStyle("-fx-background-color: #38393b;");}
                 if(parcelaActual instanceof Pasarela) {casillaMapa.setStyle("-fx-background-color: #d1b680;");}
+                for(int i = 0; i < partida.obtenerEnemigos().size(); i++){
+                
+                Enemigo enemigoActual = partida.obtenerEnemigos().get(i);
+                if(enemigoActual instanceof Hormiga) {
+                    root.add(new ImageView(imagenHormiga),coordenadaX,coordenaday);
+                } else if(enemigoActual instanceof Arania) {
+                    root.add(new ImageView(imagenArania),coordenadaX,coordenaday);
+                } else if(enemigoActual instanceof Topo) {
+                    root.add(new ImageView(imagenTopo),coordenadaX,coordenaday);
+                } else if(enemigoActual instanceof Lechuza) {
+                    root.add(new ImageView(imagenLechuza),coordenadaX,coordenaday);
+                }
+                }
 
                 casillaMapa.setOnAction(event -> {
                     if(!torreAux.puseDefensa){
@@ -288,7 +302,22 @@ public class IntroMenu {
             //Avanzar turno
             partida.avanzarTurno(turno);
             turno++;
-            //ubica la imagen de los enemigos en el mapa
+            List<Node> nodesToRemove = new ArrayList<>();
+            for (Node node : root.getChildren()) {
+                if (node instanceof ImageView) {
+
+                    ImageView imageView = (ImageView) node;
+                    Image image = imageView.getImage();
+                    String imageUrl = image.getUrl();
+                    if (imageUrl.equals(imagenHormiga) ||
+                        imageUrl.equals(imagenArania) ||
+                        imageUrl.equals(imagenTopo) ||
+                        imageUrl.equals(imagenLechuza)) {
+                        nodesToRemove.add(node);
+                    }
+                }
+            }
+            root.getChildren().removeAll(nodesToRemove);
             for(int i = 0; i < partida.obtenerEnemigos().size(); i++){
                 Enemigo enemigoActual = partida.obtenerEnemigos().get(i);
                 int coordenadaX = enemigoActual.obtenerPosicion().obtenerCoordenadaX();
@@ -299,8 +328,6 @@ public class IntroMenu {
                     root.add(new ImageView(imagenArania),coordenadaX,coordenadaY);
                 } else if(enemigoActual instanceof Topo) {
                     root.add(new ImageView(imagenTopo),coordenadaX,coordenadaY);
-                } else if(enemigoActual instanceof Topo) {
-                    root.add(new ImageView(imagenTopoEscondido),coordenadaX,coordenadaY);
                 } else if(enemigoActual instanceof Lechuza) {
                     root.add(new ImageView(imagenLechuza),coordenadaX,coordenadaY);
                 }
