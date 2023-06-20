@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo;
 import java.util.List;
 
 import edu.fiuba.algo3.modelo.Defensas.Defensa;
+import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 
 public class Mapa {
@@ -15,7 +16,11 @@ public class Mapa {
 
     public void construir(Defensa defensa, int coordenadaX, int coordenadaY)
     {
-        mapa.get(coordenadaY).get(coordenadaX).construir(defensa);
+        try {
+            mapa.get(coordenadaY).get(coordenadaX).construir(defensa);
+        }catch (TerrenoDeConstruccionInvalidoError e){
+            SingleLogger.obtenerLogger().imprimirLog("Terreno de construccion invalido seleccionado");
+        }
     }
 
 
