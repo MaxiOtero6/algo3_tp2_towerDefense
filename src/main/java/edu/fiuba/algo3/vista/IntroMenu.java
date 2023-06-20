@@ -116,12 +116,14 @@ public class IntroMenu {
 
     private void validarNombre(VBox inicio) {
         String inputText = textoNombre.getText();
+        Label valLabel = new Label();
+        inicio.getChildren().removeAll(valLabel, validationLabel);
         if (inputText.length() >= 6) {
             nombre = inputText;
-            validationLabel.setText("Nombre elegido: " + nombre);
-            validationLabel.setStyle("-fx-text-fill: #a86f13;");
-            inicio.getChildren().removeAll(textoNombre, okButton);
-            inicio.getChildren().add(iniButton);
+            valLabel.setText("Nombre elegido: " + nombre);
+            valLabel.setStyle("-fx-text-fill: #a86f13;");
+            inicio.getChildren().removeAll(valLabel, textoNombre, okButton);
+            inicio.getChildren().addAll(valLabel, iniButton);
         } else {
             validationLabel.setText("Ingrese un nombre de al menos 6 caracteres");
             validationLabel.setStyle("-fx-text-fill: #FF0000;");
