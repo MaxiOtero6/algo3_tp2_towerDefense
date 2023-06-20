@@ -28,6 +28,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
@@ -153,7 +154,7 @@ public class IntroMenu {
         
         root = new GridPane();
         root.setPadding(new Insets(10));
-        root.setStyle("-fx-background-color: #A9A9A9;");
+        //root.setStyle("-fx-background-color: #A9A9A9;");
 
         for(int y = 0; y < length; y++){
             for(int x = 0; x < width; x++){
@@ -259,19 +260,29 @@ public class IntroMenu {
             //ACA VA EL CODIGO PARA PASAR DE TURNO
         });
 
-
+        
         VBox vbox = new VBox();
         vbox.setSpacing(10);
-        vbox.setStyle("-fx-background-color: #A9A9A9;");
+        //vbox.setStyle("-fx-background-color: #A9A9A9;");
         vbox.getChildren().addAll(botonPlateada, botonBlanca, botonTrampa, botonSkipTurno);
         vbox.setPadding(new Insets(10));
 
-        BorderPane borderPane = new BorderPane();
-        borderPane.setCenter(root);
+        // BorderPane borderPane = new BorderPane();
+        // borderPane.setCenter(root);
+        // borderPane.setRight(vbox);
 
-        borderPane.setRight(vbox);
+        HBox seccionMapa = new HBox();
+        seccionMapa.getChildren().addAll(root, vbox);
 
-        Scene scene = new Scene(borderPane);    
+        ImageView backgroundImageView = new ImageView((new File("src/main/resources/image/image.png")).toURI().toString());
+        backgroundImageView.fitWidthProperty().bind(seccionMapa.widthProperty());
+        backgroundImageView.fitHeightProperty().bind(seccionMapa.heightProperty());
+
+
+        StackPane fondoMapa = new StackPane();
+        fondoMapa.getChildren().addAll(backgroundImageView, seccionMapa);
+
+        Scene scene = new Scene(fondoMapa);    
         stagePrincipal.setTitle("Mapa");
         stagePrincipal.setScene(scene);
         stagePrincipal.show();
