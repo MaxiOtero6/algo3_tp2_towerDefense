@@ -121,7 +121,7 @@ public class IntroMenu {
             validationLabel.setStyle("-fx-text-fill: #a86f13;");
             inicio.getChildren().removeAll(botonInicial, textoNombre, okButton);
             inicio.getChildren().addAll(validationLabel, iniButton);
-        } else {
+        } else if(inputText.length() < 6){
             validationLabel.setText("Ingrese un nombre de al menos 6 caracteres");
             validationLabel.setStyle("-fx-text-fill: #FF0000;");
             inicio.getChildren().add(validationLabel);
