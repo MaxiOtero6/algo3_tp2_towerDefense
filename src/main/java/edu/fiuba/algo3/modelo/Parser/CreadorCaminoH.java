@@ -37,12 +37,12 @@ public class CreadorCaminoH {
 
         caminoH.add(mapa.get(coordenadaYInicial + j).get(coordenadaXInicial + i));
 
-        while ((coordenadaXInicial + i != coordenadaXMeta) && (coordenadaYInicial + j != coordenadaYMeta))
+        while ((coordenadaXInicial + i != coordenadaXMeta) || (coordenadaYInicial + j != coordenadaYMeta))
         {
-            if (coordenadaXInicial < coordenadaXMeta) {i++;}
-            else if (coordenadaXInicial > coordenadaXMeta) {i--;}
-            if (coordenadaYInicial < coordenadaYMeta) {j++;}
-            else if (coordenadaYInicial > coordenadaYMeta) {j--;}
+            if (coordenadaXInicial + i < coordenadaXMeta) {i++;}
+            else if (coordenadaXInicial + i > coordenadaXMeta) {i--;}
+            if (coordenadaYInicial + j < coordenadaYMeta) {j++;}
+            else if (coordenadaYInicial + j > coordenadaYMeta) {j--;}
 
             caminoH.add(mapa.get(coordenadaYInicial + j).get(coordenadaXInicial + i));
         }

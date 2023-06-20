@@ -33,12 +33,12 @@ public class Posicion {
 
     public int diferenciaEnX(int coordenadaX)
     {
-        return (this.coordenadaX - coordenadaX);
+        return Math.abs(this.coordenadaX - coordenadaX);
     }
 
     public int diferenciaEnY(int coordenadaY)
     {
-        return (this.coordenadaY - coordenadaY);
+        return Math.abs(this.coordenadaY - coordenadaY);
     }
 
     public String imprimirPosicion(){
