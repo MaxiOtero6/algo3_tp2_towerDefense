@@ -142,14 +142,14 @@ public class IntroMenu {
         Partida partida = new Partida();
         partida.iniciarJuego();
 
-        ImageView imagenTorrePlateada = new ImageView((new File("src/main/resources/image/torrePlateada.png")).toURI().toString());
-        ImageView imagenTorreBlanca = new ImageView((new File("src/main/resources/image/torreBlanca.png")).toURI().toString());
-        ImageView imagenTrampaArenosa = new ImageView((new File("src/main/resources/image/trampaArenosa.png")).toURI().toString());
-        ImageView imagenHormiga = new ImageView((new File("src/main/resources/image/hormiga.png")).toURI().toString());
-        ImageView imagenArania = new ImageView((new File("src/main/resources/image/arania.png")).toURI().toString());
-        ImageView imagenTopo = new ImageView((new File("src/main/resources/image/topo.png")).toURI().toString());
-        ImageView imagenTopoEscondido = new ImageView((new File("src/main/resources/image/topo_escondido.png")).toURI().toString());
-        ImageView imagenLechuza = new ImageView((new File("src/main/resources/image/lechuza.png")).toURI().toString());
+        String imagenTorrePlateada = (new File("src/main/resources/image/torrePlateada.png")).toURI().toString();
+        String imagenTorreBlanca = (new File("src/main/resources/image/torreBlanca.png")).toURI().toString();
+        String imagenTrampaArenosa = (new File("src/main/resources/image/trampaArenosa.png")).toURI().toString();
+        String imagenHormiga = (new File("src/main/resources/image/hormiga.png")).toURI().toString();
+        String imagenArania = (new File("src/main/resources/image/arania.png")).toURI().toString();
+        String imagenTopo = (new File("src/main/resources/image/topo.png")).toURI().toString();
+        String imagenTopoEscondido = (new File("src/main/resources/image/topo_escondido.png")).toURI().toString();
+        String imagenLechuza = (new File("src/main/resources/image/lechuza.png")).toURI().toString();
 
         validationLabel.setText("Partida iniciada");
 
@@ -198,15 +198,13 @@ public class IntroMenu {
 
                         if(torreActual instanceof TorrePlateada) {
                             torreAux.ponerTorre();
-                            root.add(imagenTorrePlateada,coordenadaX,coordenaday);
-                        }
-                        if(torreActual instanceof TorreBlanca) {
+                            root.add(new ImageView(imagenTorrePlateada),coordenadaX,coordenaday);
+                        } else if(torreActual instanceof TorreBlanca) {
                             torreAux.ponerTorre();
-                            root.add(imagenTorreBlanca,coordenadaX,coordenaday);
-                        }
-                        if(torreActual instanceof TrampaArenosa) {
+                            root.add(new ImageView(imagenTorreBlanca),coordenadaX,coordenaday);
+                        } else if(torreActual instanceof TrampaArenosa) {
                             torreAux.ponerTorre();
-                            root.add(imagenTrampaArenosa,coordenadaX,coordenaday);
+                            root.add(new ImageView(imagenTrampaArenosa),coordenadaX,coordenaday);
                         }
                         activarBotones();
                     }
@@ -220,31 +218,31 @@ public class IntroMenu {
         }
 
         // //TORRE PLATEADA DE EJEMPLO
-        root.add(imagenTorrePlateada,3,2);
+        root.add(new ImageView(imagenTorrePlateada),4,7);
 
         // //TORRE BLANCA DE EJEMPLO
-        root.add(imagenTorreBlanca,7,7);
+        root.add(new ImageView(imagenTorreBlanca),7,7);
         
         //TRAMPA ARENOSA DE EJEMPLO
-        root.add(imagenTrampaArenosa,6,6);
+        root.add(new ImageView(imagenTrampaArenosa),6,6);
 
         //HORMIGA DE EJEMPLO
-        root.add(imagenHormiga,1,1);
+        root.add(new ImageView(imagenHormiga),1,1);
 
         //ARANIA DE EJEMPLO
-        root.add(imagenArania,7,6);
+        root.add(new ImageView(imagenArania),7,6);
 
         //TOPO DE EJEMPLO
-        root.add(imagenTopo,8,6);
+        root.add(new ImageView(imagenTopo),8,6);
 
         //TOPO ESCONDIDO DE EJEMPLO
-        root.add(imagenTopoEscondido,5,6);
+        root.add(new ImageView(imagenTopoEscondido),5,6);
 
         //LECHUZA DE EJEMPLO
-        root.add(imagenLechuza,5,10);
+        root.add(new ImageView(imagenLechuza),5,10);
 
         Button botonPlateada = new Button();
-        botonPlateada.setGraphic(imagenTorrePlateada);
+        botonPlateada.setGraphic(new ImageView(imagenTorrePlateada));
         botonPlateada.setText("Torre Plateada");
         botonPlateada.setOnAction(event -> {
             desactivarBotonesInvalidos();
@@ -253,7 +251,7 @@ public class IntroMenu {
         });
 
         Button botonBlanca = new Button();
-        botonBlanca.setGraphic(imagenTorreBlanca);
+        botonBlanca.setGraphic(new ImageView(imagenTorreBlanca));
         botonBlanca.setText("Torre Blanca");
         botonBlanca.setOnAction(event -> {
             desactivarBotonesInvalidos();
@@ -262,7 +260,7 @@ public class IntroMenu {
         });
 
         Button botonTrampa = new Button();
-        botonTrampa.setGraphic(imagenTrampaArenosa);
+        botonTrampa.setGraphic(new ImageView(imagenTrampaArenosa));
         botonTrampa.setText("Trampa Arenosa");
         botonTrampa.setOnAction(event -> {
             desactivarBotonesInvalidos();
