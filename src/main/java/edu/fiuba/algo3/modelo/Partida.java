@@ -46,7 +46,18 @@ public class Partida {
 
     public void avanzarTurno(int i)
     {
-        turno.avanzarTurno(i);
+        try
+        {
+            turno.avanzarTurno(i);
+        }
+        catch (GanarPartidaError g)
+        {
+            SingleLogger.obtenerLogger().imprimirLog("Jugador gana la partida");
+        }
+        catch (PerderPartidaError p)
+        {
+            SingleLogger.obtenerLogger().imprimirLog("Jugador pierde la partida");
+        }
     }
 
     public void iniciarJuego()
