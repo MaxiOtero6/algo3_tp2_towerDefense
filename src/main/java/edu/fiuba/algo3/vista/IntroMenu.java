@@ -154,10 +154,10 @@ public class IntroMenu {
         validationLabel.setText("Partida iniciada");
 
         //pasarelas = new LinkedList<>();
-        //mapa = CreadorMapa.crearMapa(pasarelas);
+       // mapa = CreadorMapa.crearMapa(pasarelas);
 
         //GETTER
-        List<List<Parcela>> mapa = partida.obtenerMapa().obtenerMapa();
+        mapa = partida.obtenerMapa();
         //GETTER
 
         
@@ -193,7 +193,8 @@ public class IntroMenu {
                 casillaMapa.setOnAction(event -> {
                     if(!torreAux.puseDefensa){
                         Defensa torreActual = torreAux.getTorre();
-                        parcelaActual.construir(torreActual);
+                        partida.construirDefensa(torreActual, coordenadaX, coordenaday);
+
 
                         if(torreActual instanceof TorrePlateada) {
                             torreAux.ponerTorre();
@@ -247,8 +248,8 @@ public class IntroMenu {
         botonPlateada.setText("Torre Plateada");
         botonPlateada.setOnAction(event -> {
             desactivarBotonesInvalidos();
-            //TorrePlateada torreCreada = new TorrePlateada();
-            //torreAux.setTorre(torreCreada);
+            TorrePlateada torreCreada = new TorrePlateada();
+            torreAux.setTorre(torreCreada);
         });
 
         Button botonBlanca = new Button();
@@ -273,8 +274,8 @@ public class IntroMenu {
         botonSkipTurno.setText("Skip Turno");
         botonSkipTurno.setOnAction(event -> {
             //Avanzar turno
-            //partida.avanzarTurno(turno);
-            //turno++;
+            partida.avanzarTurno(turno);
+            turno++;
         });
 
         

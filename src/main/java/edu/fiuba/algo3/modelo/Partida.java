@@ -83,9 +83,9 @@ public class Partida {
         return false;
     }
 
-    public Mapa obtenerMapa()
+    public List<List<Parcela>> obtenerMapa()
     {
-        return this.mapa;
+        return this.mapa.obtenerMapa();
     }
 
 }
