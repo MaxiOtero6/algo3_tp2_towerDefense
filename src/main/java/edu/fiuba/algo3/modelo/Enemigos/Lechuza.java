@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.SingleLogger;
 import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Enemigos.Objetivos.ObjetivoLechuza;
 import edu.fiuba.algo3.modelo.Enemigos.Ruta.Ruta;
@@ -27,8 +28,12 @@ public class Lechuza extends Enemigo {
     @Override
     public void atacar()
     {
-        objetivo.hallarObjetivo(this.defensas).destruir();
+        Defensa defensa = objetivo.hallarObjetivo(this.defensas); 
+        defensa.destruir();
         this.salud = new Muerto();
+
+        SingleLogger.obtenerLogger().imprimirLog(String.format(
+                "%s destruye una %s", this.getClass().getSimpleName(), defensa.getClass().getSimpleName()));
     }
 
     @Override
