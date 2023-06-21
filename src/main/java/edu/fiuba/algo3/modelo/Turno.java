@@ -42,10 +42,10 @@ public class Turno {
         this.defensas = defensas;
     }
 
-    public void avanzarTurno(int numeroTurno) {
-        avanzarEnemigos();
+    public void avanzarTurno(int numeroTurno) { 
         crearOleada(numeroTurno);
         avanzarDefensas();
+        avanzarEnemigos();
         comprobarCantidadEnemigos();
     }
 
