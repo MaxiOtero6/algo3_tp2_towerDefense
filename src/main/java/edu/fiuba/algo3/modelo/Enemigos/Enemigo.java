@@ -101,9 +101,9 @@ public abstract class Enemigo {
         this.posicion = posicion;
     }
 
-    public void avanzarTurno(LinkedList<Enemigo> enemigos)
+    public void comprobarSalud(LinkedList<Enemigo> enemigos)
     {
-        this.salud.avanzarTurno(enemigos, this);
+        this.salud.comprobarSalud(enemigos, this);
     }
 
     public void mover()

@@ -6,8 +6,5 @@ import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 
 public class Vivo implements SaludEnemigo{
     @Override
-    public void avanzarTurno(LinkedList<Enemigo> enemigos, Enemigo enemigo)
-    {
-        enemigo.mover();
-    }
+    public void comprobarSalud(LinkedList<Enemigo> enemigos, Enemigo enemigo){}
 }
