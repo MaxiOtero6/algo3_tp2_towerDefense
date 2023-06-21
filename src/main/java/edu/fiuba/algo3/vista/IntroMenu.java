@@ -171,7 +171,10 @@ public class IntroMenu {
         //label2.setText(jugador.obtenerVidaRestante() + "/20");
         // Code for botonSkipTurno
         //soundClip.play();
-        
+
+        if (turno == 13){
+            turno = 0;
+        }
         partida.avanzarTurno(turno);
         turno++;
         List<Node> nodesToRemove = new ArrayList<>();
