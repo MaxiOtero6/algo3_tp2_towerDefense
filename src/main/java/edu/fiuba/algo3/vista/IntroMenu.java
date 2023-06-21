@@ -60,16 +60,18 @@ public class IntroMenu {
     private Button okButton;
     private Button iniButton;
     private Label validationLabel;
+    private Label labelVida;
     private String nombre;
     private Partida partida;
-    String imagenTorrePlateada = (new File("src/main/resources/image/torrePlateada.png")).toURI().toString();
-    String imagenTorreBlanca = (new File("src/main/resources/image/torreBlanca.png")).toURI().toString();
-    String imagenTrampaArenosa = (new File("src/main/resources/image/trampaArenosa.png")).toURI().toString();
-    String imagenHormiga = (new File("src/main/resources/image/hormiga.png")).toURI().toString();
-    String imagenArania = (new File("src/main/resources/image/arania.png")).toURI().toString();
-    String imagenTopo = (new File("src/main/resources/image/topo.png")).toURI().toString();
-    String imagenTopoEscondido = (new File("src/main/resources/image/topo_escondido.png")).toURI().toString();
-    String imagenLechuza = (new File("src/main/resources/image/lechuza.png")).toURI().toString();
+    private Jugador jugador;
+    private String imagenTorrePlateada = (new File("src/main/resources/image/torrePlateada.png")).toURI().toString();
+    private String imagenTorreBlanca = (new File("src/main/resources/image/torreBlanca.png")).toURI().toString();
+    private String imagenTrampaArenosa = (new File("src/main/resources/image/trampaArenosa.png")).toURI().toString();
+    private String imagenHormiga = (new File("src/main/resources/image/hormiga.png")).toURI().toString();
+    private String imagenArania = (new File("src/main/resources/image/arania.png")).toURI().toString();
+    private String imagenTopo = (new File("src/main/resources/image/topo.png")).toURI().toString();
+    private String imagenTopoEscondido = (new File("src/main/resources/image/topo_escondido.png")).toURI().toString();
+    private String imagenLechuza = (new File("src/main/resources/image/lechuza.png")).toURI().toString();
 
 
     private Button botonInicial;
@@ -81,6 +83,8 @@ public class IntroMenu {
 
     public void crearUI(Stage stagePrincipal) {
         partida = new Partida();
+        jugador = partida.obtenerJugador();
+        labelVida = new Label(jugador.obtenerVidaRestante() + "/20");
         String css = "-fx-prompt-text-fill: black;";
         ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/logo.png")).toURI().toString());
         ImageView backgroundImageView = new ImageView((new File("src/main/resources/image/image.png")).toURI().toString());
@@ -158,10 +162,11 @@ public class IntroMenu {
     }
 
 
-    private void executeBotonSkipTurnoCode() {
-        
+    private void ejecutarBotonSkipTurno() {
+        //label2.setText(jugador.obtenerVidaRestante() + "/20");
         // Code for botonSkipTurno
         //soundClip.play();
+        
         partida.avanzarTurno(turno);
         turno++;
         List<Node> nodesToRemove = new ArrayList<>();
@@ -188,11 +193,13 @@ public class IntroMenu {
             } else if (enemigoActual instanceof Arania) {
                 root.add(new ImageView(imagenArania), coordenadaX, coordenadaY);
             } else if (enemigoActual instanceof Topo) {
+                //if (enemigoActual.)
                 root.add(new ImageView(imagenTopo), coordenadaX, coordenadaY);
             } else if (enemigoActual instanceof Lechuza) {
                 root.add(new ImageView(imagenLechuza), coordenadaX, coordenadaY);
             }
         }
+        labelVida.setText(jugador.obtenerVidaRestante() + "/20");
     }
 
     private void IniciarPartida(Stage stagePrincipal) {
@@ -254,7 +261,7 @@ public class IntroMenu {
                             torreAux.ponerTorre();
                             root.add(new ImageView(imagenTrampaArenosa),coordenadaX,coordenaday);
                         }
-                        executeBotonSkipTurnoCode();
+                        ejecutarBotonSkipTurno();
                         activarBotones();
                     }
 
@@ -276,9 +283,9 @@ public class IntroMenu {
         
 
         Label label1 = new Label("Nombre: " + nombre);
-        Label label2 = new Label(jugador.obtenerVidaRestante() + "/20");
+        labelVida = new Label(jugador.obtenerVidaRestante() + "/20");
         Label label3 = new Label("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
-        datosUsuario.getChildren().addAll(label1, label2, label3);
+        datosUsuario.getChildren().addAll(label1, labelVida, label3);
 
         Button botonPlateada = new Button();
         botonPlateada.setGraphic(new ImageView(imagenTorrePlateada));
@@ -314,7 +321,7 @@ public class IntroMenu {
         //AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/Hormiga.mp3").toURI().toString());
         botonSkipTurno.setText("Skip Turno");
         botonSkipTurno.setOnAction(event -> {
-            executeBotonSkipTurnoCode();
+            ejecutarBotonSkipTurno();
         });
 
 
