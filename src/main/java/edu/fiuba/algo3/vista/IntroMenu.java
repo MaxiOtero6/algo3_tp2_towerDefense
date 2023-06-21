@@ -60,7 +60,19 @@ public class IntroMenu {
     private Button okButton;
     private Button iniButton;
     private Label validationLabel;
+    private Label labelVida;
     private String nombre;
+    private Partida partida;
+    private Jugador jugador;
+    private String imagenTorrePlateada = (new File("src/main/resources/image/torrePlateada.png")).toURI().toString();
+    private String imagenTorreBlanca = (new File("src/main/resources/image/torreBlanca.png")).toURI().toString();
+    private String imagenTrampaArenosa = (new File("src/main/resources/image/trampaArenosa.png")).toURI().toString();
+    private String imagenHormiga = (new File("src/main/resources/image/hormiga.png")).toURI().toString();
+    private String imagenArania = (new File("src/main/resources/image/arania.png")).toURI().toString();
+    private String imagenTopo = (new File("src/main/resources/image/topo.png")).toURI().toString();
+    private String imagenTopoEscondido = (new File("src/main/resources/image/topo_escondido.png")).toURI().toString();
+    private String imagenLechuza = (new File("src/main/resources/image/lechuza.png")).toURI().toString();
+
 
     private Button botonInicial;
     List<Parcela> pasarelas;
@@ -70,6 +82,9 @@ public class IntroMenu {
     
 
     public void crearUI(Stage stagePrincipal) {
+        partida = new Partida();
+        jugador = partida.obtenerJugador();
+        labelVida = new Label(jugador.obtenerVidaRestante() + "/20");
         String css = "-fx-prompt-text-fill: black;";
         ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/logo.png")).toURI().toString());
         ImageView backgroundImageView = new ImageView((new File("src/main/resources/image/image.png")).toURI().toString());
@@ -147,22 +162,53 @@ public class IntroMenu {
     }
 
 
+    private void ejecutarBotonSkipTurno() {
+        //label2.setText(jugador.obtenerVidaRestante() + "/20");
+        // Code for botonSkipTurno
+        //soundClip.play();
+        
+        partida.avanzarTurno(turno);
+        turno++;
+        List<Node> nodesToRemove = new ArrayList<>();
+        for (Node node : root.getChildren()) {
+            if (node instanceof ImageView) {
+                ImageView imageView = (ImageView) node;
+                Image image = imageView.getImage();
+                String imageUrl = image.getUrl();
+                if (imageUrl.equals(imagenHormiga) ||
+                    imageUrl.equals(imagenArania) ||
+                    imageUrl.equals(imagenTopo) ||
+                    imageUrl.equals(imagenLechuza)) {
+                    nodesToRemove.add(node);
+                }
+            }
+        }
+        root.getChildren().removeAll(nodesToRemove);
+        for (int i = 0; i < partida.obtenerEnemigos().size(); i++) {
+            Enemigo enemigoActual = partida.obtenerEnemigos().get(i);
+            int coordenadaX = enemigoActual.obtenerPosicion().obtenerCoordenadaX();
+            int coordenadaY = enemigoActual.obtenerPosicion().obtenerCoordenadaY();
+            if (enemigoActual instanceof Hormiga) {
+                root.add(new ImageView(imagenHormiga), coordenadaX, coordenadaY);
+            } else if (enemigoActual instanceof Arania) {
+                root.add(new ImageView(imagenArania), coordenadaX, coordenadaY);
+            } else if (enemigoActual instanceof Topo) {
+                //if (enemigoActual.)
+                root.add(new ImageView(imagenTopo), coordenadaX, coordenadaY);
+            } else if (enemigoActual instanceof Lechuza) {
+                root.add(new ImageView(imagenLechuza), coordenadaX, coordenadaY);
+            }
+        }
+        labelVida.setText(jugador.obtenerVidaRestante() + "/20");
+    }
+
     private void IniciarPartida(Stage stagePrincipal) {
 
 
-        Partida partida = new Partida();
-
-        String imagenTorrePlateada = (new File("src/main/resources/image/torrePlateada.png")).toURI().toString();
-        String imagenTorreBlanca = (new File("src/main/resources/image/torreBlanca.png")).toURI().toString();
-        String imagenTrampaArenosa = (new File("src/main/resources/image/trampaArenosa.png")).toURI().toString();
-        String imagenHormiga = (new File("src/main/resources/image/hormiga.png")).toURI().toString();
-        String imagenArania = (new File("src/main/resources/image/arania.png")).toURI().toString();
-        String imagenTopo = (new File("src/main/resources/image/topo.png")).toURI().toString();
-        String imagenTopoEscondido = (new File("src/main/resources/image/topo_escondido.png")).toURI().toString();
-        String imagenLechuza = (new File("src/main/resources/image/lechuza.png")).toURI().toString();
 
         validationLabel.setText("Partida iniciada");
 
+        //Mapa getter
         mapa = partida.obtenerMapa();
 
         
@@ -174,6 +220,8 @@ public class IntroMenu {
         
         root = new GridPane();
         root.setPadding(new Insets(10));
+
+       
 
         for(int y = 0; y < length; y++){
             for(int x = 0; x < width; x++){
@@ -188,25 +236,14 @@ public class IntroMenu {
 
                 Parcela parcelaActual = mapa.get(y).get(x);
                 
-
+                
                 if(parcelaActual instanceof Tierra) {casillaMapa.setStyle("-fx-background-color: #699922;");}
                 if(parcelaActual instanceof Largada) {casillaMapa.setStyle("-fx-background-color: #599ed4;");}
                 if(parcelaActual instanceof Meta) {casillaMapa.setStyle("-fx-background-color: #FFA500;");}
                 if(parcelaActual instanceof Rocoso) {casillaMapa.setStyle("-fx-background-color: #38393b;");}
                 if(parcelaActual instanceof Pasarela) {casillaMapa.setStyle("-fx-background-color: #d1b680;");}
-                for(int i = 0; i < partida.obtenerEnemigos().size(); i++){
+
                 
-                Enemigo enemigoActual = partida.obtenerEnemigos().get(i);
-                if(enemigoActual instanceof Hormiga) {
-                    root.add(new ImageView(imagenHormiga),coordenadaX,coordenaday);
-                } else if(enemigoActual instanceof Arania) {
-                    root.add(new ImageView(imagenArania),coordenadaX,coordenaday);
-                } else if(enemigoActual instanceof Topo) {
-                    root.add(new ImageView(imagenTopo),coordenadaX,coordenaday);
-                } else if(enemigoActual instanceof Lechuza) {
-                    root.add(new ImageView(imagenLechuza),coordenadaX,coordenaday);
-                }
-                }
 
                 casillaMapa.setOnAction(event -> {
                     if(!torreAux.puseDefensa){
@@ -224,6 +261,7 @@ public class IntroMenu {
                             torreAux.ponerTorre();
                             root.add(new ImageView(imagenTrampaArenosa),coordenadaX,coordenaday);
                         }
+                        ejecutarBotonSkipTurno();
                         activarBotones();
                     }
 
@@ -234,31 +272,10 @@ public class IntroMenu {
                 
             }
         }
-/* 
-        // //TORRE PLATEADA DE EJEMPLO
-        root.add(new ImageView(imagenTorrePlateada),4,7);
+ 
+        //TORRE PLATEADA DE EJEMPLO
+        //root.add(new ImageView(imagenTorrePlateada),4,7);
 
-        // //TORRE BLANCA DE EJEMPLO
-        root.add(new ImageView(imagenTorreBlanca),7,7);
-        
-        //TRAMPA ARENOSA DE EJEMPLO
-        root.add(new ImageView(imagenTrampaArenosa),6,6);
-
-        //HORMIGA DE EJEMPLO
-        root.add(new ImageView(imagenHormiga),1,1);
-
-        //ARANIA DE EJEMPLO
-        root.add(new ImageView(imagenArania),7,6);
-
-        //TOPO DE EJEMPLO
-        root.add(new ImageView(imagenTopo),8,6);
-
-        //TOPO ESCONDIDO DE EJEMPLO
-        root.add(new ImageView(imagenTopoEscondido),5,6);
-
-        //LECHUZA DE EJEMPLO
-        root.add(new ImageView(imagenLechuza),5,10);
-*/
         Jugador jugador = partida.obtenerJugador();
         VBox datosUsuario = new VBox();
         datosUsuario.setSpacing(10);
@@ -266,9 +283,9 @@ public class IntroMenu {
         
 
         Label label1 = new Label("Nombre: " + nombre);
-        Label label2 = new Label(jugador.obtenerVidaRestante() + "/20");
+        labelVida = new Label(jugador.obtenerVidaRestante() + "/20");
         Label label3 = new Label("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
-        datosUsuario.getChildren().addAll(label1, label2, label3);
+        datosUsuario.getChildren().addAll(label1, labelVida, label3);
 
         Button botonPlateada = new Button();
         botonPlateada.setGraphic(new ImageView(imagenTorrePlateada));
@@ -304,41 +321,12 @@ public class IntroMenu {
         //AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/Hormiga.mp3").toURI().toString());
         botonSkipTurno.setText("Skip Turno");
         botonSkipTurno.setOnAction(event -> {
-            //Avanzar turno
-            //soundClip.play();
-            partida.avanzarTurno(turno);
-            turno++;
-            List<Node> nodesToRemove = new ArrayList<>();
-            for (Node node : root.getChildren()) {
-                if (node instanceof ImageView) {
-
-                    ImageView imageView = (ImageView) node;
-                    Image image = imageView.getImage();
-                    String imageUrl = image.getUrl();
-                    if (imageUrl.equals(imagenHormiga) ||
-                        imageUrl.equals(imagenArania) ||
-                        imageUrl.equals(imagenTopo) ||
-                        imageUrl.equals(imagenLechuza)) {
-                        nodesToRemove.add(node);
-                    }
-                }
-            }
-            root.getChildren().removeAll(nodesToRemove);
-            for(int i = 0; i < partida.obtenerEnemigos().size(); i++){
-                Enemigo enemigoActual = partida.obtenerEnemigos().get(i);
-                int coordenadaX = enemigoActual.obtenerPosicion().obtenerCoordenadaX();
-                int coordenadaY = enemigoActual.obtenerPosicion().obtenerCoordenadaY();
-                if(enemigoActual instanceof Hormiga) {
-                    root.add(new ImageView(imagenHormiga),coordenadaX,coordenadaY);
-                } else if(enemigoActual instanceof Arania) {
-                    root.add(new ImageView(imagenArania),coordenadaX,coordenadaY);
-                } else if(enemigoActual instanceof Topo) {
-                    root.add(new ImageView(imagenTopo),coordenadaX,coordenadaY);
-                } else if(enemigoActual instanceof Lechuza) {
-                    root.add(new ImageView(imagenLechuza),coordenadaX,coordenadaY);
-                }
-            }
+            ejecutarBotonSkipTurno();
         });
+
+
+
+        
 
         BackgroundFill backgroundFill = new BackgroundFill(Color.ORANGE, new CornerRadii(8), Insets.EMPTY);
         Background background = new Background(backgroundFill);

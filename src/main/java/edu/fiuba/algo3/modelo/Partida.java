@@ -109,4 +109,10 @@ public class Partida {
         return this.turno.obtenerJugador();
     }
 
+    //obtener turno
+    public Turno obtenerTurno()
+    {
+        return this.turno;
+    }
+
 }
