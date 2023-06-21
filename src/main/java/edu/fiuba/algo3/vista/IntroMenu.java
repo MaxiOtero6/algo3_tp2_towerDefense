@@ -211,14 +211,19 @@ public class IntroMenu {
         labelCreditos.setText("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
         //ALERTA DE PERDIDA
         if(jugador.obtenerVidaRestante() <= 0  && jugador.obtenerVidaRestante() < 0){
-            
+                //private String imagenTorrePlateada = (new File("src/main/resources/image/torrePlateada.png")).toURI().toString();
+
+            alert.setGraphic(new ImageView(imagenArania));
             alert.setTitle("Termino la partida");
+            alert.setHeaderText("test!");
             alert.setContentText("Perdiste!");
             alert.showAndWait();
         }
         //ALERTA DE VICTORIA
         if(partida.obtenerEnemigos().size() == 0 && jugador.obtenerVidaRestante() > 0){
+            alert.setGraphic(new ImageView(imagenTorrePlateada));
             alert.setTitle("Termino la partida");
+            alert.setHeaderText("test!");
             alert.setContentText("Ganaste!");
             alert.showAndWait();
         }
