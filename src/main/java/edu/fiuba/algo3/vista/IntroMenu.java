@@ -50,6 +50,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.StrokeType;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderStroke;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 
 
@@ -73,7 +75,7 @@ public class IntroMenu {
     private String imagenTopo = (new File("src/main/resources/image/topo.png")).toURI().toString();
     private String imagenTopoEscondido = (new File("src/main/resources/image/topo_escondido.png")).toURI().toString();
     private String imagenLechuza = (new File("src/main/resources/image/lechuza.png")).toURI().toString();
-
+    private Alert alert;
 
     private Button botonInicial;
     List<Parcela> pasarelas;
@@ -83,6 +85,7 @@ public class IntroMenu {
     
 
     public void crearUI(Stage stagePrincipal) {
+        alert = new Alert(AlertType.INFORMATION);
         partida = new Partida();
         jugador = partida.obtenerJugador();
         labelVida = new Label(jugador.obtenerVidaRestante() + "/20");
@@ -203,7 +206,21 @@ public class IntroMenu {
         }
         labelVida.setText(jugador.obtenerVidaRestante() + "/20");
         labelCreditos.setText("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
+        //ALERTA DE PERDIDA
+        if(jugador.obtenerVidaRestante() <= 0){
+            
+            alert.setTitle("Termino la partida");
+            alert.setContentText("Perdiste!");
+            alert.showAndWait();
+        }
+        //ALERTA DE VICTORIA
+        if(partida.obtenerEnemigos().size() == 0){
+            alert.setTitle("Termino la partida");
+            alert.setContentText("Ganaste!");
+            alert.showAndWait();
+        }
     }
+
 
     private void IniciarPartida(Stage stagePrincipal) {
 
