@@ -43,9 +43,9 @@ public class Turno {
     }
 
     public void avanzarTurno(int numeroTurno) { 
+        avanzarEnemigos();
         crearOleada(numeroTurno);
         avanzarDefensas();
-        avanzarEnemigos();
         comprobarCantidadEnemigos();
     }
 
@@ -82,12 +82,18 @@ public class Turno {
         int i = enemigos.size() - 1;
         while (i >= 0)
         {
-            enemigos.get(i).avanzarTurno(enemigos);
+            enemigos.get(i).mover();
             i--;
         }
     }
 
     private void comprobarCantidadEnemigos(){
+        int i = enemigos.size() - 1;
+        while (i >= 0)
+        {
+            enemigos.get(i).comprobarSalud(enemigos);
+            i--;
+        }
         GanarPartidaError.comprobarGanarJuego(enemigos);
     }
 
