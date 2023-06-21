@@ -207,14 +207,14 @@ public class IntroMenu {
         labelVida.setText(jugador.obtenerVidaRestante() + "/20");
         labelCreditos.setText("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
         //ALERTA DE PERDIDA
-        if(jugador.obtenerVidaRestante() <= 0){
+        if(jugador.obtenerVidaRestante() <= 0  && jugador.obtenerVidaRestante() < 0){
             
             alert.setTitle("Termino la partida");
             alert.setContentText("Perdiste!");
             alert.showAndWait();
         }
         //ALERTA DE VICTORIA
-        if(partida.obtenerEnemigos().size() == 0){
+        if(partida.obtenerEnemigos().size() == 0 && jugador.obtenerVidaRestante() > 0){
             alert.setTitle("Termino la partida");
             alert.setContentText("Ganaste!");
             alert.showAndWait();
