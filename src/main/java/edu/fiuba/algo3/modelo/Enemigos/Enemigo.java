@@ -28,7 +28,7 @@ public abstract class Enemigo {
     private double multiplicadorVelocidad;
     private Volador volador;
     protected Camino camino;
-    private SaludEnemigo salud;
+    protected SaludEnemigo salud;
     private Atacable atacable;
 
     public Enemigo(int energia, int danio, int creditos, int velocidad, Jugador jugador, Camino camino){
