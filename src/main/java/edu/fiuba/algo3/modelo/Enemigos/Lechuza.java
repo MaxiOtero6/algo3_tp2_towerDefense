@@ -9,6 +9,7 @@ import edu.fiuba.algo3.modelo.Enemigos.Objetivos.ObjetivoLechuza;
 import edu.fiuba.algo3.modelo.Enemigos.Ruta.Ruta;
 import edu.fiuba.algo3.modelo.Enemigos.Ruta.RutaH;
 import edu.fiuba.algo3.modelo.Enemigos.Ruta.RutaL;
+import edu.fiuba.algo3.modelo.Enemigos.Salud.Muerto;
 import edu.fiuba.algo3.modelo.Enemigos.Volador.EsVolador;
 import edu.fiuba.algo3.modelo.Errores.EnemigoNoRalentizableError;
 public class Lechuza extends Enemigo {
@@ -27,6 +28,7 @@ public class Lechuza extends Enemigo {
     public void atacar()
     {
         objetivo.hallarObjetivo(this.defensas).destruir();
+        this.salud = new Muerto();
     }
 
     @Override
