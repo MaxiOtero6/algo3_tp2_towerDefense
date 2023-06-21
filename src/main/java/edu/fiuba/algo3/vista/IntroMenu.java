@@ -61,6 +61,7 @@ public class IntroMenu {
     private Button iniButton;
     private Label validationLabel;
     private Label labelVida;
+    private Label labelCreditos;
     private String nombre;
     private Partida partida;
     private Jugador jugador;
@@ -85,6 +86,7 @@ public class IntroMenu {
         partida = new Partida();
         jugador = partida.obtenerJugador();
         labelVida = new Label(jugador.obtenerVidaRestante() + "/20");
+        labelCreditos = new Label("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
         String css = "-fx-prompt-text-fill: black;";
         ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/logo.png")).toURI().toString());
         ImageView backgroundImageView = new ImageView((new File("src/main/resources/image/image.png")).toURI().toString());
@@ -200,6 +202,7 @@ public class IntroMenu {
             }
         }
         labelVida.setText(jugador.obtenerVidaRestante() + "/20");
+        labelCreditos.setText("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
     }
 
     private void IniciarPartida(Stage stagePrincipal) {
@@ -284,8 +287,8 @@ public class IntroMenu {
 
         Label label1 = new Label("Nombre: " + nombre);
         labelVida = new Label(jugador.obtenerVidaRestante() + "/20");
-        Label label3 = new Label("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
-        datosUsuario.getChildren().addAll(label1, labelVida, label3);
+
+        datosUsuario.getChildren().addAll(label1, labelVida, labelCreditos);
 
         Button botonPlateada = new Button();
         botonPlateada.setGraphic(new ImageView(imagenTorrePlateada));
@@ -294,7 +297,7 @@ public class IntroMenu {
             activarBordesTorres();
             TorrePlateada torreCreada = new TorrePlateada();
             torreAux.setTorre(torreCreada);
-            label3.setText("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
+            
         });
 
         Button botonBlanca = new Button();
@@ -304,7 +307,7 @@ public class IntroMenu {
             activarBordesTorres();
             TorreBlanca torreCreada = new TorreBlanca();
             torreAux.setTorre(torreCreada);
-            label3.setText("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
+            
         });
 
         Button botonTrampa = new Button();
@@ -314,7 +317,7 @@ public class IntroMenu {
             activarBordesTrampaArena();
             TrampaArenosa trampaCreada = new TrampaArenosa();
             torreAux.setTorre(trampaCreada);
-            label3.setText("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
+        
         });
 
         Button botonSkipTurno = new Button();
