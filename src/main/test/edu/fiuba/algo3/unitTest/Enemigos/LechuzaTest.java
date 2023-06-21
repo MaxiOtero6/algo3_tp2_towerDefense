@@ -126,23 +126,6 @@ public class LechuzaTest {
     }
 
     @Test
-    public void test07UnaLechuzaMuertaNoPuedeMoverse()
-    {
-        Camino caminoMock = mock(Camino.class);
-        Jugador jugadorMock = mock(Jugador.class);
-        doNothing().when(jugadorMock).agregarCreditos(anyInt());
-        Posicion posicion = new Posicion(0,0);
-        Enemigo enemigo = new Lechuza(jugadorMock, caminoMock);
-        enemigo.setearPosicion(posicion);
-        LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigo);
-
-        enemigo.recibirDanio(5, "Test07Lechuza");
-        verify(jugadorMock, times(1)).agregarCreditos(anyInt());
-        enemigo.avanzarTurno(enemigos);
-        verify(caminoMock, never()).moverEnemigo(5, posicion, enemigo);
-    }
-
-    @Test
     public void test08UnaLechuzaNoSePuedeRalentizar()
     {
         Enemigo enemigo = new Lechuza(null, null);

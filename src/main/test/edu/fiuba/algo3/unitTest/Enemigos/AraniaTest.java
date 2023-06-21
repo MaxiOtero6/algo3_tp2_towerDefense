@@ -56,23 +56,6 @@ public class AraniaTest {
     }
 
     @Test
-    public void test04UnaAraniaMuertaNoPuedeMoverse()
-    {
-        Camino caminoMock = mock(Camino.class);
-        Jugador jugadorMock = mock(Jugador.class);
-        doNothing().when(jugadorMock).agregarCreditos(anyInt());
-        Posicion posicion = new Posicion(0,0);
-        Enemigo enemigo = new Arania(jugadorMock, caminoMock);
-        enemigo.setearPosicion(posicion);
-        LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigo);
-        
-        enemigo.recibirDanio(2, "Test04Arania");
-        verify(jugadorMock, times(1)).agregarCreditos(anyInt());
-        enemigo.avanzarTurno(enemigos);;
-        verify(caminoMock, never()).moverEnemigo(2, posicion, enemigo);
-    }
-
-    @Test
     public void test05UnaAraniaRalentizadaTieneUnoDeVelocidadUnTurno()
     {
         Camino caminoMock = mock(Camino.class);

@@ -77,23 +77,6 @@ public class HormigaTest {
     }
 
     @Test
-    public void test05UnaHormigaMuertaNoPuedeMoverse()
-    {
-        Camino caminoMock = mock(Camino.class);
-        Jugador jugadorMock = mock(Jugador.class);
-        doNothing().when(jugadorMock).agregarCreditos(anyInt());
-        Posicion posicion = new Posicion(0,0);
-        Enemigo enemigo = new Hormiga(jugadorMock, caminoMock);
-        enemigo.setearPosicion(posicion);
-        LinkedList<Enemigo> enemigos = new LinkedList<>(); enemigos.add(enemigo);
-        
-        enemigo.recibirDanio(1, "Test05Hormiga");
-        verify(jugadorMock, times(1)).agregarCreditos(anyInt());
-        enemigo.avanzarTurno(enemigos);
-        verify(caminoMock, never()).moverEnemigo(1, posicion, enemigo);
-    }
-
-    @Test
     public void test06UnaHormigaRalentizadaQuedaInmovilUnTurno()
     {
         Camino caminoMock = mock(Camino.class);

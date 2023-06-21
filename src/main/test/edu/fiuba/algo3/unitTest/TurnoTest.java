@@ -77,9 +77,10 @@ public class TurnoTest {
         turno.aniadirDefensa(trampaMock);
 
         turno.avanzarTurno(0);
-        verify(enemigoMock, atLeastOnce()).avanzarTurno(any());
+        verify(enemigoMock, atLeastOnce()).mover();
         verify(torreMock, atLeastOnce()).avanzarTurno(any());
         verify(trampaMock, atLeastOnce()).avanzarTurno(any());
+        verify(enemigoMock, atLeastOnce()).comprobarSalud(any());
         creadorEnemigoMock.close();
     }
 
