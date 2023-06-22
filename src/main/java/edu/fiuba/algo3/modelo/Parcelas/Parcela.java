@@ -53,4 +53,8 @@ public abstract class Parcela {
     {
         throw new SpawnNoEnLargadaError();
     }
+
+    public LinkedList<Enemigo> devolverEnemigos(){
+        return enemigos;
+    }
 }

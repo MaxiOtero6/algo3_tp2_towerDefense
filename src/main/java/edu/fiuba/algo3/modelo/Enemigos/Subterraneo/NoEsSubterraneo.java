@@ -7,4 +7,8 @@ public class NoEsSubterraneo implements Subterraneo{
     public int subterraneo(Defensa defensa) {
         return 0;    
     }
+
+    public boolean esSubterraneo(){
+        return false;
+    }
 }

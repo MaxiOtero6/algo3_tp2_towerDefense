@@ -49,4 +49,8 @@ public class Topo extends Enemigo {
         toposMuertos++;
         enemigosMuertos++;
     }
+
+    public boolean esSubterraneo(){
+        return this.subterraneo.esSubterraneo();
+    }
 }

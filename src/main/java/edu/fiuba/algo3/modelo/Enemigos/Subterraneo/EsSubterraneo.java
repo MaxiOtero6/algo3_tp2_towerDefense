@@ -9,4 +9,8 @@ public class EsSubterraneo implements Subterraneo{
         if (defensa instanceof TorreBlanca) {return 1000;}
         return 0;    
     }
+
+    public boolean esSubterraneo(){
+        return true;
+    }
 }

@@ -232,7 +232,22 @@ public class IntroMenu {
 
     private void IniciarPartida(Stage stagePrincipal) {
 
+        //SECCION PARA MOSTRAR ENEMIGOS EN LA PARCELA ACTUAL
+        Color bordeAzul = Color.BLANCHEDALMOND;
+        double borderWidth = 2.0; 
+        HBox enemigosEnParcela = new HBox();
+        enemigosEnParcela.setSpacing(10);
+        enemigosEnParcela.setPadding(new Insets(10));
+        enemigosEnParcela.setAlignment(Pos.CENTER);
+        enemigosEnParcela.setPrefHeight(75);
 
+        BackgroundFill backgroundFillEnemigos = new BackgroundFill(Color.ORANGE, new CornerRadii(8), Insets.EMPTY);
+        Background backgroundEnemigos = new Background(backgroundFillEnemigos);
+        enemigosEnParcela.setBackground(backgroundEnemigos);
+
+        enemigosEnParcela.setBorder(new javafx.scene.layout.Border(
+                                    new javafx.scene.layout.BorderStroke(bordeAzul, javafx.scene.layout.BorderStrokeStyle.SOLID,
+                                            new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
 
         validationLabel.setText("Partida iniciada");
 
@@ -295,6 +310,8 @@ public class IntroMenu {
 
                 });
 
+                casillaMapa.setOnMouseEntered(event -> mostrarEnemigos(enemigosEnParcela, coordenadaX, coordenaday));
+                casillaMapa.setOnMouseExited(event -> sacarEnemigos(enemigosEnParcela));
  
                 root.add(casillaMapa, x, y);
                 
@@ -360,8 +377,6 @@ public class IntroMenu {
         Background background = new Background(backgroundFill);
         datosUsuario.setBackground(background);
 
-        Color bordeAzul = Color.BLANCHEDALMOND;
-        double borderWidth = 2.0; 
         datosUsuario.setBorder(new javafx.scene.layout.Border(
                                     new javafx.scene.layout.BorderStroke(bordeAzul, javafx.scene.layout.BorderStrokeStyle.SOLID,
                                             new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
@@ -375,12 +390,15 @@ public class IntroMenu {
         HBox seccionMapa = new HBox();
         seccionMapa.getChildren().addAll(root, seccionBotones);
 
+        VBox seccionTotal = new VBox();
+        seccionTotal.getChildren().addAll(enemigosEnParcela, seccionMapa);
+
         ImageView backgroundImageView = new ImageView((new File("src/main/resources/image/image.png")).toURI().toString());
-        backgroundImageView.fitWidthProperty().bind(seccionMapa.widthProperty());
-        backgroundImageView.fitHeightProperty().bind(seccionMapa.heightProperty());
+        backgroundImageView.fitWidthProperty().bind(seccionTotal.widthProperty());
+        backgroundImageView.fitHeightProperty().bind(seccionTotal.heightProperty());
 
         StackPane fondoMapa = new StackPane();
-        fondoMapa.getChildren().addAll(backgroundImageView, seccionMapa);
+        fondoMapa.getChildren().addAll(backgroundImageView, seccionTotal);
 
         Scene scene = new Scene(fondoMapa);    
         stagePrincipal.setTitle("Mapa");
@@ -516,6 +534,20 @@ public class IntroMenu {
                 }   
             }               
         }  
+    }
+
+    private void mostrarEnemigos(HBox enemigosDeParcela, int x, int y){
+        Parcela parcelaActual = mapa.get(y).get(x);
+        LinkedList<Enemigo> enemigosEnLaParcela = parcelaActual.devolverEnemigos();
+        for(Enemigo enemigo : enemigosEnLaParcela){
+            if(enemigo instanceof Arania) {enemigosDeParcela.getChildren().add(new ImageView(imagenArania));}
+            if(enemigo instanceof Hormiga) {enemigosDeParcela.getChildren().add(new ImageView(imagenHormiga));}
+            if(enemigo instanceof Lechuza) {enemigosDeParcela.getChildren().add(new ImageView(imagenLechuza));}
+            if(enemigo instanceof Topo) {enemigosDeParcela.getChildren().add(new ImageView(imagenTopo));}
+        }
+    }
+    private void sacarEnemigos(HBox enemigosDeParcela){
+        enemigosDeParcela.getChildren().clear();
     }
 }
 

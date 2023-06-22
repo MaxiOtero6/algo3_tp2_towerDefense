@@ -4,4 +4,6 @@ import edu.fiuba.algo3.modelo.Defensas.Defensa;
 
 public interface Subterraneo {
     public int subterraneo(Defensa defensa);
+
+    public boolean esSubterraneo();
 }

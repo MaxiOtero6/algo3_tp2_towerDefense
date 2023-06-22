@@ -24,7 +24,7 @@ public abstract class Enemigo {
     protected static int enemigosMuertos = 0;
     protected Posicion posicion;
     private Jugador jugador;
-    private Subterraneo subterraneo;
+    protected Subterraneo subterraneo;
     private double multiplicadorVelocidad;
     private Volador volador;
     protected Camino camino;
