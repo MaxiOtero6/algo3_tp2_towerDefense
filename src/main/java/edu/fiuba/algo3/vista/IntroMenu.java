@@ -197,7 +197,8 @@ public class IntroMenu {
                 if (imageUrl.equals(imagenHormiga) ||
                     imageUrl.equals(imagenArania) ||
                     imageUrl.equals(imagenTopo) ||
-                    imageUrl.equals(imagenLechuza)) {
+                    imageUrl.equals(imagenLechuza)||
+                    imageUrl.equals(imagenTopoEscondido)) {
                     nodesToRemove.add(node);
                 }
             }
@@ -212,8 +213,14 @@ public class IntroMenu {
             } else if (enemigoActual instanceof Arania) {
                 root.add(new ImageView(imagenArania), coordenadaX, coordenadaY);
             } else if (enemigoActual instanceof Topo) {
-                //if (enemigoActual.)
-                root.add(new ImageView(imagenTopo), coordenadaX, coordenadaY);
+                Topo topo = (Topo) enemigoActual;
+                if (topo.esSubterraneo()){
+                    root.add(new ImageView(imagenTopoEscondido), coordenadaX, coordenadaY);
+                }
+                else{
+                    root.add(new ImageView(imagenTopo), coordenadaX, coordenadaY);
+                }
+                
             } else if (enemigoActual instanceof Lechuza) {
                 root.add(new ImageView(imagenLechuza), coordenadaX, coordenadaY);
             }
