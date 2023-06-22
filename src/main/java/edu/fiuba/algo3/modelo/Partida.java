@@ -5,6 +5,7 @@ import java.util.List;
 
 import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
+import edu.fiuba.algo3.modelo.Errores.DefensaEnTerrenoErroneoError;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
 import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
 import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
@@ -85,6 +86,8 @@ public class Partida {
             this.turno.aniadirDefensa(defensa);
         }catch (TerrenoDeConstruccionInvalidoError e){
             SingleLogger.obtenerLogger().imprimirLog("Terreno de construccion invalido seleccionado");
+        }catch (DefensaEnTerrenoErroneoError e){
+            SingleLogger.obtenerLogger().imprimirLog("Esa defensa no se puede construir en este terreno");
         }
     }
 
