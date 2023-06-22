@@ -228,14 +228,14 @@ public class IntroMenu {
             alert.showAndWait();
         }
     }
-
+        HBox enemigosEnParcela = new HBox();
 
     private void IniciarPartida(Stage stagePrincipal) {
 
         //SECCION PARA MOSTRAR ENEMIGOS EN LA PARCELA ACTUAL
         Color bordeAzul = Color.BLANCHEDALMOND;
         double borderWidth = 2.0; 
-        HBox enemigosEnParcela = new HBox();
+
         enemigosEnParcela.setSpacing(10);
         enemigosEnParcela.setPadding(new Insets(10));
         enemigosEnParcela.setAlignment(Pos.CENTER);
@@ -368,10 +368,6 @@ public class IntroMenu {
         botonSkipTurno.setOnAction(event -> {
             ejecutarBotonSkipTurno();
         });
-
-
-
-        
 
         BackgroundFill backgroundFill = new BackgroundFill(Color.ORANGE, new CornerRadii(8), Insets.EMPTY);
         Background background = new Background(backgroundFill);
@@ -517,16 +513,17 @@ public class IntroMenu {
     private void activarBotones(){
         for(int y = 0; y < 15; y++){
             for(int x = 0; x < 15; x++){
+                int coordenadaX = x;
+                int coordenadaY = y;
 
                 Parcela parcelaActual = mapa.get(y).get(x);
                 if((parcelaActual instanceof Parcela)){
                     for (Node botonActual : root.getChildren()) {
                         if (GridPane.getRowIndex(botonActual) == y && GridPane.getColumnIndex(botonActual) == x) {
                             Button boton = (Button)botonActual;
-                            
-                            boton.setOnMouseEntered(event -> boton.setBorder(null));
-
-                            boton.setOnMouseExited(event -> boton.setBorder(null));
+                            boton.setBorder(null);
+                            boton.setOnMouseEntered(event -> mostrarEnemigos(enemigosEnParcela, coordenadaX, coordenadaY));
+                            boton.setOnMouseExited(event -> sacarEnemigos(enemigosEnParcela));
 
                         break;
                         }           
@@ -550,5 +547,6 @@ public class IntroMenu {
         enemigosDeParcela.getChildren().clear();
     }
 }
+
 
 
