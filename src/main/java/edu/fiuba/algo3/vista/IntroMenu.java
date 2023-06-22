@@ -97,7 +97,9 @@ public class IntroMenu {
         backgroundImageView.fitHeightProperty().bind(stagePrincipal.heightProperty());
 
         textoNombre = new TextField();
-        textoNombre.setPromptText("Ingrese nombre");
+        
+        textoNombre.setPromptText("Ingrese nombre: ");
+        textoNombre.setMaxWidth(200);
         textoNombre.setStyle("-fx-control-inner-background: #FFC864;");
         textoNombre.setStyle(textoNombre.getStyle() + css);
         
