@@ -183,9 +183,9 @@ public class IntroMenu {
         // Code for botonSkipTurno
         //soundClip.play();
 
-        if (turno == 13){
-            turno = 0;
-        }
+        // if (turno == 13){
+        //     turno = 0;
+        // }
         partida.avanzarTurno(turno);
         turno++;
         List<Node> nodesToRemove = new ArrayList<>();
@@ -585,7 +585,14 @@ public class IntroMenu {
             if(enemigo instanceof Arania) {enemigosDeParcela.getChildren().add(new ImageView(imagenArania));}
             if(enemigo instanceof Hormiga) {enemigosDeParcela.getChildren().add(new ImageView(imagenHormiga));}
             if(enemigo instanceof Lechuza) {enemigosDeParcela.getChildren().add(new ImageView(imagenLechuza));}
-            if(enemigo instanceof Topo) {enemigosDeParcela.getChildren().add(new ImageView(imagenTopo));}
+            if(enemigo instanceof Topo) {
+                Topo topoAux = (Topo)enemigo;
+                if(topoAux.esSubterraneo()){
+                    enemigosDeParcela.getChildren().add(new ImageView(imagenTopoEscondido));
+                } else {
+                    enemigosDeParcela.getChildren().add(new ImageView(imagenTopo));
+                }   
+            }
         }
     }
     private void sacarEnemigos(HBox enemigosDeParcela){
