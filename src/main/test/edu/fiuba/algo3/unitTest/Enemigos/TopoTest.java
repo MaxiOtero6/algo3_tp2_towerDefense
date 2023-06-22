@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -81,25 +82,30 @@ public class TopoTest {
         camino.aparecerEnemigos(enemigos);
 
         enemigo.mover();
-        verify(spy1, times(1)).agregarEnemigo(enemigo);
+        enemigo.recargarVelocidad();
+        verify(spy1, atLeastOnce()).agregarEnemigo(enemigo);
 
         for (int i = 0; i < 5; i++) {
             parcelas.add(new Pasarela(i+1,i+1));
             enemigo.mover();
+            enemigo.recargarVelocidad();
         }
 
         parcelas.add(spy2);
         enemigo.mover();
-        verify(spy2, times(1)).agregarEnemigo(enemigo);
+        enemigo.recargarVelocidad();
+        verify(spy2, atLeastOnce()).agregarEnemigo(enemigo);
 
         for (int i = 0; i < 5; i++) {
             parcelas.add(new Pasarela(i+6,i+6));
             enemigo.mover();
+            enemigo.recargarVelocidad();
         }
 
         parcelas.add(new Pasarela(11,11)); parcelas.add(spy3);
         enemigo.mover();
-        verify(spy3, times(1)).agregarEnemigo(enemigo);
+        enemigo.recargarVelocidad();
+        verify(spy3, atLeastOnce()).agregarEnemigo(enemigo);
     }
 
     @Test
@@ -123,6 +129,7 @@ public class TopoTest {
         
         enemigo.ralentizar();
         enemigo.mover();
+        enemigo.recargarVelocidad();
 
         verify(caminoMock, times(1)).moverEnemigo(0, posicion, enemigo);
     

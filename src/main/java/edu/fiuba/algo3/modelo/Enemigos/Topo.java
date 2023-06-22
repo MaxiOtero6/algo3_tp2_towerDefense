@@ -40,8 +40,8 @@ public class Topo extends Enemigo {
     private void acelerar()
     {
         movimientosRealizados++;
-        if(movimientosRealizados == 5) {this.velocidad++;}
-        else if(movimientosRealizados == 10) {this.velocidad++;}
+        if(movimientosRealizados == 5) {this.velocidad++; this.recargarVelocidad();}
+        else if(movimientosRealizados == 10) {this.velocidad++; this.recargarVelocidad();}
     }
 
     @Override

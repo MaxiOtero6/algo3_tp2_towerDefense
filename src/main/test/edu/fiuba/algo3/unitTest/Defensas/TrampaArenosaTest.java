@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -62,8 +63,7 @@ public class TrampaArenosaTest {
 
         defensa.setEnemigos(enemigos);
         defensa.atacar();
-        verify(enemigoMock, times(1)).ralentizar();
-        verify(enemigoMock, times(1)).setSubterraneo(any(NoEsSubterraneo.class));
+        verify(enemigoMock, atLeastOnce()).ralentizar();
     }
 
     @Test

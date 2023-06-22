@@ -30,12 +30,14 @@ public abstract class Enemigo {
     protected Camino camino;
     protected SaludEnemigo salud;
     private Atacable atacable;
+    protected int velocidadRestante;
 
     public Enemigo(int energia, int danio, int creditos, int velocidad, Jugador jugador, Camino camino){
         this.energia = energia;
         this.danio = danio;
         this.creditos = creditos;
         this.velocidad = velocidad;
+        this.velocidadRestante = velocidad + 1;
         this.posicion = null;
         this.jugador = jugador;
         this.camino = camino;
@@ -71,6 +73,7 @@ public abstract class Enemigo {
         String tipoEnemigo = this.getClass().getSimpleName();
         this.jugador.recibirDanio(danioAtaque, tipoEnemigo);
         this.salud = new Muerto();
+        this.velocidadRestante = 0;
     }
 
     public void recibirDanio(int danioRecibido, String tipoTorre)
@@ -108,8 +111,8 @@ public abstract class Enemigo {
 
     public void mover()
     {
-        this.camino.moverEnemigo((int)(this.velocidad * this.multiplicadorVelocidad), this.posicion, this);
-        this.multiplicadorVelocidad = 1;
+        this.velocidadRestante -= 1;
+        this.camino.moverEnemigo((int)(this.velocidadRestante * this.multiplicadorVelocidad), this.posicion, this);
     }
 
     public void eliminar()
@@ -150,6 +153,12 @@ public abstract class Enemigo {
     public Posicion obtenerPosicion()
     {
         return this.posicion;
+    }
+
+    public void recargarVelocidad()
+    {
+        this.velocidadRestante = velocidad + 1;
+        this.multiplicadorVelocidad = 1;
     }
 
 }

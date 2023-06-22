@@ -31,6 +31,7 @@ public class Lechuza extends Enemigo {
         Defensa defensa = objetivo.hallarObjetivo(this.defensas); 
         defensa.destruir();
         this.salud = new Muerto();
+        this.velocidadRestante = 0;
 
         SingleLogger.obtenerLogger().imprimirLog(String.format(
                 "%s destruye una %s", this.getClass().getSimpleName(), defensa.getClass().getSimpleName()));

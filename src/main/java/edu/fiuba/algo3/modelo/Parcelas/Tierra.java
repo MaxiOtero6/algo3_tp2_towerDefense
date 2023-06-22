@@ -15,6 +15,7 @@ public class Tierra extends Parcela
     public Tierra(int coordenadaX, int coordenadaY)
     {
         super(coordenadaX, coordenadaY);
+        this.torre = new NoTorre();
         this.construible = new EsConstruible();
     }
 

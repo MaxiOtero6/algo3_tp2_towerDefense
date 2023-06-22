@@ -65,6 +65,7 @@ public class AraniaTest {
         
         enemigo.ralentizar();
         enemigo.mover();
+        enemigo.recargarVelocidad();
 
         verify(caminoMock, times(1)).moverEnemigo(1, posicion, enemigo);
     

@@ -39,7 +39,7 @@ public class ObjetivoTorreTest {
         enemigotemp.setearPosicion(posicion2);
         enemigos.add(enemigotemp);
 
-        doReturn(100.0).when(enemigoMock).calcDistancia(any(), any(TorreBlanca.class));
+        doReturn(1.0).when(enemigoMock).calcDistancia(any(), any(TorreBlanca.class));
 
         ObjetivoTorre objetivo = new ObjetivoTorre();
         Enemigo enemigoObtenido = objetivo.hallarObjetivo(posicion1, enemigos, 3, new TorreBlanca());

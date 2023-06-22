@@ -2,7 +2,9 @@ package edu.fiuba.algo3.modelo.Parcelas;
 
 import edu.fiuba.algo3.modelo.Errores.DefensaEnTerrenoErroneoError;
 import edu.fiuba.algo3.modelo.Defensas.Defensa;
+import edu.fiuba.algo3.modelo.Defensas.Trampas.NoTrampa;
 import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
+import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Parcelas.Construible.Construible;
 import edu.fiuba.algo3.modelo.Parcelas.Construible.EsConstruible;
 import edu.fiuba.algo3.modelo.Parcelas.Construible.NoEsConstruible;
@@ -16,6 +18,7 @@ public class Pasarela extends Parcela {
     {
         super(coordenadaX, coordenadaY);
         this.construible = new EsConstruible();
+        this.trampa = new NoTrampa();
     }
     
     @Override
@@ -29,5 +32,12 @@ public class Pasarela extends Parcela {
     public void setConstruible(Construible construible)
     {
         this.construible = construible;
+    }
+
+    @Override
+    public void agregarEnemigo(Enemigo enemigo)
+    {
+        super.agregarEnemigo(enemigo);
+        this.trampa.atacar();
     }
 }

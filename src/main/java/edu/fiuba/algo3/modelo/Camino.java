@@ -21,13 +21,18 @@ public class Camino {
      */
     public void moverEnemigo(int velocidad, Posicion posicion, Enemigo enemigo)
     {
-        int iterador = indiceParcela(posicion);
-        parcelas.get(iterador).eliminarEnemigo(enemigo);
+        if (0 < velocidad) 
+        { 
+            int iterador = indiceParcela(posicion);
+            parcelas.get(iterador).eliminarEnemigo(enemigo);
         
-        int indiceDestino = iterador + velocidad;
-        if (indiceDestino > parcelas.size() - 1) { indiceDestino = parcelas.size() - 1; }
+            if (iterador + 1 > parcelas.size() - 1) {velocidad = 0; iterador--;}
+            parcelas.get(iterador + 1).agregarEnemigo(enemigo);
+        
+            enemigo.mover(); 
+        }
 
-        parcelas.get(indiceDestino).agregarEnemigo(enemigo);
+        enemigo.recargarVelocidad();
     }
 
     private int indiceParcela(Posicion posicion)

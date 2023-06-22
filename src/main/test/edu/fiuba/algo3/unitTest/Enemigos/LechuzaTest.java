@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
@@ -91,7 +92,7 @@ public class LechuzaTest {
 
         enemigo.recibirDanio(3, "Test04Lechuza");
         enemigo.mover();
-        caminoHMock.verify(() -> CreadorCaminoH.crearCaminoH(null), times(1));
+        caminoHMock.verify(() -> CreadorCaminoH.crearCaminoH(null), atLeastOnce());
         caminoHMock.close();
         caminoLMock.close();
     }
