@@ -17,7 +17,7 @@ public class TorreBlanca extends Defensa{
         super(coste);
         this.rango = rango;
         this.danio = danio;
-        this.progresoConstruccion = progresoConstruccion;
+        this.progresoConstruccion = progresoConstruccion + 1;
         this.estado = new EstadoDesactivado();
         this.objetivo = new ObjetivoTorre();
     }
