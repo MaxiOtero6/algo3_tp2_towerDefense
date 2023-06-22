@@ -307,9 +307,10 @@ public class IntroMenu {
                 casillaMapa.setOnAction(event -> {
                     if(!torreAux.puseDefensa){
                         Defensa torreActual = torreAux.getTorre();
-                        VistaDefensas vistaDefensa = new VistaDefensas(root, torreActual, coordenadaX, coordenaday);
-                        listaVistaDefensas.add(vistaDefensa);
                         partida.construirDefensa(torreActual, coordenadaX, coordenaday);
+                        VistaDefensas vistaDefensa = new VistaDefensas(root, torreActual);
+                        listaVistaDefensas.add(vistaDefensa);
+
                         torreAux.ponerTorre();
 
 

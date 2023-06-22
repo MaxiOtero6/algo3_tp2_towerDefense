@@ -32,11 +32,11 @@ public class VistaDefensas {
     private int coordenadaX;
     private int coordenadaY;
 
-    public VistaDefensas(GridPane grid, Defensa defensa, int coordenadaX, int coordenadaY){
+    public VistaDefensas(GridPane grid, Defensa defensa){
         this.defensa = defensa;
         this.grid = grid;
-        this.coordenadaX = coordenadaX;
-        this.coordenadaY = coordenadaY;
+        this.coordenadaX = defensa.getPosicion().obtenerCoordenadaX();
+        this.coordenadaY = defensa.getPosicion().obtenerCoordenadaY();
     }
     public void dibujar(){
         this.clean();
