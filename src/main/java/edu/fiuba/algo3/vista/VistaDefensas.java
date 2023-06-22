@@ -25,7 +25,7 @@ public class VistaDefensas {
     private String imagenTorrePlateadaEnConstruccion = (new File("src/main/resources/image/TpConstruccion.png")).toURI().toString();
     private String imagenTorrePlateadaDestruida = (new File("src/main/resources/image/TpDestruida.png")).toURI().toString();
     private String imagenTorreBlancaEnConstruccion = (new File("src/main/resources/image/TbConstruccion.png")).toURI().toString();
-    private String imagenTrampaArenosaDestruida = (new File("src/main/resources/image/trampaArenosa.png")).toURI().toString();
+    private String imagenTrampaArenosaDestruida = (new File("src/main/resources/image/TaDestruida.png")).toURI().toString();
     private String imagenTorreBlancaDestruida = (new File("src/main/resources/image/TbDestruida.png")).toURI().toString();
     private Defensa defensa;
     private GridPane grid;
