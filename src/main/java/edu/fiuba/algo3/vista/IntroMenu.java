@@ -355,29 +355,33 @@ public class IntroMenu {
         botonPlateada.setGraphic(new ImageView(imagenTorrePlateada));
         botonPlateada.setText("Torre Plateada");
         botonPlateada.setOnAction(event -> {
-            activarBordesTorres();
-            TorrePlateada torreCreada = new TorrePlateada();
-            torreAux.setTorre(torreCreada);
-            
+            if(jugador.obtenerCreditosRestantes() >= 20){
+                activarBordesTorres();
+                TorrePlateada torreCreada = new TorrePlateada();
+                torreAux.setTorre(torreCreada);
+            }
         });
 
         Button botonBlanca = new Button();
         botonBlanca.setGraphic(new ImageView(imagenTorreBlanca));
         botonBlanca.setText("Torre Blanca");
         botonBlanca.setOnAction(event -> {
-            activarBordesTorres();
-            TorreBlanca torreCreada = new TorreBlanca();
-            torreAux.setTorre(torreCreada);
-            
+            if(jugador.obtenerCreditosRestantes() >= 10){
+                activarBordesTorres();
+                TorreBlanca torreCreada = new TorreBlanca();
+                torreAux.setTorre(torreCreada);
+            }    
         });
 
         Button botonTrampa = new Button();
         botonTrampa.setGraphic(new ImageView(imagenTrampaArenosa));
         botonTrampa.setText("Trampa Arenosa");
         botonTrampa.setOnAction(event -> {
-            activarBordesTrampaArena();
-            TrampaArenosa trampaCreada = new TrampaArenosa();
-            torreAux.setTorre(trampaCreada);
+            if(jugador.obtenerCreditosRestantes() >= 25){
+                activarBordesTrampaArena();
+                TrampaArenosa trampaCreada = new TrampaArenosa();
+                torreAux.setTorre(trampaCreada);
+            }
         
         });
 
