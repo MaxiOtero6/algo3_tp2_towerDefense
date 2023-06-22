@@ -68,4 +68,10 @@ public abstract class Defensa {
         }
         return false;
     }
+    public Posicion getPosicion(){
+        return posicion;
+    }
+    public SaludDefensa getSalud(){
+        return salud;
+    }
 }
