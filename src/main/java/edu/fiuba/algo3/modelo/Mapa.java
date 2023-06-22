@@ -16,11 +16,8 @@ public class Mapa {
 
     public void construir(Defensa defensa, int coordenadaX, int coordenadaY)
     {
-        try {
-            mapa.get(coordenadaY).get(coordenadaX).construir(defensa);
-        }catch (TerrenoDeConstruccionInvalidoError e){
-            SingleLogger.obtenerLogger().imprimirLog("Terreno de construccion invalido seleccionado");
-        }
+        mapa.get(coordenadaY).get(coordenadaX).construir(defensa);
+
     }
 
 
