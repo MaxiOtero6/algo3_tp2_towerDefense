@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Enemigos;
 import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Enemigos.Subterraneo.EsSubterraneo;
+import edu.fiuba.algo3.modelo.Enemigos.Subterraneo.NoEsSubterraneo;
 
 public class Topo extends Enemigo {
     
@@ -48,6 +49,13 @@ public class Topo extends Enemigo {
     {
         toposMuertos++;
         enemigosMuertos++;
+    }
+
+    @Override
+    public void ralentizar()
+    {
+        this.subterraneo = new NoEsSubterraneo();
+        super.ralentizar();
     }
 
     public boolean esSubterraneo(){

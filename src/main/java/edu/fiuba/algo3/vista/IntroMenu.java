@@ -24,6 +24,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
@@ -221,21 +222,26 @@ public class IntroMenu {
 
         //ALERTA DE PERDIDA
         if(jugador.obtenerVidaRestante() <= 0  && jugador.obtenerVidaRestante() < 0){
-                //private String imagenTorrePlateada = (new File("src/main/resources/image/torrePlateada.png")).toURI().toString();
 
             alert.setGraphic(new ImageView(imagenArania));
+            
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.setStyle("-fx-background-color: orange;");
             alert.setTitle("Termino la partida");
-            alert.setHeaderText("test!");
-            alert.setContentText("Perdiste!");
-            alert.showAndWait();
+            alert.setHeaderText("Perdiste!");
+            alert.setContentText("Te quedaste sin puntos de vida!");
+            alert.showAndWait(); 
         }
         //ALERTA DE VICTORIA
         if(partida.obtenerEnemigos().size() == 0 && jugador.obtenerVidaRestante() > 0){
             alert.setGraphic(new ImageView(imagenTorrePlateada));
+            
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.setStyle("-fx-background-color: lightblue;");
             alert.setTitle("Termino la partida");
-            alert.setHeaderText("test!");
-            alert.setContentText("Ganaste!");
-            alert.showAndWait();
+            alert.setHeaderText("Ganaste!");
+            alert.setContentText("Eliminaste a todos los enemigos!");
+            alert.showAndWait(); 
         }
     }
         HBox enemigosEnParcela = new HBox();
