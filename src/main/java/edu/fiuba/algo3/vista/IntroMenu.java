@@ -13,6 +13,8 @@ import edu.fiuba.algo3.modelo.Parcelas.Rocoso;
 import edu.fiuba.algo3.modelo.Parcelas.Tierra;
 import edu.fiuba.algo3.modelo.Parser.CreadorMapa;
 import edu.fiuba.algo3.modelo.Partida;
+import edu.fiuba.algo3.controlador.BotonOkEventHandler;
+import edu.fiuba.algo3.controlador.NombreEventHandler;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Defensas.*;
 import edu.fiuba.algo3.modelo.Defensas.Torres.*;
@@ -136,6 +138,9 @@ public class IntroMenu {
         VBox inicio = new VBox();
         inicio.setAlignment(Pos.CENTER);
         inicio.setSpacing(10);
+
+        NombreEventHandler nombreEventHandler = new NombreEventHandler(okButton);
+        textoNombre.setOnKeyPressed(nombreEventHandler);
 
         okButton.setOnAction(event -> {
             validarNombre(inicio);
