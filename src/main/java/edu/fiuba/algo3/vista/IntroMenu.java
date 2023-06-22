@@ -319,11 +319,21 @@ public class IntroMenu {
                 casillaMapa.setOnAction(event -> {
                     if(!torreAux.puseDefensa){
                         Defensa torreActual = torreAux.getTorre();
-                        partida.construirDefensa(torreActual, coordenadaX, coordenaday);
-                        VistaDefensas vistaDefensa = new VistaDefensas(root, torreActual);
-                        listaVistaDefensas.add(vistaDefensa);
 
-                        torreAux.ponerTorre();
+                        try {
+                            partida.construirDefensa(torreActual, coordenadaX, coordenaday);
+                            VistaDefensas vistaDefensa = new VistaDefensas(root, torreActual);
+                            vistaDefensa.dibujar();
+                            torreAux.ponerTorre();
+                            listaVistaDefensas.add(vistaDefensa);
+                            ejecutarBotonSkipTurno();
+                            activarBotones();
+                        } catch (NullPointerException e){
+
+                        }
+
+
+
 
 
 //                        if(torreActual instanceof TorrePlateada) {
@@ -336,8 +346,7 @@ public class IntroMenu {
 //                            torreAux.ponerTorre();
 //                            root.add(new ImageView(imagenTrampaArenosa),coordenadaX,coordenaday);
 //                        }
-                       ejecutarBotonSkipTurno();
-                       activarBotones();
+
                     }
 
                 });

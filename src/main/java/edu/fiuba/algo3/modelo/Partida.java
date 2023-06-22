@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
 import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
+import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 import edu.fiuba.algo3.modelo.Parser.CreadorMapa;
 
@@ -79,8 +80,12 @@ public class Partida {
 
     public void construirDefensa(Defensa defensa, int coordenadaX, int coordenadaY)
     {
-        this.mapa.construir(defensa, coordenadaX, coordenadaY);
-        this.turno.aniadirDefensa(defensa);
+        try{
+            this.mapa.construir(defensa, coordenadaX, coordenadaY);
+            this.turno.aniadirDefensa(defensa);
+        }catch (TerrenoDeConstruccionInvalidoError e){
+            SingleLogger.obtenerLogger().imprimirLog("Terreno de construccion invalido seleccionado");
+        }
     }
 
     @Override
