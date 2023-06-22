@@ -60,6 +60,8 @@ public class Tests {
         spy.avanzarTurno();
         verify(spy, never()).atacar();
         spy.avanzarTurno();
+        verify(spy, never()).atacar();
+        spy.avanzarTurno();
         verify(spy, times(1)).atacar();
     }
     @Test
@@ -73,6 +75,8 @@ public class Tests {
         spy.setEnemigos(enemigos);
         spy.setearPosicion(new Posicion(1,1));
 
+        spy.avanzarTurno();
+        verify(spy, never()).atacar();
         spy.avanzarTurno();
         verify(spy, never()).atacar();
         spy.avanzarTurno();

@@ -64,6 +64,8 @@ public class TorreBlancaTest {
         spy.avanzarTurno();
         verify(spy, never()).atacar();
         spy.avanzarTurno();
+        verify(spy, never()).atacar();
+        spy.avanzarTurno();
         verify(spy, times(1)).atacar();
     }
 

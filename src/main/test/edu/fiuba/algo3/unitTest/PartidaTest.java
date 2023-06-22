@@ -42,8 +42,10 @@ public class PartidaTest {
         TorreBlanca torre = new TorrePlateada();
         torre.avanzarTurno();
         torre.avanzarTurno();
+        torre.avanzarTurno();
         
         TorreBlanca torre2 = new TorrePlateada();
+        torre2.avanzarTurno();
         torre2.avanzarTurno();
         torre2.avanzarTurno();
         
