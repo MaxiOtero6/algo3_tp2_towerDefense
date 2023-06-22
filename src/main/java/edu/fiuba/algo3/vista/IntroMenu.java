@@ -19,6 +19,7 @@ import edu.fiuba.algo3.modelo.Defensas.Torres.*;
 import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Enemigos.*;
+import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -78,6 +79,7 @@ public class IntroMenu {
     private Alert alert;
 
     private Button botonInicial;
+    private List<VistaDefensas> listaVistaDefensas;
     List<Parcela> pasarelas;
     List<List<Parcela>> mapa;
     GridPane root;
@@ -85,6 +87,7 @@ public class IntroMenu {
     
 
     public void crearUI(Stage stagePrincipal) {
+        listaVistaDefensas = new ArrayList<>();
         alert = new Alert(AlertType.INFORMATION);
         partida = new Partida();
         jugador = partida.obtenerJugador();
@@ -211,6 +214,11 @@ public class IntroMenu {
         }
         labelVida.setText(jugador.obtenerVidaRestante() + "/20");
         labelCreditos.setText("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
+        //ACTUALIZAR DEFENSAS
+        for (VistaDefensas vista: listaVistaDefensas) {
+            vista.update();
+        }
+
         //ALERTA DE PERDIDA
         if(jugador.obtenerVidaRestante() <= 0  && jugador.obtenerVidaRestante() < 0){
                 //private String imagenTorrePlateada = (new File("src/main/resources/image/torrePlateada.png")).toURI().toString();
@@ -293,21 +301,24 @@ public class IntroMenu {
                 casillaMapa.setOnAction(event -> {
                     if(!torreAux.puseDefensa){
                         Defensa torreActual = torreAux.getTorre();
+                        VistaDefensas vistaDefensa = new VistaDefensas(root, torreActual, coordenadaX, coordenaday);
+                        listaVistaDefensas.add(vistaDefensa);
                         partida.construirDefensa(torreActual, coordenadaX, coordenaday);
+                        torreAux.ponerTorre();
 
 
-                        if(torreActual instanceof TorrePlateada) {
-                            torreAux.ponerTorre();
-                            root.add(new ImageView(imagenTorrePlateada),coordenadaX,coordenaday);
-                        } else if(torreActual instanceof TorreBlanca) {
-                            torreAux.ponerTorre();
-                            root.add(new ImageView(imagenTorreBlanca),coordenadaX,coordenaday);
-                        } else if(torreActual instanceof TrampaArenosa) {
-                            torreAux.ponerTorre();
-                            root.add(new ImageView(imagenTrampaArenosa),coordenadaX,coordenaday);
-                        }
-                        ejecutarBotonSkipTurno();
-                        activarBotones();
+//                        if(torreActual instanceof TorrePlateada) {
+//                            torreAux.ponerTorre();
+//                            root.add(new ImageView(imagenTorrePlateada),coordenadaX,coordenaday);
+//                        } else if(torreActual instanceof TorreBlanca) {
+//                            torreAux.ponerTorre();
+//                            root.add(new ImageView(imagenTorreBlanca),coordenadaX,coordenaday);
+//                        } else if(torreActual instanceof TrampaArenosa) {
+//                            torreAux.ponerTorre();
+//                            root.add(new ImageView(imagenTrampaArenosa),coordenadaX,coordenaday);
+//                        }
+                       ejecutarBotonSkipTurno();
+                       activarBotones();
                     }
 
                 });
