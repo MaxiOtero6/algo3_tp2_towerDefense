@@ -22,11 +22,11 @@ public class VistaDefensas {
     private String imagenTorreBlanca = (new File("src/main/resources/image/torreBlanca.png")).toURI().toString();
     private String imagenTorrePlateada = (new File("src/main/resources/image/torrePlateada.png")).toURI().toString();
     private String imagenTrampaArenosa = (new File("src/main/resources/image/trampaArenosa.png")).toURI().toString();
-    private String imagenTorrePlateadaEnConstruccion = (new File("src/main/resources/image/topo_escondido.png")).toURI().toString();
-    private String imagenTorrePlateadaDestruida = (new File("src/main/resources/image/trampaArenosa.png")).toURI().toString();
-    private String imagenTorreBlancaEnConstruccion;
-    private String imagenTrampaArenosaDestruida;
-    private String imagenTorreBlancaDestruida;
+    private String imagenTorrePlateadaEnConstruccion = (new File("src/main/resources/image/TpConstruccion.png")).toURI().toString();
+    private String imagenTorrePlateadaDestruida = (new File("src/main/resources/image/TpDestruida.png")).toURI().toString();
+    private String imagenTorreBlancaEnConstruccion = (new File("src/main/resources/image/TbConstruccion.png")).toURI().toString();
+    private String imagenTrampaArenosaDestruida = (new File("src/main/resources/image/trampaArenosa.png")).toURI().toString();
+    private String imagenTorreBlancaDestruida = (new File("src/main/resources/image/TbDestruida.png")).toURI().toString();
     private Defensa defensa;
     private GridPane grid;
     private int coordenadaX;
@@ -84,19 +84,21 @@ public class VistaDefensas {
     private void clean() {
         List<Node> nodesToRemove = new ArrayList<>();
         for (Node node : grid.getChildren()) {
-            if (node instanceof ImageView) {
-                ImageView imageView = (ImageView) node;
-                Image image = imageView.getImage();
-                String imageUrl = image.getUrl();
-                if (imageUrl.equals(imagenTorreBlanca) ||
-                        imageUrl.equals(imagenTorreBlancaDestruida) ||
-                        imageUrl.equals(imagenTorreBlancaEnConstruccion) ||
-                        imageUrl.equals(imagenTorrePlateadaDestruida) ||
-                        imageUrl.equals(imagenTorrePlateada) ||
-                        imageUrl.equals(imagenTorrePlateadaEnConstruccion) ||
-                        imageUrl.equals(imagenTrampaArenosa) ||
-                        imageUrl.equals(imagenTrampaArenosaDestruida)) {
-                    nodesToRemove.add(node);
+            if (GridPane.getColumnIndex(node) == coordenadaX && GridPane.getRowIndex(node) == coordenadaY) {
+                if (node instanceof ImageView) {
+                    ImageView imageView = (ImageView) node;
+                    Image image = imageView.getImage();
+                    String imageUrl = image.getUrl();
+                    if (imageUrl.equals(imagenTorreBlanca) ||
+                            imageUrl.equals(imagenTorreBlancaDestruida) ||
+                            imageUrl.equals(imagenTorreBlancaEnConstruccion) ||
+                            imageUrl.equals(imagenTorrePlateadaDestruida) ||
+                            imageUrl.equals(imagenTorrePlateada) ||
+                            imageUrl.equals(imagenTorrePlateadaEnConstruccion) ||
+                            imageUrl.equals(imagenTrampaArenosa) ||
+                            imageUrl.equals(imagenTrampaArenosaDestruida)) {
+                        nodesToRemove.add(node);
+                    }
                 }
             }
         }
