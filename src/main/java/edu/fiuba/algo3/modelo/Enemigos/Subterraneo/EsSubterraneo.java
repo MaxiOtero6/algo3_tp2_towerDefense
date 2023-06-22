@@ -6,8 +6,7 @@ import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 public class EsSubterraneo implements Subterraneo{
     @Override
     public int subterraneo(Defensa defensa) {
-        if (defensa instanceof TorreBlanca) {return 1000;}
-        return 0;    
+        return defensa.incrementarDistanciaS();   
     }
 
     public boolean esSubterraneo(){

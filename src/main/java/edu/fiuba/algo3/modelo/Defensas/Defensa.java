@@ -74,4 +74,14 @@ public abstract class Defensa {
     public SaludDefensa getSalud(){
         return salud;
     }
+
+    public int incrementarDistanciaV()
+    {
+        return 0;
+    }
+
+    public int incrementarDistanciaS()
+    {
+        return 0;
+    }
 }

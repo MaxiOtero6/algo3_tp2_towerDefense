@@ -26,7 +26,7 @@ public class VoladorTest {
     @Test
     public void test01SiUnEnemigoEsVoladorYLaDefensaEsUnaTorreRespondeDeLaFormaIndicada()
     {
-        Defensa defensa = mock(TorreBlanca.class);
+        Defensa defensa = new TorreBlanca();
         Volador vol = new EsVolador();
         int respuestaEsperada = 0;
 
@@ -38,9 +38,9 @@ public class VoladorTest {
     @Test
     public void test02SiUnEnemigoEsVoladorYLaDefensaEsUnaTrampaRespondeDeLaFormaIndicada()
     {
-        Defensa defensa = mock(TrampaArenosa.class);
+        Defensa defensa = new TrampaArenosa();
         Volador vol = new EsVolador();
-        int respuestaEsperada = 1000;
+        int respuestaEsperada = 10000;
 
         int respuesta = vol.volador(defensa);
 
@@ -50,7 +50,7 @@ public class VoladorTest {
     @Test
     public void test03SiUnEnemigoNoEsVoladorRespondeDeLaFormaIndicada()
     {
-        Defensa defensa = mock(Defensa.class);
+        Defensa defensa = new TrampaArenosa();
         Volador vol = new NoEsVolador();
         int respuestaEsperada = 0;
 

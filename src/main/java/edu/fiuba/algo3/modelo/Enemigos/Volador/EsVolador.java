@@ -7,7 +7,6 @@ public class EsVolador implements Volador{
     @Override
     public int volador(Defensa defensa)
     {
-        if (defensa instanceof TrampaArenosa) {return 1000;}
-        return 0;
+        return defensa.incrementarDistanciaV();
     }
 }

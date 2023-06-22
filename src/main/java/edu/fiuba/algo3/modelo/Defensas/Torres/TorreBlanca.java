@@ -51,4 +51,10 @@ public class TorreBlanca extends Defensa{
     public Estado getEstado(){
         return estado;
     }
+
+    @Override
+    public int incrementarDistanciaS()
+    {
+        return 10000;
+    }
 }

@@ -46,7 +46,11 @@ public class TrampaArenosa extends Defensa
         }
     }    
 
-
+    @Override
+    public int incrementarDistanciaV()
+    {
+        return 10000;
+    }
 
 }
 

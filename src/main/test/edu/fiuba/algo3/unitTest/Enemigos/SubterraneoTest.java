@@ -26,9 +26,9 @@ public class SubterraneoTest {
     @Test
     public void test01SiUnEnemigoEsSubterraneoYLaDefensaEsUnaTorreRespondeDeLaFormaIndicada()
     {
-        Defensa defensa = mock(TorreBlanca.class);
+        Defensa defensa = new TorreBlanca();
         Subterraneo sub = new EsSubterraneo();
-        int respuestaEsperada = 1000;
+        int respuestaEsperada = 10000;
 
         int respuesta = sub.subterraneo(defensa);
 
@@ -38,7 +38,7 @@ public class SubterraneoTest {
     @Test
     public void test02SiUnEnemigoEsSubterraneoYLaDefensaEsUnaTrampaRespondeDeLaFormaIndicada()
     {
-        Defensa defensa = mock(TrampaArenosa.class);
+        Defensa defensa = new TrampaArenosa();
         Subterraneo sub = new EsSubterraneo();
         int respuestaEsperada = 0;
 
@@ -50,7 +50,7 @@ public class SubterraneoTest {
     @Test
     public void test03SiUnEnemigoNoEsSubterraneoRespondeDeLaFormaIndicada()
     {
-        Defensa defensa = mock(Defensa.class);
+        Defensa defensa = new TorreBlanca();
         Subterraneo sub = new NoEsSubterraneo();
         int respuestaEsperada = 0;
 
