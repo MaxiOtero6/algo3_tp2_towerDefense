@@ -39,6 +39,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
+
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 // import javafx.scene.media.*;
@@ -329,23 +330,11 @@ public class IntroMenu {
                             ejecutarBotonSkipTurno();
                             activarBotones();
                         } catch (NullPointerException e){
-
+                            //System.out.println("TESTTESTTESTTEST");
+                            //AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/doorwuz.wav").toURI().toString());
+                            //AudioClip errorSound = new AudioClip(getClass().getResource("/sound/error.mp3").toExternalForm());
+                            //soundClip.play();
                         }
-
-
-
-
-
-//                        if(torreActual instanceof TorrePlateada) {
-//                            torreAux.ponerTorre();
-//                            root.add(new ImageView(imagenTorrePlateada),coordenadaX,coordenaday);
-//                        } else if(torreActual instanceof TorreBlanca) {
-//                            torreAux.ponerTorre();
-//                            root.add(new ImageView(imagenTorreBlanca),coordenadaX,coordenaday);
-//                        } else if(torreActual instanceof TrampaArenosa) {
-//                            torreAux.ponerTorre();
-//                            root.add(new ImageView(imagenTrampaArenosa),coordenadaX,coordenaday);
-//                        }
 
                     }
 
