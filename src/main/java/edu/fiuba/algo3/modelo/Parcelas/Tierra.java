@@ -22,7 +22,7 @@ public class Tierra extends Parcela
     @Override
     public void construir(Defensa defensa)
     {
-        DefensaEnTerrenoErroneoError.comprobarTerreno(this, defensa);
+        DefensaEnTerrenoErroneoError.comprobarTierra(this, defensa);
         this.torre = (TorreBlanca)construible.construir(defensa, this.posicion);
         this.setConstruible(new NoEsConstruible());
 

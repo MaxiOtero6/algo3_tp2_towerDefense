@@ -24,7 +24,7 @@ public class Pasarela extends Parcela {
     @Override
     public void construir(Defensa defensa)
     {
-        DefensaEnTerrenoErroneoError.comprobarTerreno(this, defensa);
+        DefensaEnTerrenoErroneoError.comprobarPasarela(this, defensa);
         this.trampa = (TrampaArenosa)construible.construir(defensa, this.posicion);
         this.setConstruible(new NoEsConstruible());
     }
