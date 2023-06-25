@@ -20,8 +20,9 @@ public class Topo extends Enemigo {
     @Override
     public void atacar()
     {
-        if(numeroTurno % 2 == 0) {super.atacar(2);} 
-        else {super.atacar(5);}
+        super.atacar(2 + 3 * (numeroTurno % 2));
+        // 2 si numeroTurno es par
+        // 5 si numeroTurno es impar
     }
 
     public void setNumeroTurno(int numeroTurno)
