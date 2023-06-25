@@ -55,7 +55,7 @@ public class Turno {
         for (Enemigo enemigo : enemigosTurno) 
         {
             this.enemigos.add(enemigo);
-            if (enemigo instanceof Lechuza) {((Lechuza)enemigo).setDefensas(defensas);}
+            enemigo.setDefensas(defensas);
         }
         this.camino.aparecerEnemigos(enemigosTurno);
     }
