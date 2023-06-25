@@ -331,9 +331,9 @@ public class IntroMenu {
                             activarBotones();
                         } catch (NullPointerException e){
                             //System.out.println("TESTTESTTESTTEST");
-                            //AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/doorwuz.wav").toURI().toString());
+                            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/doorwuz.wav").toURI().toString());
                             //AudioClip errorSound = new AudioClip(getClass().getResource("/sound/error.mp3").toExternalForm());
-                            //soundClip.play();
+                            soundClip.play();
                         }
 
                     }
