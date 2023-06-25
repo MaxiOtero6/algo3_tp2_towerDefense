@@ -161,4 +161,6 @@ public abstract class Enemigo {
         this.multiplicadorVelocidad = 1;
     }
 
+    public void setDefensas(LinkedList<Defensa> defensas){}
+
 }

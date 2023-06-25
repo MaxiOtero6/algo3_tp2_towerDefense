@@ -63,6 +63,7 @@ public class Lechuza extends Enemigo {
         throw new EnemigoNoRalentizableError();
     }
 
+    @Override
     public void setDefensas(LinkedList<Defensa> defensas)
     {
         this.defensas = defensas;
