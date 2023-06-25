@@ -80,6 +80,11 @@ public abstract class Defensa {
         return 0;
     }
 
+    public void avanzarEntreTurno()
+    {
+        this.salud.avanzarEntreTurno(this);
+    }
+
     public int incrementarDistanciaS()
     {
         return 0;

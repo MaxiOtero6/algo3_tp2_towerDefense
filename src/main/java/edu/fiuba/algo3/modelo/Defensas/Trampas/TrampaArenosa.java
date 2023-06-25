@@ -36,13 +36,10 @@ public class TrampaArenosa extends Defensa
     @Override
     public void atacar() 
     {
-        if (this.turnosUtiles > 0)
+        List<Enemigo> enemigoObjetivos = this.objetivo.hallarObjetivo(posicion, enemigos, this);
+        for (Enemigo enemigo : enemigoObjetivos) 
         {
-            List<Enemigo> enemigoObjetivos = this.objetivo.hallarObjetivo(posicion, enemigos, this);
-            for (Enemigo enemigo : enemigoObjetivos) 
-            {
-                enemigo.ralentizar();
-            }
+            enemigo.ralentizar();
         }
     }    
 

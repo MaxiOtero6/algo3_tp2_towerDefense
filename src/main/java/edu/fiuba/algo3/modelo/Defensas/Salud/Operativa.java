@@ -11,4 +11,9 @@ public class Operativa implements SaludDefensa
     {
         defensa.avanzarTurno();
     }
+
+    @Override
+    public void avanzarEntreTurno(Defensa defensa) {
+        defensa.atacar();
+    }
 }

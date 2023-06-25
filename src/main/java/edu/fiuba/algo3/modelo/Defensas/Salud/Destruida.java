@@ -10,4 +10,7 @@ public class Destruida implements SaludDefensa {
     {
         defensas.remove(defensa);
     }
+
+    @Override
+    public void avanzarEntreTurno(Defensa defensa) {}
 }

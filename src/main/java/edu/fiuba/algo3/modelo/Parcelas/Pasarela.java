@@ -38,6 +38,6 @@ public class Pasarela extends Parcela {
     public void agregarEnemigo(Enemigo enemigo)
     {
         super.agregarEnemigo(enemigo);
-        this.trampa.atacar();
+        this.trampa.avanzarEntreTurno();
     }
 }
