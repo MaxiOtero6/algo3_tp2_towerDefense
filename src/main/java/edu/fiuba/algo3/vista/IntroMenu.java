@@ -253,6 +253,7 @@ public class IntroMenu {
             pantallaFinalPerdida.getChildren().addAll(backgroundImageView, logoAlgoDefense);
 
             Scene escenaInicial = new Scene(pantallaFinalPerdida, 800, 600);
+            stagePrincipal.setTitle("Terminó la partida!");
             stagePrincipal.setScene(escenaInicial);
         }
         //ALERTA DE VICTORIA
@@ -274,6 +275,7 @@ public class IntroMenu {
             pantallaFinalGanar.getChildren().addAll(backgroundImageView, logoAlgoDefense);
 
             Scene escenaInicial = new Scene(pantallaFinalGanar, 800, 600);
+            stagePrincipal.setTitle("Terminó la partida!");
             stagePrincipal.setScene(escenaInicial);
         }
     }
@@ -451,7 +453,7 @@ public class IntroMenu {
         fondoMapa.getChildren().addAll(backgroundImageView, seccionTotal);
 
         Scene scene = new Scene(fondoMapa);    
-        stagePrincipal.setTitle("Mapa");
+        stagePrincipal.setTitle("Jugando");
         stagePrincipal.setScene(scene);
         stagePrincipal.show();
     }
