@@ -8,5 +8,6 @@ public class Vivo implements SaludEnemigo{
     @Override
     public void comprobarSalud(LinkedList<Enemigo> enemigos, Enemigo enemigo){}
 
+    @Override
     public int incrementarDistancia(){return 0;}
 }
