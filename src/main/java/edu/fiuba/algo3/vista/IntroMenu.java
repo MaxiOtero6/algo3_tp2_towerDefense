@@ -91,6 +91,7 @@ public class IntroMenu {
     
 
     public void crearUI(Stage stagePrincipal) {
+        
         listaVistaDefensas = new ArrayList<>();
         alert = new Alert(AlertType.INFORMATION);
         partida = new Partida();
@@ -120,8 +121,9 @@ public class IntroMenu {
         validationLabel = new Label();
 
         iniButton.setOnAction(event -> {
-            
             IniciarPartida(stagePrincipal);
+            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/start.mp3").toURI().toString());
+            soundClip.play();
         });  
 
         botonInicial = new Button("Siguiente");
@@ -144,12 +146,16 @@ public class IntroMenu {
         textoNombre.setOnKeyPressed(nombreEventHandler);
 
         okButton.setOnAction(event -> {
+            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/enter.mp3").toURI().toString());
+            soundClip.play();
             validarNombre(inicio);
         });
 
         inicio.getChildren().addAll(logoAlgoDefense, botonInicial);
 
         botonInicial.setOnAction(event -> {
+            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/enter.mp3").toURI().toString());
+            soundClip.play();
             inicio.getChildren().remove(botonInicial);
             inicio.getChildren().addAll(textoNombre, okButton);
         });
@@ -235,6 +241,8 @@ public class IntroMenu {
 
         //ALERTA DE PERDIDA
         if(jugador.obtenerVidaRestante() <= 0  && jugador.obtenerVidaRestante() < 0){
+            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/fail.mp3").toURI().toString());
+            soundClip.play();
 
             // alert.setGraphic(new ImageView(imagenArania));
             
@@ -258,6 +266,8 @@ public class IntroMenu {
         }
         //ALERTA DE VICTORIA
         if(partida.obtenerEnemigos().size() == 0 && jugador.obtenerVidaRestante() > 0){
+            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/win.mp3").toURI().toString());
+            soundClip.play();
             // alert.setGraphic(new ImageView(imagenTorrePlateada));
             
             // DialogPane dialogPane = alert.getDialogPane();
@@ -342,7 +352,15 @@ public class IntroMenu {
                 casillaMapa.setOnAction(event -> {
                     if(!torreAux.puseDefensa){
                         Defensa torreActual = torreAux.getTorre();
-
+                        //sound
+                        if((torreActual instanceof TorrePlateada || torreActual instanceof TorreBlanca) && parcelaActual instanceof Tierra){
+                            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/place.mp3").toURI().toString());
+                            soundClip.play();
+                        }
+                        if(torreActual instanceof TrampaArenosa && parcelaActual instanceof Pasarela){
+                            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/sand.mp3").toURI().toString());
+                            soundClip.play();
+                        }
                         try {
                             partida.construirDefensa(torreActual, coordenadaX, coordenaday);
                             VistaDefensas vistaDefensa = new VistaDefensas(root, torreActual);
@@ -352,9 +370,7 @@ public class IntroMenu {
                             ejecutarBotonSkipTurno(stagePrincipal);
                             activarBotones();
                         } catch (NullPointerException e){
-                            //System.out.println("TESTTESTTESTTEST");
-                            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/doorwuz.wav").toURI().toString());
-                            //AudioClip errorSound = new AudioClip(getClass().getResource("/sound/error.mp3").toExternalForm());
+                            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/error.mp3").toURI().toString());
                             soundClip.play();
                         }
 
@@ -388,6 +404,8 @@ public class IntroMenu {
         botonPlateada.setGraphic(new ImageView(imagenTorrePlateada));
         botonPlateada.setText("Torre Plateada");
         botonPlateada.setOnAction(event -> {
+            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/click.mp3").toURI().toString());
+            soundClip.play();
             if(jugador.obtenerCreditosRestantes() >= 20){
                 activarBordesTorres();
                 TorrePlateada torreCreada = new TorrePlateada();
@@ -399,6 +417,8 @@ public class IntroMenu {
         botonBlanca.setGraphic(new ImageView(imagenTorreBlanca));
         botonBlanca.setText("Torre Blanca");
         botonBlanca.setOnAction(event -> {
+            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/click.mp3").toURI().toString());
+            soundClip.play();
             if(jugador.obtenerCreditosRestantes() >= 10){
                 activarBordesTorres();
                 TorreBlanca torreCreada = new TorreBlanca();
@@ -410,6 +430,8 @@ public class IntroMenu {
         botonTrampa.setGraphic(new ImageView(imagenTrampaArenosa));
         botonTrampa.setText("Trampa Arenosa");
         botonTrampa.setOnAction(event -> {
+            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/click.mp3").toURI().toString());
+            soundClip.play();
             if(jugador.obtenerCreditosRestantes() >= 25){
                 activarBordesTrampaArena();
                 TrampaArenosa trampaCreada = new TrampaArenosa();
@@ -422,6 +444,8 @@ public class IntroMenu {
         //AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/Hormiga.mp3").toURI().toString());
         botonSkipTurno.setText("Skip Turno");
         botonSkipTurno.setOnAction(event -> {
+            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/click.mp3").toURI().toString());
+            soundClip.play();
             ejecutarBotonSkipTurno(stagePrincipal);
         });
 
