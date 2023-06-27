@@ -30,7 +30,7 @@ public class SubterraneoTest {
         Subterraneo sub = new EsSubterraneo();
         int respuestaEsperada = 10000;
 
-        int respuesta = sub.subterraneo(defensa);
+        int respuesta = sub.incrementarDistancia(defensa);
 
         assertEquals(respuestaEsperada, respuesta);
     }
@@ -42,7 +42,7 @@ public class SubterraneoTest {
         Subterraneo sub = new EsSubterraneo();
         int respuestaEsperada = 0;
 
-        int respuesta = sub.subterraneo(defensa);
+        int respuesta = sub.incrementarDistancia(defensa);
 
         assertEquals(respuestaEsperada, respuesta);
     }
@@ -54,7 +54,7 @@ public class SubterraneoTest {
         Subterraneo sub = new NoEsSubterraneo();
         int respuestaEsperada = 0;
 
-        int respuesta = sub.subterraneo(defensa);
+        int respuesta = sub.incrementarDistancia(defensa);
 
         assertEquals(respuestaEsperada, respuesta);
     }

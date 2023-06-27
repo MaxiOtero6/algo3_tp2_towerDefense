@@ -30,7 +30,7 @@ public class VoladorTest {
         Volador vol = new EsVolador();
         int respuestaEsperada = 0;
 
-        int respuesta = vol.volador(defensa);
+        int respuesta = vol.incrementarDistancia(defensa);
 
         assertEquals(respuestaEsperada, respuesta);
     }
@@ -42,7 +42,7 @@ public class VoladorTest {
         Volador vol = new EsVolador();
         int respuestaEsperada = 10000;
 
-        int respuesta = vol.volador(defensa);
+        int respuesta = vol.incrementarDistancia(defensa);
 
         assertEquals(respuestaEsperada, respuesta);
     }
@@ -54,7 +54,7 @@ public class VoladorTest {
         Volador vol = new NoEsVolador();
         int respuestaEsperada = 0;
 
-        int respuesta = vol.volador(defensa);
+        int respuesta = vol.incrementarDistancia(defensa);
 
         assertEquals(respuestaEsperada, respuesta);
     }
