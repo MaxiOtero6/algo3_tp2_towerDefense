@@ -5,7 +5,7 @@ import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 
 public class EsSubterraneo implements Subterraneo{
     @Override
-    public int subterraneo(Defensa defensa) {
+    public int incrementarDistancia(Defensa defensa) {
         return defensa.incrementarDistanciaS();   
     }
 

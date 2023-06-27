@@ -5,7 +5,7 @@ import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
 
 public class EsVolador implements Volador{
     @Override
-    public int volador(Defensa defensa)
+    public int incrementarDistancia(Defensa defensa)
     {
         return defensa.incrementarDistanciaV();
     }

@@ -131,8 +131,8 @@ public abstract class Enemigo {
     {
         return (
                 this.posicion.calcDistancia(posicion) 
-                + volador.volador(defensa) 
-                + subterraneo.subterraneo(defensa)
+                + volador.incrementarDistancia(defensa) 
+                + subterraneo.incrementarDistancia(defensa)
                 + salud.incrementarDistancia()
                 );
     }
