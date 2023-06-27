@@ -5,9 +5,6 @@ import java.util.LinkedList;
 import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.Enemigos.Atacable.Atacable;
-import edu.fiuba.algo3.modelo.Enemigos.Atacable.EsAtacable;
-import edu.fiuba.algo3.modelo.Enemigos.Atacable.NoEsAtacable;
 import edu.fiuba.algo3.modelo.Enemigos.Salud.Muerto;
 import edu.fiuba.algo3.modelo.Enemigos.Salud.SaludEnemigo;
 import edu.fiuba.algo3.modelo.Enemigos.Salud.Vivo;
@@ -29,7 +26,6 @@ public abstract class Enemigo {
     private Volador volador;
     protected Camino camino;
     protected SaludEnemigo salud;
-    private Atacable atacable;
     protected int velocidadRestante;
 
     public Enemigo(int energia, int danio, int creditos, int velocidad, Jugador jugador, Camino camino){
@@ -45,7 +41,6 @@ public abstract class Enemigo {
         this.multiplicadorVelocidad = 1;
         this.volador = new NoEsVolador();
         this.salud = new Vivo();
-        this.atacable = new EsAtacable();
     }
 
     public void setSubterraneo(Subterraneo subterraneo)
@@ -84,7 +79,6 @@ public abstract class Enemigo {
             this.otorgarCreditos();
             this.morir();
             this.salud = new Muerto();
-            this.atacable = new NoEsAtacable();
         }
         String tipoEnemigo = this.getClass().getSimpleName();
         String coordenadas;
@@ -139,7 +133,7 @@ public abstract class Enemigo {
                 this.posicion.calcDistancia(posicion) 
                 + volador.volador(defensa) 
                 + subterraneo.subterraneo(defensa)
-                + atacable.atacable()
+                + salud.incrementarDistancia()
                 );
     }
 

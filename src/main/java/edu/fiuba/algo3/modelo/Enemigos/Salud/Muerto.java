@@ -11,4 +11,7 @@ public class Muerto implements SaludEnemigo{
         enemigos.remove(enemigo);
         enemigo.eliminar();
     }
+
+    @Override
+    public int incrementarDistancia(){return 10000;}
 }
