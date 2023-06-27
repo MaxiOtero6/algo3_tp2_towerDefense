@@ -1,6 +1,7 @@
 <!--
 Link a google docs para ver el informe: https://docs.google.com/document/d/13T3bP0Rvs13mjeTZq3B0dRh9En3OLh_HDWBtm41YBCA/edit?usp=sharing
 -->
+
 <h1><center> [75.07 / 95.02]</center>
 
 <center> Algoritmos y programacion III</center>
@@ -14,10 +15,10 @@ Link a google docs para ver el informe: https://docs.google.com/document/d/13T3b
 | Nombre                   | Padron | Mail                 |
 | ------------------------ | ------ | -------------------- |
 | Otero Silvera Maximiliano| 108634 | motero@fi.uba.ar     |
-|Pla Tomas Alberto         | 106705 | tpla@fi.uba.ar       |
-|Oviedo Ignacio Sebastian  | 109821 | ioviedo@fi.uba.ar    |
-|Fernandez Lucas           | 109250 | lufernandez@fi.uba.ar|
-|Velurtas Joaquin Mateo    | 109655 | jvelurtas@fi.uba.ar  |
+| Pla Tomas Alberto        | 106705 | tpla@fi.uba.ar       |
+| Oviedo Ignacio Sebastian | 109821 | ioviedo@fi.uba.ar    |
+| Fernandez Lucas          | 109250 | lufernandez@fi.uba.ar|
+| Velurtas Joaquin Mateo   | 109655 | jvelurtas@fi.uba.ar  |
 
 ### Tutor: Diego Sanchez
 <br><br><br>
@@ -172,7 +173,7 @@ ___________
 
 _______________
 
-<center><h2> Diagramas de Clase </h2><center>
+<center><h2> Diagramas de Clase </h2></center>
 
 <br><br>
 
@@ -181,7 +182,72 @@ _______________
 
 ____________
 
-<center><h2> Diagramas de Secuencia </h2><center>
+<center><h2> Diagramas de Secuencia </h2></center>
+
+<br><br>
+<p align="justify">
+    De los casos de uso planteados en el enunciado, rescatamos las siguientes secuencias interesantes:
+</p>
+
+<h2> Torres y trampas</h2>
+
+<h3> Activacion de una torre </h3>
+
+<img src="../diagrams/sequences/ActivacionTorreBlanca.png"  width="1000" height="400">
+
+<h3> Hallar enemigo torres </h3>
+
+<img src="../diagrams/sequences/HallarEnemigoTorres.png"  width="1000" height="400">
+
+<h3> Hallar enemigos trampas </h3>
+
+<img src="../diagrams/sequences/HallarEnemigosTrampa.png"  width="1000" height="400">
+
+<h2> Construccion en las diferentes parcelas</h2>
+<p>
+    Meta, Largada y Rocoso unicamente arrojan una excepcion al recibir el mensaje construir(). Por lo cual decidimos prescindir de diagramar estos casos.
+</p>
+
+<h3> Construccion en Tierra </h3>
+
+<img src="../diagrams/sequences/Construccion%20en%20Tierra.png"  width="1000" height="400">
+
+<h3> Construccion en Pasarela </h3>
+
+<img src="../diagrams/sequences/Construccion%20en%20Pasarela.png"  width="1000" height="400">
+
+<h2> Enemigos </h2>
+
+<h3> Muerte de un enemigo </h3>
+
+<img src="../diagrams/sequences/MuerteEnemigo.png"  width="1000" height="400">
+
+<h3> Movimiento de un enemigo </h3>
+
+<p> Misma secuencia para todos los tipos de enemigos. En casos como la lechuza que sobreescribe mover() lo hace para utilizar un camino alterno al normal. O en casos como el Topo es para acelerar si debe hacerlo. </p>
+
+<img src="../diagrams/sequences/MoverEnemigo.png" width="1000" height="400">
+
+<h2> Analisis de excepciones </h2>
+
+<h3> Analisis CreditosInsuficientesError </h3>
+
+<img src="../diagrams/sequences/ComoAnalizaCreditosInsuficientes.png"  width="1000" height="400">
+
+
+<h3> Analisis de ganar una partida </h3>
+
+<img src="../diagrams/sequences/AnalisisDeGanarPartida.png"  width="1000" height="400">
+
+<h3> Analisis de perder una partida </h3>
+
+<img src="../diagrams/sequences/AnalisisPerderPartida.png"  width="1000" height="400">
+
+<br><br><br>
+
+____________
+
+<center><h2> Diagramas de Estados </h2></center>
 
 <br><br>
 
@@ -190,16 +256,7 @@ ____________
 
 ____________
 
-<center><h2> Diagramas de Estados </h2><center>
-
-<br><br>
-
-
-<br><br><br>
-
-____________
-
-<center><h2> Diagramas de Paquetes </h2><center>
+<center><h2> Diagramas de Paquetes </h2></center>
 
 <br><br>
 
