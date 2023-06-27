@@ -28,6 +28,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -72,6 +73,7 @@ public class IntroMenu {
     private String nombre;
     private Partida partida;
     private Jugador jugador;
+    private static MediaPlayer mediaPlayer;
     private String imagenTorrePlateada = (new File("src/main/resources/image/torrePlateada.png")).toURI().toString();
     private String imagenTorreBlanca = (new File("src/main/resources/image/torreBlanca.png")).toURI().toString();
     private String imagenTrampaArenosa = (new File("src/main/resources/image/trampaArenosa.png")).toURI().toString();
@@ -92,6 +94,14 @@ public class IntroMenu {
 
     public void crearUI(Stage stagePrincipal) {
         
+        String musicFile = "src/main/resources/sound/music.wav";
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(javafx.util.Duration.ZERO));
+        mediaPlayer.setVolume(0.3);
+
+        mediaPlayer.play();
+
         listaVistaDefensas = new ArrayList<>();
         alert = new Alert(AlertType.INFORMATION);
         partida = new Partida();
@@ -459,8 +469,14 @@ public class IntroMenu {
 
         VBox seccionBotones = new VBox();
         seccionBotones.setSpacing(10);
+
+        Slider slider = new Slider(0, 100, 50);
+        slider.setValue(mediaPlayer.getVolume() * 100);
+        slider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            mediaPlayer.setVolume(slider.getValue() / 100);
+        });
         
-        seccionBotones.getChildren().addAll(datosUsuario, botonPlateada, botonBlanca, botonTrampa, botonSkipTurno);
+        seccionBotones.getChildren().addAll(datosUsuario, botonPlateada, botonBlanca, botonTrampa, botonSkipTurno, slider);
         seccionBotones.setPadding(new Insets(10));
 
         HBox seccionMapa = new HBox();

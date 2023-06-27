@@ -17,16 +17,10 @@ import javafx.scene.paint.Color;
  * JavaFX App
  */
 public class App extends Application {
-    private static MediaPlayer mediaPlayer;
+    
     @Override
     public void start(Stage primaryStage) {
-            String musicFile = "src/main/resources/sound/music.wav";
-            Media sound = new Media(new File(musicFile).toURI().toString());
-            mediaPlayer = new MediaPlayer(sound);
-            mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(javafx.util.Duration.ZERO));
-            mediaPlayer.setVolume(0.3);
-
-            mediaPlayer.play();
+            
             IntroMenu intro = new IntroMenu();
             intro.crearUI(primaryStage);
 
