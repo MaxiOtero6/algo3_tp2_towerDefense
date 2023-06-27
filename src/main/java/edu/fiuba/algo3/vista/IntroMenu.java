@@ -43,7 +43,6 @@ import javafx.scene.media.AudioClip;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-// import javafx.scene.media.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.StrokeType;
@@ -255,15 +254,6 @@ public class IntroMenu {
         //ALERTA DE PERDIDA
         if(jugador.obtenerVidaRestante() <= 0  && jugador.obtenerVidaRestante() < 0){
             sonidoPerder.play();
-
-            // alert.setGraphic(new ImageView(imagenArania));
-            
-            // DialogPane dialogPane = alert.getDialogPane();
-            // dialogPane.setStyle("-fx-background-color: orange;");
-            // alert.setTitle("Termino la partida");
-            // alert.setHeaderText("Perdiste!");
-            // alert.setContentText("Te quedaste sin puntos de vida!");
-            // alert.showAndWait();
             StackPane pantallaFinalPerdida = new StackPane();
             ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/perdiste.png")).toURI().toString());
             ImageView backgroundImageView = new ImageView((new File("src/main/resources/image/imagenPerder.png")).toURI().toString());
@@ -279,14 +269,6 @@ public class IntroMenu {
         //ALERTA DE VICTORIA
         if(partida.obtenerEnemigos().size() == 0 && jugador.obtenerVidaRestante() > 0){
             sonidoGanar.play();
-            // alert.setGraphic(new ImageView(imagenTorrePlateada));
-            
-            // DialogPane dialogPane = alert.getDialogPane();
-            // dialogPane.setStyle("-fx-background-color: lightblue;");
-            // alert.setTitle("Termino la partida");
-            // alert.setHeaderText("Ganaste!");
-            // alert.setContentText("Eliminaste a todos los enemigos!");
-            // alert.showAndWait();
             StackPane pantallaFinalGanar = new StackPane();
             ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/ganaste.png")).toURI().toString());
             ImageView backgroundImageView = new ImageView((new File("src/main/resources/image/imagenGanar.png")).toURI().toString());
@@ -394,9 +376,6 @@ public class IntroMenu {
                 
             }
         }
- 
-        //TORRE PLATEADA DE EJEMPLO
-        //root.add(new ImageView(imagenTorrePlateada),4,7);
 
         BackgroundFill backgroundFill = new BackgroundFill(Color.ORANGE, new CornerRadii(8), Insets.EMPTY);
         Background background = new Background(backgroundFill);
@@ -477,7 +456,6 @@ public class IntroMenu {
                                             new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
 
         Button botonSkipTurno = new Button();
-        //AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/Hormiga.mp3").toURI().toString());
         botonSkipTurno.setText("Skip Turno");
         botonSkipTurno.prefWidthProperty().bind(botonTrampa.widthProperty());
         botonSkipTurno.setOnAction(event -> {
