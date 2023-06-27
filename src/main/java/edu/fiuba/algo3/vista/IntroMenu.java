@@ -30,6 +30,7 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -43,7 +44,6 @@ import javafx.scene.media.AudioClip;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-// import javafx.scene.media.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.StrokeType;
@@ -83,6 +83,12 @@ public class IntroMenu {
     private String imagenTopoEscondido = (new File("src/main/resources/image/topo_escondido.png")).toURI().toString();
     private String imagenLechuza = (new File("src/main/resources/image/lechuza.png")).toURI().toString();
     private Alert alert;
+    AudioClip sonidoPerder = new AudioClip(new File("src/main/resources/sound/fail.mp3").toURI().toString());
+    AudioClip sonidoGanar = new AudioClip(new File("src/main/resources/sound/win.mp3").toURI().toString());
+    AudioClip sonidoPonerTorre = new AudioClip(new File("src/main/resources/sound/place.mp3").toURI().toString());
+    AudioClip sonidoPonerTrampa = new AudioClip(new File("src/main/resources/sound/sand.mp3").toURI().toString());
+    AudioClip sonidoError = new AudioClip(new File("src/main/resources/sound/error.mp3").toURI().toString());
+    AudioClip sonidoClick = new AudioClip(new File("src/main/resources/sound/click.mp3").toURI().toString());
 
     private Button botonInicial;
     private List<VistaDefensas> listaVistaDefensas;
@@ -106,7 +112,7 @@ public class IntroMenu {
         alert = new Alert(AlertType.INFORMATION);
         partida = new Partida();
         jugador = partida.obtenerJugador();
-        labelVida = new Label(jugador.obtenerVidaRestante() + "/20");
+        labelVida = new Label("Vida Restante: " + jugador.obtenerVidaRestante() + "/20");
         labelCreditos = new Label("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
         String css = "-fx-prompt-text-fill: black;";
         ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/logo.png")).toURI().toString());
@@ -196,9 +202,6 @@ public class IntroMenu {
 
 
     private void ejecutarBotonSkipTurno(Stage stagePrincipal) {
-        //label2.setText(jugador.obtenerVidaRestante() + "/20");
-        // Code for botonSkipTurno
-        //soundClip.play();
 
         if (turno == 13){
             turno = 0;
@@ -242,7 +245,7 @@ public class IntroMenu {
                 root.add(new ImageView(imagenLechuza), coordenadaX, coordenadaY);
             }
         }
-        labelVida.setText(jugador.obtenerVidaRestante() + "/20");
+        labelVida.setText("Vida Restante: " + jugador.obtenerVidaRestante() + "/20");
         labelCreditos.setText("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
         //ACTUALIZAR DEFENSAS
         for (VistaDefensas vista: listaVistaDefensas) {
@@ -251,17 +254,7 @@ public class IntroMenu {
 
         //ALERTA DE PERDIDA
         if(jugador.obtenerVidaRestante() <= 0  && jugador.obtenerVidaRestante() < 0){
-            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/fail.mp3").toURI().toString());
-            soundClip.play();
-
-            // alert.setGraphic(new ImageView(imagenArania));
-            
-            // DialogPane dialogPane = alert.getDialogPane();
-            // dialogPane.setStyle("-fx-background-color: orange;");
-            // alert.setTitle("Termino la partida");
-            // alert.setHeaderText("Perdiste!");
-            // alert.setContentText("Te quedaste sin puntos de vida!");
-            // alert.showAndWait();
+            sonidoPerder.play();
             StackPane pantallaFinalPerdida = new StackPane();
             ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/perdiste.png")).toURI().toString());
             ImageView backgroundImageView = new ImageView((new File("src/main/resources/image/imagenPerder.png")).toURI().toString());
@@ -273,19 +266,11 @@ public class IntroMenu {
             Scene escenaInicial = new Scene(pantallaFinalPerdida, 800, 600);
             stagePrincipal.setTitle("Terminó la partida!");
             stagePrincipal.setScene(escenaInicial);
+            mediaPlayer.stop();
         }
         //ALERTA DE VICTORIA
         if(partida.obtenerEnemigos().size() == 0 && jugador.obtenerVidaRestante() > 0){
-            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/win.mp3").toURI().toString());
-            soundClip.play();
-            // alert.setGraphic(new ImageView(imagenTorrePlateada));
-            
-            // DialogPane dialogPane = alert.getDialogPane();
-            // dialogPane.setStyle("-fx-background-color: lightblue;");
-            // alert.setTitle("Termino la partida");
-            // alert.setHeaderText("Ganaste!");
-            // alert.setContentText("Eliminaste a todos los enemigos!");
-            // alert.showAndWait();
+            sonidoGanar.play();
             StackPane pantallaFinalGanar = new StackPane();
             ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/ganaste.png")).toURI().toString());
             ImageView backgroundImageView = new ImageView((new File("src/main/resources/image/imagenGanar.png")).toURI().toString());
@@ -297,6 +282,7 @@ public class IntroMenu {
             Scene escenaInicial = new Scene(pantallaFinalGanar, 800, 600);
             stagePrincipal.setTitle("Terminó la partida!");
             stagePrincipal.setScene(escenaInicial);
+            mediaPlayer.stop();
         }
     }
         HBox enemigosEnParcela = new HBox();
@@ -304,7 +290,8 @@ public class IntroMenu {
     private void IniciarPartida(Stage stagePrincipal) {
 
         //SECCION PARA MOSTRAR ENEMIGOS EN LA PARCELA ACTUAL
-        Color bordeAzul = Color.BLANCHEDALMOND;
+        Color bordeClaro = Color.BLANCHEDALMOND;
+        Color bordeAzul = Color.DARKCYAN;
         double borderWidth = 2.0; 
 
         enemigosEnParcela.setSpacing(10);
@@ -317,7 +304,7 @@ public class IntroMenu {
         enemigosEnParcela.setBackground(backgroundEnemigos);
 
         enemigosEnParcela.setBorder(new javafx.scene.layout.Border(
-                                    new javafx.scene.layout.BorderStroke(bordeAzul, javafx.scene.layout.BorderStrokeStyle.SOLID,
+                                    new javafx.scene.layout.BorderStroke(bordeClaro, javafx.scene.layout.BorderStrokeStyle.SOLID,
                                             new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
 
         validationLabel.setText("Partida iniciada");
@@ -364,12 +351,10 @@ public class IntroMenu {
                         Defensa torreActual = torreAux.getTorre();
                         //sound
                         if((torreActual instanceof TorrePlateada || torreActual instanceof TorreBlanca) && parcelaActual instanceof Tierra){
-                            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/place.mp3").toURI().toString());
-                            soundClip.play();
+                            sonidoPonerTorre.play();
                         }
                         if(torreActual instanceof TrampaArenosa && parcelaActual instanceof Pasarela){
-                            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/sand.mp3").toURI().toString());
-                            soundClip.play();
+                            sonidoPonerTrampa.play();
                         }
                         try {
                             partida.construirDefensa(torreActual, coordenadaX, coordenaday);
@@ -380,8 +365,7 @@ public class IntroMenu {
                             ejecutarBotonSkipTurno(stagePrincipal);
                             activarBotones();
                         } catch (NullPointerException e){
-                            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/error.mp3").toURI().toString());
-                            soundClip.play();
+                            sonidoError.play();
                         }
 
                     }
@@ -395,27 +379,67 @@ public class IntroMenu {
                 
             }
         }
- 
-        //TORRE PLATEADA DE EJEMPLO
-        //root.add(new ImageView(imagenTorrePlateada),4,7);
+
+        BackgroundFill backgroundFill = new BackgroundFill(Color.ORANGE, new CornerRadii(8), Insets.EMPTY);
+        Background background = new Background(backgroundFill);
+
+        Label volumenMusica = new Label("Volumen de la musica:");
+        Slider sliderMusica = new Slider(0, 100, 50);
+        sliderMusica.setValue(mediaPlayer.getVolume() * 100);
+        sliderMusica.valueProperty().addListener((observable, oldValue, newValue) -> {
+            mediaPlayer.setVolume(sliderMusica.getValue() / 100);
+        });
+
+        Label volumenSonidos = new Label("Volumen de los sonidos:");
+        Slider sliderSonidos = new Slider(0, 100, 50);
+        sliderSonidos.setValue(sonidoClick.getVolume() * 100);
+        sliderSonidos.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sonidoGanar.setVolume(sliderSonidos.getValue() / 100);
+            sonidoPerder.setVolume(sliderSonidos.getValue() / 100);
+            sonidoError.setVolume(sliderSonidos.getValue() / 100);
+            sonidoClick.setVolume(sliderSonidos.getValue() / 100);
+            sonidoPonerTorre.setVolume(sliderSonidos.getValue() / 100);
+            sonidoPonerTrampa.setVolume(sliderSonidos.getValue() / 100);
+        });
+
+        VBox seccionVolumen = new VBox();
+        seccionVolumen.setSpacing(10);
+        seccionVolumen.setPadding(new Insets(10));
+        seccionVolumen.setBackground(background);
+
+        seccionVolumen.setBorder(new javafx.scene.layout.Border(
+                                    new javafx.scene.layout.BorderStroke(bordeClaro, javafx.scene.layout.BorderStrokeStyle.SOLID,
+                                            new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
+
+        seccionVolumen.getChildren().addAll(volumenMusica, sliderMusica, volumenSonidos, sliderSonidos);
 
         Jugador jugador = partida.obtenerJugador();
         VBox datosUsuario = new VBox();
         datosUsuario.setSpacing(10);
         datosUsuario.setPadding(new Insets(10));
+        datosUsuario.prefWidthProperty().bind(seccionVolumen.widthProperty());
         
+        datosUsuario.setBackground(background);
+
+        datosUsuario.setBorder(new javafx.scene.layout.Border(
+                                    new javafx.scene.layout.BorderStroke(bordeClaro, javafx.scene.layout.BorderStrokeStyle.SOLID,
+                                            new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
 
         Label label1 = new Label("Nombre: " + nombre);
-        labelVida = new Label(jugador.obtenerVidaRestante() + "/20");
+        labelVida = new Label("Vida Restante: " + jugador.obtenerVidaRestante() + "/20");
 
         datosUsuario.getChildren().addAll(label1, labelVida, labelCreditos);
+
+        BackgroundFill backgroundFillAzul = new BackgroundFill(Color.LIGHTBLUE, new CornerRadii(8), Insets.EMPTY);
+        Background backgroundAzul = new Background(backgroundFillAzul);
 
         Button botonPlateada = new Button();
         botonPlateada.setGraphic(new ImageView(imagenTorrePlateada));
         botonPlateada.setText("Torre Plateada");
+        botonPlateada.prefWidthProperty().bind(datosUsuario.widthProperty());
+        botonPlateada.setMinWidth(datosUsuario.getMinWidth());
         botonPlateada.setOnAction(event -> {
-            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/click.mp3").toURI().toString());
-            soundClip.play();
+            sonidoClick.play();
             if(jugador.obtenerCreditosRestantes() >= 20){
                 activarBordesTorres();
                 TorrePlateada torreCreada = new TorrePlateada();
@@ -423,12 +447,17 @@ public class IntroMenu {
             }
         });
 
+        botonPlateada.setBackground(backgroundAzul);
+        botonPlateada.setBorder(new javafx.scene.layout.Border(
+                                    new javafx.scene.layout.BorderStroke(bordeAzul, javafx.scene.layout.BorderStrokeStyle.SOLID,
+                                            new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
+
         Button botonBlanca = new Button();
         botonBlanca.setGraphic(new ImageView(imagenTorreBlanca));
         botonBlanca.setText("Torre Blanca");
+        botonBlanca.prefWidthProperty().bind(datosUsuario.widthProperty());
         botonBlanca.setOnAction(event -> {
-            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/click.mp3").toURI().toString());
-            soundClip.play();
+            sonidoClick.play();
             if(jugador.obtenerCreditosRestantes() >= 10){
                 activarBordesTorres();
                 TorreBlanca torreCreada = new TorreBlanca();
@@ -436,12 +465,17 @@ public class IntroMenu {
             }    
         });
 
+        botonBlanca.setBackground(backgroundAzul);
+        botonBlanca.setBorder(new javafx.scene.layout.Border(
+                                    new javafx.scene.layout.BorderStroke(bordeAzul, javafx.scene.layout.BorderStrokeStyle.SOLID,
+                                            new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
+
         Button botonTrampa = new Button();
         botonTrampa.setGraphic(new ImageView(imagenTrampaArenosa));
         botonTrampa.setText("Trampa Arenosa");
+        botonTrampa.prefWidthProperty().bind(datosUsuario.widthProperty());
         botonTrampa.setOnAction(event -> {
-            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/click.mp3").toURI().toString());
-            soundClip.play();
+            sonidoClick.play();
             if(jugador.obtenerCreditosRestantes() >= 25){
                 activarBordesTrampaArena();
                 TrampaArenosa trampaCreada = new TrampaArenosa();
@@ -450,37 +484,38 @@ public class IntroMenu {
         
         });
 
+        botonTrampa.setBackground(backgroundAzul);
+        botonTrampa.setBorder(new javafx.scene.layout.Border(
+                                    new javafx.scene.layout.BorderStroke(bordeAzul, javafx.scene.layout.BorderStrokeStyle.SOLID,
+                                            new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
+
         Button botonSkipTurno = new Button();
-        //AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/Hormiga.mp3").toURI().toString());
         botonSkipTurno.setText("Skip Turno");
+        botonSkipTurno.prefWidthProperty().bind(botonTrampa.widthProperty());
         botonSkipTurno.setOnAction(event -> {
-            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/click.mp3").toURI().toString());
-            soundClip.play();
+            sonidoClick.play();
             ejecutarBotonSkipTurno(stagePrincipal);
         });
 
-        BackgroundFill backgroundFill = new BackgroundFill(Color.ORANGE, new CornerRadii(8), Insets.EMPTY);
-        Background background = new Background(backgroundFill);
-        datosUsuario.setBackground(background);
-
-        datosUsuario.setBorder(new javafx.scene.layout.Border(
+        botonSkipTurno.setBackground(backgroundAzul);
+        botonSkipTurno.setBorder(new javafx.scene.layout.Border(
                                     new javafx.scene.layout.BorderStroke(bordeAzul, javafx.scene.layout.BorderStrokeStyle.SOLID,
                                             new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
 
         VBox seccionBotones = new VBox();
         seccionBotones.setSpacing(10);
 
-        Slider slider = new Slider(0, 100, 50);
-        slider.setValue(mediaPlayer.getVolume() * 100);
-        slider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            mediaPlayer.setVolume(slider.getValue() / 100);
-        });
-        
-        seccionBotones.getChildren().addAll(datosUsuario, botonPlateada, botonBlanca, botonTrampa, botonSkipTurno, slider);
+        seccionBotones.setMargin(botonSkipTurno, new Insets(0, 0, 0, 0));
+        seccionBotones.getChildren().addAll(datosUsuario, botonPlateada, botonBlanca, botonTrampa, botonSkipTurno, seccionVolumen);
         seccionBotones.setPadding(new Insets(10));
 
+        AnchorPane anchorPane = new AnchorPane();
+        AnchorPane.setBottomAnchor(seccionVolumen, 15.0);
+        AnchorPane.setRightAnchor(seccionVolumen, 15.0);
+        anchorPane.getChildren().addAll(seccionBotones, seccionVolumen); 
+
         HBox seccionMapa = new HBox();
-        seccionMapa.getChildren().addAll(root, seccionBotones);
+        seccionMapa.getChildren().addAll(root, anchorPane);
 
         VBox seccionTotal = new VBox();
         seccionTotal.getChildren().addAll(enemigosEnParcela, seccionMapa);
