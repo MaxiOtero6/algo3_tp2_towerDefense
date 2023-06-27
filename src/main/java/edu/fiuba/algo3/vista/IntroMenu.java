@@ -83,6 +83,12 @@ public class IntroMenu {
     private String imagenTopoEscondido = (new File("src/main/resources/image/topo_escondido.png")).toURI().toString();
     private String imagenLechuza = (new File("src/main/resources/image/lechuza.png")).toURI().toString();
     private Alert alert;
+    AudioClip sonidoPerder = new AudioClip(new File("src/main/resources/sound/fail.mp3").toURI().toString());
+    AudioClip sonidoGanar = new AudioClip(new File("src/main/resources/sound/win.mp3").toURI().toString());
+    AudioClip sonidoPonerTorre = new AudioClip(new File("src/main/resources/sound/place.mp3").toURI().toString());
+    AudioClip sonidoPonerTrampa = new AudioClip(new File("src/main/resources/sound/sand.mp3").toURI().toString());
+    AudioClip sonidoError = new AudioClip(new File("src/main/resources/sound/error.mp3").toURI().toString());
+    AudioClip sonidoClick = new AudioClip(new File("src/main/resources/sound/click.mp3").toURI().toString());
 
     private Button botonInicial;
     private List<VistaDefensas> listaVistaDefensas;
@@ -251,8 +257,7 @@ public class IntroMenu {
 
         //ALERTA DE PERDIDA
         if(jugador.obtenerVidaRestante() <= 0  && jugador.obtenerVidaRestante() < 0){
-            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/fail.mp3").toURI().toString());
-            soundClip.play();
+            sonidoPerder.play();
 
             // alert.setGraphic(new ImageView(imagenArania));
             
@@ -276,8 +281,7 @@ public class IntroMenu {
         }
         //ALERTA DE VICTORIA
         if(partida.obtenerEnemigos().size() == 0 && jugador.obtenerVidaRestante() > 0){
-            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/win.mp3").toURI().toString());
-            soundClip.play();
+            sonidoGanar.play();
             // alert.setGraphic(new ImageView(imagenTorrePlateada));
             
             // DialogPane dialogPane = alert.getDialogPane();
@@ -364,12 +368,10 @@ public class IntroMenu {
                         Defensa torreActual = torreAux.getTorre();
                         //sound
                         if((torreActual instanceof TorrePlateada || torreActual instanceof TorreBlanca) && parcelaActual instanceof Tierra){
-                            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/place.mp3").toURI().toString());
-                            soundClip.play();
+                            sonidoPonerTorre.play();
                         }
                         if(torreActual instanceof TrampaArenosa && parcelaActual instanceof Pasarela){
-                            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/sand.mp3").toURI().toString());
-                            soundClip.play();
+                            sonidoPonerTrampa.play();
                         }
                         try {
                             partida.construirDefensa(torreActual, coordenadaX, coordenaday);
@@ -380,8 +382,7 @@ public class IntroMenu {
                             ejecutarBotonSkipTurno(stagePrincipal);
                             activarBotones();
                         } catch (NullPointerException e){
-                            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/error.mp3").toURI().toString());
-                            soundClip.play();
+                            sonidoError.play();
                         }
 
                     }
@@ -414,8 +415,7 @@ public class IntroMenu {
         botonPlateada.setGraphic(new ImageView(imagenTorrePlateada));
         botonPlateada.setText("Torre Plateada");
         botonPlateada.setOnAction(event -> {
-            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/click.mp3").toURI().toString());
-            soundClip.play();
+            sonidoClick.play();
             if(jugador.obtenerCreditosRestantes() >= 20){
                 activarBordesTorres();
                 TorrePlateada torreCreada = new TorrePlateada();
@@ -427,8 +427,7 @@ public class IntroMenu {
         botonBlanca.setGraphic(new ImageView(imagenTorreBlanca));
         botonBlanca.setText("Torre Blanca");
         botonBlanca.setOnAction(event -> {
-            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/click.mp3").toURI().toString());
-            soundClip.play();
+            sonidoClick.play();
             if(jugador.obtenerCreditosRestantes() >= 10){
                 activarBordesTorres();
                 TorreBlanca torreCreada = new TorreBlanca();
@@ -440,8 +439,7 @@ public class IntroMenu {
         botonTrampa.setGraphic(new ImageView(imagenTrampaArenosa));
         botonTrampa.setText("Trampa Arenosa");
         botonTrampa.setOnAction(event -> {
-            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/click.mp3").toURI().toString());
-            soundClip.play();
+            sonidoClick.play();
             if(jugador.obtenerCreditosRestantes() >= 25){
                 activarBordesTrampaArena();
                 TrampaArenosa trampaCreada = new TrampaArenosa();
@@ -454,8 +452,7 @@ public class IntroMenu {
         //AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/Hormiga.mp3").toURI().toString());
         botonSkipTurno.setText("Skip Turno");
         botonSkipTurno.setOnAction(event -> {
-            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/click.mp3").toURI().toString());
-            soundClip.play();
+            sonidoClick.play();
             ejecutarBotonSkipTurno(stagePrincipal);
         });
 
@@ -470,13 +467,39 @@ public class IntroMenu {
         VBox seccionBotones = new VBox();
         seccionBotones.setSpacing(10);
 
-        Slider slider = new Slider(0, 100, 50);
-        slider.setValue(mediaPlayer.getVolume() * 100);
-        slider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            mediaPlayer.setVolume(slider.getValue() / 100);
+
+        Label volumenMusica = new Label("Volumen de la musica:");
+        Slider sliderMusica = new Slider(0, 100, 50);
+        sliderMusica.setValue(mediaPlayer.getVolume() * 100);
+        sliderMusica.valueProperty().addListener((observable, oldValue, newValue) -> {
+            mediaPlayer.setVolume(sliderMusica.getValue() / 100);
         });
-        
-        seccionBotones.getChildren().addAll(datosUsuario, botonPlateada, botonBlanca, botonTrampa, botonSkipTurno, slider);
+
+        Label volumenSonidos = new Label("Volumen de los sonidos:");
+        Slider sliderSonidos = new Slider(0, 100, 50);
+        sliderSonidos.setValue(sonidoClick.getVolume() * 100);
+        sliderSonidos.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sonidoGanar.setVolume(sliderSonidos.getValue() / 100);
+            sonidoPerder.setVolume(sliderSonidos.getValue() / 100);
+            sonidoError.setVolume(sliderSonidos.getValue() / 100);
+            sonidoClick.setVolume(sliderSonidos.getValue() / 100);
+            sonidoPonerTorre.setVolume(sliderSonidos.getValue() / 100);
+            sonidoPonerTrampa.setVolume(sliderSonidos.getValue() / 100);
+        });
+
+        VBox seccionVolumen = new VBox();
+        seccionVolumen.setSpacing(10);
+        seccionVolumen.setPadding(new Insets(10));
+        seccionVolumen.setBackground(background);
+
+        seccionVolumen.setBorder(new javafx.scene.layout.Border(
+                                    new javafx.scene.layout.BorderStroke(bordeAzul, javafx.scene.layout.BorderStrokeStyle.SOLID,
+                                            new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
+
+        seccionVolumen.getChildren().addAll(volumenMusica, sliderMusica, volumenSonidos, sliderSonidos);
+
+        seccionBotones.setMargin(botonSkipTurno, new Insets(0, 0, 300, 0));
+        seccionBotones.getChildren().addAll(datosUsuario, botonPlateada, botonBlanca, botonTrampa, botonSkipTurno, seccionVolumen);
         seccionBotones.setPadding(new Insets(10));
 
         HBox seccionMapa = new HBox();
