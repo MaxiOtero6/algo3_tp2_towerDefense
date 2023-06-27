@@ -26,7 +26,7 @@ public class Camino {
             int iterador = indiceParcela(posicion);
             parcelas.get(iterador).eliminarEnemigo(enemigo);
         
-            if (iterador + 1 > parcelas.size() - 1) {velocidad = 0; iterador--;}
+            if (iterador + 1 > parcelas.size() - 1) {iterador--;}
             parcelas.get(iterador + 1).agregarEnemigo(enemigo);
         
             enemigo.mover(); 
