@@ -13,27 +13,27 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 
-
 /**
  * JavaFX App
  */
 public class App extends Application {
-
+    private static MediaPlayer mediaPlayer;
     @Override
     public void start(Stage primaryStage) {
-        String musicFile = "src/main/resources/sound/music.mp3";
-        Media sound = new Media(new File(musicFile).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(javafx.util.Duration.ZERO));
-        mediaPlayer.play();
-        IntroMenu intro = new IntroMenu();
-        intro.crearUI(primaryStage);
-        
-        primaryStage.setTitle("AlgoDefense");
-        Image icon = new Image("file:src/main/resources/image/torrePlateada.png");
-        primaryStage.getIcons().add(icon);
-        primaryStage.show();
+            String musicFile = "src/main/resources/sound/music.wav";
+            Media sound = new Media(new File(musicFile).toURI().toString());
+            mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(javafx.util.Duration.ZERO));
+            mediaPlayer.setVolume(0.3);
 
+            mediaPlayer.play();
+            IntroMenu intro = new IntroMenu();
+            intro.crearUI(primaryStage);
+
+            primaryStage.setTitle("AlgoDefense");
+            Image icon = new Image("file:src/main/resources/image/torrePlateada.png");
+            primaryStage.getIcons().add(icon);
+            primaryStage.show();
     }
 
     public static void main(String[] args) {
