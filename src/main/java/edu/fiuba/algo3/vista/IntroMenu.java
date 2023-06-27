@@ -30,6 +30,7 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -380,10 +381,41 @@ public class IntroMenu {
         BackgroundFill backgroundFill = new BackgroundFill(Color.ORANGE, new CornerRadii(8), Insets.EMPTY);
         Background background = new Background(backgroundFill);
 
+        Label volumenMusica = new Label("Volumen de la musica:");
+        Slider sliderMusica = new Slider(0, 100, 50);
+        sliderMusica.setValue(mediaPlayer.getVolume() * 100);
+        sliderMusica.valueProperty().addListener((observable, oldValue, newValue) -> {
+            mediaPlayer.setVolume(sliderMusica.getValue() / 100);
+        });
+
+        Label volumenSonidos = new Label("Volumen de los sonidos:");
+        Slider sliderSonidos = new Slider(0, 100, 50);
+        sliderSonidos.setValue(sonidoClick.getVolume() * 100);
+        sliderSonidos.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sonidoGanar.setVolume(sliderSonidos.getValue() / 100);
+            sonidoPerder.setVolume(sliderSonidos.getValue() / 100);
+            sonidoError.setVolume(sliderSonidos.getValue() / 100);
+            sonidoClick.setVolume(sliderSonidos.getValue() / 100);
+            sonidoPonerTorre.setVolume(sliderSonidos.getValue() / 100);
+            sonidoPonerTrampa.setVolume(sliderSonidos.getValue() / 100);
+        });
+
+        VBox seccionVolumen = new VBox();
+        seccionVolumen.setSpacing(10);
+        seccionVolumen.setPadding(new Insets(10));
+        seccionVolumen.setBackground(background);
+
+        seccionVolumen.setBorder(new javafx.scene.layout.Border(
+                                    new javafx.scene.layout.BorderStroke(bordeClaro, javafx.scene.layout.BorderStrokeStyle.SOLID,
+                                            new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
+
+        seccionVolumen.getChildren().addAll(volumenMusica, sliderMusica, volumenSonidos, sliderSonidos);
+
         Jugador jugador = partida.obtenerJugador();
         VBox datosUsuario = new VBox();
         datosUsuario.setSpacing(10);
         datosUsuario.setPadding(new Insets(10));
+        datosUsuario.prefWidthProperty().bind(seccionVolumen.widthProperty());
         
         datosUsuario.setBackground(background);
 
@@ -471,43 +503,17 @@ public class IntroMenu {
         VBox seccionBotones = new VBox();
         seccionBotones.setSpacing(10);
 
-
-        Label volumenMusica = new Label("Volumen de la musica:");
-        Slider sliderMusica = new Slider(0, 100, 50);
-        sliderMusica.setValue(mediaPlayer.getVolume() * 100);
-        sliderMusica.valueProperty().addListener((observable, oldValue, newValue) -> {
-            mediaPlayer.setVolume(sliderMusica.getValue() / 100);
-        });
-
-        Label volumenSonidos = new Label("Volumen de los sonidos:");
-        Slider sliderSonidos = new Slider(0, 100, 50);
-        sliderSonidos.setValue(sonidoClick.getVolume() * 100);
-        sliderSonidos.valueProperty().addListener((observable, oldValue, newValue) -> {
-            sonidoGanar.setVolume(sliderSonidos.getValue() / 100);
-            sonidoPerder.setVolume(sliderSonidos.getValue() / 100);
-            sonidoError.setVolume(sliderSonidos.getValue() / 100);
-            sonidoClick.setVolume(sliderSonidos.getValue() / 100);
-            sonidoPonerTorre.setVolume(sliderSonidos.getValue() / 100);
-            sonidoPonerTrampa.setVolume(sliderSonidos.getValue() / 100);
-        });
-
-        VBox seccionVolumen = new VBox();
-        seccionVolumen.setSpacing(10);
-        seccionVolumen.setPadding(new Insets(10));
-        seccionVolumen.setBackground(background);
-
-        seccionVolumen.setBorder(new javafx.scene.layout.Border(
-                                    new javafx.scene.layout.BorderStroke(bordeClaro, javafx.scene.layout.BorderStrokeStyle.SOLID,
-                                            new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
-
-        seccionVolumen.getChildren().addAll(volumenMusica, sliderMusica, volumenSonidos, sliderSonidos);
-
         seccionBotones.setMargin(botonSkipTurno, new Insets(0, 0, 0, 0));
         seccionBotones.getChildren().addAll(datosUsuario, botonPlateada, botonBlanca, botonTrampa, botonSkipTurno, seccionVolumen);
         seccionBotones.setPadding(new Insets(10));
 
+        AnchorPane anchorPane = new AnchorPane();
+        AnchorPane.setBottomAnchor(seccionVolumen, 15.0);
+        AnchorPane.setRightAnchor(seccionVolumen, 15.0);
+        anchorPane.getChildren().addAll(seccionBotones, seccionVolumen); 
+
         HBox seccionMapa = new HBox();
-        seccionMapa.getChildren().addAll(root, seccionBotones);
+        seccionMapa.getChildren().addAll(root, anchorPane);
 
         VBox seccionTotal = new VBox();
         seccionTotal.getChildren().addAll(enemigosEnParcela, seccionMapa);
