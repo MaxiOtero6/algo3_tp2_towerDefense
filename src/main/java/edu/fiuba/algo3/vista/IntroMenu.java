@@ -202,9 +202,6 @@ public class IntroMenu {
 
 
     private void ejecutarBotonSkipTurno(Stage stagePrincipal) {
-        //label2.setText(jugador.obtenerVidaRestante() + "/20");
-        // Code for botonSkipTurno
-        //soundClip.play();
 
         if (turno == 13){
             turno = 0;
@@ -308,7 +305,8 @@ public class IntroMenu {
     private void IniciarPartida(Stage stagePrincipal) {
 
         //SECCION PARA MOSTRAR ENEMIGOS EN LA PARCELA ACTUAL
-        Color bordeAzul = Color.BLANCHEDALMOND;
+        Color bordeClaro = Color.BLANCHEDALMOND;
+        Color bordeAzul = Color.DARKCYAN;
         double borderWidth = 2.0; 
 
         enemigosEnParcela.setSpacing(10);
@@ -321,7 +319,7 @@ public class IntroMenu {
         enemigosEnParcela.setBackground(backgroundEnemigos);
 
         enemigosEnParcela.setBorder(new javafx.scene.layout.Border(
-                                    new javafx.scene.layout.BorderStroke(bordeAzul, javafx.scene.layout.BorderStrokeStyle.SOLID,
+                                    new javafx.scene.layout.BorderStroke(bordeClaro, javafx.scene.layout.BorderStrokeStyle.SOLID,
                                             new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
 
         validationLabel.setText("Partida iniciada");
@@ -400,20 +398,33 @@ public class IntroMenu {
         //TORRE PLATEADA DE EJEMPLO
         //root.add(new ImageView(imagenTorrePlateada),4,7);
 
+        BackgroundFill backgroundFill = new BackgroundFill(Color.ORANGE, new CornerRadii(8), Insets.EMPTY);
+        Background background = new Background(backgroundFill);
+
         Jugador jugador = partida.obtenerJugador();
         VBox datosUsuario = new VBox();
         datosUsuario.setSpacing(10);
         datosUsuario.setPadding(new Insets(10));
         
+        datosUsuario.setBackground(background);
+
+        datosUsuario.setBorder(new javafx.scene.layout.Border(
+                                    new javafx.scene.layout.BorderStroke(bordeClaro, javafx.scene.layout.BorderStrokeStyle.SOLID,
+                                            new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
 
         Label label1 = new Label("Nombre: " + nombre);
         labelVida = new Label(jugador.obtenerVidaRestante() + "/20");
 
         datosUsuario.getChildren().addAll(label1, labelVida, labelCreditos);
 
+        BackgroundFill backgroundFillAzul = new BackgroundFill(Color.LIGHTBLUE, new CornerRadii(8), Insets.EMPTY);
+        Background backgroundAzul = new Background(backgroundFillAzul);
+
         Button botonPlateada = new Button();
         botonPlateada.setGraphic(new ImageView(imagenTorrePlateada));
         botonPlateada.setText("Torre Plateada");
+        botonPlateada.prefWidthProperty().bind(datosUsuario.widthProperty());
+        botonPlateada.setMinWidth(datosUsuario.getMinWidth());
         botonPlateada.setOnAction(event -> {
             sonidoClick.play();
             if(jugador.obtenerCreditosRestantes() >= 20){
@@ -423,9 +434,15 @@ public class IntroMenu {
             }
         });
 
+        botonPlateada.setBackground(backgroundAzul);
+        botonPlateada.setBorder(new javafx.scene.layout.Border(
+                                    new javafx.scene.layout.BorderStroke(bordeAzul, javafx.scene.layout.BorderStrokeStyle.SOLID,
+                                            new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
+
         Button botonBlanca = new Button();
         botonBlanca.setGraphic(new ImageView(imagenTorreBlanca));
         botonBlanca.setText("Torre Blanca");
+        botonBlanca.prefWidthProperty().bind(datosUsuario.widthProperty());
         botonBlanca.setOnAction(event -> {
             sonidoClick.play();
             if(jugador.obtenerCreditosRestantes() >= 10){
@@ -435,9 +452,15 @@ public class IntroMenu {
             }    
         });
 
+        botonBlanca.setBackground(backgroundAzul);
+        botonBlanca.setBorder(new javafx.scene.layout.Border(
+                                    new javafx.scene.layout.BorderStroke(bordeAzul, javafx.scene.layout.BorderStrokeStyle.SOLID,
+                                            new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
+
         Button botonTrampa = new Button();
         botonTrampa.setGraphic(new ImageView(imagenTrampaArenosa));
         botonTrampa.setText("Trampa Arenosa");
+        botonTrampa.prefWidthProperty().bind(datosUsuario.widthProperty());
         botonTrampa.setOnAction(event -> {
             sonidoClick.play();
             if(jugador.obtenerCreditosRestantes() >= 25){
@@ -448,19 +471,22 @@ public class IntroMenu {
         
         });
 
+        botonTrampa.setBackground(backgroundAzul);
+        botonTrampa.setBorder(new javafx.scene.layout.Border(
+                                    new javafx.scene.layout.BorderStroke(bordeAzul, javafx.scene.layout.BorderStrokeStyle.SOLID,
+                                            new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
+
         Button botonSkipTurno = new Button();
         //AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/Hormiga.mp3").toURI().toString());
         botonSkipTurno.setText("Skip Turno");
+        botonSkipTurno.prefWidthProperty().bind(botonTrampa.widthProperty());
         botonSkipTurno.setOnAction(event -> {
             sonidoClick.play();
             ejecutarBotonSkipTurno(stagePrincipal);
         });
 
-        BackgroundFill backgroundFill = new BackgroundFill(Color.ORANGE, new CornerRadii(8), Insets.EMPTY);
-        Background background = new Background(backgroundFill);
-        datosUsuario.setBackground(background);
-
-        datosUsuario.setBorder(new javafx.scene.layout.Border(
+        botonSkipTurno.setBackground(backgroundAzul);
+        botonSkipTurno.setBorder(new javafx.scene.layout.Border(
                                     new javafx.scene.layout.BorderStroke(bordeAzul, javafx.scene.layout.BorderStrokeStyle.SOLID,
                                             new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
 
@@ -493,12 +519,12 @@ public class IntroMenu {
         seccionVolumen.setBackground(background);
 
         seccionVolumen.setBorder(new javafx.scene.layout.Border(
-                                    new javafx.scene.layout.BorderStroke(bordeAzul, javafx.scene.layout.BorderStrokeStyle.SOLID,
+                                    new javafx.scene.layout.BorderStroke(bordeClaro, javafx.scene.layout.BorderStrokeStyle.SOLID,
                                             new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
 
         seccionVolumen.getChildren().addAll(volumenMusica, sliderMusica, volumenSonidos, sliderSonidos);
 
-        seccionBotones.setMargin(botonSkipTurno, new Insets(0, 0, 300, 0));
+        seccionBotones.setMargin(botonSkipTurno, new Insets(0, 0, 0, 0));
         seccionBotones.getChildren().addAll(datosUsuario, botonPlateada, botonBlanca, botonTrampa, botonSkipTurno, seccionVolumen);
         seccionBotones.setPadding(new Insets(10));
 
