@@ -203,12 +203,8 @@ public class IntroMenu {
         textoNombre.setOnKeyPressed(nombreEventHandler);
         
         
-        okButton.setOnAction(event -> {
-            sonidoEnter.play();
-            validarNombre(inicio);
-        });
-
-        
+        BotonOkEventHandler botonOkEventHandler = new BotonOkEventHandler(textoNombre, validationLabel, inicio, okButton, iniButton, sonidoEnter);
+        okButton.setOnAction(botonOkEventHandler);
 
         inicio.getChildren().addAll(logoAlgoDefense, botonInicial);
 
@@ -229,23 +225,6 @@ public class IntroMenu {
 
         Scene escenaInicial = new Scene(pantallaInicial, 800, 600);
         stagePrincipal.setScene(escenaInicial);
-    }
-
-    private void validarNombre(VBox inicio) {
-        String inputText = textoNombre.getText();
-        Label valLabel = new Label();
-        inicio.getChildren().removeAll(valLabel, validationLabel);
-        if (inputText.length() >= 6) {
-            nombre = inputText;
-            valLabel.setText("Nombre elegido: " + nombre);
-            valLabel.setStyle("-fx-text-fill: #a86f13;");
-            inicio.getChildren().removeAll(valLabel, textoNombre, okButton);
-            inicio.getChildren().addAll(valLabel, iniButton);
-        } else {
-            validationLabel.setText("Ingrese un nombre de al menos 6 caracteres");
-            validationLabel.setStyle("-fx-text-fill: #FF0000;");
-            inicio.getChildren().add(validationLabel);
-        }
     }
 
 
