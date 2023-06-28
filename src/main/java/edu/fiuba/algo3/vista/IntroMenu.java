@@ -45,6 +45,7 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
@@ -67,6 +68,7 @@ public class IntroMenu {
     private TextField textoNombre;
     private Button okButton;
     private Button iniButton;
+    private Button volverAJugarButton;
     private Label validationLabel;
     private Label labelVida;
     private Label labelCreditos;
@@ -199,7 +201,8 @@ public class IntroMenu {
 
         NombreEventHandler nombreEventHandler = new NombreEventHandler(okButton);
         textoNombre.setOnKeyPressed(nombreEventHandler);
-
+        
+        
         okButton.setOnAction(event -> {
             sonidoEnter.play();
             validarNombre(inicio);
@@ -305,8 +308,16 @@ public class IntroMenu {
             ImageView backgroundImageView = new ImageView((new File("src/main/resources/image/imagenPerder.png")).toURI().toString());
             backgroundImageView.fitWidthProperty().bind(stagePrincipal.widthProperty());
             backgroundImageView.fitHeightProperty().bind(stagePrincipal.heightProperty());
+            
+            volverAJugarButton = new Button("Volver a jugar");
+            volverAJugarButton.setStyle("-fx-background-color: #FFA500;");
+            volverAJugarButton.setTranslateY(60);
+            volverAJugarButton.setOnAction(event -> {
+                sonidoEnter.play();
+                crearUI(stagePrincipal);
+            });
 
-            pantallaFinalPerdida.getChildren().addAll(backgroundImageView, logoAlgoDefense);
+            pantallaFinalPerdida.getChildren().addAll(backgroundImageView, logoAlgoDefense, volverAJugarButton);
 
             Scene escenaInicial = new Scene(pantallaFinalPerdida, 800, 600);
             stagePrincipal.setTitle("Terminó la partida!");
@@ -314,7 +325,7 @@ public class IntroMenu {
             mediaPlayer.stop();
         }
         //ALERTA DE VICTORIA
-        if(partida.obtenerEnemigos().size() == 0 && jugador.obtenerVidaRestante() > 0){
+        if(partida.obtenerEnemigos().size() == 0 && jugador.obtenerVidaRestante()  > 0){
             sonidoGanar.play();
             StackPane pantallaFinalGanar = new StackPane();
             ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/ganaste.png")).toURI().toString());
@@ -322,7 +333,15 @@ public class IntroMenu {
             backgroundImageView.fitWidthProperty().bind(stagePrincipal.widthProperty());
             backgroundImageView.fitHeightProperty().bind(stagePrincipal.heightProperty());
 
-            pantallaFinalGanar.getChildren().addAll(backgroundImageView, logoAlgoDefense);
+            volverAJugarButton = new Button("Volver a jugar");
+            volverAJugarButton.setStyle("-fx-background-color: #FFA500;");
+            volverAJugarButton.setTranslateY(60);
+            volverAJugarButton.setOnAction(event -> {
+                sonidoEnter.play();
+                crearUI(stagePrincipal);
+            });
+
+            pantallaFinalGanar.getChildren().addAll(backgroundImageView, logoAlgoDefense, volverAJugarButton);
 
             Scene escenaInicial = new Scene(pantallaFinalGanar, 800, 600);
             stagePrincipal.setTitle("Terminó la partida!");
