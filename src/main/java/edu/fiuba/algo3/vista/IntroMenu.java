@@ -75,7 +75,6 @@ public class IntroMenu {
     private Label labelCreditos;
     private Partida partida;
     private Jugador jugador;
-    private static MediaPlayer mediaPlayer;
     private String imagenTorrePlateada = (new File("src/main/resources/image/torrePlateada.png")).toURI().toString();
     private String imagenTorreBlanca = (new File("src/main/resources/image/torreBlanca.png")).toURI().toString();
     private String imagenTrampaArenosa = (new File("src/main/resources/image/trampaArenosa.png")).toURI().toString();
@@ -85,6 +84,11 @@ public class IntroMenu {
     private String imagenTopoEscondido = (new File("src/main/resources/image/topo_escondido.png")).toURI().toString();
     private String imagenLechuza = (new File("src/main/resources/image/lechuza.png")).toURI().toString();
     private Alert alert;
+    
+    //Configuration global de la musica y los sonidos
+    static String musicFile = "src/main/resources/sound/music.wav";
+    static Media sound = new Media(new File(musicFile).toURI().toString());
+    private static MediaPlayer mediaPlayer = new MediaPlayer(sound);
     AudioClip sonidoPerder = new AudioClip(new File("src/main/resources/sound/fail.mp3").toURI().toString());
     AudioClip sonidoGanar = new AudioClip(new File("src/main/resources/sound/win.mp3").toURI().toString());
     AudioClip sonidoPonerTorre = new AudioClip(new File("src/main/resources/sound/place.mp3").toURI().toString());
@@ -100,15 +104,10 @@ public class IntroMenu {
     List<List<Parcela>> mapa;
     GridPane root;
 
-    
-
     public void crearUI(Stage stagePrincipal) {
         
-        String musicFile = "src/main/resources/sound/music.wav";
-        Media sound = new Media(new File(musicFile).toURI().toString());
-        mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(javafx.util.Duration.ZERO));
-        mediaPlayer.setVolume(0.3);
+        mediaPlayer.setVolume(mediaPlayer.getVolume());
 
         mediaPlayer.play();
 
