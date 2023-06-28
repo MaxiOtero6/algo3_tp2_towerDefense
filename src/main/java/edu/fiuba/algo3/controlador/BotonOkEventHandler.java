@@ -33,10 +33,8 @@ public class BotonOkEventHandler implements EventHandler<ActionEvent> {
         String inputText = textoNombre.getText();
         Label valLabel = new Label();
         inicio.getChildren().removeAll(valLabel, validationLabel);
-        String nombre;
         if (inputText.length() >= 6) {
-            nombre = inputText;
-            valLabel.setText("Nombre elegido: " + nombre);
+            valLabel.setText("Nombre elegido: " + inputText);
             valLabel.setStyle("-fx-text-fill: #a86f13;");
             inicio.getChildren().removeAll(valLabel, textoNombre, okButton);
             inicio.getChildren().addAll(valLabel, iniButton);

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.fiuba.algo3.controlador.BotonInicialEventHandler;
 import edu.fiuba.algo3.modelo.Parcelas.Largada;
 import edu.fiuba.algo3.modelo.Parcelas.Meta;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
@@ -72,7 +73,6 @@ public class IntroMenu {
     private Label validationLabel;
     private Label labelVida;
     private Label labelCreditos;
-    private String nombre;
     private Partida partida;
     private Jugador jugador;
     private static MediaPlayer mediaPlayer;
@@ -201,18 +201,14 @@ public class IntroMenu {
 
         NombreEventHandler nombreEventHandler = new NombreEventHandler(okButton);
         textoNombre.setOnKeyPressed(nombreEventHandler);
-        
-        
+
         BotonOkEventHandler botonOkEventHandler = new BotonOkEventHandler(textoNombre, validationLabel, inicio, okButton, iniButton, sonidoEnter);
         okButton.setOnAction(botonOkEventHandler);
 
         inicio.getChildren().addAll(logoAlgoDefense, botonInicial);
 
-        botonInicial.setOnAction(event -> {
-            sonidoEnter.play();
-            inicio.getChildren().remove(botonInicial);
-            inicio.getChildren().addAll(textoNombre, okButton);
-        });
+        BotonInicialEventHandler botonInicialEventHandler = new BotonInicialEventHandler(sonidoEnter, botonInicial, okButton, textoNombre, inicio);
+        botonInicial.setOnAction(botonInicialEventHandler);
 
         inicio.setAlignment(Pos.CENTER);
         seccionVolumen.setAlignment(Pos.BOTTOM_LEFT);
@@ -464,7 +460,7 @@ public class IntroMenu {
                                     new javafx.scene.layout.BorderStroke(bordeClaro, javafx.scene.layout.BorderStrokeStyle.SOLID,
                                             new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
 
-        Label label1 = new Label("Nombre: " + nombre);
+        Label label1 = new Label("Nombre: " + textoNombre.getText());
         labelVida = new Label("Vida Restante: " + jugador.obtenerVidaRestante() + "/20");
 
         datosUsuario.getChildren().addAll(label1, labelVida, labelCreditos);
