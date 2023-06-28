@@ -114,7 +114,7 @@ public class IntroMenu {
         alert = new Alert(AlertType.INFORMATION);
         partida = new Partida();
         jugador = partida.obtenerJugador();
-        labelVida = new Label(jugador.obtenerVidaRestante() + "/20");
+        labelVida = new Label("Vida Restante: " + jugador.obtenerVidaRestante() + "/20");
         labelCreditos = new Label("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
         String css = "-fx-prompt-text-fill: black;";
         ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/logo.png")).toURI().toString());
@@ -290,7 +290,7 @@ public class IntroMenu {
                 root.add(new ImageView(imagenLechuza), coordenadaX, coordenadaY);
             }
         }
-        labelVida.setText(jugador.obtenerVidaRestante() + "/20");
+        labelVida.setText("Vida Restante: " + jugador.obtenerVidaRestante() + "/20");
         labelCreditos.setText("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
         //ACTUALIZAR DEFENSAS
         for (VistaDefensas vista: listaVistaDefensas) {
@@ -311,6 +311,7 @@ public class IntroMenu {
             Scene escenaInicial = new Scene(pantallaFinalPerdida, 800, 600);
             stagePrincipal.setTitle("Terminó la partida!");
             stagePrincipal.setScene(escenaInicial);
+            mediaPlayer.stop();
         }
         //ALERTA DE VICTORIA
         if(partida.obtenerEnemigos().size() == 0 && jugador.obtenerVidaRestante() > 0){
@@ -326,6 +327,7 @@ public class IntroMenu {
             Scene escenaInicial = new Scene(pantallaFinalGanar, 800, 600);
             stagePrincipal.setTitle("Terminó la partida!");
             stagePrincipal.setScene(escenaInicial);
+            mediaPlayer.stop();
         }
     }
         HBox enemigosEnParcela = new HBox();
@@ -469,7 +471,7 @@ public class IntroMenu {
                                             new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
 
         Label label1 = new Label("Nombre: " + nombre);
-        labelVida = new Label(jugador.obtenerVidaRestante() + "/20");
+        labelVida = new Label("Vida Restante: " + jugador.obtenerVidaRestante() + "/20");
 
         datosUsuario.getChildren().addAll(label1, labelVida, labelCreditos);
 
