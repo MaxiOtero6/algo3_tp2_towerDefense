@@ -89,6 +89,8 @@ public class IntroMenu {
     AudioClip sonidoPonerTrampa = new AudioClip(new File("src/main/resources/sound/sand.mp3").toURI().toString());
     AudioClip sonidoError = new AudioClip(new File("src/main/resources/sound/error.mp3").toURI().toString());
     AudioClip sonidoClick = new AudioClip(new File("src/main/resources/sound/click.mp3").toURI().toString());
+    AudioClip sonidoStart = new AudioClip(new File("src/main/resources/sound/start.mp3").toURI().toString());
+    AudioClip sonidoEnter = new AudioClip(new File("src/main/resources/sound/enter.mp3").toURI().toString());
 
     private Button botonInicial;
     private List<VistaDefensas> listaVistaDefensas;
@@ -120,6 +122,44 @@ public class IntroMenu {
         backgroundImageView.fitWidthProperty().bind(stagePrincipal.widthProperty());
         backgroundImageView.fitHeightProperty().bind(stagePrincipal.heightProperty());
 
+        Color bordeClaro = Color.BLANCHEDALMOND;
+        double borderWidth = 2.0; 
+        BackgroundFill backgroundFill = new BackgroundFill(Color.ORANGE, new CornerRadii(8), Insets.EMPTY);
+        Background background = new Background(backgroundFill);
+
+        Label volumenMusica = new Label("Volumen de la musica:");
+        Slider sliderMusica = new Slider(0, 100, 50);
+        sliderMusica.setValue(mediaPlayer.getVolume() * 100);
+        sliderMusica.valueProperty().addListener((observable, oldValue, newValue) -> {
+            mediaPlayer.setVolume(sliderMusica.getValue() / 100);
+        });
+
+        Label volumenSonidos = new Label("Volumen de los sonidos:");
+        Slider sliderSonidos = new Slider(0, 100, 50);
+        sliderSonidos.setValue(sonidoClick.getVolume() * 100);
+        sliderSonidos.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sonidoGanar.setVolume(sliderSonidos.getValue() / 100);
+            sonidoPerder.setVolume(sliderSonidos.getValue() / 100);
+            sonidoError.setVolume(sliderSonidos.getValue() / 100);
+            sonidoClick.setVolume(sliderSonidos.getValue() / 100);
+            sonidoPonerTorre.setVolume(sliderSonidos.getValue() / 100);
+            sonidoPonerTrampa.setVolume(sliderSonidos.getValue() / 100);
+            sonidoEnter.setVolume(sliderSonidos.getValue() / 100);
+            sonidoStart.setVolume(sliderSonidos.getValue() / 100);
+        });
+
+        VBox seccionVolumen = new VBox();
+        seccionVolumen.setSpacing(10);
+        seccionVolumen.setPadding(new Insets(10));
+        seccionVolumen.setBackground(background);
+
+        seccionVolumen.setBorder(new javafx.scene.layout.Border(
+                                    new javafx.scene.layout.BorderStroke(bordeClaro, javafx.scene.layout.BorderStrokeStyle.SOLID,
+                                            new CornerRadii(6), new javafx.scene.layout.BorderWidths(borderWidth))));
+
+        seccionVolumen.getChildren().addAll(volumenMusica, sliderMusica, volumenSonidos, sliderSonidos);
+
+
         textoNombre = new TextField();
         
         textoNombre.setPromptText("Ingrese nombre: ");
@@ -138,8 +178,7 @@ public class IntroMenu {
 
         iniButton.setOnAction(event -> {
             IniciarPartida(stagePrincipal);
-            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/start.mp3").toURI().toString());
-            soundClip.play();
+            sonidoStart.play();
         });  
 
         botonInicial = new Button("Siguiente");
@@ -162,22 +201,28 @@ public class IntroMenu {
         textoNombre.setOnKeyPressed(nombreEventHandler);
 
         okButton.setOnAction(event -> {
-            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/enter.mp3").toURI().toString());
-            soundClip.play();
+            sonidoEnter.play();
             validarNombre(inicio);
         });
+
+        
 
         inicio.getChildren().addAll(logoAlgoDefense, botonInicial);
 
         botonInicial.setOnAction(event -> {
-            AudioClip soundClip = new AudioClip(new File("src/main/resources/sound/enter.mp3").toURI().toString());
-            soundClip.play();
+            sonidoEnter.play();
             inicio.getChildren().remove(botonInicial);
             inicio.getChildren().addAll(textoNombre, okButton);
         });
 
+        inicio.setAlignment(Pos.CENTER);
+        seccionVolumen.setAlignment(Pos.BOTTOM_LEFT);
+        seccionVolumen.setMaxWidth(200);
+        BorderPane borderPane = new BorderPane();
+        borderPane.setCenter(inicio);
+        borderPane.setBottom(seccionVolumen);
 
-        pantallaInicial.getChildren().addAll(backgroundImageView, inicio);
+        pantallaInicial.getChildren().addAll(backgroundImageView, borderPane);
 
         Scene escenaInicial = new Scene(pantallaInicial, 800, 600);
         stagePrincipal.setScene(escenaInicial);
