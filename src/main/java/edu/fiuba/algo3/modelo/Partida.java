@@ -36,22 +36,19 @@ public class Partida {
 
     public void iniciar()
     {
-        int i = 0;
         int j = 0;
         while (j < 500)
         {
-            turno.avanzarTurno(i);
-            i++;
-            if (i == 12) {i = 0;}
+            turno.avanzarTurno();
             j++;
         }
     }
 
-    public void avanzarTurno(int i)
+    public void avanzarTurno()
     {
         try
         {
-            turno.avanzarTurno(i);
+            turno.avanzarTurno();
         }
         catch (GanarPartidaError g)
         {

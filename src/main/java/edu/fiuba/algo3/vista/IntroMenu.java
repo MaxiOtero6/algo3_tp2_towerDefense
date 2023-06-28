@@ -251,11 +251,7 @@ public class IntroMenu {
 
     private void ejecutarBotonSkipTurno(Stage stagePrincipal) {
 
-        if (turno == 13){
-            turno = 0;
-         }
-        partida.avanzarTurno(turno);
-        turno++;
+        partida.avanzarTurno();
         List<Node> nodesToRemove = new ArrayList<>();
         for (Node node : root.getChildren()) {
             if (node instanceof ImageView) {
@@ -325,7 +321,7 @@ public class IntroMenu {
             mediaPlayer.stop();
         }
         //ALERTA DE VICTORIA
-        if(partida.obtenerEnemigos().size() == 0 && jugador.obtenerVidaRestante()  > 0){
+        if(partida.obtenerEnemigos().size() == 0 && jugador.obtenerVidaRestante() > 0){
             sonidoGanar.play();
             StackPane pantallaFinalGanar = new StackPane();
             ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/ganaste.png")).toURI().toString());

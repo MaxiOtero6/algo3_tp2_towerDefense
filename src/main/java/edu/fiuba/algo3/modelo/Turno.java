@@ -5,7 +5,6 @@ import java.util.List;
 
 import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Enemigos.Enemigo;
-import edu.fiuba.algo3.modelo.Enemigos.Lechuza;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 import edu.fiuba.algo3.modelo.Parser.CreadorEnemigos;
@@ -16,6 +15,7 @@ public class Turno {
     private LinkedList<Enemigo> enemigos;
     private Camino camino;
     private Jugador jugador;
+    private int numeroTurno;
 
 
     public Turno(List<Parcela> camino, Jugador jugador)
@@ -24,6 +24,7 @@ public class Turno {
         this.camino = new Camino(camino);
         this.enemigos = new LinkedList<>();
         this.defensas = new LinkedList<>();
+        this.numeroTurno = 0;
     }
 
     public Turno(Camino camino, Jugador jugador)
@@ -32,6 +33,7 @@ public class Turno {
         this.camino = camino;
         this.enemigos = new LinkedList<>();
         this.defensas = new LinkedList<>();
+        this.numeroTurno = 0;
     }
 
     public Turno(Camino camino, Jugador jugador, LinkedList<Defensa> defensas)
@@ -40,13 +42,26 @@ public class Turno {
         this.camino = camino;
         this.enemigos = new LinkedList<>();
         this.defensas = defensas;
+        this.numeroTurno = 0;
     }
 
-    public void avanzarTurno(int numeroTurno) { 
+    public void avanzarTurno(int numeroTurno)
+    {
         avanzarEnemigos();
         crearOleada(numeroTurno);
         avanzarDefensas();
         comprobarCantidadEnemigos();
+    }
+
+    public void avanzarTurno() { 
+        avanzarTurno(this.numeroTurno);
+        incrementarTurno();
+    }
+
+    private void incrementarTurno()
+    {
+        this.numeroTurno++;
+        if (this.numeroTurno == 12) {this.numeroTurno = 0;}
     }
 
     private void crearOleada(int numeroTurno)
