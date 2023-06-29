@@ -179,13 +179,12 @@ public class IntroMenu {
 
         validationLabel = new Label();
 
-        ContenedorPartida contenedorPartida = new ContenedorPartida(stagePrincipal, partida, jugador, labelVida, labelCreditos, textoNombre, mediaPlayer);
+        ContenedorPartida contenedorPartida = new ContenedorPartida(stagePrincipal, partida, jugador, labelVida, labelCreditos, textoNombre, mediaPlayer, mediaPlayer.getVolume(), sonidoClick.getVolume());
         Scene escenaPartida = new Scene(contenedorPartida);
         BotonIniciarEventHandler botonIniciarEventHandler = new BotonIniciarEventHandler(escenaPartida, stagePrincipal);
 
         iniButton.setOnAction(botonIniciarEventHandler);
             //sonidoStart.play();
-
 
         botonInicial = new Button("Siguiente");
         botonInicial.setStyle("-fx-background-color: #FFA500;");

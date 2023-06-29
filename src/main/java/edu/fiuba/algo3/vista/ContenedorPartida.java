@@ -66,7 +66,7 @@ public class ContenedorPartida extends StackPane {
     AudioClip sonidoEnter = new AudioClip(new File("src/main/resources/sound/enter.mp3").toURI().toString());
 
 
-    public ContenedorPartida(Stage stagePrincipal, Partida partida, Jugador jugador, Label labelVida, Label labelCreditos, TextField textoNombre, MediaPlayer mediaPlayer) {
+    public ContenedorPartida(Stage stagePrincipal, Partida partida, Jugador jugador, Label labelVida, Label labelCreditos, TextField textoNombre, MediaPlayer mediaPlayer, double volumenActualMusica, double volumenActualSonidos) {
 
         super();
         this.partida = partida;
@@ -183,14 +183,20 @@ public class ContenedorPartida extends StackPane {
 
         Label volumenMusica = new Label("Volumen de la musica:");
         Slider sliderMusica = new Slider(0, 100, 50);
-        sliderMusica.setValue(mediaPlayer.getVolume() * 100);
+        sliderMusica.setValue(volumenActualMusica);
         sliderMusica.valueProperty().addListener((observable, oldValue, newValue) -> {
             mediaPlayer.setVolume(sliderMusica.getValue() / 100);
         });
 
         Label volumenSonidos = new Label("Volumen de los sonidos:");
         Slider sliderSonidos = new Slider(0, 100, 50);
-        sliderSonidos.setValue(sonidoClick.getVolume() * 100);
+        sliderSonidos.setValue(volumenActualSonidos);
+        sonidoGanar.setVolume(sliderSonidos.getValue() / 100);
+        sonidoPerder.setVolume(sliderSonidos.getValue() / 100);
+        sonidoError.setVolume(sliderSonidos.getValue() / 100);
+        sonidoClick.setVolume(sliderSonidos.getValue() / 100);
+        sonidoPonerTorre.setVolume(sliderSonidos.getValue() / 100);
+        sonidoPonerTrampa.setVolume(sliderSonidos.getValue() / 100);
         sliderSonidos.valueProperty().addListener((observable, oldValue, newValue) -> {
             sonidoGanar.setVolume(sliderSonidos.getValue() / 100);
             sonidoPerder.setVolume(sliderSonidos.getValue() / 100);
