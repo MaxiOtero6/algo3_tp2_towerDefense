@@ -183,9 +183,17 @@ public class IntroMenu {
         ImageView corazon = new ImageView(imagenCorazon);
         vida.getChildren().addAll(labelVida, corazon);
 
-        ContenedorPartida contenedorPartida = new ContenedorPartida(stagePrincipal, partida, jugador, labelVida, vida, labelCreditos, textoNombre, mediaPlayer);
+        List sonidos = new ArrayList<AudioClip>();
+        sonidos.add(sonidoGanar);
+        sonidos.add(sonidoPerder);
+        sonidos.add(sonidoPonerTorre);
+        sonidos.add(sonidoPonerTrampa);
+        sonidos.add(sonidoError);
+        sonidos.add(sonidoClick);
+        sonidos.add(sonidoEnter);
+        ContenedorPartida contenedorPartida = new ContenedorPartida(stagePrincipal, partida, jugador, labelVida, vida, labelCreditos, textoNombre, mediaPlayer, sonidos);
         Scene escenaPartida = new Scene(contenedorPartida);
-        BotonIniciarEventHandler botonIniciarEventHandler = new BotonIniciarEventHandler(escenaPartida, stagePrincipal);
+        BotonIniciarEventHandler botonIniciarEventHandler = new BotonIniciarEventHandler(escenaPartida, stagePrincipal, contenedorPartida);
 
         iniButton.setOnAction(botonIniciarEventHandler);
             //sonidoStart.play();

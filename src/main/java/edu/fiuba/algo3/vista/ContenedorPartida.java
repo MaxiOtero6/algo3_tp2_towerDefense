@@ -58,16 +58,18 @@ public class ContenedorPartida extends StackPane {
     private VBox datosUsuario;
     private HBox vida;
 
-    AudioClip sonidoPonerTorre = new AudioClip(new File("src/main/resources/sound/place.mp3").toURI().toString());
-    AudioClip sonidoPonerTrampa = new AudioClip(new File("src/main/resources/sound/sand.mp3").toURI().toString());
-    AudioClip sonidoError = new AudioClip(new File("src/main/resources/sound/error.mp3").toURI().toString());
-    AudioClip sonidoClick = new AudioClip(new File("src/main/resources/sound/click.mp3").toURI().toString());
-    AudioClip sonidoGanar = new AudioClip(new File("src/main/resources/sound/win.mp3").toURI().toString());
-    AudioClip sonidoPerder = new AudioClip(new File("src/main/resources/sound/fail.mp3").toURI().toString());
-    AudioClip sonidoEnter = new AudioClip(new File("src/main/resources/sound/enter.mp3").toURI().toString());
+    AudioClip sonidoPonerTorre;
+    AudioClip sonidoPonerTrampa;
+    AudioClip sonidoError;
+    AudioClip sonidoClick;
+    AudioClip sonidoGanar;
+    AudioClip sonidoPerder;
+    AudioClip sonidoEnter;
+    Slider sliderMusica;
+    Slider sliderSonidos;
 
 
-    public ContenedorPartida(Stage stagePrincipal, Partida partida, Jugador jugador, Label labelVida,HBox vida, Label labelCreditos, TextField textoNombre, MediaPlayer mediaPlayer) {
+    public ContenedorPartida(Stage stagePrincipal, Partida partida, Jugador jugador, Label labelVida,HBox vida, Label labelCreditos, TextField textoNombre, MediaPlayer mediaPlayer, List sonidos) {
 
         super();
         this.partida = partida;
@@ -78,6 +80,14 @@ public class ContenedorPartida extends StackPane {
         this.labelCreditos = labelCreditos;
         this.labelVida = labelVida;
         this.textoNombre = textoNombre;
+
+        sonidoGanar = (AudioClip)sonidos.get(0);
+        sonidoPerder = (AudioClip)sonidos.get(1);
+        sonidoPonerTorre = (AudioClip)sonidos.get(2);
+        sonidoPonerTrampa = (AudioClip)sonidos.get(3);
+        sonidoError = (AudioClip)sonidos.get(4);
+        sonidoClick = (AudioClip)sonidos.get(5);
+        sonidoEnter = (AudioClip)sonidos.get(6);
 
         //SECCION PARA MOSTRAR ENEMIGOS EN LA PARCELA ACTUAL
         Color bordeClaro = Color.BLANCHEDALMOND;
@@ -183,22 +193,20 @@ public class ContenedorPartida extends StackPane {
         Background background = new Background(backgroundFill);
 
         Label volumenMusica = new Label("Volumen de la musica:");
-        Slider sliderMusica = new Slider(0, 100, 50);
-        sliderMusica.setValue(mediaPlayer.getVolume() * 100);
+        sliderMusica = new Slider(0, 100, 50);
+        //sliderMusica.setValue(mediaPlayer.getVolume() * 100);
         sliderMusica.valueProperty().addListener((observable, oldValue, newValue) -> {
             mediaPlayer.setVolume(sliderMusica.getValue() / 100);
         });
 
         Label volumenSonidos = new Label("Volumen de los sonidos:");
-        Slider sliderSonidos = new Slider(0, 100, 50);
-        sliderSonidos.setValue(sonidoClick.getVolume() * 100);
+        sliderSonidos = new Slider(0, 100, 50);
+        // sliderSonidos.setValue(sonidoClick.getVolume() * 100);
         sliderSonidos.valueProperty().addListener((observable, oldValue, newValue) -> {
-            sonidoGanar.setVolume(sliderSonidos.getValue() / 100);
-            sonidoPerder.setVolume(sliderSonidos.getValue() / 100);
-            sonidoError.setVolume(sliderSonidos.getValue() / 100);
-            sonidoClick.setVolume(sliderSonidos.getValue() / 100);
-            sonidoPonerTorre.setVolume(sliderSonidos.getValue() / 100);
-            sonidoPonerTrampa.setVolume(sliderSonidos.getValue() / 100);
+            for (Object sonido : sonidos) {
+                AudioClip sonidoAux2 = (AudioClip)sonido;
+                sonidoAux2.setVolume(sliderSonidos.getValue() / 100);
+            }
         });
 
         VBox seccionVolumen = new VBox();
@@ -561,5 +569,10 @@ public class ContenedorPartida extends StackPane {
     }
     public void actualizarNombre(){
         labelNombre.setText("Nombre: " + textoNombre.getText());
+    }
+
+    public void actualizarSliders(){
+        sliderMusica.setValue(mediaPlayer.getVolume() * 100);
+        sliderSonidos.setValue(sonidoClick.getVolume() * 100);
     }
 }
