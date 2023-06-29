@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.controlador.*;
 import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Defensas.Torres.NoTorre;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
@@ -38,7 +39,7 @@ public class ContenedorPartida extends StackPane {
     private HBox enemigosEnParcela;
     private GridPane root;
     private Button volverAJugarButton;
-    private List<VistaDefensas> listaVistaDefensas;
+    private List<Vista> listaVistaDefensas;
     private Defensa defensaActual = null;
 
     private String imagenTorrePlateada = (new File("src/main/resources/image/torrePlateada.png")).toURI().toString();
@@ -52,11 +53,8 @@ public class ContenedorPartida extends StackPane {
     private String imagenMoneda = (new File("src/main/resources/image/coin.png")).toURI().toString();
     private MediaPlayer mediaPlayer;
     private Jugador jugador;
-    private Label labelNombre;
-    private Label labelVida;
-    private Label labelCreditos;
     private TextField textoNombre;
-    private VBox datosUsuario;
+    private VistaDatosUsuario datosUsuario;
     private HBox vida;
     private HBox creditos;
     
@@ -74,6 +72,7 @@ public class ContenedorPartida extends StackPane {
 
     public ContenedorPartida(Stage stagePrincipal, Partida partida, Jugador jugador, Label labelVida, HBox vida, Label labelCreditos, HBox creditos, TextField textoNombre, MediaPlayer mediaPlayer, ControladorSonidos controladorSonidos) {
 
+
         super();
         this.partida = partida;
         enemigosEnParcela = new HBox();
@@ -81,9 +80,8 @@ public class ContenedorPartida extends StackPane {
         this.vida = vida;
         this.creditos = creditos;
         this.jugador = jugador;
-        this.labelCreditos = labelCreditos;
-        this.labelVida = labelVida;
         this.textoNombre = textoNombre;
+        listaVistaDefensas = new ArrayList<Vista>();
 
         List sonidos = controladorSonidos.devolverSonidos();
         sonidoGanar = (AudioClip)sonidos.get(0);
@@ -126,7 +124,49 @@ public class ContenedorPartida extends StackPane {
         root = new GridPane();
         root.setPadding(new Insets(10));
 
+        BackgroundFill backgroundFill = new BackgroundFill(Color.ORANGE, new CornerRadii(8), Insets.EMPTY);
+        Background background = new Background(backgroundFill);
 
+        Label volumenMusica = new Label("Volumen de la musica:");
+        Slider sliderMusica = new Slider(0, 100, 50);
+        sliderMusica.setValue(mediaPlayer.getVolume() * 100);
+        sliderMusica.valueProperty().addListener((observable, oldValue, newValue) -> {
+            mediaPlayer.setVolume(sliderMusica.getValue() / 100);
+        });
+
+        Label volumenSonidos = new Label("Volumen de los sonidos:");
+        Slider sliderSonidos = new Slider(0, 100, 50);
+        sliderSonidos.setValue(sonidoClick.getVolume() * 100);
+        sliderSonidos.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sonidoGanar.setVolume(sliderSonidos.getValue() / 100);
+            sonidoPerder.setVolume(sliderSonidos.getValue() / 100);
+            sonidoError.setVolume(sliderSonidos.getValue() / 100);
+            sonidoClick.setVolume(sliderSonidos.getValue() / 100);
+            sonidoPonerTorre.setVolume(sliderSonidos.getValue() / 100);
+            sonidoPonerTrampa.setVolume(sliderSonidos.getValue() / 100);
+        });
+
+
+        VBox seccionVolumen = new VBox();
+        seccionVolumen.setSpacing(10);
+        seccionVolumen.setPadding(new Insets(10));
+        seccionVolumen.setBackground(background);
+
+        seccionVolumen.setBorder(new Border(
+                new BorderStroke(bordeClaro, BorderStrokeStyle.SOLID,
+                        new CornerRadii(6), new BorderWidths(borderWidth))));
+
+        seccionVolumen.getChildren().addAll(volumenMusica, sliderMusica, volumenSonidos, sliderSonidos);
+
+        BordesDefensas bordesDefensas = new BordesDefensas(root, mapa, enemigosEnParcela);
+        datosUsuario = new VistaDatosUsuario(seccionVolumen, bordeClaro, jugador, textoNombre);
+        VistaEnemigos vistaEnemigos = new VistaEnemigos(root, partida);
+        listaVistaDefensas.add(datosUsuario);
+        listaVistaDefensas.add(vistaEnemigos);
+        BotonSkipEventHandler botonSkipEventHandler = new BotonSkipEventHandler(listaVistaDefensas, partida, mediaPlayer, stagePrincipal);
+
+
+        List<CasillaMapaEventHandler> casillaMapaEventHandlerList = new ArrayList<>();
         for (int y = 0; y < length; y++) {
             for (int x = 0; x < width; x++) {
 
@@ -158,36 +198,13 @@ public class ContenedorPartida extends StackPane {
                 }
 
 
-                listaVistaDefensas = new ArrayList<VistaDefensas>();
-                casillaMapa.setOnAction(event -> {
-                    if (!(defensaActual instanceof NoTorre)) {
+                CasillaMapaEventHandler casillaMapaEventHandler = new CasillaMapaEventHandler(parcelaActual, root, coordenadaX,
+                        coordenaday, partida, sonidoPonerTorre, sonidoPonerTrampa, sonidoError, botonSkipEventHandler, bordesDefensas);
+                casillaMapaEventHandlerList.add(casillaMapaEventHandler);
+                casillaMapa.setOnAction(casillaMapaEventHandler);
 
-                        //sound
-                        if ((defensaActual instanceof TorreBlanca) && parcelaActual instanceof Tierra) {
-                            sonidoPonerTorre.play();
-                        }
-                        if (defensaActual instanceof TrampaArenosa && parcelaActual instanceof Pasarela) {
-                            sonidoPonerTrampa.play();
-                        }
-                        try {
-                            partida.construirDefensa(defensaActual, coordenadaX, coordenaday);
-                            VistaDefensas vistaDefensa = new VistaDefensas(root, defensaActual);
-                            vistaDefensa.dibujar();
-                            listaVistaDefensas.add(vistaDefensa);
-                            ejecutarBotonSkipTurno(stagePrincipal);
-                            activarBotones();
-
-                            defensaActual = new NoTorre();
-                        } catch (NullPointerException e) {
-                            sonidoError.play();
-                        }
-
-                    }
-
-                });
-
-                casillaMapa.setOnMouseEntered(event -> mostrarEnemigos(enemigosEnParcela, coordenadaX, coordenaday));
-                casillaMapa.setOnMouseExited(event -> sacarEnemigos(enemigosEnParcela));
+                casillaMapa.setOnMouseEntered(event -> bordesDefensas.mostrarEnemigos(coordenadaX, coordenaday));
+                casillaMapa.setOnMouseExited(event -> bordesDefensas.sacarEnemigos());
 
                 root.add(casillaMapa, x, y);
 
@@ -263,14 +280,11 @@ public class ContenedorPartida extends StackPane {
 
         botonPlateada.prefWidthProperty().bind(datosUsuario.widthProperty());
         botonPlateada.setMinWidth(datosUsuario.getMinWidth());
-        botonPlateada.setOnAction(event -> {
-            sonidoClick.play();
-            if (jugador.obtenerCreditosRestantes() >= 20) {
-                activarBordesTorres();
-                TorrePlateada torreCreada = new TorrePlateada();
-                defensaActual = new TorrePlateada();
-            }
-        });
+
+
+        BotonPlateadaEventHandler botonPlateadaEventHandler = new BotonPlateadaEventHandler(bordesDefensas, jugador,
+                casillaMapaEventHandlerList, sonidoClick, sonidoError);
+        botonPlateada.setOnAction(botonPlateadaEventHandler);
 
         botonPlateada.setBackground(backgroundAzul);
         botonPlateada.setBorder(new Border(
@@ -295,23 +309,17 @@ public class ContenedorPartida extends StackPane {
         botonBlanca.setGraphic(blanca);
 
         botonBlanca.prefWidthProperty().bind(datosUsuario.widthProperty());
-        botonBlanca.setOnAction(event -> {
-            sonidoClick.play();
-            if (jugador.obtenerCreditosRestantes() >= 10) {
-                activarBordesTorres();
-                TorreBlanca torreCreada = new TorreBlanca();
-                defensaActual = new TorreBlanca();
-            }
-        });
 
+        BotonBlancaEventHandler botonBlancaEventHandler = new BotonBlancaEventHandler(bordesDefensas, jugador,
+                casillaMapaEventHandlerList, sonidoClick, sonidoError);
+        botonBlanca.setOnAction(botonBlancaEventHandler);
         botonBlanca.setBackground(backgroundAzul);
         botonBlanca.setBorder(new Border(
                 new BorderStroke(bordeAzul, BorderStrokeStyle.SOLID,
                         new CornerRadii(6), new BorderWidths(borderWidth))));
 
         Button botonTrampa = new Button();
-        
-        
+            
         HBox arena = new HBox();
         VBox precioArena = new VBox();
         HBox precioArena2 = new HBox();
@@ -334,7 +342,9 @@ public class ContenedorPartida extends StackPane {
                 defensaActual = new TrampaArenosa();
             }
 
-        });
+        BotonArenosaEventHandler botonArenosaEventHandler = new BotonArenosaEventHandler(bordesDefensas, jugador,
+                casillaMapaEventHandlerList, sonidoClick, sonidoError);
+        botonTrampa.setOnAction(botonArenosaEventHandler);
 
         botonTrampa.setBackground(backgroundAzul);
         botonTrampa.setBorder(new Border(
@@ -344,10 +354,9 @@ public class ContenedorPartida extends StackPane {
         Button botonSkipTurno = new Button();
         botonSkipTurno.setText("Skip Turno");
         botonSkipTurno.prefWidthProperty().bind(botonTrampa.widthProperty());
-        botonSkipTurno.setOnAction(event -> {
-            sonidoClick.play();
-            ejecutarBotonSkipTurno(stagePrincipal);
-        });
+
+
+        botonSkipTurno.setOnAction(botonSkipEventHandler);
 
         botonSkipTurno.setBackground(backgroundAzul);
         botonSkipTurno.setBorder(new Border(
@@ -379,241 +388,7 @@ public class ContenedorPartida extends StackPane {
         this.getChildren().addAll(backgroundImageView, seccionTotal);
     }
 
-    private void activarBotones() {
-        for (int y = 0; y < 15; y++) {
-            for (int x = 0; x < 15; x++) {
-                int coordenadaX = x;
-                int coordenadaY = y;
-
-                Parcela parcelaActual = mapa.get(y).get(x);
-                if ((parcelaActual != null)) {
-                    for (Node botonActual : root.getChildren()) {
-                        if (GridPane.getRowIndex(botonActual) == y && GridPane.getColumnIndex(botonActual) == x) {
-                            Button boton = (Button) botonActual;
-                            boton.setBorder(null);
-                            boton.setOnMouseEntered(event -> mostrarEnemigos(enemigosEnParcela, coordenadaX, coordenadaY));
-                            boton.setOnMouseExited(event -> sacarEnemigos(enemigosEnParcela));
-
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private void mostrarEnemigos(HBox enemigosDeParcela, int x, int y) {
-        Parcela parcelaActual = mapa.get(y).get(x);
-        LinkedList<Enemigo> enemigosEnLaParcela = parcelaActual.devolverEnemigos();
-        for (Enemigo enemigo : enemigosEnLaParcela) {
-            if (enemigo instanceof Arania) {
-                enemigosDeParcela.getChildren().add(new ImageView(imagenArania));
-            }
-            if (enemigo instanceof Hormiga) {
-                enemigosDeParcela.getChildren().add(new ImageView(imagenHormiga));
-            }
-            if (enemigo instanceof Lechuza) {
-                enemigosDeParcela.getChildren().add(new ImageView(imagenLechuza));
-            }
-            if (enemigo instanceof Topo) {
-                Topo topoAux = (Topo) enemigo;
-                if (topoAux.esSubterraneo()) {
-                    enemigosDeParcela.getChildren().add(new ImageView(imagenTopoEscondido));
-                } else {
-                    enemigosDeParcela.getChildren().add(new ImageView(imagenTopo));
-                }
-            }
-        }
-    }
-
-    private void sacarEnemigos(HBox enemigosDeParcela) {
-        enemigosDeParcela.getChildren().clear();
-    }
-
-    private void ejecutarBotonSkipTurno(Stage stagePrincipal) {
-
-        partida.avanzarTurno();
-        List<Node> nodesToRemove = new ArrayList<>();
-        for (Node node : root.getChildren()) {
-            if (node instanceof ImageView) {
-                ImageView imageView = (ImageView) node;
-                Image image = imageView.getImage();
-                String imageUrl = image.getUrl();
-                if (imageUrl.equals(imagenHormiga) ||
-                        imageUrl.equals(imagenArania) ||
-                        imageUrl.equals(imagenTopo) ||
-                        imageUrl.equals(imagenLechuza) ||
-                        imageUrl.equals(imagenTopoEscondido)) {
-                    nodesToRemove.add(node);
-                }
-            }
-        }
-        root.getChildren().removeAll(nodesToRemove);
-        for (int i = 0; i < partida.obtenerEnemigos().size(); i++) {
-            Enemigo enemigoActual = partida.obtenerEnemigos().get(i);
-            int coordenadaX = enemigoActual.obtenerPosicion().obtenerCoordenadaX();
-            int coordenadaY = enemigoActual.obtenerPosicion().obtenerCoordenadaY();
-            if (enemigoActual instanceof Hormiga) {
-                root.add(new ImageView(imagenHormiga), coordenadaX, coordenadaY);
-            } else if (enemigoActual instanceof Arania) {
-                root.add(new ImageView(imagenArania), coordenadaX, coordenadaY);
-            } else if (enemigoActual instanceof Topo) {
-                Topo topo = (Topo) enemigoActual;
-                if (topo.esSubterraneo()) {
-                    root.add(new ImageView(imagenTopoEscondido), coordenadaX, coordenadaY);
-                } else {
-                    root.add(new ImageView(imagenTopo), coordenadaX, coordenadaY);
-                }
-
-            } else if (enemigoActual instanceof Lechuza) {
-                root.add(new ImageView(imagenLechuza), coordenadaX, coordenadaY);
-            }
-        }
-        labelVida.setText("Vida: " + jugador.obtenerVidaRestante() + "/20 ");
-        labelCreditos.setText("Creditos: " + jugador.obtenerCreditosRestantes() + " ");
-        //ACTUALIZAR DEFENSAS
-        for (VistaDefensas vista : listaVistaDefensas) {
-            vista.update();
-        }
-
-        //ALERTA DE PERDIDA
-        if (jugador.obtenerVidaRestante() <= 0 && jugador.obtenerVidaRestante() < 0) {
-            sonidoPerder.play();
-            StackPane pantallaFinalPerdida = new StackPane();
-            ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/perdiste.png")).toURI().toString());
-            ImageView backgroundImageView = new ImageView((new File("src/main/resources/image/imagenPerder.png")).toURI().toString());
-            backgroundImageView.fitWidthProperty().bind(stagePrincipal.widthProperty());
-            backgroundImageView.fitHeightProperty().bind(stagePrincipal.heightProperty());
-
-            volverAJugarButton = new Button("Volver a jugar");
-            volverAJugarButton.setStyle("-fx-background-color: #FFA500;");
-            volverAJugarButton.setTranslateY(60);
-            volverAJugarButton.setOnAction(event -> {
-                sonidoEnter.play();
-                IntroMenu intro = new IntroMenu();
-                intro.crearUI(stagePrincipal);
-            });
-
-            pantallaFinalPerdida.getChildren().addAll(backgroundImageView, logoAlgoDefense, volverAJugarButton);
-
-            Scene escenaInicial = new Scene(pantallaFinalPerdida, 800, 600);
-            stagePrincipal.setTitle("Terminó la partida!");
-            stagePrincipal.setScene(escenaInicial);
-            mediaPlayer.stop();
-        }
-        //ALERTA DE VICTORIA
-        if (partida.obtenerEnemigos().size() == 0 && jugador.obtenerVidaRestante() > 0) {
-            sonidoGanar.play();
-            StackPane pantallaFinalGanar = new StackPane();
-            ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/ganaste.png")).toURI().toString());
-            ImageView backgroundImageView = new ImageView((new File("src/main/resources/image/imagenGanar.png")).toURI().toString());
-            backgroundImageView.fitWidthProperty().bind(stagePrincipal.widthProperty());
-            backgroundImageView.fitHeightProperty().bind(stagePrincipal.heightProperty());
-
-            volverAJugarButton = new Button("Volver a jugar");
-            volverAJugarButton.setStyle("-fx-background-color: #FFA500;");
-            volverAJugarButton.setTranslateY(60);
-            volverAJugarButton.setOnAction(event -> {
-                sonidoEnter.play();
-                IntroMenu intro = new IntroMenu();
-                intro.crearUI(stagePrincipal);
-            });
-
-            pantallaFinalGanar.getChildren().addAll(backgroundImageView, logoAlgoDefense, volverAJugarButton);
-
-            Scene escenaInicial = new Scene(pantallaFinalGanar, 800, 600);
-            stagePrincipal.setTitle("Terminó la partida!");
-            stagePrincipal.setScene(escenaInicial);
-            mediaPlayer.stop();
-        }
-    }
-
-    private void activarBordesTorres() {
-
-        Color bordeRojo = Color.RED;
-        Color borderVerde = Color.GREENYELLOW;
-        double borderWidth = 2.0;
-
-        for (int y = 0; y < 15; y++) {
-            for (int x = 0; x < 15; x++) {
-
-                Parcela parcelaActual = mapa.get(y).get(x);
-                if (!(parcelaActual instanceof Tierra)) {
-                    for (Node botonActual : root.getChildren()) {
-                        if (GridPane.getRowIndex(botonActual) == y && GridPane.getColumnIndex(botonActual) == x) {
-                            Button boton = (Button) botonActual;
-
-                            boton.setOnMouseEntered(event -> boton.setBorder(new javafx.scene.layout.Border(
-                                    new javafx.scene.layout.BorderStroke(bordeRojo, javafx.scene.layout.BorderStrokeStyle.SOLID,
-                                            new CornerRadii(2), new javafx.scene.layout.BorderWidths(borderWidth)))));
-
-                            boton.setOnMouseExited(event -> boton.setBorder(null));
-
-                            break;
-                        }
-                    }
-                } else {
-                    for (Node botonActual : root.getChildren()) {
-                        if (GridPane.getRowIndex(botonActual) == y && GridPane.getColumnIndex(botonActual) == x) {
-                            Button boton = (Button) botonActual;
-
-                            boton.setOnMouseEntered(event -> boton.setBorder(new javafx.scene.layout.Border(
-                                    new javafx.scene.layout.BorderStroke(borderVerde, javafx.scene.layout.BorderStrokeStyle.SOLID,
-                                            new CornerRadii(2), new javafx.scene.layout.BorderWidths(borderWidth)))));
-
-                            boton.setOnMouseExited(event -> boton.setBorder(null));
-
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private void activarBordesTrampaArena() {
-
-        Color bordeRojo = Color.RED;
-        Color borderVerde = Color.GREENYELLOW;
-        double borderWidth = 2.0;
-
-        for (int y = 0; y < 15; y++) {
-            for (int x = 0; x < 15; x++) {
-
-                Parcela parcelaActual = mapa.get(y).get(x);
-                if (!(parcelaActual instanceof Pasarela)) {
-                    for (Node botonActual : root.getChildren()) {
-                        if (GridPane.getRowIndex(botonActual) == y && GridPane.getColumnIndex(botonActual) == x) {
-                            Button boton = (Button) botonActual;
-
-                            boton.setOnMouseEntered(event -> boton.setBorder(new javafx.scene.layout.Border(
-                                    new javafx.scene.layout.BorderStroke(bordeRojo, javafx.scene.layout.BorderStrokeStyle.SOLID,
-                                            new CornerRadii(2), new javafx.scene.layout.BorderWidths(borderWidth)))));
-
-                            boton.setOnMouseExited(event -> boton.setBorder(null));
-
-                            break;
-                        }
-                    }
-                } else {
-                    for (Node botonActual : root.getChildren()) {
-                        if (GridPane.getRowIndex(botonActual) == y && GridPane.getColumnIndex(botonActual) == x) {
-                            Button boton = (Button) botonActual;
-
-                            boton.setOnMouseEntered(event -> boton.setBorder(new javafx.scene.layout.Border(
-                                    new javafx.scene.layout.BorderStroke(borderVerde, javafx.scene.layout.BorderStrokeStyle.SOLID,
-                                            new CornerRadii(2), new javafx.scene.layout.BorderWidths(borderWidth)))));
-
-                            boton.setOnMouseExited(event -> boton.setBorder(null));
-
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
     public void actualizarNombre(){
-        labelNombre.setText("Nombre: " + textoNombre.getText());
+        datosUsuario.update();
     }
 }
