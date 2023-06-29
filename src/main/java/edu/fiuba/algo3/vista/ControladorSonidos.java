@@ -11,8 +11,8 @@ public class ControladorSonidos {
     private Slider sliderMusica;
     private Slider sliderSonidos;
     private MediaPlayer musica;
-    private List listaDeSonidos;
-    public ControladorSonidos( MediaPlayer musica, List sonidos) {
+    private List<AudioClip> listaDeSonidos;
+    public ControladorSonidos( MediaPlayer musica, List<AudioClip> sonidos) {
         this.musica = musica;
         this.listaDeSonidos = sonidos;
     }
@@ -23,7 +23,7 @@ public class ControladorSonidos {
         sliderSonidos.setValue(aux.getVolume() * 100);
     }
 
-    public List devolverSonidos(){
+    public List<AudioClip> devolverSonidos(){
         return listaDeSonidos;
     }
 

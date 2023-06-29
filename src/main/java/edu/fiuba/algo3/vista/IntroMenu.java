@@ -2,42 +2,25 @@ package edu.fiuba.algo3.vista;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import edu.fiuba.algo3.controlador.BotonInicialEventHandler;
 import edu.fiuba.algo3.controlador.BotonIniciarEventHandler;
-import edu.fiuba.algo3.modelo.Parcelas.Largada;
-import edu.fiuba.algo3.modelo.Parcelas.Meta;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
-import edu.fiuba.algo3.modelo.Parcelas.Pasarela;
-import edu.fiuba.algo3.modelo.Parcelas.Rocoso;
-import edu.fiuba.algo3.modelo.Parcelas.Tierra;
-import edu.fiuba.algo3.modelo.Parser.CreadorMapa;
 import edu.fiuba.algo3.modelo.Partida;
 import edu.fiuba.algo3.controlador.BotonOkEventHandler;
 import edu.fiuba.algo3.controlador.NombreEventHandler;
 import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.Defensas.*;
-import edu.fiuba.algo3.modelo.Defensas.Torres.*;
-import edu.fiuba.algo3.modelo.Defensas.Trampas.TrampaArenosa;
-import edu.fiuba.algo3.modelo.Mapa;
-import edu.fiuba.algo3.modelo.Enemigos.*;
-import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -46,46 +29,24 @@ import javafx.scene.media.AudioClip;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.Node;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.StrokeType;
-import javafx.stage.Stage;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 
 
 
 public class IntroMenu {
 
-    private int turno = 0;
     private TextField textoNombre;
     private Button okButton;
     private Button iniButton;
-    private Button volverAJugarButton;
     private Label validationLabel;
 
 
     private Partida partida;
     private Jugador jugador;
     private static MediaPlayer mediaPlayer;
-    private String imagenTorrePlateada = (new File("src/main/resources/image/torrePlateada.png")).toURI().toString();
-    private String imagenTorreBlanca = (new File("src/main/resources/image/torreBlanca.png")).toURI().toString();
-    private String imagenTrampaArenosa = (new File("src/main/resources/image/trampaArenosa.png")).toURI().toString();
-    private String imagenHormiga = (new File("src/main/resources/image/hormiga.png")).toURI().toString();
-    private String imagenArania = (new File("src/main/resources/image/arania.png")).toURI().toString();
-    private String imagenTopo = (new File("src/main/resources/image/topo.png")).toURI().toString();
-    private String imagenTopoEscondido = (new File("src/main/resources/image/topo_escondido.png")).toURI().toString();
-    private String imagenLechuza = (new File("src/main/resources/image/lechuza.png")).toURI().toString();
-    private Alert alert;
     AudioClip sonidoPerder = new AudioClip(new File("src/main/resources/sound/fail.mp3").toURI().toString());
     AudioClip sonidoGanar = new AudioClip(new File("src/main/resources/sound/win.mp3").toURI().toString());
     AudioClip sonidoPonerTorre = new AudioClip(new File("src/main/resources/sound/place.mp3").toURI().toString());
@@ -96,7 +57,6 @@ public class IntroMenu {
     AudioClip sonidoEnter = new AudioClip(new File("src/main/resources/sound/enter.mp3").toURI().toString());
 
     private Button botonInicial;
-    private List<VistaDefensas> listaVistaDefensas;
     List<Parcela> pasarelas;
     List<List<Parcela>> mapa;
     GridPane root;
@@ -113,14 +73,9 @@ public class IntroMenu {
 
         mediaPlayer.play();
 
-        listaVistaDefensas = new ArrayList<>();
-        alert = new Alert(AlertType.INFORMATION);
         partida = new Partida();
         jugador = partida.obtenerJugador();
 
-        labelVida = new Label("Vida: " + jugador.obtenerVidaRestante() + "/20 ");
-        labelCreditos = new Label("Creditos: " + jugador.obtenerCreditosRestantes() + " ");
-      
         String css = "-fx-prompt-text-fill: black;";
         ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/logo.png")).toURI().toString());
         ImageView backgroundImageView = new ImageView((new File("src/main/resources/image/image.png")).toURI().toString());
@@ -181,12 +136,7 @@ public class IntroMenu {
 
         validationLabel = new Label();
 
-        HBox creditos = new HBox();
-        String imagenMoneda = (new File("src/main/resources/image/coin.png")).toURI().toString();
-        ImageView moneda = new ImageView(imagenMoneda);
-        creditos.getChildren().addAll(labelCreditos, moneda);
-
-        List sonidos = new ArrayList<AudioClip>();
+        List<AudioClip> sonidos = new ArrayList<AudioClip>();
         sonidos.add(sonidoGanar);
         sonidos.add(sonidoPerder);
         sonidos.add(sonidoPonerTorre);
@@ -195,7 +145,7 @@ public class IntroMenu {
         sonidos.add(sonidoClick);
         sonidos.add(sonidoEnter);
         ControladorSonidos sliders = new ControladorSonidos(mediaPlayer, sonidos);
-        ContenedorPartida contenedorPartida = new ContenedorPartida(stagePrincipal, partida, jugador, labelVida, vida, labelCreditos, creditos, textoNombre, mediaPlayer, sliders);
+        ContenedorPartida contenedorPartida = new ContenedorPartida(stagePrincipal, partida, jugador, textoNombre, mediaPlayer, sliders);
 
         Scene escenaPartida = new Scene(contenedorPartida);
         BotonIniciarEventHandler botonIniciarEventHandler = new BotonIniciarEventHandler(escenaPartida, stagePrincipal, sliders, sonidoStart);

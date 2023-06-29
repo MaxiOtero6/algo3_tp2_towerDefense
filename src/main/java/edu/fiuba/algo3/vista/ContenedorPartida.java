@@ -34,63 +34,42 @@ import java.util.List;
 
 public class ContenedorPartida extends StackPane {
 
-    private Partida partida;
     private List<List<Parcela>> mapa;
     private HBox enemigosEnParcela;
     private GridPane root;
-    private Button volverAJugarButton;
     private List<Vista> listaVistaDefensas;
-    private Defensa defensaActual = null;
 
     private String imagenTorrePlateada = (new File("src/main/resources/image/torrePlateada.png")).toURI().toString();
     private String imagenTorreBlanca = (new File("src/main/resources/image/torreBlanca.png")).toURI().toString();
     private String imagenTrampaArenosa = (new File("src/main/resources/image/trampaArenosa.png")).toURI().toString();
-    private String imagenHormiga = (new File("src/main/resources/image/hormiga.png")).toURI().toString();
-    private String imagenArania = (new File("src/main/resources/image/arania.png")).toURI().toString();
-    private String imagenTopo = (new File("src/main/resources/image/topo.png")).toURI().toString();
-    private String imagenTopoEscondido = (new File("src/main/resources/image/topo_escondido.png")).toURI().toString();
-    private String imagenLechuza = (new File("src/main/resources/image/lechuza.png")).toURI().toString();
     private String imagenMoneda = (new File("src/main/resources/image/coin.png")).toURI().toString();
-    private MediaPlayer mediaPlayer;
-    private Jugador jugador;
-    private TextField textoNombre;
     private VistaDatosUsuario datosUsuario;
-    private HBox vida;
-    private HBox creditos;
     
 
-    AudioClip sonidoPonerTorre;
-    AudioClip sonidoPonerTrampa;
-    AudioClip sonidoError;
-    AudioClip sonidoClick;
-    AudioClip sonidoGanar;
-    AudioClip sonidoPerder;
-    AudioClip sonidoEnter;
-    Slider sliderMusica;
-    Slider sliderSonidos;
+    private AudioClip sonidoPonerTorre;
+    private AudioClip sonidoPonerTrampa;
+    private AudioClip sonidoError;
+    private AudioClip sonidoClick;
+    private AudioClip sonidoGanar;
+    private AudioClip sonidoPerder;
+    private Slider sliderMusica;
+    private Slider sliderSonidos;
 
 
-    public ContenedorPartida(Stage stagePrincipal, Partida partida, Jugador jugador, Label labelVida, HBox vida, Label labelCreditos, HBox creditos, TextField textoNombre, MediaPlayer mediaPlayer, ControladorSonidos controladorSonidos) {
+    public ContenedorPartida(Stage stagePrincipal, Partida partida, Jugador jugador, TextField textoNombre, MediaPlayer mediaPlayer, ControladorSonidos controladorSonidos) {
 
 
         super();
-        this.partida = partida;
         enemigosEnParcela = new HBox();
-        this.mediaPlayer = mediaPlayer;
-        this.vida = vida;
-        this.creditos = creditos;
-        this.jugador = jugador;
-        this.textoNombre = textoNombre;
         listaVistaDefensas = new ArrayList<Vista>();
 
-        List sonidos = controladorSonidos.devolverSonidos();
+        List<AudioClip> sonidos = controladorSonidos.devolverSonidos();
         sonidoGanar = (AudioClip)sonidos.get(0);
         sonidoPerder = (AudioClip)sonidos.get(1);
         sonidoPonerTorre = (AudioClip)sonidos.get(2);
         sonidoPonerTrampa = (AudioClip)sonidos.get(3);
         sonidoError = (AudioClip)sonidos.get(4);
         sonidoClick = (AudioClip)sonidos.get(5);
-        sonidoEnter = (AudioClip)sonidos.get(6);
 
         //SECCION PARA MOSTRAR ENEMIGOS EN LA PARCELA ACTUAL
         Color bordeClaro = Color.BLANCHEDALMOND;
@@ -128,14 +107,14 @@ public class ContenedorPartida extends StackPane {
         Background background = new Background(backgroundFill);
 
         Label volumenMusica = new Label("Volumen de la musica:");
-        Slider sliderMusica = new Slider(0, 100, 50);
+        sliderMusica = new Slider(0, 100, 50);
         sliderMusica.setValue(mediaPlayer.getVolume() * 100);
         sliderMusica.valueProperty().addListener((observable, oldValue, newValue) -> {
             mediaPlayer.setVolume(sliderMusica.getValue() / 100);
         });
 
         Label volumenSonidos = new Label("Volumen de los sonidos:");
-        Slider sliderSonidos = new Slider(0, 100, 50);
+        sliderSonidos = new Slider(0, 100, 50);
         sliderSonidos.setValue(sonidoClick.getVolume() * 100);
         sliderSonidos.valueProperty().addListener((observable, oldValue, newValue) -> {
             sonidoGanar.setVolume(sliderSonidos.getValue() / 100);
@@ -211,17 +190,12 @@ public class ContenedorPartida extends StackPane {
             }
         }
 
-        BackgroundFill backgroundFill = new BackgroundFill(Color.ORANGE, new CornerRadii(8), Insets.EMPTY);
-        Background background = new Background(backgroundFill);
-        
-        Label volumenMusica = new Label("Volumen de la musica:");
         sliderMusica = new Slider(0, 100, 50);
         controladorSonidos.setSliderMusica(sliderMusica);
         sliderMusica.valueProperty().addListener((observable, oldValue, newValue) -> {
             mediaPlayer.setVolume(sliderMusica.getValue() / 100);
         });
 
-        Label volumenSonidos = new Label("Volumen de los sonidos:");
         sliderSonidos = new Slider(0, 100, 50);
         controladorSonidos.setSliderSonidos(sliderSonidos);
         sliderSonidos.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -231,7 +205,6 @@ public class ContenedorPartida extends StackPane {
             }
         });
 
-        VBox seccionVolumen = new VBox();
         seccionVolumen.setSpacing(10);
         seccionVolumen.setPadding(new Insets(10));
         seccionVolumen.setBackground(background);
@@ -240,9 +213,8 @@ public class ContenedorPartida extends StackPane {
                 new BorderStroke(bordeClaro, BorderStrokeStyle.SOLID,
                         new CornerRadii(6), new BorderWidths(borderWidth))));
 
-        seccionVolumen.getChildren().addAll(volumenMusica, sliderMusica, volumenSonidos, sliderSonidos);
+        //seccionVolumen.getChildren().addAll(volumenMusica, sliderMusica, volumenSonidos, sliderSonidos);
 
-        datosUsuario = new VBox();
         datosUsuario.setSpacing(10);
         datosUsuario.setPadding(new Insets(10));
         datosUsuario.prefWidthProperty().bind(seccionVolumen.widthProperty());
@@ -253,10 +225,6 @@ public class ContenedorPartida extends StackPane {
                 new BorderStroke(bordeClaro, BorderStrokeStyle.SOLID,
                         new CornerRadii(6), new BorderWidths(borderWidth))));
 
-        labelNombre = new Label();
-        //labelVida = new Label("Vida Restante: " + jugador.obtenerVidaRestante() + "/20");
-
-        datosUsuario.getChildren().addAll(labelNombre, vida, creditos);
 
         BackgroundFill backgroundFillAzul = new BackgroundFill(Color.LIGHTBLUE, new CornerRadii(8), Insets.EMPTY);
         Background backgroundAzul = new Background(backgroundFillAzul);
@@ -334,13 +302,6 @@ public class ContenedorPartida extends StackPane {
         precioArena.getChildren().addAll(trampaArenosaTexto, precioArena2);
         arena.getChildren().addAll(imageviewTrampaArena, precioArena);
         botonTrampa.setGraphic(arena);
-        botonTrampa.setOnAction(event -> {
-            sonidoClick.play();
-            if (jugador.obtenerCreditosRestantes() >= 25) {
-                activarBordesTrampaArena();
-                TrampaArenosa trampaCreada = new TrampaArenosa();
-                defensaActual = new TrampaArenosa();
-            }
 
         BotonArenosaEventHandler botonArenosaEventHandler = new BotonArenosaEventHandler(bordesDefensas, jugador,
                 casillaMapaEventHandlerList, sonidoClick, sonidoError);
@@ -387,6 +348,7 @@ public class ContenedorPartida extends StackPane {
 
         this.getChildren().addAll(backgroundImageView, seccionTotal);
     }
+    
 
     public void actualizarNombre(){
         datosUsuario.update();

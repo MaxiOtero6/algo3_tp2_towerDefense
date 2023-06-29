@@ -37,16 +37,21 @@ public class VistaDatosUsuario extends VBox implements Vista {
         labelVida = new Label("Vida Restante: " + jugador.obtenerVidaRestante() + "/20");
         labelCreditos = new Label();
 
+        HBox creditos = new HBox();
+        String imagenMoneda = (new File("src/main/resources/image/coin.png")).toURI().toString();
+        ImageView moneda = new ImageView(imagenMoneda);
+        creditos.getChildren().addAll(labelCreditos, moneda);
+
         HBox vida = new HBox();
         String imagenCorazon = (new File("src/main/resources/image/corazon.png")).toURI().toString();
         ImageView corazon = new ImageView(imagenCorazon);
         vida.getChildren().addAll(labelVida, corazon);
 
-        this.getChildren().addAll(labelNombre, vida, labelCreditos);
+        this.getChildren().addAll(labelNombre, vida, creditos);
     }
     public void update(){
         labelNombre.setText("Nombre: " + textoNombre.getText());
         labelVida.setText("Vida Restante: " + jugador.obtenerVidaRestante() + "/20 ");
-        labelCreditos.setText("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
+        labelCreditos.setText("Creditos Restantes: " + jugador.obtenerCreditosRestantes() + " ");
     }
 }
