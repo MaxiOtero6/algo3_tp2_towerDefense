@@ -51,8 +51,11 @@ public class ContenedorPartida extends StackPane {
     private String imagenLechuza = (new File("src/main/resources/image/lechuza.png")).toURI().toString();
     private MediaPlayer mediaPlayer;
     private Jugador jugador;
+    private Label labelNombre;
     private Label labelVida;
     private Label labelCreditos;
+    private TextField textoNombre;
+    private VBox datosUsuario;
 
     AudioClip sonidoPonerTorre = new AudioClip(new File("src/main/resources/sound/place.mp3").toURI().toString());
     AudioClip sonidoPonerTrampa = new AudioClip(new File("src/main/resources/sound/sand.mp3").toURI().toString());
@@ -63,18 +66,17 @@ public class ContenedorPartida extends StackPane {
     AudioClip sonidoEnter = new AudioClip(new File("src/main/resources/sound/enter.mp3").toURI().toString());
 
 
-    public ContenedorPartida(Stage stagePrincipal, Partida partida, Jugador jugador, Label labelVida, Label labelCreditos, TextField textoNombre){
+    public ContenedorPartida(Stage stagePrincipal, Partida partida, Jugador jugador, Label labelVida, Label labelCreditos, TextField textoNombre, MediaPlayer mediaPlayer) {
 
         super();
         this.partida = partida;
         enemigosEnParcela = new HBox();
-        String musicFile = "src/main/resources/sound/music.wav";
-        Media sound = new Media(new File(musicFile).toURI().toString());
-        mediaPlayer = new MediaPlayer(sound);
+        this.mediaPlayer = mediaPlayer;
 
         this.jugador = jugador;
         this.labelCreditos = labelCreditos;
         this.labelVida = labelVida;
+        this.textoNombre = textoNombre;
 
         //SECCION PARA MOSTRAR ENEMIGOS EN LA PARCELA ACTUAL
         Color bordeClaro = Color.BLANCHEDALMOND;
@@ -101,8 +103,6 @@ public class ContenedorPartida extends StackPane {
         mapa = partida.obtenerMapa();
 
 
-        ContenedorTorre torreAux = new ContenedorTorre();
-
         int SIZE = 15;
         int length = SIZE;
         int width = SIZE;
@@ -111,9 +111,8 @@ public class ContenedorPartida extends StackPane {
         root.setPadding(new Insets(10));
 
 
-
-        for(int y = 0; y < length; y++){
-            for(int x = 0; x < width; x++){
+        for (int y = 0; y < length; y++) {
+            for (int x = 0; x < width; x++) {
 
                 int coordenadaX = x;
                 int coordenaday = y;
@@ -126,23 +125,32 @@ public class ContenedorPartida extends StackPane {
                 Parcela parcelaActual = mapa.get(y).get(x);
 
 
-                if(parcelaActual instanceof Tierra) {casillaMapa.setStyle("-fx-background-color: #699922;");}
-                if(parcelaActual instanceof Largada) {casillaMapa.setStyle("-fx-background-color: #599ed4;");}
-                if(parcelaActual instanceof Meta) {casillaMapa.setStyle("-fx-background-color: #FFA500;");}
-                if(parcelaActual instanceof Rocoso) {casillaMapa.setStyle("-fx-background-color: #38393b;");}
-                if(parcelaActual instanceof Pasarela) {casillaMapa.setStyle("-fx-background-color: #d1b680;");}
-
+                if (parcelaActual instanceof Tierra) {
+                    casillaMapa.setStyle("-fx-background-color: #699922;");
+                }
+                if (parcelaActual instanceof Largada) {
+                    casillaMapa.setStyle("-fx-background-color: #599ed4;");
+                }
+                if (parcelaActual instanceof Meta) {
+                    casillaMapa.setStyle("-fx-background-color: #FFA500;");
+                }
+                if (parcelaActual instanceof Rocoso) {
+                    casillaMapa.setStyle("-fx-background-color: #38393b;");
+                }
+                if (parcelaActual instanceof Pasarela) {
+                    casillaMapa.setStyle("-fx-background-color: #d1b680;");
+                }
 
 
                 listaVistaDefensas = new ArrayList<VistaDefensas>();
                 casillaMapa.setOnAction(event -> {
-                    if(!(defensaActual instanceof NoTorre)){
+                    if (!(defensaActual instanceof NoTorre)) {
 
                         //sound
-                        if((defensaActual instanceof TorreBlanca) && parcelaActual instanceof Tierra){
+                        if ((defensaActual instanceof TorreBlanca) && parcelaActual instanceof Tierra) {
                             sonidoPonerTorre.play();
                         }
-                        if(defensaActual instanceof TrampaArenosa && parcelaActual instanceof Pasarela){
+                        if (defensaActual instanceof TrampaArenosa && parcelaActual instanceof Pasarela) {
                             sonidoPonerTrampa.play();
                         }
                         try {
@@ -154,7 +162,7 @@ public class ContenedorPartida extends StackPane {
                             activarBotones();
 
                             defensaActual = new NoTorre();
-                        } catch (NullPointerException e){
+                        } catch (NullPointerException e) {
                             sonidoError.play();
                         }
 
@@ -203,7 +211,7 @@ public class ContenedorPartida extends StackPane {
 
         seccionVolumen.getChildren().addAll(volumenMusica, sliderMusica, volumenSonidos, sliderSonidos);
 
-        VBox datosUsuario = new VBox();
+        datosUsuario = new VBox();
         datosUsuario.setSpacing(10);
         datosUsuario.setPadding(new Insets(10));
         datosUsuario.prefWidthProperty().bind(seccionVolumen.widthProperty());
@@ -214,10 +222,10 @@ public class ContenedorPartida extends StackPane {
                 new BorderStroke(bordeClaro, BorderStrokeStyle.SOLID,
                         new CornerRadii(6), new BorderWidths(borderWidth))));
 
-        Label label1 = new Label("Nombre: " + textoNombre.getText());
-        labelVida = new Label("Vida Restante: " + jugador.obtenerVidaRestante() + "/20");
+        labelNombre = new Label();
+        //labelVida = new Label("Vida Restante: " + jugador.obtenerVidaRestante() + "/20");
 
-        datosUsuario.getChildren().addAll(label1, labelVida, labelCreditos);
+        datosUsuario.getChildren().addAll(labelNombre, labelVida, labelCreditos);
 
         BackgroundFill backgroundFillAzul = new BackgroundFill(Color.LIGHTBLUE, new CornerRadii(8), Insets.EMPTY);
         Background backgroundAzul = new Background(backgroundFillAzul);
@@ -229,7 +237,7 @@ public class ContenedorPartida extends StackPane {
         botonPlateada.setMinWidth(datosUsuario.getMinWidth());
         botonPlateada.setOnAction(event -> {
             sonidoClick.play();
-            if(jugador.obtenerCreditosRestantes() >= 20){
+            if (jugador.obtenerCreditosRestantes() >= 20) {
                 activarBordesTorres();
                 TorrePlateada torreCreada = new TorrePlateada();
                 defensaActual = new TorrePlateada();
@@ -247,7 +255,7 @@ public class ContenedorPartida extends StackPane {
         botonBlanca.prefWidthProperty().bind(datosUsuario.widthProperty());
         botonBlanca.setOnAction(event -> {
             sonidoClick.play();
-            if(jugador.obtenerCreditosRestantes() >= 10){
+            if (jugador.obtenerCreditosRestantes() >= 10) {
                 activarBordesTorres();
                 TorreBlanca torreCreada = new TorreBlanca();
                 defensaActual = new TorreBlanca();
@@ -265,7 +273,7 @@ public class ContenedorPartida extends StackPane {
         botonTrampa.prefWidthProperty().bind(datosUsuario.widthProperty());
         botonTrampa.setOnAction(event -> {
             sonidoClick.play();
-            if(jugador.obtenerCreditosRestantes() >= 25){
+            if (jugador.obtenerCreditosRestantes() >= 25) {
                 activarBordesTrampaArena();
                 TrampaArenosa trampaCreada = new TrampaArenosa();
                 defensaActual = new TrampaArenosa();
@@ -315,17 +323,18 @@ public class ContenedorPartida extends StackPane {
 
         this.getChildren().addAll(backgroundImageView, seccionTotal);
     }
-    private void activarBotones(){
-        for(int y = 0; y < 15; y++){
-            for(int x = 0; x < 15; x++){
+
+    private void activarBotones() {
+        for (int y = 0; y < 15; y++) {
+            for (int x = 0; x < 15; x++) {
                 int coordenadaX = x;
                 int coordenadaY = y;
 
                 Parcela parcelaActual = mapa.get(y).get(x);
-                if((parcelaActual != null)){
+                if ((parcelaActual != null)) {
                     for (Node botonActual : root.getChildren()) {
                         if (GridPane.getRowIndex(botonActual) == y && GridPane.getColumnIndex(botonActual) == x) {
-                            Button boton = (Button)botonActual;
+                            Button boton = (Button) botonActual;
                             boton.setBorder(null);
                             boton.setOnMouseEntered(event -> mostrarEnemigos(enemigosEnParcela, coordenadaX, coordenadaY));
                             boton.setOnMouseExited(event -> sacarEnemigos(enemigosEnParcela));
@@ -337,16 +346,23 @@ public class ContenedorPartida extends StackPane {
             }
         }
     }
-    private void mostrarEnemigos(HBox enemigosDeParcela, int x, int y){
+
+    private void mostrarEnemigos(HBox enemigosDeParcela, int x, int y) {
         Parcela parcelaActual = mapa.get(y).get(x);
         LinkedList<Enemigo> enemigosEnLaParcela = parcelaActual.devolverEnemigos();
-        for(Enemigo enemigo : enemigosEnLaParcela){
-            if(enemigo instanceof Arania) {enemigosDeParcela.getChildren().add(new ImageView(imagenArania));}
-            if(enemigo instanceof Hormiga) {enemigosDeParcela.getChildren().add(new ImageView(imagenHormiga));}
-            if(enemigo instanceof Lechuza) {enemigosDeParcela.getChildren().add(new ImageView(imagenLechuza));}
-            if(enemigo instanceof Topo) {
-                Topo topoAux = (Topo)enemigo;
-                if(topoAux.esSubterraneo()){
+        for (Enemigo enemigo : enemigosEnLaParcela) {
+            if (enemigo instanceof Arania) {
+                enemigosDeParcela.getChildren().add(new ImageView(imagenArania));
+            }
+            if (enemigo instanceof Hormiga) {
+                enemigosDeParcela.getChildren().add(new ImageView(imagenHormiga));
+            }
+            if (enemigo instanceof Lechuza) {
+                enemigosDeParcela.getChildren().add(new ImageView(imagenLechuza));
+            }
+            if (enemigo instanceof Topo) {
+                Topo topoAux = (Topo) enemigo;
+                if (topoAux.esSubterraneo()) {
                     enemigosDeParcela.getChildren().add(new ImageView(imagenTopoEscondido));
                 } else {
                     enemigosDeParcela.getChildren().add(new ImageView(imagenTopo));
@@ -354,9 +370,11 @@ public class ContenedorPartida extends StackPane {
             }
         }
     }
-    private void sacarEnemigos(HBox enemigosDeParcela){
+
+    private void sacarEnemigos(HBox enemigosDeParcela) {
         enemigosDeParcela.getChildren().clear();
     }
+
     private void ejecutarBotonSkipTurno(Stage stagePrincipal) {
 
         partida.avanzarTurno();
@@ -369,7 +387,7 @@ public class ContenedorPartida extends StackPane {
                 if (imageUrl.equals(imagenHormiga) ||
                         imageUrl.equals(imagenArania) ||
                         imageUrl.equals(imagenTopo) ||
-                        imageUrl.equals(imagenLechuza)||
+                        imageUrl.equals(imagenLechuza) ||
                         imageUrl.equals(imagenTopoEscondido)) {
                     nodesToRemove.add(node);
                 }
@@ -386,10 +404,9 @@ public class ContenedorPartida extends StackPane {
                 root.add(new ImageView(imagenArania), coordenadaX, coordenadaY);
             } else if (enemigoActual instanceof Topo) {
                 Topo topo = (Topo) enemigoActual;
-                if (topo.esSubterraneo()){
+                if (topo.esSubterraneo()) {
                     root.add(new ImageView(imagenTopoEscondido), coordenadaX, coordenadaY);
-                }
-                else{
+                } else {
                     root.add(new ImageView(imagenTopo), coordenadaX, coordenadaY);
                 }
 
@@ -400,12 +417,12 @@ public class ContenedorPartida extends StackPane {
         labelVida.setText("Vida Restante: " + jugador.obtenerVidaRestante() + "/20");
         labelCreditos.setText("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
         //ACTUALIZAR DEFENSAS
-        for (VistaDefensas vista: listaVistaDefensas) {
+        for (VistaDefensas vista : listaVistaDefensas) {
             vista.update();
         }
 
         //ALERTA DE PERDIDA
-        if(jugador.obtenerVidaRestante() <= 0  && jugador.obtenerVidaRestante() < 0){
+        if (jugador.obtenerVidaRestante() <= 0 && jugador.obtenerVidaRestante() < 0) {
             sonidoPerder.play();
             StackPane pantallaFinalPerdida = new StackPane();
             ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/perdiste.png")).toURI().toString());
@@ -429,7 +446,7 @@ public class ContenedorPartida extends StackPane {
             mediaPlayer.stop();
         }
         //ALERTA DE VICTORIA
-        if(partida.obtenerEnemigos().size() == 0 && jugador.obtenerVidaRestante() > 0){
+        if (partida.obtenerEnemigos().size() == 0 && jugador.obtenerVidaRestante() > 0) {
             sonidoGanar.play();
             StackPane pantallaFinalGanar = new StackPane();
             ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/ganaste.png")).toURI().toString());
@@ -442,7 +459,7 @@ public class ContenedorPartida extends StackPane {
             volverAJugarButton.setTranslateY(60);
             volverAJugarButton.setOnAction(event -> {
                 sonidoEnter.play();
-              //  crearUI(stagePrincipal);
+                //  crearUI(stagePrincipal);
             });
 
             pantallaFinalGanar.getChildren().addAll(backgroundImageView, logoAlgoDefense, volverAJugarButton);
@@ -453,20 +470,21 @@ public class ContenedorPartida extends StackPane {
             //mediaPlayer.stop();
         }
     }
-    private void activarBordesTorres(){
+
+    private void activarBordesTorres() {
 
         Color bordeRojo = Color.RED;
         Color borderVerde = Color.GREENYELLOW;
         double borderWidth = 2.0;
 
-        for(int y = 0; y < 15; y++){
-            for(int x = 0; x < 15; x++){
+        for (int y = 0; y < 15; y++) {
+            for (int x = 0; x < 15; x++) {
 
                 Parcela parcelaActual = mapa.get(y).get(x);
-                if(!(parcelaActual instanceof Tierra)){
+                if (!(parcelaActual instanceof Tierra)) {
                     for (Node botonActual : root.getChildren()) {
                         if (GridPane.getRowIndex(botonActual) == y && GridPane.getColumnIndex(botonActual) == x) {
-                            Button boton = (Button)botonActual;
+                            Button boton = (Button) botonActual;
 
                             boton.setOnMouseEntered(event -> boton.setBorder(new javafx.scene.layout.Border(
                                     new javafx.scene.layout.BorderStroke(bordeRojo, javafx.scene.layout.BorderStrokeStyle.SOLID,
@@ -480,7 +498,7 @@ public class ContenedorPartida extends StackPane {
                 } else {
                     for (Node botonActual : root.getChildren()) {
                         if (GridPane.getRowIndex(botonActual) == y && GridPane.getColumnIndex(botonActual) == x) {
-                            Button boton = (Button)botonActual;
+                            Button boton = (Button) botonActual;
 
                             boton.setOnMouseEntered(event -> boton.setBorder(new javafx.scene.layout.Border(
                                     new javafx.scene.layout.BorderStroke(borderVerde, javafx.scene.layout.BorderStrokeStyle.SOLID,
@@ -496,20 +514,20 @@ public class ContenedorPartida extends StackPane {
         }
     }
 
-    private void activarBordesTrampaArena(){
+    private void activarBordesTrampaArena() {
 
         Color bordeRojo = Color.RED;
         Color borderVerde = Color.GREENYELLOW;
         double borderWidth = 2.0;
 
-        for(int y = 0; y < 15; y++){
-            for(int x = 0; x < 15; x++){
+        for (int y = 0; y < 15; y++) {
+            for (int x = 0; x < 15; x++) {
 
                 Parcela parcelaActual = mapa.get(y).get(x);
-                if(!(parcelaActual instanceof Pasarela)){
+                if (!(parcelaActual instanceof Pasarela)) {
                     for (Node botonActual : root.getChildren()) {
                         if (GridPane.getRowIndex(botonActual) == y && GridPane.getColumnIndex(botonActual) == x) {
-                            Button boton = (Button)botonActual;
+                            Button boton = (Button) botonActual;
 
                             boton.setOnMouseEntered(event -> boton.setBorder(new javafx.scene.layout.Border(
                                     new javafx.scene.layout.BorderStroke(bordeRojo, javafx.scene.layout.BorderStrokeStyle.SOLID,
@@ -523,7 +541,7 @@ public class ContenedorPartida extends StackPane {
                 } else {
                     for (Node botonActual : root.getChildren()) {
                         if (GridPane.getRowIndex(botonActual) == y && GridPane.getColumnIndex(botonActual) == x) {
-                            Button boton = (Button)botonActual;
+                            Button boton = (Button) botonActual;
 
                             boton.setOnMouseEntered(event -> boton.setBorder(new javafx.scene.layout.Border(
                                     new javafx.scene.layout.BorderStroke(borderVerde, javafx.scene.layout.BorderStrokeStyle.SOLID,
@@ -537,6 +555,8 @@ public class ContenedorPartida extends StackPane {
                 }
             }
         }
+    }
+    public void actualizarNombre(){
+        labelNombre.setText("Nombre: " + textoNombre.getText());
     }
 }
-

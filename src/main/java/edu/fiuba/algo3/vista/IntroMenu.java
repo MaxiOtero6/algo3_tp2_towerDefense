@@ -179,7 +179,7 @@ public class IntroMenu {
 
         validationLabel = new Label();
 
-        ContenedorPartida contenedorPartida = new ContenedorPartida(stagePrincipal, partida, jugador, labelVida, labelCreditos, textoNombre);
+        ContenedorPartida contenedorPartida = new ContenedorPartida(stagePrincipal, partida, jugador, labelVida, labelCreditos, textoNombre, mediaPlayer);
         Scene escenaPartida = new Scene(contenedorPartida);
         BotonIniciarEventHandler botonIniciarEventHandler = new BotonIniciarEventHandler(escenaPartida, stagePrincipal);
 
@@ -206,7 +206,7 @@ public class IntroMenu {
         NombreEventHandler nombreEventHandler = new NombreEventHandler(okButton);
         textoNombre.setOnKeyPressed(nombreEventHandler);
 
-        BotonOkEventHandler botonOkEventHandler = new BotonOkEventHandler(textoNombre, validationLabel, inicio, okButton, iniButton, sonidoEnter);
+        BotonOkEventHandler botonOkEventHandler = new BotonOkEventHandler(textoNombre, validationLabel, inicio, okButton, iniButton, sonidoEnter, contenedorPartida);
         okButton.setOnAction(botonOkEventHandler);
 
         inicio.getChildren().addAll(logoAlgoDefense, botonInicial);
