@@ -3,7 +3,6 @@ package edu.fiuba.algo3.modelo;
 import java.util.List;
 
 import edu.fiuba.algo3.modelo.Defensas.Defensa;
-import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 
 public class Mapa {

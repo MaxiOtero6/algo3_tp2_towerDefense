@@ -15,17 +15,12 @@ import com.fasterxml.jackson.databind.*;
 import edu.fiuba.algo3.modelo.Parser.CreadorEnemigos;
 import edu.fiuba.algo3.modelo.Parser.CreadorMapa;
 import edu.fiuba.algo3.modelo.Parser.ParserJSON;
-import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorrePlateada;
 import edu.fiuba.algo3.modelo.Enemigos.*;
 import edu.fiuba.algo3.modelo.Errores.GanarPartidaError;
 import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
 import edu.fiuba.algo3.modelo.Parcelas.*;
-import edu.fiuba.algo3.modelo.Parcelas.Pasarela.*;
-import edu.fiuba.algo3.modelo.Parcelas.Tierra.*;
-
-
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;

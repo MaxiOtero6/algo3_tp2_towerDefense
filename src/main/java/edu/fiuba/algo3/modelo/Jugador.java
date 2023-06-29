@@ -1,14 +1,11 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Errores.PerderPartidaError;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class Jugador {
     private Creditos creditos;
     private int vida;
     private String nombre;
-    private static final Logger logger = LogManager.getLogger(Jugador.class);
 
     public Jugador()
     {

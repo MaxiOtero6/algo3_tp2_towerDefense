@@ -1,17 +1,9 @@
 package edu.fiuba.algo3;
 
-import java.io.File;
-
 import edu.fiuba.algo3.vista.IntroMenu;
 import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
 
 /**
  * JavaFX App

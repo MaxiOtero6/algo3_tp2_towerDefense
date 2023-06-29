@@ -1,14 +1,10 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.controlador.VolverAJugarBotonEventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-
-import java.util.Stack;
 
 public class EscenaFinalDePartida extends StackPane{
 

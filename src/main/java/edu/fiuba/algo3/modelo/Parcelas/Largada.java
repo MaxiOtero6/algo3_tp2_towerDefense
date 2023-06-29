@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo.Parcelas;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import edu.fiuba.algo3.modelo.Defensas.Defensa;

@@ -13,7 +13,6 @@ import java.util.List;
 
 public class VistaEnemigos implements Vista{
 
-    private Enemigo enemigo;
     private GridPane root;
     private Partida partida;
 

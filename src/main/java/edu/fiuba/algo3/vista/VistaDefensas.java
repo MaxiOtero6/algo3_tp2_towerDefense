@@ -2,7 +2,6 @@ package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.Defensas.Defensa;
 import edu.fiuba.algo3.modelo.Defensas.Salud.Destruida;
-import edu.fiuba.algo3.modelo.Defensas.Salud.Operativa;
 import edu.fiuba.algo3.modelo.Defensas.Torres.EstadoDesactivado;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
 import edu.fiuba.algo3.modelo.Defensas.Torres.TorrePlateada;
@@ -11,8 +10,6 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.media.AudioClip;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;

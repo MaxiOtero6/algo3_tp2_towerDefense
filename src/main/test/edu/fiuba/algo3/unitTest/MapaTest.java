@@ -1,11 +1,7 @@
 package edu.fiuba.algo3.unitTest;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,15 +11,9 @@ import org.junit.jupiter.api.Test;
 
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.SingleLogger;
-import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
-import edu.fiuba.algo3.modelo.Defensas.Torres.TorreBlanca;
-import edu.fiuba.algo3.modelo.Errores.TerrenoDeConstruccionInvalidoError;
-import edu.fiuba.algo3.modelo.Parcelas.Largada;
-import edu.fiuba.algo3.modelo.Parcelas.Meta;
 import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela;
 import edu.fiuba.algo3.modelo.Parcelas.Rocoso;
-import edu.fiuba.algo3.modelo.Parcelas.Tierra;
 
 public class MapaTest {
     @BeforeEach
