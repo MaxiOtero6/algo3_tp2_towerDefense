@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class VistaDefensas {
+public class VistaDefensas implements Vista{
 
     private String imagenTorreBlanca = (new File("src/main/resources/image/torreBlanca.png")).toURI().toString();
     private String imagenTorrePlateada = (new File("src/main/resources/image/torrePlateada.png")).toURI().toString();
