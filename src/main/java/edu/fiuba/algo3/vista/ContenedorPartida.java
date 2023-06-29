@@ -135,8 +135,6 @@ public class ContenedorPartida extends StackPane {
                 new BorderStroke(bordeClaro, BorderStrokeStyle.SOLID,
                         new CornerRadii(6), new BorderWidths(borderWidth))));
 
-        seccionVolumen.getChildren().addAll(volumenMusica, sliderMusica, volumenSonidos, sliderSonidos);
-
         BordesDefensas bordesDefensas = new BordesDefensas(root, mapa, enemigosEnParcela);
         datosUsuario = new VistaDatosUsuario(seccionVolumen, bordeClaro, jugador, textoNombre);
         VistaEnemigos vistaEnemigos = new VistaEnemigos(root, partida);
@@ -205,15 +203,7 @@ public class ContenedorPartida extends StackPane {
             }
         });
 
-        seccionVolumen.setSpacing(10);
-        seccionVolumen.setPadding(new Insets(10));
-        seccionVolumen.setBackground(background);
-
-        seccionVolumen.setBorder(new Border(
-                new BorderStroke(bordeClaro, BorderStrokeStyle.SOLID,
-                        new CornerRadii(6), new BorderWidths(borderWidth))));
-
-        //seccionVolumen.getChildren().addAll(volumenMusica, sliderMusica, volumenSonidos, sliderSonidos);
+        seccionVolumen.getChildren().addAll(volumenMusica, sliderMusica, volumenSonidos, sliderSonidos);
 
         datosUsuario.setSpacing(10);
         datosUsuario.setPadding(new Insets(10));
