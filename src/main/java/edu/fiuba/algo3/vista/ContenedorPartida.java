@@ -229,7 +229,7 @@ public class ContenedorPartida extends StackPane {
         ImageView imagenMonedaView1 = new ImageView(imagenMoneda);
         ImageView imageviewTorrePlateada = new ImageView(imagenTorrePlateada);
         Label torrePlateadaTexto = new Label("Torre Plateada");
-        Label precioPlateadaTexto = new Label("Costo: 25 ");
+        Label precioPlateadaTexto = new Label("Costo: 20 ");
 
         precioPlat2.getChildren().addAll(precioPlateadaTexto, imagenMonedaView1);
  

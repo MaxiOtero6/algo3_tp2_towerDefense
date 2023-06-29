@@ -51,7 +51,7 @@ public class VistaDatosUsuario extends VBox implements Vista {
     }
     public void update(){
         labelNombre.setText("Nombre: " + textoNombre.getText());
-        labelVida.setText("Vida Restante: " + jugador.obtenerVidaRestante() + "/20 ");
-        labelCreditos.setText("Creditos Restantes: " + jugador.obtenerCreditosRestantes() + " ");
+        labelVida.setText("Vida: " + jugador.obtenerVidaRestante() + "/20 ");
+        labelCreditos.setText("Creditos: " + jugador.obtenerCreditosRestantes() + " ");
     }
 }
