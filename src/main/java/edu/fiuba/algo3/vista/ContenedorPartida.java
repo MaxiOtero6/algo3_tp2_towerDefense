@@ -435,7 +435,8 @@ public class ContenedorPartida extends StackPane {
             volverAJugarButton.setTranslateY(60);
             volverAJugarButton.setOnAction(event -> {
                 sonidoEnter.play();
-                //crearUI(stagePrincipal);
+                IntroMenu intro = new IntroMenu();
+                intro.crearUI(stagePrincipal);
             });
 
             pantallaFinalPerdida.getChildren().addAll(backgroundImageView, logoAlgoDefense, volverAJugarButton);
@@ -459,7 +460,8 @@ public class ContenedorPartida extends StackPane {
             volverAJugarButton.setTranslateY(60);
             volverAJugarButton.setOnAction(event -> {
                 sonidoEnter.play();
-                //  crearUI(stagePrincipal);
+                IntroMenu intro = new IntroMenu();
+                intro.crearUI(stagePrincipal);
             });
 
             pantallaFinalGanar.getChildren().addAll(backgroundImageView, logoAlgoDefense, volverAJugarButton);
@@ -467,7 +469,7 @@ public class ContenedorPartida extends StackPane {
             Scene escenaInicial = new Scene(pantallaFinalGanar, 800, 600);
             stagePrincipal.setTitle("Terminó la partida!");
             stagePrincipal.setScene(escenaInicial);
-            //mediaPlayer.stop();
+            mediaPlayer.stop();
         }
     }
 
