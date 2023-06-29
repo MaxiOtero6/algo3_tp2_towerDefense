@@ -8,6 +8,7 @@ import edu.fiuba.algo3.modelo.Parcelas.Parcela;
 import edu.fiuba.algo3.modelo.Parcelas.Pasarela;
 import edu.fiuba.algo3.modelo.Parcelas.Tierra;
 import edu.fiuba.algo3.modelo.Partida;
+import edu.fiuba.algo3.vista.BordesDefensas;
 import edu.fiuba.algo3.vista.ContenedorPartida;
 import edu.fiuba.algo3.vista.Vista;
 import edu.fiuba.algo3.vista.VistaDefensas;
@@ -33,11 +34,12 @@ public class CasillaMapaEventHandler implements EventHandler<ActionEvent> {
     private AudioClip sonidoTorre;
     private AudioClip sonidoTrampa;
     private AudioClip sonidoError;
+    private BordesDefensas borde;
 
     
     public CasillaMapaEventHandler(Parcela parcela, GridPane root, int coordenadaX, int coordenadaY, Partida partida,
                                    AudioClip sonidoTorre, AudioClip sonidoTrampa, AudioClip sonidoError,
-                                   BotonSkipEventHandler botonSkipEventHandler){
+                                   BotonSkipEventHandler botonSkipEventHandler, BordesDefensas borde){
         this.parcela = parcela;
         this.defensa = new NoTorre();
         this.sonidoTorre = sonidoTorre;
@@ -47,8 +49,7 @@ public class CasillaMapaEventHandler implements EventHandler<ActionEvent> {
         this.coordenadaX = coordenadaX;
         this. coordenadaY = coordenadaY;
         this.partida = partida;
-        this.botonSkipEventHandler = botonSkipEventHandler;
-
+        this.borde = borde;
 
         this.botonSkipEventHandler = botonSkipEventHandler;
     }
@@ -68,7 +69,7 @@ public class CasillaMapaEventHandler implements EventHandler<ActionEvent> {
                 VistaDefensas vistaDefensa = new VistaDefensas(root, defensa);
                 vistaDefensa.dibujar();
                 botonSkipEventHandler.agregarDefensa(vistaDefensa);
-
+                borde.activarBotones();
                 defensa = new NoTorre();
             } catch (NullPointerException e){
                 sonidoError.play();
