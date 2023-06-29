@@ -359,4 +359,5 @@ ____________
 
 <br><br>
 
+<img src="../diagrams/packages/Diagrama%20de%20paquetes.png">
 
