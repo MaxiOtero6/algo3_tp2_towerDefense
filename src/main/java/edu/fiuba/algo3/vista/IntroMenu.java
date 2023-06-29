@@ -66,6 +66,7 @@ import javafx.scene.control.Alert.AlertType;
 public class IntroMenu {
 
     private int turno = 0;
+    private Defensa defensaActual = null;
     private TextField textoNombre;
     private Button okButton;
     private Button iniButton;
@@ -346,9 +347,6 @@ public class IntroMenu {
 
         //Mapa getter
         mapa = partida.obtenerMapa();
-
-        
-        ContenedorTorre torreAux = new ContenedorTorre();
         
         int SIZE = 15;
         int length = SIZE;
@@ -356,8 +354,6 @@ public class IntroMenu {
         
         root = new GridPane();
         root.setPadding(new Insets(10));
-
-       
 
         for(int y = 0; y < length; y++){
             for(int x = 0; x < width; x++){
@@ -382,29 +378,28 @@ public class IntroMenu {
                 
 
                 casillaMapa.setOnAction(event -> {
-                    if(!torreAux.puseDefensa){
-                        Defensa torreActual = torreAux.getTorre();
-                        //sound
-                        if((torreActual instanceof TorrePlateada || torreActual instanceof TorreBlanca) && parcelaActual instanceof Tierra){
+                    if(!(defensaActual instanceof NoTorre)){
+                        if((defensaActual instanceof TorreBlanca) && parcelaActual instanceof Tierra){
                             sonidoPonerTorre.play();
                         }
-                        if(torreActual instanceof TrampaArenosa && parcelaActual instanceof Pasarela){
+                        if(defensaActual instanceof TrampaArenosa && parcelaActual instanceof Pasarela){
                             sonidoPonerTrampa.play();
                         }
                         try {
-                            partida.construirDefensa(torreActual, coordenadaX, coordenaday);
-                            VistaDefensas vistaDefensa = new VistaDefensas(root, torreActual);
+                            partida.construirDefensa(defensaActual, coordenadaX, coordenaday);
+
+                            VistaDefensas vistaDefensa = new VistaDefensas(root, defensaActual);
                             vistaDefensa.dibujar();
-                            torreAux.ponerTorre();
                             listaVistaDefensas.add(vistaDefensa);
                             ejecutarBotonSkipTurno(stagePrincipal);
                             activarBotones();
+
+                            defensaActual = new NoTorre();
+
                         } catch (NullPointerException e){
                             sonidoError.play();
                         }
-
                     }
-
                 });
 
                 casillaMapa.setOnMouseEntered(event -> mostrarEnemigos(enemigosEnParcela, coordenadaX, coordenaday));
@@ -477,8 +472,7 @@ public class IntroMenu {
             sonidoClick.play();
             if(jugador.obtenerCreditosRestantes() >= 20){
                 activarBordesTorres();
-                TorrePlateada torreCreada = new TorrePlateada();
-                torreAux.setTorre(torreCreada);
+                defensaActual = new TorrePlateada();
             }
         });
 
@@ -495,8 +489,8 @@ public class IntroMenu {
             sonidoClick.play();
             if(jugador.obtenerCreditosRestantes() >= 10){
                 activarBordesTorres();
-                TorreBlanca torreCreada = new TorreBlanca();
-                torreAux.setTorre(torreCreada);
+                defensaActual = new TorreBlanca();
+                //torreAux.setTorre(torreCreada);
             }    
         });
 
@@ -513,8 +507,8 @@ public class IntroMenu {
             sonidoClick.play();
             if(jugador.obtenerCreditosRestantes() >= 25){
                 activarBordesTrampaArena();
-                TrampaArenosa trampaCreada = new TrampaArenosa();
-                torreAux.setTorre(trampaCreada);
+                defensaActual = new TrampaArenosa();
+                //torreAux.setTorre(trampaCreada);
             }
         
         });
@@ -567,28 +561,6 @@ public class IntroMenu {
         stagePrincipal.setScene(scene);
         stagePrincipal.show();
     }
-
-    class ContenedorTorre {
-    private Defensa defensa;
-    public boolean puseDefensa = false;
-
-    public Defensa getTorre() {
-        return defensa;
-    }
-
-    public void setTorre(Defensa defensa) {
-        this.defensa = defensa;
-        puseDefensa = false;
-    }
-
-    public void ponerTorre() {
-        puseDefensa = true;
-    }
-
-    public boolean puseTorre() {
-        return puseDefensa;
-    }
-}
 
     private void activarBordesTorres(){
 
