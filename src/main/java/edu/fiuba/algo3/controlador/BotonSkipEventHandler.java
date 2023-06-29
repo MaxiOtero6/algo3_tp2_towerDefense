@@ -21,22 +21,25 @@ import java.util.List;
 
 public class BotonSkipEventHandler implements EventHandler<ActionEvent> {
 
-    AudioClip sonidoClick = new AudioClip(new File("src/main/resources/sound/click.mp3").toURI().toString());
-    AudioClip sonidoGanar = new AudioClip(new File("src/main/resources/sound/win.mp3").toURI().toString());
-    AudioClip sonidoPerder = new AudioClip(new File("src/main/resources/sound/fail.mp3").toURI().toString());
-    AudioClip sonidoEnter = new AudioClip(new File("src/main/resources/sound/enter.mp3").toURI().toString());
+    private AudioClip sonidoClick;
+    private AudioClip sonidoGanar;
+    private AudioClip sonidoPerder;
 
     private List<Vista> vistas;
     private Partida partida;
     private Jugador jugador;
     private MediaPlayer mediaPlayer;
     private Stage  stage;
-    public BotonSkipEventHandler(List<Vista> vistas, Partida partida, MediaPlayer mediaPlayer, Stage  stage){
+    public BotonSkipEventHandler(List<Vista> vistas, Partida partida, MediaPlayer mediaPlayer, Stage  stage,
+                                 AudioClip sonidoClick, AudioClip sonidoGanar, AudioClip sonidoPerder){
         this.vistas = vistas;
         this.partida = partida;
         this.jugador = partida.obtenerJugador();
         this.mediaPlayer = mediaPlayer;
         this.stage = stage;
+        this.sonidoClick = sonidoClick;
+        this.sonidoGanar = sonidoGanar;
+        this.sonidoPerder = sonidoPerder;
     }
     @Override
     public void handle(ActionEvent actionEvent){

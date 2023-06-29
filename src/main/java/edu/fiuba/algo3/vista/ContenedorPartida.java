@@ -140,7 +140,8 @@ public class ContenedorPartida extends StackPane {
         VistaEnemigos vistaEnemigos = new VistaEnemigos(root, partida);
         listaVistaDefensas.add(datosUsuario);
         listaVistaDefensas.add(vistaEnemigos);
-        BotonSkipEventHandler botonSkipEventHandler = new BotonSkipEventHandler(listaVistaDefensas, partida, mediaPlayer, stagePrincipal);
+        BotonSkipEventHandler botonSkipEventHandler = new BotonSkipEventHandler(listaVistaDefensas, partida, mediaPlayer,
+                stagePrincipal, sonidoClick, sonidoGanar, sonidoPerder);
 
 
         List<CasillaMapaEventHandler> casillaMapaEventHandlerList = new ArrayList<>();
