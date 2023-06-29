@@ -26,24 +26,13 @@ public class BordesDefensas {
 
     private GridPane root;
     private List<List<Parcela>> mapa;
-    HBox enemigosEnParcela;
-    public BordesDefensas(GridPane root, List<List<Parcela>> mapa){
+    private HBox enemigosEnParcela;
+    public BordesDefensas(GridPane root, List<List<Parcela>> mapa, HBox enemigoEnParcela){
         this.root = root;
         this.mapa = mapa;
 
-        enemigosEnParcela = new HBox();
-        enemigosEnParcela.setSpacing(10);
-        enemigosEnParcela.setPadding(new Insets(10));
-        enemigosEnParcela.setAlignment(Pos.CENTER);
-        enemigosEnParcela.setPrefHeight(75);
+        this.enemigosEnParcela = enemigoEnParcela;
 
-        BackgroundFill backgroundFillEnemigos = new BackgroundFill(Color.ORANGE, new CornerRadii(8), Insets.EMPTY);
-        Background backgroundEnemigos = new Background(backgroundFillEnemigos);
-        enemigosEnParcela.setBackground(backgroundEnemigos);
-
-        enemigosEnParcela.setBorder(new Border(
-                new BorderStroke(Color.BLANCHEDALMOND, BorderStrokeStyle.SOLID,
-                        new CornerRadii(6), new BorderWidths(2.0))));
     }
     public void activarBordesTorres() {
 
@@ -141,8 +130,8 @@ public class BordesDefensas {
                         if (GridPane.getRowIndex(botonActual) == y && GridPane.getColumnIndex(botonActual) == x) {
                             Button boton = (Button) botonActual;
                             boton.setBorder(null);
-                            boton.setOnMouseEntered(event -> mostrarEnemigos(enemigosEnParcela, coordenadaX, coordenadaY));
-                            boton.setOnMouseExited(event -> sacarEnemigos(enemigosEnParcela));
+                            boton.setOnMouseEntered(event -> mostrarEnemigos(coordenadaX, coordenadaY));
+                            boton.setOnMouseExited(event -> sacarEnemigos());
 
                             break;
                         }
@@ -152,31 +141,31 @@ public class BordesDefensas {
         }
     }
 
-    private void mostrarEnemigos(HBox enemigosDeParcela, int x, int y) {
+    public void mostrarEnemigos(int x, int y) {
         Parcela parcelaActual = mapa.get(y).get(x);
         LinkedList<Enemigo> enemigosEnLaParcela = parcelaActual.devolverEnemigos();
         for (Enemigo enemigo : enemigosEnLaParcela) {
             if (enemigo instanceof Arania) {
-                enemigosDeParcela.getChildren().add(new ImageView(imagenArania));
+                enemigosEnParcela.getChildren().add(new ImageView(imagenArania));
             }
             if (enemigo instanceof Hormiga) {
-                enemigosDeParcela.getChildren().add(new ImageView(imagenHormiga));
+                enemigosEnParcela.getChildren().add(new ImageView(imagenHormiga));
             }
             if (enemigo instanceof Lechuza) {
-                enemigosDeParcela.getChildren().add(new ImageView(imagenLechuza));
+                enemigosEnParcela.getChildren().add(new ImageView(imagenLechuza));
             }
             if (enemigo instanceof Topo) {
                 Topo topoAux = (Topo) enemigo;
                 if (topoAux.esSubterraneo()) {
-                    enemigosDeParcela.getChildren().add(new ImageView(imagenTopoEscondido));
+                    enemigosEnParcela.getChildren().add(new ImageView(imagenTopoEscondido));
                 } else {
-                    enemigosDeParcela.getChildren().add(new ImageView(imagenTopo));
+                    enemigosEnParcela.getChildren().add(new ImageView(imagenTopo));
                 }
             }
         }
     }
 
-    private void sacarEnemigos(HBox enemigosDeParcela) {
-        enemigosDeParcela.getChildren().clear();
+    public void sacarEnemigos() {
+        this.enemigosEnParcela.getChildren().clear();
     }
 }

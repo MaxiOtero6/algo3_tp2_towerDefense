@@ -9,16 +9,12 @@ import edu.fiuba.algo3.modelo.Parcelas.Pasarela;
 import edu.fiuba.algo3.modelo.Parcelas.Tierra;
 import edu.fiuba.algo3.modelo.Partida;
 import edu.fiuba.algo3.vista.BordesDefensas;
-import edu.fiuba.algo3.vista.ContenedorPartida;
-import edu.fiuba.algo3.vista.Vista;
 import edu.fiuba.algo3.vista.VistaDefensas;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.layout.GridPane;
 import javafx.scene.media.AudioClip;
-import javafx.stage.Stage;
 
-import java.util.List;
 
 public class CasillaMapaEventHandler implements EventHandler<ActionEvent> {
 

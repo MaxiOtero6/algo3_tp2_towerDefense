@@ -141,7 +141,7 @@ public class ContenedorPartida extends StackPane {
 
         seccionVolumen.getChildren().addAll(volumenMusica, sliderMusica, volumenSonidos, sliderSonidos);
 
-        BordesDefensas bordesDefensas = new BordesDefensas(root, mapa);
+        BordesDefensas bordesDefensas = new BordesDefensas(root, mapa, enemigosEnParcela);
         datosUsuario = new VistaDatosUsuario(seccionVolumen, bordeClaro, jugador, textoNombre);
         VistaEnemigos vistaEnemigos = new VistaEnemigos(root, partida);
         listaVistaDefensas.add(datosUsuario);
@@ -181,53 +181,18 @@ public class ContenedorPartida extends StackPane {
                 }
 
 
-
-
                 CasillaMapaEventHandler casillaMapaEventHandler = new CasillaMapaEventHandler(parcelaActual, root, coordenadaX,
                         coordenaday, partida, sonidoPonerTorre, sonidoPonerTrampa, sonidoError, botonSkipEventHandler, bordesDefensas);
                 casillaMapaEventHandlerList.add(casillaMapaEventHandler);
                 casillaMapa.setOnAction(casillaMapaEventHandler);
-//                        (event -> {
-//                    if (!(defensaActual instanceof NoTorre)) {
-//
-//                        //sound
-//                        if ((defensaActual instanceof TorreBlanca) && parcelaActual instanceof Tierra) {
-//                            sonidoPonerTorre.play();
-//                        }
-//                        if (defensaActual instanceof TrampaArenosa && parcelaActual instanceof Pasarela) {
-//                            sonidoPonerTrampa.play();
-//                        }
-//                        try {
-//                            partida.construirDefensa(defensaActual, coordenadaX, coordenaday);
-//                            VistaDefensas vistaDefensa = new VistaDefensas(root, defensaActual);
-//                            vistaDefensa.dibujar();
-//                            listaVistaDefensas.add(vistaDefensa);
-//                            ejecutarBotonSkipTurno(stagePrincipal);
-//                            activarBotones();
-//
-//                            defensaActual = new NoTorre();
-//                        } catch (NullPointerException e) {
-//                            sonidoError.play();
-//                        }
-//
-//                    }
-//
-//                });
 
-                casillaMapa.setOnMouseEntered(event -> mostrarEnemigos(enemigosEnParcela, coordenadaX, coordenaday));
-                casillaMapa.setOnMouseExited(event -> sacarEnemigos(enemigosEnParcela));
+                casillaMapa.setOnMouseEntered(event -> bordesDefensas.mostrarEnemigos(coordenadaX, coordenaday));
+                casillaMapa.setOnMouseExited(event -> bordesDefensas.sacarEnemigos());
 
                 root.add(casillaMapa, x, y);
 
             }
         }
-
-
-
-
-
-
-
 
 
 
@@ -283,10 +248,6 @@ public class ContenedorPartida extends StackPane {
 
 
         botonSkipTurno.setOnAction(botonSkipEventHandler);
-//                event -> {
-//            sonidoClick.play();
-//            ejecutarBotonSkipTurno(stagePrincipal);
-//        });
 
         botonSkipTurno.setBackground(backgroundAzul);
         botonSkipTurno.setBorder(new Border(
@@ -318,197 +279,6 @@ public class ContenedorPartida extends StackPane {
         this.getChildren().addAll(backgroundImageView, seccionTotal);
     }
 
-    public void activarBotones() {
-        for (int y = 0; y < 15; y++) {
-            for (int x = 0; x < 15; x++) {
-                int coordenadaX = x;
-                int coordenadaY = y;
-
-                Parcela parcelaActual = mapa.get(y).get(x);
-                if ((parcelaActual != null)) {
-                    for (Node botonActual : root.getChildren()) {
-                        if (GridPane.getRowIndex(botonActual) == y && GridPane.getColumnIndex(botonActual) == x) {
-                            Button boton = (Button) botonActual;
-                            boton.setBorder(null);
-                            boton.setOnMouseEntered(event -> mostrarEnemigos(enemigosEnParcela, coordenadaX, coordenadaY));
-                            boton.setOnMouseExited(event -> sacarEnemigos(enemigosEnParcela));
-
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private void mostrarEnemigos(HBox enemigosDeParcela, int x, int y) {
-        Parcela parcelaActual = mapa.get(y).get(x);
-        LinkedList<Enemigo> enemigosEnLaParcela = parcelaActual.devolverEnemigos();
-        for (Enemigo enemigo : enemigosEnLaParcela) {
-            if (enemigo instanceof Arania) {
-                enemigosDeParcela.getChildren().add(new ImageView(imagenArania));
-            }
-            if (enemigo instanceof Hormiga) {
-                enemigosDeParcela.getChildren().add(new ImageView(imagenHormiga));
-            }
-            if (enemigo instanceof Lechuza) {
-                enemigosDeParcela.getChildren().add(new ImageView(imagenLechuza));
-            }
-            if (enemigo instanceof Topo) {
-                Topo topoAux = (Topo) enemigo;
-                if (topoAux.esSubterraneo()) {
-                    enemigosDeParcela.getChildren().add(new ImageView(imagenTopoEscondido));
-                } else {
-                    enemigosDeParcela.getChildren().add(new ImageView(imagenTopo));
-                }
-            }
-        }
-    }
-
-    private void sacarEnemigos(HBox enemigosDeParcela) {
-        enemigosDeParcela.getChildren().clear();
-    }
-
-    public void ejecutarBotonSkipTurno(Stage stagePrincipal) {
-
-
-        //ALERTA DE PERDIDA
-        if (jugador.obtenerVidaRestante() <= 0 && jugador.obtenerVidaRestante() < 0) {
-            sonidoPerder.play();
-            StackPane pantallaFinalPerdida = new StackPane();
-            ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/perdiste.png")).toURI().toString());
-            ImageView backgroundImageView = new ImageView((new File("src/main/resources/image/imagenPerder.png")).toURI().toString());
-            backgroundImageView.fitWidthProperty().bind(stagePrincipal.widthProperty());
-            backgroundImageView.fitHeightProperty().bind(stagePrincipal.heightProperty());
-
-            volverAJugarButton = new Button("Volver a jugar");
-            volverAJugarButton.setStyle("-fx-background-color: #FFA500;");
-            volverAJugarButton.setTranslateY(60);
-            volverAJugarButton.setOnAction(event -> {
-                sonidoEnter.play();
-                IntroMenu intro = new IntroMenu();
-                intro.crearUI(stagePrincipal);
-            });
-
-            pantallaFinalPerdida.getChildren().addAll(backgroundImageView, logoAlgoDefense, volverAJugarButton);
-
-            Scene escenaInicial = new Scene(pantallaFinalPerdida, 800, 600);
-            stagePrincipal.setTitle("Terminó la partida!");
-            stagePrincipal.setScene(escenaInicial);
-            mediaPlayer.stop();
-        }
-        //ALERTA DE VICTORIA
-        if (partida.obtenerEnemigos().size() == 0 && jugador.obtenerVidaRestante() > 0) {
-            sonidoGanar.play();
-            StackPane pantallaFinalGanar = new StackPane();
-            ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/ganaste.png")).toURI().toString());
-            ImageView backgroundImageView = new ImageView((new File("src/main/resources/image/imagenGanar.png")).toURI().toString());
-            backgroundImageView.fitWidthProperty().bind(stagePrincipal.widthProperty());
-            backgroundImageView.fitHeightProperty().bind(stagePrincipal.heightProperty());
-
-            volverAJugarButton = new Button("Volver a jugar");
-            volverAJugarButton.setStyle("-fx-background-color: #FFA500;");
-            volverAJugarButton.setTranslateY(60);
-            volverAJugarButton.setOnAction(event -> {
-                sonidoEnter.play();
-                IntroMenu intro = new IntroMenu();
-                intro.crearUI(stagePrincipal);
-            });
-
-            pantallaFinalGanar.getChildren().addAll(backgroundImageView, logoAlgoDefense, volverAJugarButton);
-
-            Scene escenaInicial = new Scene(pantallaFinalGanar, 800, 600);
-            stagePrincipal.setTitle("Terminó la partida!");
-            stagePrincipal.setScene(escenaInicial);
-            mediaPlayer.stop();
-        }
-    }
-
-    private void activarBordesTorres() {
-
-        Color bordeRojo = Color.RED;
-        Color borderVerde = Color.GREENYELLOW;
-        double borderWidth = 2.0;
-
-        for (int y = 0; y < 15; y++) {
-            for (int x = 0; x < 15; x++) {
-
-                Parcela parcelaActual = mapa.get(y).get(x);
-                if (!(parcelaActual instanceof Tierra)) {
-                    for (Node botonActual : root.getChildren()) {
-                        if (GridPane.getRowIndex(botonActual) == y && GridPane.getColumnIndex(botonActual) == x) {
-                            Button boton = (Button) botonActual;
-
-                            boton.setOnMouseEntered(event -> boton.setBorder(new javafx.scene.layout.Border(
-                                    new javafx.scene.layout.BorderStroke(bordeRojo, javafx.scene.layout.BorderStrokeStyle.SOLID,
-                                            new CornerRadii(2), new javafx.scene.layout.BorderWidths(borderWidth)))));
-
-                            boton.setOnMouseExited(event -> boton.setBorder(null));
-
-                            break;
-                        }
-                    }
-                } else {
-                    for (Node botonActual : root.getChildren()) {
-                        if (GridPane.getRowIndex(botonActual) == y && GridPane.getColumnIndex(botonActual) == x) {
-                            Button boton = (Button) botonActual;
-
-                            boton.setOnMouseEntered(event -> boton.setBorder(new javafx.scene.layout.Border(
-                                    new javafx.scene.layout.BorderStroke(borderVerde, javafx.scene.layout.BorderStrokeStyle.SOLID,
-                                            new CornerRadii(2), new javafx.scene.layout.BorderWidths(borderWidth)))));
-
-                            boton.setOnMouseExited(event -> boton.setBorder(null));
-
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private void activarBordesTrampaArena() {
-
-        Color bordeRojo = Color.RED;
-        Color borderVerde = Color.GREENYELLOW;
-        double borderWidth = 2.0;
-
-        for (int y = 0; y < 15; y++) {
-            for (int x = 0; x < 15; x++) {
-
-                Parcela parcelaActual = mapa.get(y).get(x);
-                if (!(parcelaActual instanceof Pasarela)) {
-                    for (Node botonActual : root.getChildren()) {
-                        if (GridPane.getRowIndex(botonActual) == y && GridPane.getColumnIndex(botonActual) == x) {
-                            Button boton = (Button) botonActual;
-
-                            boton.setOnMouseEntered(event -> boton.setBorder(new javafx.scene.layout.Border(
-                                    new javafx.scene.layout.BorderStroke(bordeRojo, javafx.scene.layout.BorderStrokeStyle.SOLID,
-                                            new CornerRadii(2), new javafx.scene.layout.BorderWidths(borderWidth)))));
-
-                            boton.setOnMouseExited(event -> boton.setBorder(null));
-
-                            break;
-                        }
-                    }
-                } else {
-                    for (Node botonActual : root.getChildren()) {
-                        if (GridPane.getRowIndex(botonActual) == y && GridPane.getColumnIndex(botonActual) == x) {
-                            Button boton = (Button) botonActual;
-
-                            boton.setOnMouseEntered(event -> boton.setBorder(new javafx.scene.layout.Border(
-                                    new javafx.scene.layout.BorderStroke(borderVerde, javafx.scene.layout.BorderStrokeStyle.SOLID,
-                                            new CornerRadii(2), new javafx.scene.layout.BorderWidths(borderWidth)))));
-
-                            boton.setOnMouseExited(event -> boton.setBorder(null));
-
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
     public void actualizarNombre(){
         datosUsuario.update();
     }
