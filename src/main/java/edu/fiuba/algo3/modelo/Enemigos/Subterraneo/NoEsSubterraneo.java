@@ -8,6 +8,7 @@ public class NoEsSubterraneo implements Subterraneo{
         return 0;    
     }
 
+    //Getter vista
     public boolean esSubterraneo(){
         return false;
     }

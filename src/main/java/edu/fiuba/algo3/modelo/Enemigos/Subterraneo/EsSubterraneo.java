@@ -9,6 +9,7 @@ public class EsSubterraneo implements Subterraneo{
         return defensa.incrementarDistanciaS();   
     }
 
+    //Getter vista
     public boolean esSubterraneo(){
         return true;
     }

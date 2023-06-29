@@ -124,7 +124,7 @@ ___
 </p>
 
 <p align="justify">
-    Lechuza tiene asociado ObjetivoLechuza ya que le delega la decisión de a que defensa atacar. Lechuza para saber por dónde moverse depende de Ruta, una interfaz la cual implementan RutaL y RutaH. Clases las cuales dependen de CreadorCaminoL y CreadorCaminoH respectivamente para otorgarle a la lechuza el camino que requiere.
+    Lechuza tiene asociado ObjetivoLechuza ya que le delega la decisión de a que defensa atacar. Lechuza para saber por dónde moverse depende de Ruta, una interfaz la cual implementan RutaL y RutaH [Patron strategy]. Clases las cuales dependen de CreadorCaminoL y CreadorCaminoH respectivamente para otorgarle a la lechuza el camino que requiere.
 </p>
 
 <p align="justify">
@@ -335,6 +335,21 @@ ____________
 
 <br><br>
 
+<h3> Estado de las torres </h3>
+
+<img src="../diagrams/states/Estado%20Torres.png">
+
+<h3> Salud de las defensas </h3>
+
+<img src="../diagrams/states/Salud%20Defensa.png">
+
+<h3> Salud de los enemigos </h3>
+
+<img src="../diagrams/states/Salud%20Enemigo.png">
+
+<h3> Construccion en Tierra/Pasarela </h3>
+
+<img src="../diagrams/states/Construible.png">
 
 <br><br><br>
 
@@ -344,4 +359,5 @@ ____________
 
 <br><br>
 
+<img src="../diagrams/packages/Diagrama%20de%20paquetes.png">
 
