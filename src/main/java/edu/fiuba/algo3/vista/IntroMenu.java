@@ -117,8 +117,8 @@ public class IntroMenu {
         alert = new Alert(AlertType.INFORMATION);
         partida = new Partida();
         jugador = partida.obtenerJugador();
-        labelVida = new Label("Vida Restante: " + jugador.obtenerVidaRestante() + "/20 ");
-        labelCreditos = new Label("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
+        labelVida = new Label("Vida: " + jugador.obtenerVidaRestante() + "/20 ");
+        labelCreditos = new Label("Creditos: " + jugador.obtenerCreditosRestantes() + " ");
         String css = "-fx-prompt-text-fill: black;";
         ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/logo.png")).toURI().toString());
         ImageView backgroundImageView = new ImageView((new File("src/main/resources/image/image.png")).toURI().toString());
@@ -183,6 +183,11 @@ public class IntroMenu {
         ImageView corazon = new ImageView(imagenCorazon);
         vida.getChildren().addAll(labelVida, corazon);
 
+        HBox creditos = new HBox();
+        String imagenMoneda = (new File("src/main/resources/image/coin.png")).toURI().toString();
+        ImageView moneda = new ImageView(imagenMoneda);
+        creditos.getChildren().addAll(labelCreditos, moneda);
+
         List sonidos = new ArrayList<AudioClip>();
         sonidos.add(sonidoGanar);
         sonidos.add(sonidoPerder);
@@ -192,12 +197,11 @@ public class IntroMenu {
         sonidos.add(sonidoClick);
         sonidos.add(sonidoEnter);
         ControladorSonidos sliders = new ControladorSonidos(mediaPlayer, sonidos);
-        ContenedorPartida contenedorPartida = new ContenedorPartida(stagePrincipal, partida, jugador, labelVida, vida, labelCreditos, textoNombre, mediaPlayer, sliders);
+        ContenedorPartida contenedorPartida = new ContenedorPartida(stagePrincipal, partida, jugador, labelVida, vida, labelCreditos, creditos, textoNombre, mediaPlayer, sliders);
         Scene escenaPartida = new Scene(contenedorPartida);
-        BotonIniciarEventHandler botonIniciarEventHandler = new BotonIniciarEventHandler(escenaPartida, stagePrincipal, sliders);
+        BotonIniciarEventHandler botonIniciarEventHandler = new BotonIniciarEventHandler(escenaPartida, stagePrincipal, sliders, sonidoStart);
 
         iniButton.setOnAction(botonIniciarEventHandler);
-            //sonidoStart.play();
 
         botonInicial = new Button("Siguiente");
         botonInicial.setStyle("-fx-background-color: #FFA500;");

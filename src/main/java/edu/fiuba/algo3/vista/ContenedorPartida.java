@@ -57,6 +57,8 @@ public class ContenedorPartida extends StackPane {
     private TextField textoNombre;
     private VBox datosUsuario;
     private HBox vida;
+    private HBox creditos;
+    
 
     AudioClip sonidoPonerTorre;
     AudioClip sonidoPonerTrampa;
@@ -69,13 +71,14 @@ public class ContenedorPartida extends StackPane {
     Slider sliderSonidos;
 
 
-    public ContenedorPartida(Stage stagePrincipal, Partida partida, Jugador jugador, Label labelVida,HBox vida, Label labelCreditos, TextField textoNombre, MediaPlayer mediaPlayer, ControladorSonidos controladorSonidos) {
+    public ContenedorPartida(Stage stagePrincipal, Partida partida, Jugador jugador, Label labelVida, HBox vida, Label labelCreditos, HBox creditos, TextField textoNombre, MediaPlayer mediaPlayer, ControladorSonidos controladorSonidos) {
 
         super();
         this.partida = partida;
         enemigosEnParcela = new HBox();
         this.mediaPlayer = mediaPlayer;
         this.vida = vida;
+        this.creditos = creditos;
         this.jugador = jugador;
         this.labelCreditos = labelCreditos;
         this.labelVida = labelVida;
@@ -235,7 +238,7 @@ public class ContenedorPartida extends StackPane {
         labelNombre = new Label();
         //labelVida = new Label("Vida Restante: " + jugador.obtenerVidaRestante() + "/20");
 
-        datosUsuario.getChildren().addAll(labelNombre, vida, labelCreditos);
+        datosUsuario.getChildren().addAll(labelNombre, vida, creditos);
 
         BackgroundFill backgroundFillAzul = new BackgroundFill(Color.LIGHTBLUE, new CornerRadii(8), Insets.EMPTY);
         Background backgroundAzul = new Background(backgroundFillAzul);
@@ -424,8 +427,8 @@ public class ContenedorPartida extends StackPane {
                 root.add(new ImageView(imagenLechuza), coordenadaX, coordenadaY);
             }
         }
-        labelVida.setText("Vida Restante: " + jugador.obtenerVidaRestante() + "/20 ");
-        labelCreditos.setText("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
+        labelVida.setText("Vida: " + jugador.obtenerVidaRestante() + "/20 ");
+        labelCreditos.setText("Creditos: " + jugador.obtenerCreditosRestantes() + " ");
         //ACTUALIZAR DEFENSAS
         for (VistaDefensas vista : listaVistaDefensas) {
             vista.update();
