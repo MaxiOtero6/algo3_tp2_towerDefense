@@ -49,6 +49,7 @@ public class ContenedorPartida extends StackPane {
     private String imagenTopo = (new File("src/main/resources/image/topo.png")).toURI().toString();
     private String imagenTopoEscondido = (new File("src/main/resources/image/topo_escondido.png")).toURI().toString();
     private String imagenLechuza = (new File("src/main/resources/image/lechuza.png")).toURI().toString();
+    private String imagenMoneda = (new File("src/main/resources/image/coin.png")).toURI().toString();
     private MediaPlayer mediaPlayer;
     private Jugador jugador;
     private Label labelNombre;
@@ -244,8 +245,22 @@ public class ContenedorPartida extends StackPane {
         Background backgroundAzul = new Background(backgroundFillAzul);
 
         Button botonPlateada = new Button();
-        botonPlateada.setGraphic(new ImageView(imagenTorrePlateada));
-        botonPlateada.setText("Torre Plateada");
+
+        HBox plateada = new HBox();
+        VBox precioPlat = new VBox();
+        HBox precioPlat2 = new HBox();
+
+        ImageView imagenMonedaView1 = new ImageView(imagenMoneda);
+        ImageView imageviewTorrePlateada = new ImageView(imagenTorrePlateada);
+        Label torrePlateadaTexto = new Label("Torre Plateada");
+        Label precioPlateadaTexto = new Label("Costo: 25 ");
+
+        precioPlat2.getChildren().addAll(precioPlateadaTexto, imagenMonedaView1);
+ 
+        precioPlat.getChildren().addAll(torrePlateadaTexto, precioPlat2);
+        plateada.getChildren().addAll(imageviewTorrePlateada, precioPlat);
+        botonPlateada.setGraphic(plateada);
+
         botonPlateada.prefWidthProperty().bind(datosUsuario.widthProperty());
         botonPlateada.setMinWidth(datosUsuario.getMinWidth());
         botonPlateada.setOnAction(event -> {
@@ -263,8 +278,22 @@ public class ContenedorPartida extends StackPane {
                         new CornerRadii(6), new BorderWidths(borderWidth))));
 
         Button botonBlanca = new Button();
-        botonBlanca.setGraphic(new ImageView(imagenTorreBlanca));
-        botonBlanca.setText("Torre Blanca");
+
+        HBox blanca = new HBox();
+        VBox precioBlanca = new VBox();
+        HBox precioBlanca2 = new HBox();
+
+        ImageView imagenMonedaView2 = new ImageView(imagenMoneda);
+        ImageView imageviewTorreBlanca = new ImageView(imagenTorreBlanca);
+        Label torreBlancaTexto = new Label("Torre Blanca");
+        Label precioBlancaTexto = new Label("Costo: 10 ");
+
+        precioBlanca2.getChildren().addAll(precioBlancaTexto, imagenMonedaView2);
+
+        precioBlanca.getChildren().addAll(torreBlancaTexto, precioBlanca2);
+        blanca.getChildren().addAll(imageviewTorreBlanca, precioBlanca);
+        botonBlanca.setGraphic(blanca);
+
         botonBlanca.prefWidthProperty().bind(datosUsuario.widthProperty());
         botonBlanca.setOnAction(event -> {
             sonidoClick.play();
@@ -281,9 +310,22 @@ public class ContenedorPartida extends StackPane {
                         new CornerRadii(6), new BorderWidths(borderWidth))));
 
         Button botonTrampa = new Button();
-        botonTrampa.setGraphic(new ImageView(imagenTrampaArenosa));
-        botonTrampa.setText("Trampa Arenosa");
-        botonTrampa.prefWidthProperty().bind(datosUsuario.widthProperty());
+        
+        
+        HBox arena = new HBox();
+        VBox precioArena = new VBox();
+        HBox precioArena2 = new HBox();
+
+        ImageView imagenMonedaView3 = new ImageView(imagenMoneda);
+        ImageView imageviewTrampaArena = new ImageView(imagenTrampaArenosa);
+        Label trampaArenosaTexto = new Label("Trampa Arenosa");
+        Label precioTrampaTexto = new Label("Costo: 25 ");
+
+        precioArena2.getChildren().addAll(precioTrampaTexto, imagenMonedaView3);
+        
+        precioArena.getChildren().addAll(trampaArenosaTexto, precioArena2);
+        arena.getChildren().addAll(imageviewTrampaArena, precioArena);
+        botonTrampa.setGraphic(arena);
         botonTrampa.setOnAction(event -> {
             sonidoClick.play();
             if (jugador.obtenerCreditosRestantes() >= 25) {
