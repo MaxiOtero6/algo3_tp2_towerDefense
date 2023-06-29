@@ -51,7 +51,7 @@ public class BotonSkipEventHandler implements EventHandler<ActionEvent> {
         sonidoClick.play();
 
         //ALERTA DE PERDIDA
-        if (jugador.obtenerVidaRestante() <= 0 && jugador.obtenerVidaRestante() < 0) {
+        if (jugador.obtenerVidaRestante() <= 0) {
             sonidoPerder.play();
 
             ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/perdiste.png")).toURI().toString());
@@ -65,7 +65,7 @@ public class BotonSkipEventHandler implements EventHandler<ActionEvent> {
             mediaPlayer.stop();
         }
         //ALERTA DE VICTORIA
-        if (partida.obtenerEnemigos().size() == 0 && jugador.obtenerVidaRestante() > 0) {
+        if (partida.obtenerEnemigos().size() == 0) {
             sonidoGanar.play();
             ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/ganaste.png")).toURI().toString());
             ImageView backgroundImageView = new ImageView((new File("src/main/resources/image/imagenGanar.png")).toURI().toString());
