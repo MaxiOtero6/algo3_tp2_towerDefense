@@ -15,6 +15,8 @@ import javafx.event.EventHandler;
 import javafx.scene.layout.GridPane;
 import javafx.scene.media.AudioClip;
 
+import java.util.List;
+
 
 public class CasillaMapaEventHandler implements EventHandler<ActionEvent> {
 
@@ -25,6 +27,7 @@ public class CasillaMapaEventHandler implements EventHandler<ActionEvent> {
     private int coordenadaY;
     private Partida partida;
     private BotonSkipEventHandler botonSkipEventHandler;
+    private List<CasillaMapaEventHandler> casillas;
 
 
     private AudioClip sonidoTorre;
@@ -66,7 +69,7 @@ public class CasillaMapaEventHandler implements EventHandler<ActionEvent> {
                 vistaDefensa.dibujar();
                 botonSkipEventHandler.agregarDefensa(vistaDefensa);
                 borde.activarBotones();
-                defensa = new NoTorre();
+                this.restablecerCasillas();
             } catch (NullPointerException e){
                 sonidoError.play();
             }
@@ -75,5 +78,13 @@ public class CasillaMapaEventHandler implements EventHandler<ActionEvent> {
   }
   public void asignarDefensa(Defensa defensa){
         this.defensa = defensa;
+  }
+  private void restablecerCasillas() {
+        for (CasillaMapaEventHandler casilla : casillas) {
+          casilla.asignarDefensa(new NoTorre());
+      }
+  }
+  public void asignarCasillas(List<CasillaMapaEventHandler> casillas){
+        this.casillas = casillas;
   }
 }

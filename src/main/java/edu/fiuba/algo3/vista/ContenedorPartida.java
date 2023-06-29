@@ -188,6 +188,9 @@ public class ContenedorPartida extends StackPane {
 
             }
         }
+        for (CasillaMapaEventHandler casilla : casillaMapaEventHandlerList) {
+            casilla.asignarCasillas(casillaMapaEventHandlerList);
+        }
 
         sliderMusica = new Slider(0, 100, 50);
         controladorSonidos.setSliderMusica(sliderMusica);
