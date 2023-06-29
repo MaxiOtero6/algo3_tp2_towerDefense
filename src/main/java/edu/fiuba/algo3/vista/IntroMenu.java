@@ -191,9 +191,10 @@ public class IntroMenu {
         sonidos.add(sonidoError);
         sonidos.add(sonidoClick);
         sonidos.add(sonidoEnter);
-        ContenedorPartida contenedorPartida = new ContenedorPartida(stagePrincipal, partida, jugador, labelVida, vida, labelCreditos, textoNombre, mediaPlayer, sonidos);
+        ControladorSonidos sliders = new ControladorSonidos(mediaPlayer, sonidos);
+        ContenedorPartida contenedorPartida = new ContenedorPartida(stagePrincipal, partida, jugador, labelVida, vida, labelCreditos, textoNombre, mediaPlayer, sliders);
         Scene escenaPartida = new Scene(contenedorPartida);
-        BotonIniciarEventHandler botonIniciarEventHandler = new BotonIniciarEventHandler(escenaPartida, stagePrincipal, contenedorPartida);
+        BotonIniciarEventHandler botonIniciarEventHandler = new BotonIniciarEventHandler(escenaPartida, stagePrincipal, sliders);
 
         iniButton.setOnAction(botonIniciarEventHandler);
             //sonidoStart.play();

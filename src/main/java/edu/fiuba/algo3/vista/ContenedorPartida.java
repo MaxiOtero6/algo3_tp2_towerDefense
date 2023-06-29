@@ -69,7 +69,7 @@ public class ContenedorPartida extends StackPane {
     Slider sliderSonidos;
 
 
-    public ContenedorPartida(Stage stagePrincipal, Partida partida, Jugador jugador, Label labelVida,HBox vida, Label labelCreditos, TextField textoNombre, MediaPlayer mediaPlayer, List sonidos) {
+    public ContenedorPartida(Stage stagePrincipal, Partida partida, Jugador jugador, Label labelVida,HBox vida, Label labelCreditos, TextField textoNombre, MediaPlayer mediaPlayer, ControladorSonidos controladorSonidos) {
 
         super();
         this.partida = partida;
@@ -81,6 +81,7 @@ public class ContenedorPartida extends StackPane {
         this.labelVida = labelVida;
         this.textoNombre = textoNombre;
 
+        List sonidos = controladorSonidos.devolverSonidos();
         sonidoGanar = (AudioClip)sonidos.get(0);
         sonidoPerder = (AudioClip)sonidos.get(1);
         sonidoPonerTorre = (AudioClip)sonidos.get(2);
@@ -191,17 +192,17 @@ public class ContenedorPartida extends StackPane {
 
         BackgroundFill backgroundFill = new BackgroundFill(Color.ORANGE, new CornerRadii(8), Insets.EMPTY);
         Background background = new Background(backgroundFill);
-
+        
         Label volumenMusica = new Label("Volumen de la musica:");
         sliderMusica = new Slider(0, 100, 50);
-        //sliderMusica.setValue(mediaPlayer.getVolume() * 100);
+        controladorSonidos.setSliderMusica(sliderMusica);
         sliderMusica.valueProperty().addListener((observable, oldValue, newValue) -> {
             mediaPlayer.setVolume(sliderMusica.getValue() / 100);
         });
 
         Label volumenSonidos = new Label("Volumen de los sonidos:");
         sliderSonidos = new Slider(0, 100, 50);
-        // sliderSonidos.setValue(sonidoClick.getVolume() * 100);
+        controladorSonidos.setSliderSonidos(sliderSonidos);
         sliderSonidos.valueProperty().addListener((observable, oldValue, newValue) -> {
             for (Object sonido : sonidos) {
                 AudioClip sonidoAux2 = (AudioClip)sonido;
@@ -569,10 +570,5 @@ public class ContenedorPartida extends StackPane {
     }
     public void actualizarNombre(){
         labelNombre.setText("Nombre: " + textoNombre.getText());
-    }
-
-    public void actualizarSliders(){
-        sliderMusica.setValue(mediaPlayer.getVolume() * 100);
-        sliderSonidos.setValue(sonidoClick.getVolume() * 100);
     }
 }
