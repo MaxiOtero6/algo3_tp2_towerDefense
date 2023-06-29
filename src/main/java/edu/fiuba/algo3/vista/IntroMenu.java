@@ -179,7 +179,7 @@ public class IntroMenu {
 
         validationLabel = new Label();
 
-        ContenedorPartida contenedorPartida = new ContenedorPartida(stagePrincipal, partida, jugador, labelVida, labelCreditos, textoNombre, mediaPlayer, mediaPlayer.getVolume(), sonidoClick.getVolume());
+        ContenedorPartida contenedorPartida = new ContenedorPartida(stagePrincipal, partida, jugador, labelVida, labelCreditos, textoNombre, mediaPlayer);
         Scene escenaPartida = new Scene(contenedorPartida);
         BotonIniciarEventHandler botonIniciarEventHandler = new BotonIniciarEventHandler(escenaPartida, stagePrincipal);
 

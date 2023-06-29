@@ -66,7 +66,7 @@ public class ContenedorPartida extends StackPane {
     AudioClip sonidoEnter = new AudioClip(new File("src/main/resources/sound/enter.mp3").toURI().toString());
 
 
-    public ContenedorPartida(Stage stagePrincipal, Partida partida, Jugador jugador, Label labelVida, Label labelCreditos, TextField textoNombre, MediaPlayer mediaPlayer, double volumenActualMusica, double volumenActualSonidos) {
+    public ContenedorPartida(Stage stagePrincipal, Partida partida, Jugador jugador, Label labelVida, Label labelCreditos, TextField textoNombre, MediaPlayer mediaPlayer) {
 
         super();
         this.partida = partida;
@@ -183,20 +183,14 @@ public class ContenedorPartida extends StackPane {
 
         Label volumenMusica = new Label("Volumen de la musica:");
         Slider sliderMusica = new Slider(0, 100, 50);
-        sliderMusica.setValue(volumenActualMusica);
+        sliderMusica.setValue(mediaPlayer.getVolume() * 100);
         sliderMusica.valueProperty().addListener((observable, oldValue, newValue) -> {
             mediaPlayer.setVolume(sliderMusica.getValue() / 100);
         });
 
         Label volumenSonidos = new Label("Volumen de los sonidos:");
         Slider sliderSonidos = new Slider(0, 100, 50);
-        sliderSonidos.setValue(volumenActualSonidos);
-        sonidoGanar.setVolume(sliderSonidos.getValue() / 100);
-        sonidoPerder.setVolume(sliderSonidos.getValue() / 100);
-        sonidoError.setVolume(sliderSonidos.getValue() / 100);
-        sonidoClick.setVolume(sliderSonidos.getValue() / 100);
-        sonidoPonerTorre.setVolume(sliderSonidos.getValue() / 100);
-        sonidoPonerTrampa.setVolume(sliderSonidos.getValue() / 100);
+        sliderSonidos.setValue(sonidoClick.getVolume() * 100);
         sliderSonidos.valueProperty().addListener((observable, oldValue, newValue) -> {
             sonidoGanar.setVolume(sliderSonidos.getValue() / 100);
             sonidoPerder.setVolume(sliderSonidos.getValue() / 100);
@@ -441,8 +435,7 @@ public class ContenedorPartida extends StackPane {
             volverAJugarButton.setTranslateY(60);
             volverAJugarButton.setOnAction(event -> {
                 sonidoEnter.play();
-                IntroMenu intro = new IntroMenu();
-                intro.crearUI(stagePrincipal);
+                //crearUI(stagePrincipal);
             });
 
             pantallaFinalPerdida.getChildren().addAll(backgroundImageView, logoAlgoDefense, volverAJugarButton);
@@ -466,8 +459,7 @@ public class ContenedorPartida extends StackPane {
             volverAJugarButton.setTranslateY(60);
             volverAJugarButton.setOnAction(event -> {
                 sonidoEnter.play();
-                IntroMenu intro = new IntroMenu();
-                intro.crearUI(stagePrincipal);
+                //  crearUI(stagePrincipal);
             });
 
             pantallaFinalGanar.getChildren().addAll(backgroundImageView, logoAlgoDefense, volverAJugarButton);
@@ -475,7 +467,7 @@ public class ContenedorPartida extends StackPane {
             Scene escenaInicial = new Scene(pantallaFinalGanar, 800, 600);
             stagePrincipal.setTitle("Terminó la partida!");
             stagePrincipal.setScene(escenaInicial);
-            mediaPlayer.stop();
+            //mediaPlayer.stop();
         }
     }
 
