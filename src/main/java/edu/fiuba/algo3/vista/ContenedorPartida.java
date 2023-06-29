@@ -56,6 +56,7 @@ public class ContenedorPartida extends StackPane {
     private Label labelCreditos;
     private TextField textoNombre;
     private VBox datosUsuario;
+    private HBox vida;
 
     AudioClip sonidoPonerTorre = new AudioClip(new File("src/main/resources/sound/place.mp3").toURI().toString());
     AudioClip sonidoPonerTrampa = new AudioClip(new File("src/main/resources/sound/sand.mp3").toURI().toString());
@@ -66,13 +67,13 @@ public class ContenedorPartida extends StackPane {
     AudioClip sonidoEnter = new AudioClip(new File("src/main/resources/sound/enter.mp3").toURI().toString());
 
 
-    public ContenedorPartida(Stage stagePrincipal, Partida partida, Jugador jugador, Label labelVida, Label labelCreditos, TextField textoNombre, MediaPlayer mediaPlayer) {
+    public ContenedorPartida(Stage stagePrincipal, Partida partida, Jugador jugador, Label labelVida,HBox vida, Label labelCreditos, TextField textoNombre, MediaPlayer mediaPlayer) {
 
         super();
         this.partida = partida;
         enemigosEnParcela = new HBox();
         this.mediaPlayer = mediaPlayer;
-
+        this.vida = vida;
         this.jugador = jugador;
         this.labelCreditos = labelCreditos;
         this.labelVida = labelVida;
@@ -225,7 +226,7 @@ public class ContenedorPartida extends StackPane {
         labelNombre = new Label();
         //labelVida = new Label("Vida Restante: " + jugador.obtenerVidaRestante() + "/20");
 
-        datosUsuario.getChildren().addAll(labelNombre, labelVida, labelCreditos);
+        datosUsuario.getChildren().addAll(labelNombre, vida, labelCreditos);
 
         BackgroundFill backgroundFillAzul = new BackgroundFill(Color.LIGHTBLUE, new CornerRadii(8), Insets.EMPTY);
         Background backgroundAzul = new Background(backgroundFillAzul);
@@ -414,7 +415,7 @@ public class ContenedorPartida extends StackPane {
                 root.add(new ImageView(imagenLechuza), coordenadaX, coordenadaY);
             }
         }
-        labelVida.setText("Vida Restante: " + jugador.obtenerVidaRestante() + "/20");
+        labelVida.setText("Vida Restante: " + jugador.obtenerVidaRestante() + "/20 ");
         labelCreditos.setText("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
         //ACTUALIZAR DEFENSAS
         for (VistaDefensas vista : listaVistaDefensas) {
@@ -435,7 +436,8 @@ public class ContenedorPartida extends StackPane {
             volverAJugarButton.setTranslateY(60);
             volverAJugarButton.setOnAction(event -> {
                 sonidoEnter.play();
-                //crearUI(stagePrincipal);
+                IntroMenu intro = new IntroMenu();
+                intro.crearUI(stagePrincipal);
             });
 
             pantallaFinalPerdida.getChildren().addAll(backgroundImageView, logoAlgoDefense, volverAJugarButton);
@@ -459,7 +461,8 @@ public class ContenedorPartida extends StackPane {
             volverAJugarButton.setTranslateY(60);
             volverAJugarButton.setOnAction(event -> {
                 sonidoEnter.play();
-                //  crearUI(stagePrincipal);
+                IntroMenu intro = new IntroMenu();
+                intro.crearUI(stagePrincipal);
             });
 
             pantallaFinalGanar.getChildren().addAll(backgroundImageView, logoAlgoDefense, volverAJugarButton);
@@ -467,7 +470,7 @@ public class ContenedorPartida extends StackPane {
             Scene escenaInicial = new Scene(pantallaFinalGanar, 800, 600);
             stagePrincipal.setTitle("Terminó la partida!");
             stagePrincipal.setScene(escenaInicial);
-            //mediaPlayer.stop();
+            mediaPlayer.stop();
         }
     }
 

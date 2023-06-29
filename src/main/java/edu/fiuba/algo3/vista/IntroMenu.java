@@ -117,7 +117,7 @@ public class IntroMenu {
         alert = new Alert(AlertType.INFORMATION);
         partida = new Partida();
         jugador = partida.obtenerJugador();
-        labelVida = new Label("Vida Restante: " + jugador.obtenerVidaRestante() + "/20");
+        labelVida = new Label("Vida Restante: " + jugador.obtenerVidaRestante() + "/20 ");
         labelCreditos = new Label("Creditos Restantes: " + jugador.obtenerCreditosRestantes());
         String css = "-fx-prompt-text-fill: black;";
         ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/logo.png")).toURI().toString());
@@ -178,8 +178,12 @@ public class IntroMenu {
         iniButton.setStyle("-fx-background-color: #FFA500;");
 
         validationLabel = new Label();
+        HBox vida = new HBox();
+        String imagenCorazon = (new File("src/main/resources/image/corazon.png")).toURI().toString();
+        ImageView corazon = new ImageView(imagenCorazon);
+        vida.getChildren().addAll(labelVida, corazon);
 
-        ContenedorPartida contenedorPartida = new ContenedorPartida(stagePrincipal, partida, jugador, labelVida, labelCreditos, textoNombre, mediaPlayer);
+        ContenedorPartida contenedorPartida = new ContenedorPartida(stagePrincipal, partida, jugador, labelVida, vida, labelCreditos, textoNombre, mediaPlayer);
         Scene escenaPartida = new Scene(contenedorPartida);
         BotonIniciarEventHandler botonIniciarEventHandler = new BotonIniciarEventHandler(escenaPartida, stagePrincipal);
 
