@@ -2,6 +2,7 @@ package edu.fiuba.algo3.controlador;
 
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Partida;
+import edu.fiuba.algo3.vista.EscenaFinalDePartida;
 import edu.fiuba.algo3.vista.IntroMenu;
 import edu.fiuba.algo3.vista.Vista;
 import edu.fiuba.algo3.vista.VistaDefensas;
@@ -49,49 +50,25 @@ public class BotonSkipEventHandler implements EventHandler<ActionEvent> {
         //ALERTA DE PERDIDA
         if (jugador.obtenerVidaRestante() <= 0 && jugador.obtenerVidaRestante() < 0) {
             sonidoPerder.play();
-            StackPane pantallaFinalPerdida = new StackPane();
+
             ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/perdiste.png")).toURI().toString());
             ImageView backgroundImageView = new ImageView((new File("src/main/resources/image/imagenPerder.png")).toURI().toString());
-            backgroundImageView.fitWidthProperty().bind(stage.widthProperty());
-            backgroundImageView.fitHeightProperty().bind(stage.heightProperty());
+            EscenaFinalDePartida escenaFinalDePartida = new EscenaFinalDePartida(backgroundImageView,stage,
+                    logoAlgoDefense);
 
-            Button volverAJugarButton = new Button("Volver a jugar");
-            volverAJugarButton.setStyle("-fx-background-color: #FFA500;");
-            volverAJugarButton.setTranslateY(60);
-            volverAJugarButton.setOnAction(event -> {
-                sonidoEnter.play();
-                IntroMenu intro = new IntroMenu();
-                intro.crearUI(stage);
-            });
-
-            pantallaFinalPerdida.getChildren().addAll(backgroundImageView, logoAlgoDefense, volverAJugarButton);
-
-            Scene escenaInicial = new Scene(pantallaFinalPerdida, 800, 600);
+            Scene escenaFinal = new Scene(escenaFinalDePartida, 800, 600);
             stage.setTitle("Terminó la partida!");
-            stage.setScene(escenaInicial);
+            stage.setScene(escenaFinal);
             mediaPlayer.stop();
         }
         //ALERTA DE VICTORIA
         if (partida.obtenerEnemigos().size() == 0 && jugador.obtenerVidaRestante() > 0) {
             sonidoGanar.play();
-            StackPane pantallaFinalGanar = new StackPane();
             ImageView logoAlgoDefense = new ImageView((new File("src/main/resources/image/ganaste.png")).toURI().toString());
             ImageView backgroundImageView = new ImageView((new File("src/main/resources/image/imagenGanar.png")).toURI().toString());
-            backgroundImageView.fitWidthProperty().bind(stage.widthProperty());
-            backgroundImageView.fitHeightProperty().bind(stage.heightProperty());
-
-            Button volverAJugarButton = new Button("Volver a jugar");
-            volverAJugarButton.setStyle("-fx-background-color: #FFA500;");
-            volverAJugarButton.setTranslateY(60);
-            volverAJugarButton.setOnAction(event -> {
-                sonidoEnter.play();
-                IntroMenu intro = new IntroMenu();
-                intro.crearUI(stage);
-            });
-
-            pantallaFinalGanar.getChildren().addAll(backgroundImageView, logoAlgoDefense, volverAJugarButton);
-
-            Scene escenaInicial = new Scene(pantallaFinalGanar, 800, 600);
+            EscenaFinalDePartida escenaFinalDePartida = new EscenaFinalDePartida(backgroundImageView,stage,
+                    logoAlgoDefense);
+            Scene escenaInicial = new Scene(escenaFinalDePartida, 800, 600);
             stage.setTitle("Terminó la partida!");
             stage.setScene(escenaInicial);
             mediaPlayer.stop();
